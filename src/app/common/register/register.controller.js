@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('RegisterController', RegisterController);
   /** @ngInject */
-  function RegisterController(gettextCatalog) {
+  function RegisterController() {
     var vm = this;
     vm.data = {
       form: 'MANAGER'
