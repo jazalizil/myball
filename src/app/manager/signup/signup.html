@@ -1,0 +1,178 @@
+<mb-navbar></mb-navbar>
+<md-progress-linear ng-show="signup.data.isLoading" md-mode="indeterminate"></md-progress-linear>
+<md-content class="scroll-content" layout="row" layout-align="center">
+    <div flex-gt-sm="60" flex-sm="80">
+        <div class="pad-t-5x">
+            <strong translate>Bienvenue !</strong>
+            <div class="pad-t-3x justify-text" translate>Veuillez prendre quelques minutes pour remplir ce formulaire d'inscription afin d'accéder à la plateforme myBall</div>
+        </div>
+        <form class="pad-t-5x" name="signupForm" novalidate>
+            <md-card class="md-whiteframe-6dp">
+                <md-toolbar class="md-accent">
+                    <div class="md-toolbar-tools">
+                        <h2 translate>Informations du five</h2>
+                    </div>
+                </md-toolbar>
+                <md-card-content>
+                    <mb-bar-button action="signup.addField()" icon="add" tooltip="{{vm.data.tooltip}}"></mb-bar-button>
+                    <div ng-if="signup.data.five.photo" layout>
+                        <div layout="column" layout-align="center center" flex>
+                            <img ngf-thumbnail="signup.data.five.photo"/>
+                            <md-button class="md-accent"
+                                       ng-model="signup.data.five.photo"
+                                       ngf-select ngf-pattern="'image/*'"
+                                       ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="100"
+                                       ngf-resize="{width: 100, height: 100}"
+                                       flex>
+                                <span translate>Modifier le logo</span>
+                            </md-button>
+                        </div>
+                    </div>
+                    <div ng-if="!signup.data.five.photo" layout>
+                        <span layout="column" layout-align="center center" flex>
+                            <md-button class="md-accent"
+                                       ng-model="signup.data.five.photo"
+                                       ngf-select ngf-pattern="'image/*'"
+                                       ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="100"
+                                       ngf-resize="{width: 100, height: 100}">
+                                <span translate>Ajouter un logo</span>
+                            </md-button>
+                        </span>
+                    </div>
+                    <div layout layout-padding layout-sm="column">
+                        <md-input-container flex>
+                            <label translate>
+                                Nom de la société
+                            </label>
+                            <input  ng-required="signupForm.submitted" type="text" name="fiveName" ng-model="signup.data.five.name"/>
+                            <div ng-messages="signupForm.fiveName.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label translate>
+                                Numéro SIREN
+                            </label>
+                            <input ng-required="signupForm.submitted" ng-blur="signup.verifySiren(signupForm)" type="text" minlength="9" maxlength="9" name="fiveSiren" ng-model="signup.data.five.siren"/>
+                            <div ng-messages="signupForm.fiveSiren.$error">
+                                <div ng-message="minlength || maxlength" translate>Le numéro SIREN doit contenir 9 chiffres</div>
+                                <div ng-message="invalidSiren" translate>Le numéro SIREN est invalide</div>
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-padding layout-sm="column">
+                        <md-input-container flex>
+                            <label translate>
+                                Pays
+                            </label>
+                            <md-select ng-required="signupForm.submitted" name="fiveCountry" ng-model="signup.data.five.country">
+                                <md-option ng-value="country" ng-repeat="country in signup.data.allowedCountries">{{country | translate}}</md-option>
+                            </md-select>
+                            <div ng-messages="signupForm.fiveCountry.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                        <zip-code-autocomplete ng-model="signup.data.five" form="signupForm" flex></zip-code-autocomplete>
+                        <md-input-container flex>
+                            <label translate>
+                                Ville
+                            </label>
+                            <input disabled type="text" ng-model="signup.data.five.city" name="fiveCity"/>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-padding layout-sm="column">
+                        <address-autocomplete ng-model="signup.data.completeAddress" zip-code="signup.data.five.zipCode" form="signupForm" flex></address-autocomplete>
+                        <md-input-container flex>
+                            <label translate>
+                                Numéro de téléphone
+                            </label>
+                            <input ng-required="signupForm.submitted" phone-prefix type="text" ng-minlength="10" ng-maxlength="10" name="fivePhoneNbr" ng-model="signup.data.five.phone"/>
+                            <div ng-messages="signupForm.fivePhoneNbr.$error">
+                                <div ng-message="minlength || maxlength" translate>Le numéro de téléphone est invalide</div>
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card class="md-whiteframe-6dp margin-t-5x">
+                <md-toolbar class="md-accent">
+                    <div class="md-toolbar-tools">
+                        <h2 translate>Gérant</h2>
+                    </div>
+                </md-toolbar>
+                <md-card-content>
+                    <div layout layout-padding layout-sm="column">
+                        <md-input-container flex>
+                            <label translate>
+                                Nom
+                            </label>
+                            <input type="text" ng-required="signupForm.submitted" name="managerLastName" ng-model="signup.data.manager.lastName"/>
+                            <div ng-messages="signupForm.managerLastName.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>
+                                <span translate>Prénom</span>
+                                <span class="red" ng-show="signupForm.managerFirstName.$invalid">*</span>
+                            </label>
+                            <input type="text" ng-required="signupForm.submitted" name="managerFirstName" ng-model="signup.data.manager.firstName"/>
+                            <div ng-messages="signupForm.managerFirstName.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout layout-padding layout-sm="column">
+                        <md-input-container flex>
+                            <label translate>
+                                Mot de passe
+                            </label>
+                            <input type="password" ng-required="signupForm.submitted" name="managerPassword" ng-model="signup.data.manager.password"/>
+                            <div ng-messages="signupForm.managerPassword.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label translate>
+                                Confirmation du mot de passe
+                            </label>
+                            <input ng-required="signupForm.submitted" ng-blur="signup.verifyPwdConfirmation(signupForm)"  ng-model="signup.data.manager.passwordConf" type="password" name="managerPasswordConf"/>
+                            <div ng-messages="signupForm.managerPasswordConf.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                                <div ng-message="invalid" translate>Les mots de passes ne correspondent pas</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout layout-padding layout-sm="column">
+                        <md-input-container flex>
+                            <label translate>
+                                Email
+                            </label>
+                            <input ng-required="signupForm.submitted" type="email" name="managerEmail" ng-model="signup.data.manager.email"/>
+                            <div ng-messages="signupForm.managerEmail.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label translate>
+                                Numéro de téléphone
+                            </label>
+                            <input ng-required="signupForm.submitted" type="text" ng-minlength="10" ng-maxlength="10" name="managerPhoneNbr" ng-model="signup.data.manager.phoneNumber"/>
+                            <div ng-messages="signupForm.managerPhoneNbr.$error">
+                                <div ng-message="required" translate>Ce champ est requis</div>
+                                <div ng-message="minlength || maxlength">Le numéro de téléphone est invalide</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <div class="pad-t-3x" layout layout-align="center center">
+                <md-button ng-click="signup.register(signupForm)" class="md-primary md-raised" v-busy="signup.data.isLoading">
+                    <span translate>S'enregistrer</span>
+                </md-button>
+            </div>
+        </form>
+    </div>
+</md-content>

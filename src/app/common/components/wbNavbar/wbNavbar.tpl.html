@@ -1,0 +1,24 @@
+<md-toolbar
+    id="wb-navbar"
+    ng-class="{'bg-transparent fixed' : !opaq}"
+    class="bg-black grey md-whiteframe-z2"
+    layout="row">
+  <div class="md-toolbar-tools">
+    <md-button aria-label="home" layout layout-align="left center">
+      <a ui-sref="home">
+        <un-svg svg-src="assets/icons/weball.svg"></un-svg>
+      </a>
+    </md-button>
+    <span flex></span>
+    <md-button class="action-button" aria-label="signin" layout layout-align="right center">
+      <a ui-sref="signin">
+        <span class="grey" translate>Connexion</span>
+      </a>
+    </md-button>
+    <md-button class="action-button" aria-label="register" layout layout-align="right center">
+      <a ui-sref="register">
+        <span class="grey" translate>Inscription</span>
+      </a>
+    </md-button>
+  </div>
+</md-toolbar>

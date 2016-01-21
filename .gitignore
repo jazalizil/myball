@@ -1,0 +1,10 @@
+node_modules/
+bower_components/
+coverage/
+.tmp/
+.idea/
+dist/
+npm-debug.log
+src/app/myBall.constants.js
+*.mo
+.DS_Store

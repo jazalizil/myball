@@ -1,0 +1,96 @@
+<md-card class="no-margin">
+  <md-toolbar class="md-accent">
+    <div class="md-toolbar-tools">
+      <h1 translate>Ajouter un terrain</h1>
+    </div>
+  </md-toolbar>
+  <md-card-content class="field-card">
+    <div layout="row" layout-padding>
+      <md-input-container flex>
+        <label translate>
+          Nom du terrain
+        </label>
+        <input type="text" ng-model="vm.field.name"/>
+        <div ng-messages="vm.errors.name">
+          <div ng-message="required" translate>Ce champ est requis</div>
+        </div>
+      </md-input-container>
+      <md-input-container flex>
+        <label translate>
+          Prix horaire par défault
+        </label>
+        <input type="number" ng-model="vm.data.defaultPrice"/>
+        <div class="hint" ng-hide="vm.data.defaultPrice">
+          <span translate>Veuillez renseigner un prix par défault pour les heures d'ouverture du terrain</span>
+          <br/>
+          <span translate>Laissez ce champ vide si le terrain n'est pas diponible</span>
+        </div>
+      </md-input-container>
+    </div>
+    <hr/>
+    <!--<field-scheduler field="vm.field"></field-scheduler>-->
+    <div layout="row" layout-padding>
+      <md-input-container flex layout-align="center center">
+        <label translate>
+          Jours d'ouverture
+        </label>
+        <md-select ng-model="vm.data.selectedDays">
+          <md-option value="{{selectDays.value}}" ng-repeat="selectDays in vm.data.selectDays">{{selectDays.text}}</md-option>
+        </md-select>
+      </md-input-container>
+      <span flex ng-show="vm.data.selectedDays === 'OTHER'"></span>
+      <div flex="50" layout-wrap layout="row" ng-show="vm.data.selectedDays === 'OTHER'">
+        <div flex="33" ng-repeat="day in vm.data.daysDisplayed">
+          <md-checkbox class="md-primary" ng-checked="vm.isDaySelected(day)" ng-click="vm.toggleDay(day)" aria-label="{{day.name}}">
+            {{day.name}}
+          </md-checkbox>
+        </div>
+      </div>
+    </div>
+    <hr ng-show="vm.data.defaultPrice"/>
+    <div layout="row" ng-if="vm.data.defaultPrice">
+      <md-input-container flex layout-align="center center">
+        <label translate>
+          Horaires d'ouverture
+        </label>
+        <md-select ng-model="vm.data.selectedHours">
+          <md-option value="{{selectedHours.value}}" ng-repeat="selectedHours in vm.data.selectHours">{{selectedHours.text}}</md-option>
+        </md-select>
+      </md-input-container>
+      <div layout="column" layout-wrap flex layout-align="center center" ng-show="vm.data.selectedHours === 'OTHER'">
+        <md-input-container flex layout-align="center center" >
+          <label translate>Jour</label>
+          <md-select ng-model="dayForHoursSelect">
+            <md-option value="{{day.number}}" ng-repeat="day in vm.data.daysDisplayed" ng-if="vm.isDaySelected(day)">{{day.name}}</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex layout-align="center center" ng-show="vm.data.hourPriceInput">
+          <label>
+            <span translate>Prix de </span>
+            {{vm.data.hourPriceInput.hour | hour}}
+            <span translate> à </span>
+            {{1 * vm.data.hourPriceInput.hour + 1 | hour}}
+          </label>
+          <input type="number"
+                 autofocus
+                 ng-blur="vm.hidePriceInput()"
+                 ng-model="vm.field.pricesPerHour[vm.data.hourPriceInput.day][vm.data.hourPriceInput.hourIndex].price"/>
+        </md-input-container>
+      </div>
+      <md-chips flex="50"
+                ng-if="dayForHoursSelect"
+                ng-show="vm.data.selectedHours === 'OTHER'"
+                ng-model="vm.field.pricesPerHour[dayForHoursSelect]"
+                md-on-select="vm.showHourPriceInput($chip, dayForHoursSelect)"
+                md-transform-chip="vm.transformHourChip($chip)">
+        <md-chip-template>
+          <strong>{{$chip.hour | hour}} - {{1 * $chip.hour + 1 | hour}} : {{$chip.price | price}}</strong>
+        </md-chip-template>
+      </md-chips>
+    </div>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end">
+    <md-button class="md-accent" ng-click="vm.cancelDialog()"><span translate>Annuler</span></md-button>
+    <md-button class="md-raised md-primary" ng-click="vm.closeDialog()"><span translate>Sauvegarder</span></md-button>
+  </md-card-actions>
+</md-card>

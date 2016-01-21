@@ -1,0 +1,18 @@
+<md-autocomplete
+        md-input-name="zipCodeAutocomplete"
+        md-selected-item="vm.data.selectedCity"
+        md-items="city in vm.querySearch(vm.data.searchZipCode)"
+        md-item-text="city.zipCode"
+        md-search-text="vm.data.searchZipCode"
+        md-floating-label="{{vm.data.label}}"
+        md-search-text-change="vm.dataSearch()"
+        required
+        flex>
+    <md-item-template>
+        <span md-highlight-text="vm.data.searchZipCode">{{city.zipCode}}</span>
+    </md-item-template>
+    <div ng-if="vm.form" ng-show="vm.form.submitted" ng-messages="vm.form.zipCodeAutocomplete.$error">
+      <div ng-message="invalid" translate>Code postal invalide</div>
+      <div ng-message="required" translate>Ce champ est requis</div>
+    </div>
+</md-autocomplete>

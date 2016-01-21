@@ -1,0 +1,56 @@
+<form layout-fill layout="column" action="register.manager.submit()">
+  <div layout="row">
+    <div layout="row" layout-fill>
+      <md-input-container flex class="md-icon-float md-block">
+        <label translate>Prénom</label>
+        <md-icon md-svg-src="assets/icons/user.svg"></md-icon>
+        <input required name="firstName" ng-model="register.manager.firstName" type="text">
+      </md-input-container>
+      <md-input-container flex class="margin-l-3x md-float md-block">
+        <label translate>Nom</label>
+        <input required name="lastName" ng-model="register.manager.lastName" type="text">
+      </md-input-container>
+    </div>
+  </div>
+  <div layout="row">
+    <md-input-container flex class="md-icon-float md-block">
+      <label translate>Email</label>
+      <md-icon class="grey" md-svg-src="assets/icons/email.svg"></md-icon>
+      <input type="email" required ng-model="register.manager.email" name="email">
+    </md-input-container>
+  </div>
+  <div layout="row">
+    <md-input-container flex class="md-icon-float md-block">
+      <label translate>Mot de passe</label>
+      <md-icon class="grey" md-svg-src="assets/icons/password.svg"></md-icon>
+      <input type="password" required ng-model="register.manager.password" name="password">
+    </md-input-container>
+  </div>
+  <div layout="row">
+    <md-input-container flex class="md-icon-float md-block">
+      <label translate>Confirmation du mot de passe</label>
+      <md-icon class="grey" md-svg-src="assets/icons/password.svg"></md-icon>
+      <input type="password" required ng-model="register.manager.passwordConf" name="passwordConf">
+    </md-input-container>
+  </div>
+  <div layout="row">
+    <span flex="30"></span>
+    <div layout="column" layout-fill>
+      <span>
+        <span translate>En créant un compte, vous acceptez les</span>
+
+        <strong translate>Conditions générales d'utilisation</strong>
+
+        <span translate>et comprenez la</span>
+
+        <strong translate>Politique de confidentialité</strong>
+
+        <span translate>de weBall.</span>
+      </span>
+    </div>
+    <span flex="33"></span>
+  </div>
+  <md-button class="md-raised md-primary margin-t-5x">
+    <span translate>créer un compte</span>
+  </md-button>
+</form>

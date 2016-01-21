@@ -1,0 +1,27 @@
+.form-card {
+  width: 400px;
+}
+
+.signin {
+  .logo {
+    fill: @grey;
+    width: 75%;
+  }
+
+  md-input-container {
+    input {
+      color: @grey;
+    }
+    &.md-input-invalid {
+      md-icon {
+        color: red;
+      }
+    }
+    &.md-input-has-value:not(.md-input-invalid) {
+      label {
+        color: @grey;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,34 @@
+<div id="matchs">
+
+  <mb-navbar opaq></mb-navbar>
+
+  <md-content class="scroll-content">
+    <section>
+      <mb-calendar layout></mb-calendar>
+    </section>
+    <section>
+      <div layout="column">
+        <div layout="row" layout-padding layout-align="center center">
+          <span layout="column">
+            <un-svg svg-src="assets/images/soccer-field.svg"></un-svg>
+          </span>
+          <md-select layout ng-model="matchs.data.selectedField" placeholder="{{matchs.data.selectFieldPlaceholder}}">
+            <md-option ng-value="field" ng-repeat="field in matchs.data.identity.five.fields">
+              {{field.name}}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div layout="row fit-width">
+        <div layout="column" layout-align="center">
+          <i translate>Matin</i>
+        </div>
+        <div layout="column" layout-align="center">
+          <i translate>Après Midi</i>
+        </div>
+      </div>
+    </section>
+  </md-content>
+</div>

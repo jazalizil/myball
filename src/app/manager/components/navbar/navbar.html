@@ -1,0 +1,58 @@
+<md-toolbar
+    id="wb-navbar"
+    ng-class="{'fixed bg-transparent grey': !navbar.data.isSignupState && !navbar.opaq,
+    'fixed bg-black grey': !navbar.data.isSignupState && navbar.opaq}"
+    class="md-accent md-whiteframe-z2"
+    layout="row">
+  <div class="md-toolbar-tools">
+    <md-button aria-label="home" layout layout-align="left center">
+      <a ui-sref="main">
+        <un-svg svg-src="assets/icons/myball.svg"></un-svg>
+      </a>
+    </md-button>
+    <span flex></span>
+    <div ng-if="!navbar.data.isSignupState" layout>
+      <div class="links-ctn" layout-padding layout-align="start center" ng-hide="navbar.data.isSearching">
+        <a ng-repeat="link in navbar.data.links" class="navbar-link" ui-sref="{{link.url}}">
+        <span ng-class="{'grey' : navbar.data.activeState === link.url}">
+          {{link.text}}
+        </span>
+        </a>
+      </div>
+      <div class="search-ctn" layout layout-align="center center" ng-if="navbar.data.isSearching">
+        <md-icon class="grey" md-font-set="material-icons">search</md-icon>
+        <md-autocomplete md-autofocus
+                         md-search-text="navbar.searchText"
+                         md-items="item in navbar.querySearch(navbar.searchText)"
+                         placeholder="{{navbar.data.searchPlaceholder}}">
+          <md-item-template>
+            <span md-highlight-text="navbar.searchText"></span>
+          </md-item-template>
+        </md-autocomplete>
+      </div>
+    </div>
+    <span flex></span>
+
+    <div ng-if="!navbar.data.isSignupState" layout layout-align="end end">
+      <md-button class="md-icon-button" ng-click="navbar.toggleSearch()">
+        <md-icon md-font-set="material-icons">{{navbar.data.searchIcon}}</md-icon>
+      </md-button>
+      <md-menu md-offset="50">
+        <md-button ng-click="navbar.toggleMenu($mdOpenMenu, ev)">
+          <md-icon md-font-set="material-icons">account_circle</md-icon>
+          <span>{{navbar.data.identity.manager.fullName}}</span>
+          <md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
+        </md-button>
+        <md-menu-content class="bg-grey" width="4">
+          <md-menu-item class="md-toolbar-tool">
+            <md-button ng-click="navbar.logout()">
+              <md-icon md-font-set="material-icons">exit_to_app</md-icon>
+              <span translate>Se déconnecter</span>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+
+    </div>
+  </div>
+</md-toolbar>

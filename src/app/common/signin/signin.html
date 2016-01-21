@@ -1,0 +1,42 @@
+<div id="signin">
+  <wb-navbar opaq="true"></wb-navbar>
+  <md-content class="scroll-content" layout-fill layout layout-align="center start">
+    <div layout="column" layout-align="center start">
+      <div layout="row" layout-padding class="full-width">
+        <span flex="5"></span>
+        <div flex="20" layout>
+          <span layout layout-align="center center">
+            <hr class="full-width">
+          </span>
+        </div>
+        <div flex="50" layout="column">
+          <h2 class="uppercase dark-grey" layout layout-align="center center" translate>Connexion</h2>
+          <div layout="row" layout-align="center center" class="margin-top-5x">
+            <form layout="column" action="signin.login()">
+              <md-input-container flex class="md-icon-float md-block">
+                <label>{{signin.datas.placeholders.email}}</label>
+                <md-icon class="grey" md-font-set="material-icons">email</md-icon>
+                <input required name="email" ng-model="signin.datas.login" type="email">
+              </md-input-container>
+              <md-input-container flex class="md-icon-float md-block">
+                <label>{{signin.datas.placeholders.password}}</label>
+                <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
+                <input required name="password" ng-model="signin.datas.password" type="password">
+              </md-input-container>
+              <md-button class="md-raised md-primary" ng-click="signin.login()" v-busy="signin.datas.isLoading">
+                <span translate>Se connecter</span>
+              </md-button>
+            </form>
+          </div>
+        </div>
+        <div flex="20" layout>
+          <span layout layout-align="center center">
+            <hr class="full-width">
+          </span>
+        </div>
+        <span flex="5"></span>
+      </div>
+    </div>
+
+  </md-content>
+</div>

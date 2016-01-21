@@ -1,0 +1,104 @@
+<div id="home">
+  <wb-navbar></wb-navbar>
+  <md-content class="scrollcontent">
+    <section class="full-width">
+      <mb-carousel imgs="home.data.imgs.carousel"/>
+    </section>
+    <section id="content" class="full-width">
+      <div layout="row">
+        <span flex="20"></span>
+        <div layout="column" layout-align="center start"  flex="50">
+          <h2 translate>Trouvez un five</h2>
+          <p translate>
+            Les five partenaires sont accessibles depuis l'application, vous pourrez ainsi retrouver votre five préféré et
+            en découvrir de nouveaux !
+          </p>
+        </div>
+        <div layout="column" flex="50">
+          <div layout layout-align="center center">
+            <img ng-src="{{home.data.imgs.map}}" alt="weBall iphone map">
+          </div>
+        </div>
+      </div>
+      <div layout="row" class="margin-t-5x">
+        <div layout="column" flex="50">
+          <div layout layout-align="center center">
+            <img ng-src="{{home.data.imgs.profil}}" alt="weBall iphone profil">
+          </div>
+        </div>
+        <div layout="column" layout-align="center start" flex="50">
+          <h2 translate>Trouvez des joueurs</h2>
+          <p>
+            <span translate>
+              Faites-vous une place parmi la communauté weBall
+            </span>
+            <br>
+            <span translate>
+              Chaque joueur possède des statistiques afin d'avoir un aperçu de son niveau
+            </span>
+          </p>
+        </div>
+        <span flex="20"></span>
+      </div>
+      <div layout="row" class="margin-t-5x">
+        <span flex="20"></span>
+        <div layout="column" layout-align="center start" flex="50">
+          <h2 translate>Organisez un match</h2>
+          <p>
+            Maintenant, organiser un match devient un jeu d'enfants. Invitez ou trouvez des amis dans la communauté pour
+            jouer au foot dans le five de votre choix !
+          </p>
+        </div>
+        <div layout="column" flex="50">
+          <div layout layout-align="center center">
+            <img ng-src="{{home.data.imgs.matchs}}" alt="weBall iphone profil">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="footer" class="bg-dark-grey full-width margin-t-5x">
+      <div layout="row">
+        <span flex="15"></span>
+        <div layout="column" layout-padding flex="55">
+          <h3 translate>Télécharger l'application</h3>
+          <p translate>weBall pour iOS</p>
+          <p translate>weBall pour Android</p>
+          <p translate>weBall pour Windows Phone</p>
+        </div>
+        <div layout="column" layout-padding flex="15">
+          <h3 translate>À propos de weBall</h3>
+          <p translate>Qui sommes-nous?</p>
+          <p translate>Contactez-nous</p>
+          <p translate>FAQ</p>
+        </div>
+      </div>
+      <div layout="column">
+        <div layout="row">
+          <span flex="15"></span>
+          <span flex="70">
+            <hr>
+          </span>
+        </div>
+        <div layout="row">
+          <span flex="15"></span>
+          <span layout flex="70">
+            <span flex layout-align="start center">
+              Copyright &#169; 2016 weBall
+              <span translate>Tout droits réservés.</span>
+            </span>
+            <span flex>
+              <span translate>Conditions générales d'utilisation</span>
+              &nbsp;|&nbsp;
+              <span translate>Mentions légales</span>
+            </span>
+            <span layout layout-align="end">
+              <img src="assets/icons/fr-flag.png" alt="flag France">
+              &nbsp;
+              <span translate>France</span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </section>
+  </md-content>
+</div>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="47px" height="45px" viewBox="0 0 47 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>camera</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="02.00-Register-User" sketch:type="MSArtboardGroup" transform="translate(-697.000000, -495.000000)">
+            <g id="add-photo" sketch:type="MSLayerGroup" transform="translate(638.000000, 434.000000)">
+                <g id="camera" transform="translate(58.382286, 58.868818)" sketch:type="MSShapeGroup">
+                    <g id="group" transform="translate(0.961591, 1.939208)" stroke="#7C7C7C">
+                        <path d="M16.1064028,0.397240436 L11.9647564,5.30885668 L4.60182937,5.30885668 C2.07082321,5.30885668 0,7.51908399 0,10.2204729 L0,39.6901704 C0,42.3915593 2.07082321,44.6017867 4.60182937,44.6017867 L41.4164643,44.6017867 C43.9474704,44.6017867 46.0182937,42.3915593 46.0182937,39.6901704 L46.0182937,10.2204729 C46.0182937,7.51908399 43.9474704,5.30885668 41.4164643,5.30885668 L34.0535373,5.30885668 L29.9118909,0.397240436 L16.1064028,0.397240436 L16.1064028,0.397240436 Z M23.1657369,34.2785895 C17.7808295,34.2785895 13.5498309,30.0123317 13.5498309,24.5825489 C13.5498309,19.1527662 17.7808295,14.8865084 23.1657369,14.8865084 C28.5506442,14.8865084 32.7816428,19.1527662 32.7816428,24.5825489 C32.7816428,30.0123317 28.5506442,34.2785895 23.1657369,34.2785895 L23.1657369,34.2785895 Z" id="shape"></path>
+                    </g>
+                    <rect id="bounds" x="0" y="0" width="48.0795297" height="48.4802029"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

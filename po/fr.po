@@ -1,0 +1,284 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/fields/field-edit.tpl.html:70
+msgid "à"
+msgstr "à"
+
+#: app/components/autocomplete/address.directive.js:16
+msgid "Adresse"
+msgstr "Adresse"
+
+#: app/components/autocomplete/address.tpl.html:15
+msgid "Adresse invalide"
+msgstr "Adresse invalide"
+
+#: app/signup/signup.html:38
+msgid "Ajouter un logo"
+msgstr "Ajouter un logo"
+
+#: app/fields/field-edit.tpl.html:4 app/signup/signup.controller.js:12
+msgid "Ajouter un terrain"
+msgstr "Ajouter un terrain"
+
+#: app/fields/field-edit.tpl.html:92
+msgid "Annuler"
+msgstr "Annuler"
+
+#: app/fields/fields.service.js:19 app/fields/fields.service.js:28
+msgid "Autre"
+msgstr "Autre"
+
+#: app/signup/signup.html:6
+msgid "Bienvenue !"
+msgstr "Bienvenue !"
+
+#: app/components/autocomplete/address.tpl.html:16
+#: app/components/autocomplete/zipCode.tpl.html:16
+#: app/fields/field-edit.tpl.html:15 app/signup/signup.html:113
+#: app/signup/signup.html:123 app/signup/signup.html:134
+#: app/signup/signup.html:143 app/signup/signup.html:155
+#: app/signup/signup.html:164 app/signup/signup.html:49
+#: app/signup/signup.html:60 app/signup/signup.html:73
+#: app/signup/signup.html:93
+msgid "Ce champ est requis"
+msgstr "Ce champ est requis"
+
+#: app/signin/signin.controller.js:23
+msgid "Cet utilisateur n'existe pas"
+msgstr ""
+
+#: app/404/404.html:6
+msgid "Click"
+msgstr "Cliquez"
+
+#: app/components/autocomplete/zipCode.directive.js:14
+msgid "Code Postal"
+msgstr ""
+
+#: app/components/autocomplete/zipCode.tpl.html:15
+msgid "Code postal invalide"
+msgstr ""
+
+#: app/signup/signup.html:138
+msgid "Confirmation du mot de passe"
+msgstr "Confirmation du mot de passe"
+
+#: app/fields/fields.service.js:59
+msgid "Dimanche"
+msgstr "Dimanche"
+
+#: app/fields/fields.service.js:15
+msgid "Du lundi au samedi"
+msgstr ""
+
+#: app/signup/signup.html:150
+msgid "Email"
+msgstr "Email"
+
+#: app/signin/signin.controller.js:11
+msgid "Email adress"
+msgstr ""
+
+#: app/signin/signin.controller.js:23 app/signin/signin.controller.js:26
+#: app/signin/signin.controller.js:30 app/signup/signup.controller.js:75
+#: app/signup/signup.controller.js:80 app/signup/signup.controller.js:94
+msgid "Erreur"
+msgstr ""
+
+#: app/signin/signin.html:24
+msgid "Forgot password?"
+msgstr "Mot de passe oublié?"
+
+#: app/signup/signup.controller.js:10
+msgid "France"
+msgstr ""
+
+#: app/signup/signup.html:102
+msgid "Gérant"
+msgstr "Gérant"
+
+#: app/404/404.html:6
+msgid "here"
+msgstr "ici"
+
+#: app/fields/field-edit.tpl.html:52
+msgid "Horaires d'ouverture"
+msgstr ""
+
+#: app/signin/signin.controller.js:29 app/signup/signup.controller.js:93
+msgid "Impossible de joindre le serveur. Veuillez réessayer ultérieurement"
+msgstr ""
+
+#: app/signup/signup.html:13
+msgid "Informations du five"
+msgstr "Informations du five"
+
+#: app/signup/signup.controller.js:75
+msgid "Informations incorrectes"
+msgstr ""
+
+#: app/fields/fields.service.js:47
+msgid "Jeudi"
+msgstr ""
+
+#: app/fields/field-edit.tpl.html:61
+msgid "Jour"
+msgstr ""
+
+#: app/fields/field-edit.tpl.html:33
+msgid "Jours d'ouverture"
+msgstr ""
+
+#: app/fields/field-edit.tpl.html:26
+msgid "Laissez ce champ vide si le terrain n'est pas diponible"
+msgstr ""
+
+#: app/signin/signin.controller.js:26
+msgid "Le mot de passe est invalide"
+msgstr ""
+
+#: app/signup/signup.html:92
+msgid "Le numéro de téléphone est invalide"
+msgstr "Le numéro de téléphone est invalide"
+
+#: app/signup/signup.html:58
+msgid "Le numéro SIREN doit contenir 9 chiffres"
+msgstr "Le numéro SIREN doit contenir 9 chiffres"
+
+#: app/signup/signup.html:59
+msgid "Le numéro SIREN est invalide"
+msgstr "Le numéro SIREN est invalide"
+
+#: app/signup/signup.html:144
+msgid "Les mots de passes ne correspondent pas"
+msgstr "Les mots de passes ne correspondent pas"
+
+#: app/signin/signin.html:23 app/signin/signin.html:7
+msgid "Login"
+msgstr "Connexion"
+
+#: app/fields/fields.service.js:35
+msgid "Lundi"
+msgstr ""
+
+#: app/fields/fields.service.js:39
+msgid "Mardi"
+msgstr ""
+
+#: app/fields/fields.service.js:43
+msgid "Mercredi"
+msgstr ""
+
+#: app/signup/signup.html:27
+msgid "Modifier le logo"
+msgstr "Modifier le logo"
+
+#: app/signup/signup.html:129
+msgid "Mot de passe"
+msgstr "Mot de passe"
+
+#: app/signup/signup.html:108
+msgid "Nom"
+msgstr "Nom"
+
+#: app/signup/signup.html:44
+msgid "Nom de la société"
+msgstr "Nom de la société"
+
+#: app/fields/field-edit.tpl.html:10
+msgid "Nom du terrain"
+msgstr ""
+
+#: app/signup/signup.html:159 app/signup/signup.html:87
+msgid "Numéro de téléphone"
+msgstr "Numéro de téléphone"
+
+#: app/signup/signup.html:53
+msgid "Numéro SIREN"
+msgstr "Numéro SIREN"
+
+#: app/404/404.html:5
+msgid "Or something went wrong..."
+msgstr "Ou quelque chose ne va pas…"
+
+#: app/404/404.html:4
+msgid "Page not Found"
+msgstr "Page non trouvée"
+
+#: app/signin/signin.controller.js:12
+msgid "Password"
+msgstr "Mot de passe"
+
+#: app/signup/signup.html:66
+msgid "Pays"
+msgstr "Pays"
+
+#: app/signup/signup.html:118
+msgid "Prénom"
+msgstr ""
+
+#: app/fields/field-edit.tpl.html:68
+msgid "Prix de"
+msgstr ""
+
+#: app/fields/field-edit.tpl.html:19
+msgid "Prix horaire par défault"
+msgstr ""
+
+#: app/signup/signup.html:173
+msgid "S'enregistrer"
+msgstr "S'enregistrer"
+
+#: app/fields/fields.service.js:55
+msgid "Samedi"
+msgstr ""
+
+#: app/fields/field-edit.tpl.html:93
+msgid "Sauvegarder"
+msgstr ""
+
+#: app/404/404.html:6
+msgid "to go back to the portal."
+msgstr "pour retourner à la page d’accueil"
+
+#: app/fields/fields.service.js:24
+msgid "Tous les jours de 9h à 00h"
+msgstr ""
+
+#: app/fields/fields.service.js:51
+msgid "Vendredi"
+msgstr ""
+
+#: app/signup/signup.controller.js:79
+msgid "Veuillez ajouter au moins un terrain"
+msgstr ""
+
+#: app/signup/signup.html:7
+msgid ""
+"Veuillez prendre quelques minutes pour remplir ce formulaire d'inscription "
+"afin d'accéder à la plateforme myBall"
+msgstr ""
+"Veuillez prendre quelques minutes pour remplir ce formulaire d'inscription "
+"afin d'accéder à la plateforme myBall"
+
+#: app/fields/field-edit.tpl.html:24
+msgid ""
+"Veuillez renseigner un prix par défault pour les heures d'ouverture du "
+"terrain"
+msgstr ""
+
+#: app/signup/signup.html:78
+msgid "Ville"
+msgstr "Ville"

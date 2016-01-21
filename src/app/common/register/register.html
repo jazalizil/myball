@@ -1,0 +1,48 @@
+<div id="register">
+  <wb-navbar opaq="true"></wb-navbar>
+  <md-content class="scroll-content" layout-fill layout layout-align="center center">
+    <div layout="column" layout-fill layout-align="center start">
+      <div layout="row" layout-padding class="full-width">
+        <span flex="5"></span>
+        <div flex="20" layout>
+          <span layout layout-align="center center">
+            <hr class="full-width">
+          </span>
+        </div>
+        <span flex="50" layout="column">
+          <h2 class="uppercase dark-grey" layout layout-align="center center" translate>Inscription</h2>
+          <div ng-show="!register.data.form">
+            <p class="justify-text no-margin" translate>
+              En vous inscrivant sur weBall en tant que joueur, vous aurez la possibilité de trouver un terrain et
+              des coéquipiers ou adversaires afin d'organiser un match dans le terrain de votre choix.
+            </p>
+            <p class="justify-text no-margin margin-t-3x" translate>
+              En tant que manager, l'application web myBall vous permettra de gérer au mieux vos réservations et vos
+              paiements à travers un site ergonomique et intuitif.
+            </p>
+          </div>
+          <div ng-hide="register.data.form" layout="column">
+            <md-button class="md-raised md-primary margin-t-3x" ng-click="register.showForm('USER')" layout layout-align="center center">
+              <span translate>Je suis un joueur</span>
+            </md-button>
+            <md-button class="md-raised md-accent" ng-click="register.showForm('MANAGER')" layout layout-align="center center">
+              <span translate>Je suis gérant d'un five</span>
+            </md-button>
+          </div>
+        </span>
+        <span flex="20" layout>
+          <span layout layout-align="center center">
+            <hr class="full-width">
+          </span>
+        </span>
+        <span flex="5"></span>
+      </div>
+      <div layout="column" layout-fill layout-align="start start" ng-show="register.data.form">
+        <div layout="row" class="full-width">
+          <span flex="25"></span>
+          <div layout-fill flex="50" ng-show="register.data.form == 'MANAGER'" ng-include="'app/common/register/register-manager.tpl.html'"></div>
+        </div>
+      </div>
+    </div>
+  </md-content>
+</div>
