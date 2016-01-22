@@ -26,7 +26,7 @@ function browserSyncInit(baseDir, browser) {
     routes: routes
   };
 
-  var port = conf.env === 'prod' ? 8080 : 3000;
+  var port = conf.env === 'prod' ? 80 : 3000;
 
   /*
    * You can add a proxy to your backend by uncommenting the line below.
