@@ -21,8 +21,6 @@ to manage their reservations and their fields.
 ### 5. Build project
 * cd into project folder
 * gulp build for the vitrine app
-* gulp build --users for the users app
-* gulp build --managers for the managers app
 
 ### 6. Start testserver
 * cd into project folder
@@ -54,5 +52,3 @@ to manage their reservations and their fields.
 * gulp --dev run the project with API URL on local and DEBUG
 * gulp --prod run the project with distant API URL and no DEBUG
 * gulp --staging (default) run the project with distant API URL and DEBU
-* gulp --users run the users application
-* gulp --managers run the manager application
