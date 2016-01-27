@@ -16,7 +16,7 @@
             src: Conf.CDN_BASE_URL + "images/soccer-players.png",
             titles: [
               gettextCatalog.getString("Vous jouez au foot ?"),
-              gettextCatalog.getString("Organisez des matchs rapidement parmi la communauté weBall !")
+              gettextCatalog.getString("Organisez des matchs rapidement avec weBall !")
             ],
             subTitles: [
               gettextCatalog.getString("Et si organiser un match devenait un jeu d'enfants ?"),
