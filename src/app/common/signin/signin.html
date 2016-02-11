@@ -23,7 +23,7 @@
                 <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
                 <input required name="password" ng-model="signin.datas.password" type="password">
               </md-input-container>
-              <md-button class="md-raised md-primary" ng-click="signin.login()" v-busy="signin.datas.isLoading">
+              <md-button id="submit-button" class="md-raised md-primary" ng-click="signin.login()" v-busy="signin.datas.isLoading">
                 <span translate>Se connecter</span>
               </md-button>
             </form>
