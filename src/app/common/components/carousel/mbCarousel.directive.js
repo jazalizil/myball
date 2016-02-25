@@ -13,10 +13,11 @@
       vm.index = 0;
       vm.currentImg = vm.imgs[vm.index];
     }
-    function mbCarouselLink(scope, el){
-      var timeOut = +scope.carousel.timeout || 3000, timeOutPr;
+    function mbCarouselLink(scope, el, index){
+    /*var timeOut = +scope.carousel.timeout || 3000, timeOutPr;
       function nextImg() {
-        scope.carousel.index += 1;
+		  console.log('lol');
+		  scope.carousel.index += 1;
         if (typeof scope.carousel.imgs[scope.carousel.index] === 'undefined') {
           scope.carousel.index = 0;
         }
@@ -27,7 +28,11 @@
       }, timeOut);
       el.on('$destroy', function(){
         $interval.cancel(timeOutPr);
-      });
+      });*/
+
+		scope.changeImg = function(index){
+			scope.carousel.currentImg = scope.carousel.imgs[index];
+		};
     }
     return {
       restrict: 'E',

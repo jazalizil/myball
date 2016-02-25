@@ -1,9 +1,41 @@
 #wb-navbar {
-  @media screen and (min-width: @tablet-width-min) {
-    height: 64px;
-  }
-  .action-button {
-    border: 1px solid @grey;
-    border-radius: 7%;
-  }
+	@media screen and (min-width: @tablet-width-min) {
+		height: 50px;
+		min-height: 50px;
+		max-height: 50px;
+	}
+	.action-button {
+		border: 1px solid @grey;
+		border-radius: 7%;
+	}
+
+	#wb-toolbar-tools {
+		height: 50px;
+		min-height: 50px;
+		max-height: 50px;
+
+		#wb-home-button {
+			height: 50px;
+			margin-left: -16px;
+
+			a {
+				line-height: 42px;
+
+				svg {
+					height: 38px;
+				}
+			}
+		}
+
+		#wb-signin-button,
+		#wb-signup-button {
+			min-height: 25px;
+			height: 25px;
+			line-height: 25px;
+		}
+
+		#wb-signup-button {
+
+		}
+	}
 }
