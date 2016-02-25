@@ -9,7 +9,7 @@
       return UserService.identity().then((function(data) {
         $log.debug('Go to main');
         $log.debug(data);
-        $state.go('main');
+        $state.go('home');
       }), function() {
         $log.debug('Login required');
         $state.go('home');

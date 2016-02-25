@@ -13,7 +13,7 @@
       imgs : {
         carousel : [
           {
-            src: Conf.CDN_BASE_URL + "images/soccer-players.png",
+            src: "assets/images/soccer-players.png",
             titles: [
               gettextCatalog.getString("Vous jouez au foot ?"),
               gettextCatalog.getString("Organisez des matchs rapidement avec weBall !")
@@ -26,7 +26,7 @@
             alt: gettextCatalog.getString("joueurs de foot")
           },
           {
-            src: Conf.CDN_BASE_URL + "images/footsalle-field.png",
+            src: "assets/images/footsalle-field.png",
             titles: [
               gettextCatalog.getString("Vous gérez un Five ?"),
               gettextCatalog.getString("Devenez partenaire de la communauté weBall !")
@@ -38,9 +38,9 @@
             alt: gettextCatalog.getString("terrain five")
           }
         ],
-        map: Conf.CDN_BASE_URL + 'images/weball-iphone-map.png',
-        profil: Conf.CDN_BASE_URL + 'images/weball-iphone-profil.png',
-        matchs: Conf.CDN_BASE_URL + 'images/weball-iphone-matchs.png'
+        map: 'assets/images/weball-iphone-map.png',
+        profil: 'assets/images/weball-iphone-profil.png',
+        matchs: 'assets/images/weball-iphone-matchs.png'
       }
     }
   }
