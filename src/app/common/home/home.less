@@ -1,14 +1,53 @@
 #home {
+  @media screen and (max-width: 499px) {
+    #content {
+      padding-top: 32vh;
+    }
+  }
+  @media screen and (min-width: 500px) {
+    #content {
+      padding-top: 55vh;
+    }
+  }
   #content {
-    padding-top: 55vh;
     img {
       height: 45vh;
     }
+
+	  .description-container {
+		  h2 {
+			  font-size: 2em;
+		  }
+
+		  p {
+			  //Ici pour la couleur des paragraphes
+		  }
+	  }
   }
   #footer {
-    color: @grey;
-    p {
-      line-height: 0;
-    }
+	  color: @grey;
+
+	  p {
+		  line-height: 0;
+	  }
+
+	  #copyright-container {
+		  padding-bottom: 8px;
+
+		  .copyright-content {
+			  font-size: 0.8em; //Size des copyright
+		  }
+	  }
+
+	  #download-container,
+	  #link-container {
+		  h3 {
+			  font-size: 1em; //Size de "Telecharger l'application" et "A propos de Weball"
+		  }
+
+		  span {
+			  font-size: 0.8em; //Size des liens dans ces parties
+		  }
+	  }
   }
 }

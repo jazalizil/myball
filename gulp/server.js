@@ -51,7 +51,7 @@ gulp.task('serve', ['watch', 'translations'], function () {
 });
 
 gulp.task('serve:dist', ['build', 'translations:dist'], function () {
-  browserSyncInit(conf.paths.dist);
+  browserSyncInit(conf.paths.dist, []);
 });
 
 gulp.task('serve:e2e', ['inject'], function () {
