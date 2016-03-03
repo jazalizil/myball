@@ -29,6 +29,12 @@
 @padding-5x: 25px;
 @padding-10x: 50px;
 
+//phone, tablets and desktop widths
+@phone-width-max: 499px;
+@tablet-width-min: 500px;
+@tablet-width-max: 736px;
+@desktop-width-min: 737px;
+
 //var
 @header-height: 64px;
 
@@ -138,9 +144,16 @@ html {
 // End colors
 
 // Start utils
+@media screen and (min-width: @tablet-width-min) {
+  .scroll-content {
+    height: calc(~"100vh - 64px");
+  }
+}
 
-.scroll-content {
-  height: calc(~"100vh - 64px");
+@media screen and (max-width: @phone-width-max) {
+  .scroll-content {
+    height: calc(~"100vh - 56px");
+  }
 }
 
 .justify-text {

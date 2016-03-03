@@ -51,33 +51,6 @@
       url: '/404',
       templateUrl: 'app/common/404/404.html'
     });
-    /** Manager routes **/
-    $stateProvider.state('signup', {
-      parent: "public",
-      url: "/signup",
-      templateUrl: "app/manager/signup/signup.html",
-      controller: "SignupController",
-      controllerAs: "signup"
-    }).state('main', {
-      parent: "protected",
-      url: "/main",
-      templateUrl: "app/manager/main/main.html",
-      controller: "MainController",
-      controllerAs: "main"
-    }).state('matchs', {
-      parent: "protected",
-      url: "/matchs",
-      templateUrl: "app/manager/matchs/matchs.html",
-      controller: "MatchsController",
-      controllerAs: "matchs"
-    }).state('players', {
-      parent: "protected",
-      url: "/players",
-      templateUrl: "app/manager/players/players.html",
-      controller: "PlayersController",
-      controllerAs: "players"
-    });
-    /** End manager routes **/
     $urlRouterProvider.otherwise('/404');
     $urlMatcherFactoryProvider.strictMode(false);
   }

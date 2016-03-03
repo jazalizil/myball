@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="counters">
-      <span ng-repeat="img in carousel.imgs" ng-class="{'current' : img.src === carousel.currentImg.src}" class="circle">&nbsp;</span>
+      <span ng-repeat="(key, img) in carousel.imgs" ng-click="changeImg(key)" ng-class="{'current' : img.src === carousel.currentImg.src}" class="circle">&nbsp;</span>
     </div>
   </div>
 </div>

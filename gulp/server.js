@@ -26,8 +26,6 @@ function browserSyncInit(baseDir, browser) {
     routes: routes
   };
 
-  var port = conf.env === 'prod' ? 8080 : 3000;
-
   /*
    * You can add a proxy to your backend by uncommenting the line below.
    * You just have to configure a context which will we redirected and the target url.
@@ -40,9 +38,7 @@ function browserSyncInit(baseDir, browser) {
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,
-    browser: browser,
-    port: port,
-    ui: false
+    browser: browser
   });
 }
 
@@ -55,7 +51,7 @@ gulp.task('serve', ['watch', 'translations'], function () {
 });
 
 gulp.task('serve:dist', ['build', 'translations:dist'], function () {
-  browserSyncInit(conf.paths.dist);
+  browserSyncInit(conf.paths.dist, []);
 });
 
 gulp.task('serve:e2e', ['inject'], function () {

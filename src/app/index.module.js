@@ -15,9 +15,7 @@
       'toastr',
       'vButton',
       'LocalStorageModule',
-      'ngFileUpload',
       'gettext',
-      'angularResizable',
       'wyvernzora.un-svg'
     ]);
 })();
