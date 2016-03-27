@@ -1,6 +1,68 @@
+.md-toolbar-tools {
+	padding: 0;
+	padding-left: 16px;
+}
+
 #wb-navbar {
-  .action-button {
-    border: 1px solid @grey;
-    border-radius: 7%;
-  }
+	.action-button {
+		border: 1px solid @grey;
+		border-radius: 7%;
+	}
+
+	#account-button-container {
+		height: 100%;
+		
+		.md-button.dropdown {
+			overflow: visible; /*reset*/
+
+			md-icon {
+				margin-right: 10px;
+			}
+
+			#account-name {
+				font-size: 1.2em;
+				/*float: right;*/
+				margin-right: 25px;
+				color: white;
+			}
+			.expand-more-icon {
+				position: absolute;
+				top: 50%;
+				margin-top: -0.5em;
+				right: 0;
+			}
+		}
+
+		.dropdown .dropdown-menu {
+			width: inherit;
+			max-width: 0;
+			position: absolute;
+			left: 40px;
+			top: 100%;
+			margin: 0;
+			padding: 0;
+			opacity: 0;
+			overflow: hidden;
+			background-color: #fff;
+			list-style: none;
+			transition: min-width 0.2s ease-in-out, left 0.2s ease-in-out, opacity 0.2s ease-in-out;
+		}
+
+		.dropdown .dropdown-menu .md-button {
+			min-width: 100%;
+			border-radius: 0;
+			margin: 0;
+			padding: 6px 16px;
+
+			span {
+				color: black;
+			}
+		}
+
+		.dropdown.active .dropdown-menu {
+			max-width: 300px; /* set a maxwidth bigger than the widest element */
+			left: 0;
+			opacity: 1;
+		}
+	}
 }

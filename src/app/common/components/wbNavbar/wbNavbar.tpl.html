@@ -1,24 +1,46 @@
 <md-toolbar
-    id="wb-navbar"
-    ng-class="{'bg-transparent fixed' : !opaq}"
-    class="bg-black grey md-whiteframe-z2"
-    layout="row">
-  <div class="md-toolbar-tools">
-    <md-button aria-label="home" layout layout-align="left center">
-      <a ui-sref="home">
-        <un-svg svg-src="assets/icons/weball.svg"></un-svg>
-      </a>
-    </md-button>
-    <span flex></span>
-    <md-button class="action-button" aria-label="signin" layout layout-align="right center">
-      <a ui-sref="signin">
-        <span class="grey" translate>Connexion</span>
-      </a>
-    </md-button>
-    <md-button class="action-button" aria-label="register" layout layout-align="right center">
-      <a ui-sref="register">
-        <span class="grey" translate>Inscription</span>
-      </a>
-    </md-button>
-  </div>
+		id="wb-navbar"
+		ng-class="{'bg-transparent fixed' : !opaq}"
+		class="bg-black grey md-whiteframe-z2"
+		layout="row"
+		ng-controller="WbNavbarController as wbNavbar">
+	<div class="md-toolbar-tools">
+		<md-button aria-label="home" layout layout-align="left center">
+			<a ui-sref="home">
+				<un-svg svg-src="assets/icons/weball.svg"></un-svg>
+			</a>
+		</md-button>
+		<span flex></span>
+		<md-button class="action-button" aria-label="signin" layout layout-align="right center" ng-hide="wbNavbar.isAuthed()">
+			<a ui-sref="signin">
+				<span class="grey" translate>Connexion</span>
+			</a>
+		</md-button>
+		<md-button class="action-button" aria-label="register" layout layout-align="right center" ng-hide="wbNavbar.isAuthed()">
+			<a ui-sref="register">
+				<span class="grey" translate>Inscription</span>
+			</a>
+		</md-button>
+		<!--<md-icon class="grey" md-font-set="material-icons">expand_more</md-icon>
+		<div dropdown="" class="{{temp}} wrapper-dropdown-3" ng-click="temp='active'">
+			<i class="arrow"></i>
+			<span>{{selected}}</span>
+			<ul class="dropdown">
+				<li ng-repeat="status in statuses">
+					<a ng-click="change(status)" href="#">{{status}}</a>
+				</li>
+			</ul>
+		</div>-->
+		<div ng-show="wbNavbar.isAuthed()" layout="row" id="account-button-container">
+			<md-button class="md-primary dropdown" layout-fill layout="row" layout-align="center center" ng-click="myDropdownIsActive=!myDropdownIsActive" ng-class="{active:myDropdownIsActive}">
+				<md-icon md-font-set="material-icons">account_circle</md-icon>
+				<span id="account-name">{{ wbNavbar.getFullName() }}</span>
+				<i class="material-icons expand-more-icon">expand_more</i>
+				<ul class="dropdown-menu md-whiteframe-z1">
+					<li><md-button ng-click="wbNavbar.goProfil()" ng-click="">Profil</md-button></li>
+					<li><md-button ng-click="wbNavbar.logout()">Se déconnecter</md-button></li>
+				</ul>
+			</md-button>
+		</div>
+	</div>
 </md-toolbar>
