@@ -3,7 +3,7 @@
   angular.module('myBall').factory('UserService', UserService);
 
   /** @ngInject */
-  function UserService($q, Restangular, $cookies, localStorageService) {
+  function UserService($q, Restangular, localStorageService) {
     var _authenticated, _identity, _token;
     _identity = localStorageService.get('identity') || void 0;
     _authenticated = false;
@@ -12,7 +12,7 @@
       updateToken: function(token) {
         _token = token;
         _authenticated = true;
-        $cookies.put('token', token);
+        localStorageService.set('token', token);
         Restangular.withConfig(function(RestangularConfigurer) {
           return RestangularConfigurer.setDefaultHeaders({
             'x-access-token': token
@@ -23,7 +23,7 @@
         if (_token != null) {
           return _token;
         }
-        return $cookies.get('token');
+        return localStorageService.get('token');
       },
       getIdentity: function() {
         return _identity;

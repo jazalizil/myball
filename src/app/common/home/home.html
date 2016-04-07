@@ -1,8 +1,9 @@
 <div id="home">
-  <wb-navbar></wb-navbar>
+  <wb-navbar ng-hide="home.data.isAuthenticated"></wb-navbar>
+  <mb-navbar ng-show="home.data.isAuthenticated"></mb-navbar>
   <md-content class="scrollcontent">
     <section class="full-width">
-      <mb-carousel imgs="home.data.imgs.carousel"/>
+      <mb-carousel timeout="5000" imgs="home.data.imgs.carousel"/>
     </section>
     <section id="content" class="full-width">
       <div layout="row">

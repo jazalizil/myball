@@ -1,8 +1,8 @@
 <md-toolbar
     id="wb-navbar"
     ng-class="{'fixed bg-transparent grey': !navbar.data.isSignupState && !navbar.opaq,
-    'fixed bg-black grey': !navbar.data.isSignupState && navbar.opaq}"
-    class="md-accent md-whiteframe-z2"
+    'fixed bg-dark-grey grey': !navbar.data.isSignupState && navbar.opaq}"
+    class="md-accent md-whiteframe-z2 md-toolbar-sm"
     layout="row">
   <div class="md-toolbar-tools">
     <md-button aria-label="home" layout layout-align="left center">
@@ -34,7 +34,7 @@
     <span flex></span>
 
     <div ng-if="!navbar.data.isSignupState" layout layout-align="end end">
-      <md-button class="md-icon-button" ng-click="navbar.toggleSearch()">
+      <md-button class="md-icon-button no-pad" ng-click="navbar.toggleSearch()">
         <md-icon md-font-set="material-icons">{{navbar.data.searchIcon}}</md-icon>
       </md-button>
       <md-menu md-offset="50">

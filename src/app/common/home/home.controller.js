@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('HomeController', HomeController);
   /** @ngInject */
-  function HomeController(gettextCatalog, Conf) {
+  function HomeController(UserService, gettextCatalog, Conf) {
     var vm = this;
     vm.data = {
       imgs : {
@@ -42,6 +42,13 @@
         profil: Conf.CDN_BASE_URL + 'images/weball-iphone-profil.png',
         matchs: Conf.CDN_BASE_URL + 'images/weball-iphone-matchs.png'
       }
-    }
+    };
+
+    var init = function() {
+      return UserService.identity(true).then(function(){
+        vm.data.isAuthenticated = true;
+      })
+    };
+    init();
   }
 })();

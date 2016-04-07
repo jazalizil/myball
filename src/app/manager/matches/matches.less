@@ -1,9 +1,58 @@
-#matchs {
+#matches {
   md-content {
     padding-top: @header-height;
+    .matches {
+      height: calc(~"60vh - 80px");
+      md-card {
+        height: 100%;
+        .md-toolbar-tools {
+          min-height: 40px;
+          height: 40px;
+          font-size: 14px;
+          background-color: rgba(0,0,0, 0.4);
+        }
+        md-content {
+          height: 100%;
+          background-color: rgba(0,0,0, 0.1);
+          .hour-ctn {
+            width: 80px;
+            height: 100px;
+          }
+          .line-nav {
+            width: 3px;
+            background-color: @white;
+            height: 100px;
+            opacity: 0.1;
+          }
+          .triangle-left {
+            width: 0;
+            height: 0;
+            border-top: 35px solid transparent;
+            border-right: 15px solid @white-transparent;
+            border-bottom: 35px solid transparent;
+            margin-top: 15px;
+            margin-left: 7px;
+          }
+          .container {
+            background-color: @white-transparent;
+            height: 70px;
+            margin-top: 15px;
+            width: 320px;
+          }
+          .circle {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: absolute;
+            margin-top: 42px;
+            margin-left: -10px;
+          }
+        }
+      }
+    }
   }
 
-  @colors: green @mb-color, red @red, orange @orange, blue @blue;
+  @colors: green @mb-color, red @red, orange @orange, blue @blue, grey @grey;
   .generateCircles(@i:1) when (@i <= length(@colors)){
     @start: e('.circle[data-attribute=');
     @end: e(']');
@@ -59,4 +108,5 @@
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
   }
+
 }

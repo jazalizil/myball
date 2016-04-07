@@ -12,7 +12,7 @@
         <div flex="50" layout="column">
           <h2 class="uppercase dark-grey" layout layout-align="center center" translate>Connexion</h2>
           <div layout="row" layout-align="center center" class="margin-top-5x">
-            <form layout="column" action="signin.login()">
+            <form layout="column" ng-submit="signin.login()">
               <md-input-container flex class="md-icon-float md-block">
                 <label>{{signin.datas.placeholders.email}}</label>
                 <md-icon class="grey" md-font-set="material-icons">email</md-icon>
@@ -23,9 +23,10 @@
                 <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
                 <input required name="password" ng-model="signin.datas.password" type="password">
               </md-input-container>
-              <md-button class="md-raised md-primary" ng-click="signin.login()" v-busy="signin.datas.isLoading">
+              <md-button class="md-raised md-primary" v-busy="signin.datas.isLoading">
                 <span translate>Se connecter</span>
               </md-button>
+              <input type="submit" class="hidden">
             </form>
           </div>
         </div>

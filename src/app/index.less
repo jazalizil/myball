@@ -12,14 +12,16 @@
 //colors
 @light-grey: #F9F9F9;
 @grey: #CCCCCC;
-@dark-grey: #646464;
+@black-grey: #646464;
+@dark-grey: #333;
 @dark-blue: #2c3e50;
 @red: #F05959;
 @mb-color: #29C134;
-@black: #1A1C23;
+@black: #1D1D26;
 @white: #FFF;
 @orange: #FC9A41;
 @blue: #416CBF;
+@white-transparent: rgba(255,255,255, 0.2);
 
 //paddings
 @padding: 5px;
@@ -30,7 +32,7 @@
 @padding-10x: 50px;
 
 //var
-@header-height: 64px;
+@header-height: 42px;
 
 // reusable classes
 .material-icons {
@@ -104,7 +106,7 @@ html {
 }
 
 .bg-dark-grey {
-  background-color: @dark-grey;
+  background-color: @dark-grey !important;
 }
 
 .bg-grey {
@@ -127,6 +129,10 @@ html {
   background-color: rgba(0,0,0,0.5) !important;
 }
 
+.bg-gradient {
+  background-image: linear-gradient(180deg, @dark-grey, @black);
+}
+
 .fill-grey {
   fill: @grey;
 }
@@ -140,7 +146,7 @@ html {
 // Start utils
 
 .scroll-content {
-  height: calc(~"100vh - 64px");
+  height: calc(~'100vh - 42px');
 }
 
 .justify-text {
@@ -165,6 +171,10 @@ html {
 
 .pad-r-3x {
   padding-right: @padding-3x;
+}
+
+.no-pad {
+  padding: 0 !important;
 }
 
 .no-margin {
@@ -239,6 +249,14 @@ html {
   visibility: hidden;
 }
 
+.big {
+  font-size: 20px;
+}
+
+.small {
+  font-size: 12px;
+}
+
 .hint {
   /* Position the hint */
   position: absolute;
@@ -276,6 +294,19 @@ md-input-container {
 }
 
 md-toolbar {
+  &.md-toolbar-sm {
+    min-height: 42px;
+    height: 42px;
+    .md-toolbar-tools {
+      min-height: 42px;
+      height: 42px;
+      .md-button {
+        min-height: 32px;
+        height: 32px;
+        line-height: 0;
+      }
+    }
+  }
   &.grey {
     .md-button {
       svg {
@@ -284,7 +315,7 @@ md-toolbar {
     }
   }
   .navbar-link {
-    color: @dark-grey;
+    color: @black-grey;
     cursor: pointer;
     line-height: 36px;
     min-height: 36px;
@@ -295,7 +326,7 @@ md-toolbar {
   .md-button {
     a {
       text-decoration: none;
-      color: @dark-grey;
+      color: @black-grey;
     }
     md-icon {
       color: @grey !important;
@@ -307,8 +338,6 @@ md-toolbar {
       .fill-black;
       shape-rendering: auto;
       vertical-align: bottom;
-      height: 47px;
-      width: 87px;
     }
   }
 }

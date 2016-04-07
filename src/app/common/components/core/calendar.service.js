@@ -7,7 +7,7 @@
   angular.module('myBall')
     .factory('CalendarService', CalendarService);
   /** @ngInject */
-  function CalendarService(gettextCatalog) {
+  function CalendarService(gettextCatalog, _) {
     return {
       getNumberDaysOfMonth: function(month, year) {
         return new Date(year, month, 0).getDate();
@@ -19,6 +19,11 @@
         return {
           date : new Date(),
           daysDisplayed : [
+            {
+              number : 0,
+              name : gettextCatalog.getString('Dimanche'),
+              shortName : gettextCatalog.getString('Dim')
+            },
             {
               number : 1,
               name : gettextCatalog.getString('Lundi'),
@@ -48,11 +53,6 @@
               number : 6,
               name : gettextCatalog.getString('Samedi'),
               shortName : gettextCatalog.getString('Sam')
-            },
-            {
-              number : 0,
-              name : gettextCatalog.getString('Dimanche'),
-              shortName : gettextCatalog.getString('Dim')
             }
           ],
           monthsDisplayed : [

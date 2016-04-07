@@ -13,5 +13,6 @@
     vm.data = {
       isAuthenticated: UserService.isAuthenticated()
     };
+
   }
 })();

@@ -5,7 +5,7 @@
       "WEBALL_API_BASE_URL": "http://localhost:8080/",
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
-      "CDN_BASE_URL": "https://d10c5b9vwcvlt4.cloudfront.net/"
+      "CDN_BASE_URL": "https://d153u8w1ikjxem.cloudfront.net/"
     }
   },
   "staging": {
@@ -14,7 +14,7 @@
       "WEBALL_API_BASE_URL": "http://api.weball.fr/",
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
-      "CDN_BASE_URL": "https://d10c5b9vwcvlt4.cloudfront.net/"
+      "CDN_BASE_URL": "https://d153u8w1ikjxem.cloudfront.net/"
     }
   },
   "prod": {
@@ -23,7 +23,7 @@
       "WEBALL_API_BASE_URL": "http://api.weball.fr/",
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
-      "CDN_BASE_URL": "https://d10c5b9vwcvlt4.cloudfront.net/"
+      "CDN_BASE_URL": "https://d153u8w1ikjxem.cloudfront.net/"
     }
   }
 }
