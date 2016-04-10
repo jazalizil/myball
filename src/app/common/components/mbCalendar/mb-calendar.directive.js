@@ -22,6 +22,7 @@
       };
       vm.data.yearsDisplayed = _.range(vm.data.currentYear, vm.data.currentYear + 6);
 
+      // Watches
       var w = angular.element($window);
       $scope.$watch(function () {
         return $window.innerWidth;
@@ -39,6 +40,22 @@
       });
       w.bind('resize', function () {
         $scope.$apply();
+      });
+
+      $scope.$watch(function() {
+        return vm.data.currentYear
+      }, function(newVal){
+        vm.date = new Date(newVal, vm.data.currentMonth, vm.data.currentDay);
+      });
+      $scope.$watch(function(){
+        return vm.data.currentMonth
+      }, function(newVal){
+        vm.date = new Date(vm.data.currentYear, newVal, vm.data.currentDay);
+      });
+      $scope.$watch(function(){
+        return vm.data.currentDay
+      }, function(newVal){
+        vm.date = new Date(vm.data.currentYear, vm.data.currentMonth, newVal);
       });
 
       function getDaysOfLastDecember(days) {
@@ -140,7 +157,6 @@
       vm.selectMonth = function (monthIndex) {
         vm.data.currentMonth = monthIndex;
         vm.data.weekIndex = getFirstWeekIndex();
-        $log.debug('select month', monthIndex, '--> weekIndex', vm.data.weekIndex);
       };
 
       vm.selectDay = function (day) {
@@ -149,14 +165,26 @@
           month: day.month,
           year: day.year
         };
+        vm.data.currentDay = day.date;
+        vm.data.currentMonth = day.month;
+        if (day.year !== vm.data.currentYear) {
+          vm.selectYear(day.year);
+        }
         $log.debug(day);
       };
+
+      function checkAnotherMonth() {
+        if (vm.data.daysToDisplay[vm.data.weekIndex+7].month !== vm.data.currentMonth) {
+          vm.data.currentMonth = vm.data.daysToDisplay[vm.data.weekIndex+7].month;
+        }
+      }
       
       vm.previousDays = function() {
         vm.data.weekIndex -= 7;
         if (vm.data.weekIndex < 0) {
           vm.selectYear(vm.data.currentYear - 1);
         }
+        checkAnotherMonth();
       };
       
       vm.nextDays = function() {
@@ -164,6 +192,7 @@
         if (vm.data.weekIndex > vm.data.daysToDisplay.length) {
           vm.selectYear(vm.data.currentYear + 1);
         }
+        checkAnotherMonth();
       };
 
       function init() {
@@ -183,7 +212,8 @@
       templateUrl: 'app/common/components/mbCalendar/mb-calendar.tpl.html',
       bindToController: true,
       scope: {
-        matches : '='
+        matches : '=',
+        date: '='
       }
     }
   }

@@ -11,12 +11,26 @@
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
-      selectFieldPlaceholder: gettextCatalog.getString("Aucun terrain"),
+      placeholders: {
+        paid: gettextCatalog.getString('Paid'),
+        name: gettextCatalog.getString('Complete Name'),
+        phone: gettextCatalog.getString('Phone Number')
+      },
       hours: _.range(24),
-      date: new Date()
+      date: new Date(),
+      teamSizes: [
+        {
+          value: 10,
+          name: '5 vs 5'
+        },
+        {
+          value: 6,
+          name: '3 vs 3'
+        }
+      ],
+      match: {}
     };
     vm.data.selectedField = vm.data.identity.five.fields[0];
-    $log.debug(vm.data.hours);
 
     var init = function() {
       var params = {};
@@ -29,6 +43,7 @@
           vm.data.matches = res;
           $log.debug(res);
         });
+      vm.data.match.maxPlayers = vm.data.teamSizes[0].value;
     };
     init();
   }

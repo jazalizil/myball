@@ -18,6 +18,7 @@
 @red: #F05959;
 @mb-color: #29C134;
 @black: #1D1D26;
+@true-black: #000;
 @white: #FFF;
 @orange: #FC9A41;
 @blue: #416CBF;
@@ -29,7 +30,9 @@
 @padding-3x: 15px;
 @padding-4x: 20px;
 @padding-5x: 25px;
+@padding-8x: 40px;
 @padding-10x: 50px;
+@padding-12x: 60px;
 
 //var
 @header-height: 42px;
@@ -87,6 +90,10 @@ html {
 
 .dark-grey {
   color: @dark-grey;
+}
+
+.green {
+  color: @mb-color;
 }
 
 .white {
@@ -171,6 +178,14 @@ html {
 
 .pad-r-3x {
   padding-right: @padding-3x;
+}
+
+.pad-4x {
+  padding: @padding-4x;
+}
+
+.pad-8x {
+  padding: @padding-8x;
 }
 
 .no-pad {
@@ -354,6 +369,10 @@ md-dialog {
 
 a {
   text-decoration: none;
+}
+
+:focus {
+  outline: none;
 }
 
 // End angular material rebranding

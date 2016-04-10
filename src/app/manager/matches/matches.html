@@ -4,31 +4,67 @@
 
   <md-content class="scroll-content bg-black">
     <section>
-      <mb-calendar matches="matches.data.matches" layout></mb-calendar>
+      <mb-calendar matches="matches.data.matches" date="matches.data.date" layout></mb-calendar>
     </section>
     <section class="matches" layout="row">
-      <md-card class="bg-black" flex="35">
-        <div class="md-accent md-toolbar-tools grey">
+      <md-card class="bg-black" flex="100" layout="column" layout-align="center center">
+        <div class="md-accent md-toolbar-tools grey" layout>
           {{matches.data.date | date : 'EEEE d MMMM yyyy'}}
         </div>
-        <md-content class="no-pad">
-          <div layout="row" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 9">
-            <span layout="column" layout-align="center center" class="hour-ctn grey">{{hour}}:00</span>
-            <span class="line-nav">&nbsp;</span>
-            <span class="circle bg-grey">&nbsp;</span>
-            <span class="triangle-left"></span>
-            <span class="container"></span>
-          </div>
-        </md-content>
-      </md-card>
-      <span flex="5"></span>
-      <md-card class="bg-black" flex="60">
-        <div class="md-accent md-toolbar-tools grey">
-          Terrain 1
+        <div layout="row" class="fit-width">
+          <md-content class="fit-width" flex="30">
+            <div layout="row" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 9">
+              <span layout="column" layout-align="center center" class="hour-ctn grey">{{hour}}:00</span>
+              <span class="line-nav">&nbsp;</span>
+              <span class="circle bg-grey">&nbsp;</span>
+              <span class="triangle-left"></span>
+              <span class="container"></span>
+            </div>
+          </md-content>
+          <md-content class="fit-width bordered" flex="30">
+            <div layout="row" ng-repeat="field in matches.data.identity.five.fields">
+              <div class="field fit-width" layout-padding layout="column">
+                <div layout="row" layout-align="center start" class="white">{{field.name}}</div>
+                <div layout="row" layout-align="center center" class="green fit-height">
+                  <md-button class="green">
+                    <md-icon md-font-set="material-icons green">add_circle_outline</md-icon>
+                    <span translate>Book</span>
+                  </md-button>
+                </div>
+              </div>
+            </div>
+          </md-content>
+          <md-content class="fit-width bordered extra-padded" flex="40">
+            <md-input-container class="md-icon-float md-block">
+              <label>{{matches.data.placeholders.name}}</label>
+              <md-icon md-font-set="material-icons white">person_outline</md-icon>
+              <input type="text" name="name">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+              <label>{{matches.data.placeholders.phone}}</label>
+              <md-icon md-font-set="material-icons white">phone</md-icon>
+              <input type="number" name="phone">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+              <md-icon md-font-set="material-icons white">group</md-icon>
+              <md-select ng-model="matches.data.match.matchPlayers">
+                <md-option ng-repeat="size in matches.data.teamSizes" value="{{size.value}}"
+                           ng-selected="{{matches.data.match.maxPlayers === size.value}}">
+                  {{size.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block switch-ctn">
+              <md-icon md-font-set="material-icons white">payment</md-icon>
+              <span>{{matches.data.placeholders.paid}}</span>
+              <md-switch class="md-primary" disabled ng-model="matches.data.match.paid">
+              </md-switch>
+            </md-input-container>
+            <md-button class="md-raised md-primary fit-width">
+              <span class="white" translate>book</span>
+            </md-button>
+          </md-content>
         </div>
-        <md-content class="no-pad">
-
-        </md-content>
       </md-card>
     </section>
   </md-content>
