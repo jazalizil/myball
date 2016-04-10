@@ -37,16 +37,16 @@
           <md-content class="fit-width bordered extra-padded" flex="40">
             <md-input-container class="md-icon-float md-block">
               <label>{{matches.data.placeholders.name}}</label>
-              <md-icon md-font-set="material-icons white">person_outline</md-icon>
+              <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
               <input type="text" name="name">
             </md-input-container>
             <md-input-container class="md-icon-float md-block">
               <label>{{matches.data.placeholders.phone}}</label>
-              <md-icon md-font-set="material-icons white">phone</md-icon>
+              <md-icon md-svg-src="/assets/icons/phone.svg">phone</md-icon>
               <input type="number" name="phone">
             </md-input-container>
             <md-input-container class="md-icon-float md-block">
-              <md-icon md-font-set="material-icons white">group</md-icon>
+              <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
               <md-select ng-model="matches.data.match.matchPlayers">
                 <md-option ng-repeat="size in matches.data.teamSizes" value="{{size.value}}"
                            ng-selected="{{matches.data.match.maxPlayers === size.value}}">
@@ -55,7 +55,7 @@
               </md-select>
             </md-input-container>
             <md-input-container class="md-icon-float md-block switch-ctn">
-              <md-icon md-font-set="material-icons white">payment</md-icon>
+              <md-icon md-svg-src="/assets/icons/paiement.svg"></md-icon>
               <span>{{matches.data.placeholders.paid}}</span>
               <md-switch class="md-primary" disabled ng-model="matches.data.match.paid">
               </md-switch>
