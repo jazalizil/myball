@@ -11,7 +11,7 @@
         <p ng-repeat="subTitle in carousel.currentImg.subTitles">{{subTitle}}</p>
       </div>
     </div>
-    <div class="counters">
+    <div class="counters" ng-show="{imgs.length > 1}">
       <span ng-repeat="img in carousel.imgs" ng-class="{'current' : img.src === carousel.currentImg.src}" class="circle">&nbsp;</span>
     </div>
   </div>

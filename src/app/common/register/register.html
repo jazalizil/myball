@@ -2,14 +2,14 @@
   <wb-navbar opaq="true"></wb-navbar>
   <md-content class="scroll-content" layout-fill layout layout-align="center center">
     <div layout="column" layout-fill layout-align="center start">
-      <div layout="row" layout-padding class="full-width">
+      <div layout="row" class="full-width">
         <span flex="5"></span>
         <div flex="20" layout>
           <span layout layout-align="center center">
             <hr class="full-width">
           </span>
         </div>
-        <span flex="50" layout="column">
+        <span flex="50" layout="column" class="title">
           <h2 class="uppercase dark-grey" layout layout-align="center center" translate>Inscription</h2>
           <div ng-show="!register.data.form">
             <p class="justify-text no-margin" translate>
@@ -38,7 +38,7 @@
         <span flex="5"></span>
       </div>
       <div layout="column" layout-fill layout-align="start start" ng-show="register.data.form">
-        <div layout="row" class="full-width">
+        <div layout="row" class="full-width fit-height pad-4x">
           <span flex="25"></span>
           <div layout-fill flex="50" ng-show="register.data.form == 'MANAGER'" ng-include="'app/common/register/register-manager.tpl.html'"></div>
         </div>
