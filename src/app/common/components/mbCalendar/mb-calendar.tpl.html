@@ -31,11 +31,13 @@
     </div>
     <div class="week-ctn" ng-class="{'vr' : !$last}" layout layout-padding ng-repeat="week in calendar.data.nbWeeks">
       <div layout="column" ng-repeat="dayToDisplay in calendar.data.daysToDisplay | startFrom: calendar.data.weekIndex + week * 7 | limitTo: 7">
-        <div layout="row">
+        <div layout="row" layout-align="center">
           <span class="grey">{{dayToDisplay.text}}</span>
         </div>
-        <div layout="row" class="day-circle-ctn" ng-hide="true" layout-align="center">
-          <span class="circle-sm bg-grey"></span>
+        <div layout="row" class="min-height" layout-align="center">
+          <div class="day-circle-ctn" ng-repeat="match in dayToDisplay.matches">
+            <div class="circle-sm {{calendar.data.matchStatusToColor[match.status]}}"></div>
+          </div>
         </div>
         <span class="day"
               ng-click="calendar.selectDay(dayToDisplay)"

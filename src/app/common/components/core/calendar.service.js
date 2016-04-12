@@ -7,7 +7,7 @@
   angular.module('myBall')
     .factory('CalendarService', CalendarService);
   /** @ngInject */
-  function CalendarService(gettextCatalog, _) {
+  function CalendarService(gettextCatalog) {
     return {
       getNumberDaysOfMonth: function(month, year) {
         return new Date(year, month, 0).getDate();

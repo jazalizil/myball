@@ -21,6 +21,10 @@
         year: vm.data.currentYear
       };
       vm.data.yearsDisplayed = _.range(vm.data.currentYear, vm.data.currentYear + 6);
+      vm.data.matchStatusToColor = {
+        ready: 'bg-green',
+        waiting: 'bg-yellow'
+      };
 
       // Watches
       var w = angular.element($window);
@@ -42,24 +46,45 @@
         $scope.$apply();
       });
 
-      $scope.$watch(function() {
-        return vm.data.currentYear
-      }, function(newVal){
-        vm.date = new Date(newVal, vm.data.currentMonth, vm.data.currentDay);
-      });
       $scope.$watch(function(){
-        return vm.data.currentMonth
+        return vm.matches
       }, function(newVal){
-        vm.date = new Date(vm.data.currentYear, newVal, vm.data.currentDay);
-      });
-      $scope.$watch(function(){
-        return vm.data.currentDay
-      }, function(newVal){
-        vm.date = new Date(vm.data.currentYear, vm.data.currentMonth, newVal);
+        if (newVal) {
+          addMatchesToDays();
+        }
       });
 
+      function addMatchesToDays() {
+        var matchIndex = 0, matchDate, day, toPush;
+        if (vm.matches.length === 0) {
+          return;
+        }
+        matchDate = new Date(vm.matches[matchIndex].startDate);
+        while (matchIndex < vm.matches.length && vm.data.daysToDisplay[0].date > matchDate.getDate()){
+          matchDate = new Date(vm.matches[matchIndex].startDate);
+          matchIndex += 1;
+        }
+        matchIndex = 0;
+        matchDate = new Date(vm.matches[matchIndex].startDate);
+        for (var i = 0; i < vm.data.daysToDisplay.length; i++) {
+          day = vm.data.daysToDisplay[i];
+          while (matchIndex < vm.matches.length &&
+          (matchDate = new Date(vm.matches[matchIndex].startDate)) &&
+          matchDate.getFullYear() === day.year &&
+          matchDate.getMonth() === day.month &&
+          matchDate.getDate() === day.date) {
+            toPush = vm.matches[matchIndex];
+            toPush.startDate = new Date(toPush.startDate);
+            toPush.endDate = new Date(toPush.endDate);
+            toPush.createdAt = new Date(toPush.createdAt);
+            day.matches.push(toPush);
+            matchIndex += 1;
+          }
+        }
+      }
+
       function getDaysOfLastDecember(days) {
-        var index = 0, date, emptyDays = 0;
+        var index = 0, date, emptyDays = 0, dayOfWeek = vm.data.daysDisplayed[0].day - 1;
         while (_.isEmpty(days[index])) {
           emptyDays++;
           index++;
@@ -68,13 +93,18 @@
         index = 0;
         while (index < emptyDays) {
           days[index] = {
+            matches: [],
+            day: dayOfWeek,
             date: date,
             month: 11,
             year: vm.data.currentYear - 1,
-            text: vm.data.daysDisplayed[index+1].shortName
+            text: vm.data.daysDisplayed[index+1].shortName,
+            name: vm.data.daysDisplayed[index+1].name,
+            monthName: vm.data.monthsDisplayed[11].name
           };
           index++;
           date++;
+          dayOfWeek--;
         }
         return days;
       }
@@ -88,10 +118,14 @@
             dayOfWeek = 0;
           }
           days.push({
+            matches: [],
+            day: dayOfWeek,
             date: date,
             month: 0,
             year: vm.data.currentYear + 1,
-            text: vm.data.daysDisplayed[dayOfWeek].shortName
+            text: vm.data.daysDisplayed[dayOfWeek].shortName,
+            name: vm.data.daysDisplayed[dayOfWeek].name,
+            monthName: vm.data.monthsDisplayed[0].name
           });
           date++;
           dayOfWeek++;
@@ -127,11 +161,14 @@
               dayOfWeek = 0;
             }
             days.push({
+              matches: [],
               day: dayOfWeek,
               date: j,
               year: vm.data.currentYear,
               month: i,
-              text: vm.data.daysDisplayed[dayOfWeek].shortName
+              text: vm.data.daysDisplayed[dayOfWeek].shortName,
+              name: vm.data.daysDisplayed[dayOfWeek].name,
+              monthName: vm.data.monthsDisplayed[i].name
             });
             dayOfWeek++;
           }
@@ -146,12 +183,13 @@
         }
         return vm.data.daysToDisplay[i].date === 1 ? i : i - 7;
       }
-
+      
       vm.selectYear = function (year) {
         year = +year;
         vm.data.yearsDisplayed = _.range(year - 1, year + 5);
         vm.data.currentYear = year;
         vm.data.daysToDisplay = getDaysToDisplay();
+        vm.today.year = year;
       };
 
       vm.selectMonth = function (monthIndex) {
@@ -160,6 +198,7 @@
       };
 
       vm.selectDay = function (day) {
+        var realDate = vm.today.realDate;
         vm.data.realDate = {
           day: day.date,
           month: day.month,
@@ -170,7 +209,8 @@
         if (day.year !== vm.data.currentYear) {
           vm.selectYear(day.year);
         }
-        $log.debug(day);
+        vm.today = day;
+        vm.today.realDate = realDate;
       };
 
       function checkAnotherMonth() {
@@ -196,12 +236,19 @@
       };
 
       function init() {
+        var realDate = vm.today.realDate;
         vm.data.daysToDisplay = getDaysToDisplay();
         vm.data.weekIndex = getFirstWeekIndex();
+        var day = _.filter(vm.data.daysToDisplay, function(day){
+          return day.year === vm.today.realDate.getFullYear() &&
+            day.month === vm.today.realDate.getMonth() &&
+              day.date === vm.today.realDate.getDate()
+        });
+        vm.today = day[0];
+        vm.today.realDate = realDate;
+        $log.debug('day:', day[0]);
       }
-
       init();
-      $log.debug('matches :', vm.matches);
     }
         
 
@@ -213,7 +260,7 @@
       bindToController: true,
       scope: {
         matches : '=',
-        date: '='
+        today: '='
       }
     }
   }

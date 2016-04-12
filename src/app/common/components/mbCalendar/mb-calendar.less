@@ -25,7 +25,7 @@ mb-calendar{
         cursor: pointer;
         height: 30px;
         width: 30px;
-        border-radius: 20px;
+        border-radius: 50%;
       }
     }
   }
@@ -33,15 +33,13 @@ mb-calendar{
     font-size: 15px;
     content: '\25CF';
   }
-  //.circle-sm:before {
-  //  content: '\25CF';
-  //  font-size: 10px;
-  //}
   .day-circle-ctn {
-    width: calc(100% - 8px);
+    padding: 0 2px;
+  }
+  .min-height {
+    min-height: 5px;
   }
   .circle-sm {
-    position: absolute;
     width: 5px;
     height: 5px;
     border-radius: 50%;
