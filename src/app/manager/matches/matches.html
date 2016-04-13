@@ -9,22 +9,39 @@
     <section class="matches" layout="row">
       <md-card class="bg-black" flex="100" layout="column" layout-align="center center">
         <div class="md-accent md-toolbar-tools white" layout>
-          {{matches.data.today.name + ' ' + matches.data.today.date + ' ' + matches.data.today.monthName + ' ' + matches.data.today.year}}
+          {{matches.data.today.name + ' ' + matches.data.today.date + ' ' + matches.data.today.monthName + ' ' +
+          matches.data.today.year}}
         </div>
         <div layout="row" class="fit-width">
           <md-content class="fit-width" flex="30">
-            <div layout="row" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 0">
-              <span layout="column" layout-align="center center" class="hour-ctn grey">{{hour}}:00</span>
+            <div layout="row" id="{{hour.value}}" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 0">
+              <span layout="column" layout-align="center center" class="hour-ctn grey">{{hour.value}}:00</span>
               <span class="line-nav">&nbsp;</span>
-              <span class="circle bg-grey">&nbsp;</span>
-              <span class="triangle-left"></span>
-              <div class="container">
-                <div layout="column" class="fit-height pad-2x" ng-if="matches.isMatchAt(hour)">
-                  <div class="uppercase white fit-height" layout="row" layout-align="start center">
-                    4 en attente
+              <span ng-click="matches.selectHour(hour)"
+                    class="pointer circle {{matches.data.statusToColor[hour.status]}}"
+                    ng-class="{'pointer': hour.available}"
+              >&nbsp;</span>
+              <span ng-click="matches.selectHour(hour)"
+                    class="triangle-left"
+                    ng-class="{'selected': matches.data.selectedHour.value === hour.value, 'pointer': hour.available}"
+              ></span>
+              <div ng-click="matches.selectHour(hour)"
+                   class="container"
+                   ng-class="{'selected': matches.data.selectedHour.value === hour.value, 'pointer': hour.available}"
+                   ng-switch="hour.slots | isEmpty"
+              >
+                <div layout="column" class="fit-height pad-2x" ng-switch-when="true">
+                  <div class="uppercase white fit-height" layout="row" layout-align="start center" translate>
+                    available
                   </div>
-                  <div class="uppercase white fit-height" layout="row" layout-align="start center">
-                    4 disponibles
+                </div>
+                <div layout="column" class="fit-height pad-2x" ng-switch-default>
+                  <div ng-repeat="(status, matchesArray) in hour.slots"
+                       class="uppercase white fit-height" layout="row" layout-align="start center"
+                  >
+                    <span class="circle-sm {{matches.data.statusToColor[status]}}"></span>
+                    <span>{{matchesArray.length}}&nbsp;</span>
+                    <span>{{status}}</span>
                   </div>
                 </div>
               </div>

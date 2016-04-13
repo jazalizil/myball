@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
-    $urlRouterProvider.when('', '/app');
+    $urlRouterProvider.when('', '/');
     $stateProvider.state('protected', {
       abstract: true,
       resolve: {
@@ -21,28 +21,28 @@
       templateUrl: 'content.html'
     }).state('accessdenied', {
       parent: 'public',
-      url: '/app/accessdenied'
+      url: '/accessdenied'
     }).state('home', {
       parent: 'public',
-      url: '/app/home',
+      url: '/home',
       templateUrl: 'app/common/home/home.html',
       controller: 'HomeController',
       controllerAs: 'home'
     }).state('signin', {
       parent: 'public',
-      url: '/app/signin',
+      url: '/signin',
       templateUrl: 'app/common/signin/signin.html',
       controller: 'SigninController',
       controllerAs: 'signin'
     }).state('register', {
       parent: 'public',
-      url: '/app/register',
+      url: '/register',
       templateUrl: 'app/common/register/register.html',
       controller: 'RegisterController',
       controllerAs: 'register'
     }).state('start', {
       parent: 'public',
-      url: '/app',
+      url: '/',
       controller: 'StartController',
       controllerAs: 'start',
       templateUrl: ''
@@ -60,19 +60,19 @@
       controllerAs: "signup"
     }).state('main', {
       parent: "protected",
-      url: "/app/main",
+      url: "/main",
       templateUrl: "app/manager/main/main.html",
       controller: "MainController",
       controllerAs: "main"
     }).state('matchs', {
       parent: "protected",
-      url: "/app/matchs",
+      url: "/matches",
       templateUrl: "app/manager/matches/matches.html",
       controller: "MatchesController",
       controllerAs: "matches"
     }).state('players', {
       parent: "protected",
-      url: "/app/players",
+      url: "/players",
       templateUrl: "app/manager/players/players.html",
       controller: "PlayersController",
       controllerAs: "players"

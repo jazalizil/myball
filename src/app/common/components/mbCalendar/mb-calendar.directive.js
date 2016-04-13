@@ -22,8 +22,9 @@
       };
       vm.data.yearsDisplayed = _.range(vm.data.currentYear, vm.data.currentYear + 6);
       vm.data.matchStatusToColor = {
-        ready: 'bg-green',
-        waiting: 'bg-yellow'
+        waiting: 'bg-yellow',
+        ready: 'bg-red',
+        over: 'bg-green'
       };
 
       // Watches
@@ -50,37 +51,26 @@
         return vm.matches
       }, function(newVal){
         if (newVal) {
+          $log.debug('matches:', vm.matches);
           addMatchesToDays();
         }
       });
 
       function addMatchesToDays() {
-        var matchIndex = 0, matchDate, day, toPush;
-        if (vm.matches.length === 0) {
-          return;
-        }
-        matchDate = new Date(vm.matches[matchIndex].startDate);
-        while (matchIndex < vm.matches.length && vm.data.daysToDisplay[0].date > matchDate.getDate()){
-          matchDate = new Date(vm.matches[matchIndex].startDate);
-          matchIndex += 1;
-        }
-        matchIndex = 0;
-        matchDate = new Date(vm.matches[matchIndex].startDate);
-        for (var i = 0; i < vm.data.daysToDisplay.length; i++) {
-          day = vm.data.daysToDisplay[i];
-          while (matchIndex < vm.matches.length &&
-          (matchDate = new Date(vm.matches[matchIndex].startDate)) &&
-          matchDate.getFullYear() === day.year &&
-          matchDate.getMonth() === day.month &&
-          matchDate.getDate() === day.date) {
-            toPush = vm.matches[matchIndex];
-            toPush.startDate = new Date(toPush.startDate);
-            toPush.endDate = new Date(toPush.endDate);
-            toPush.createdAt = new Date(toPush.createdAt);
-            day.matches.push(toPush);
-            matchIndex += 1;
-          }
-        }
+        var date, toPush;
+        _.each(vm.data.daysToDisplay, function(day){
+          day.matches = [];
+          _.each(vm.matches, function(match) {
+            date = new Date(match.startDate);
+            if(date.getFullYear() === day.year && date.getMonth() === day.month && date.getDate() === day.date) {
+              toPush = match;
+              toPush.startDate = new Date(match.startDate);
+              toPush.endDate = new Date(match.endDate);
+              toPush.createdAt = new Date(match.createdAt);
+              day.matches.push(toPush);
+            }
+          })
+        })
       }
 
       function getDaysOfLastDecember(days) {
@@ -93,7 +83,6 @@
         index = 0;
         while (index < emptyDays) {
           days[index] = {
-            matches: [],
             day: dayOfWeek,
             date: date,
             month: 11,
@@ -118,7 +107,6 @@
             dayOfWeek = 0;
           }
           days.push({
-            matches: [],
             day: dayOfWeek,
             date: date,
             month: 0,
@@ -161,7 +149,6 @@
               dayOfWeek = 0;
             }
             days.push({
-              matches: [],
               day: dayOfWeek,
               date: j,
               year: vm.data.currentYear,

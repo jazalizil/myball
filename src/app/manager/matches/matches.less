@@ -1,6 +1,7 @@
 #matches {
   md-content {
     padding-top: @header-height;
+    font-size: 16px;
     .matches {
       height: calc(~"60vh - 80px");
       md-card {
@@ -31,6 +32,9 @@
             opacity: 0.1;
           }
           .triangle-left {
+            &.selected {
+              border-right-color: @grey-transparent;
+            }
             width: 0;
             height: 0;
             border-top: 35px solid transparent;
@@ -44,6 +48,16 @@
             height: 70px;
             margin-top: 15px;
             width: 320px;
+            &.selected {
+              background-color: @grey-transparent;
+            }
+            .circle-sm {
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              margin-top: -1px;
+              margin-right: 10px;
+            }
           }
           .field {
             background-color: @white-transparent;
