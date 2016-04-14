@@ -2,6 +2,7 @@
   md-content {
     padding-top: @header-height;
     font-size: 16px;
+    overflow-x: hidden;
     .matches {
       height: calc(~"60vh - 80px");
       md-card {
@@ -62,6 +63,9 @@
           .field {
             background-color: @white-transparent;
             height: 150px;
+            &.selected {
+              background-color: @grey-transparent;
+            }
           }
           .circle {
             width: 15px;

@@ -48,14 +48,16 @@
             </div>
           </md-content>
           <md-content class="fit-width bordered" flex="30">
-            <div layout="row" ng-repeat="field in matches.data.identity.five.fields">
-              <div class="field fit-width" layout-margin layout="column">
+            <div layout="row fit-width" id="{{field._id}}" ng-repeat="field in matches.data.identity.five.fields">
+              <div class="field fit-width pointer" ng-click="matches.selectField(field)" layout-margin layout="column"
+              ng-class="{'selected': matches.data.selectedField._id === field._id}"
+              >
                 <div layout="row" layout-align="center start" class="white">{{field.name}}</div>
                 <div layout="row" layout-align="center center" class="green fit-height">
-                  <md-button class="green">
+                  <span class="green">
                     <md-icon md-font-set="material-icons green">add_circle_outline</md-icon>
-                    <span translate>Book</span>
-                  </md-button>
+                    <span class="upercase" translate>Book</span>
+                  </span>
                 </div>
               </div>
             </div>

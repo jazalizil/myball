@@ -38,7 +38,6 @@
         free: 'bg-grey'
       }
     };
-    vm.data.selectedField = vm.data.identity.five.fields[0];
 
     $scope.$watch(function(){
       return vm.data.today
@@ -66,11 +65,33 @@
     vm.selectHour = function(hour) {
       if (hour.available) {
         vm.data.selectedHour = hour;
+        scrollTo(hour.value);
       }
     };
 
+    vm.selectField = function(field) {
+      if (!field.booked) {
+        vm.data.selectedField = field;
+        vm.data.match = {
+          maxPlayers: vm.data.teamSizes[0].value
+        };
+        scrollTo(field._id);
+      } else {
+        _.forIn(vm.data.selectedHour.slots, function(status, matches){
+          vm.data.match = _.find(matches, function(match){
+            match.field === field._id;
+          })
+        });
+      }
+    };
+
+    function scrollTo(id) {
+      $location.hash(id);
+      $anchorScroll();
+    }
+
     var getHours = function(){
-      var toPush, hours = _.range(24), count = 0;
+      var toPush, hours = _.range(24), count = 0, field;
       vm.data.hours = [];
       _.each(hours, function(hour){
         toPush = {
@@ -80,13 +101,17 @@
           available: true
         };
         if (vm.data.today.realDate.getHours() === hour) {
-          vm.data.selectedHour = toPush;
-          $location.hash(hour);
-          $anchorScroll();
+          vm.selectHour(toPush)
         }
         _.each(vm.data.today.matches, function(match){
           if (match.startDate.getHours() !== hour) {
             return;
+          }
+          if (match.status === 'ready') {
+            field = _.find(vm.data.fields, function(field){
+              return field._id === match.field;
+            });
+            vm.data.fields[field].booked = true;
           }
           if (vm.data.statusToColor[match.status]) {
             if (!toPush.slots[match.status]) {
@@ -102,11 +127,15 @@
         }
         vm.data.hours.push(toPush);
       });
+      vm.data.selectedField = _.find(vm.data.fields, function(field){
+        return !field.booked
+      });
+      scrollTo(vm.data.selectedField._id);
     };
 
     var init = function() {
+      vm.data.fields = angular.copy(vm.data.identity.five.fields);
       fetchMatches();
-      vm.data.match.maxPlayers = vm.data.teamSizes[0].value;
     };
     init();
   }
