@@ -14,7 +14,7 @@
         </div>
         <div layout="row" class="fit-width">
           <md-content class="fit-width" flex="30">
-            <div layout="row" id="{{hour.value}}" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 0">
+            <div layout="row" id="{{hour.value}}" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 9">
               <span layout="column" layout-align="center center" class="hour-ctn grey">{{hour.value}}:00</span>
               <span class="line-nav">&nbsp;</span>
               <span ng-click="matches.selectHour(hour)"
@@ -66,18 +66,18 @@
             <md-input-container class="md-icon-float md-block">
               <label>{{matches.data.placeholders.name}}</label>
               <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
-              <input type="text" name="name">
+              <input type="text" name="name" ng-model="matches.data.match.responsable.name">
             </md-input-container>
             <md-input-container class="md-icon-float md-block">
               <label>{{matches.data.placeholders.phone}}</label>
               <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
-              <input type="number" name="phone">
+              <input type="text" name="phone" ng-model="matches.data.match.responsable.phone">
             </md-input-container>
             <md-input-container class="md-icon-float md-block">
               <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
               <md-select ng-model="matches.data.match.matchPlayers" aria-label="team size">
                 <md-option ng-repeat="size in matches.data.teamSizes" value="{{size.value}}"
-                           ng-selected="{{matches.data.match.maxPlayers === size.value}}">
+                           ng-selected="matches.data.match.maxPlayers === size.value">
                   {{size.name}}
                 </md-option>
               </md-select>
@@ -85,12 +85,35 @@
             <md-input-container class="md-icon-float md-block switch-ctn">
               <md-icon md-svg-src="/assets/icons/paiement.svg"></md-icon>
               <span>{{matches.data.placeholders.paid}}</span>
-              <md-switch class="md-primary" aria-label="match paid" disabled ng-model="matches.data.match.paid">
+              <md-switch class="md-primary" aria-label="match paid" ng-disabled="matches.data.match.alreadyPaid" ng-model="matches.data.match.justPaid">
               </md-switch>
             </md-input-container>
-            <md-button class="md-raised md-primary fit-width">
-              <span class="white" translate>book</span>
-            </md-button>
+            <div layout="row" class="fit-width" ng-switch="!matches.data.match.createdAt">
+              <div layout="column" class="fit-width" ng-switch-when="true">
+                <md-button class="md-raised md-primary fit-width">
+                  <span class="white" translate>book</span>
+                </md-button>
+              </div>
+              <div class="grey fit-width" layout ng-switch-default>
+                <div class="created fit-width" flex>
+                  <div flex>
+                    <span translate>Created with</span>
+                    <span>&nbsp;{{matches.data.match.createdWith}}</span>
+                  </div>
+                  <div flex>
+                    <span>{{matches.data.match.createdAt | date: 'd MMMM yyyy'}} </span>
+                    <span translate>at</span>
+                    <span> {{matches.data.match.createdAt | date: 'HH:mm'}}</span>
+                  </div>
+                </div>
+                <md-button flex class="fit-width">
+                  <span class="red" translate>delete</span>
+                </md-button>
+                <md-button flex class="md-raised md-primary fit-width">
+                  <span class="white" translate>update</span>
+                </md-button>
+              </div>
+            </div>
           </md-content>
         </div>
       </md-card>

@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('MatchesController', MatchesController);
   /** @ngInject */
-  function MatchesController(UserService, gettextCatalog, MatchesService, _, $scope, $location, $anchorScroll) {
+  function MatchesController(UserService, gettextCatalog, MatchesService, _, $scope, $location, $anchorScroll, $log) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
@@ -63,26 +63,34 @@
     };
 
     vm.selectHour = function(hour) {
-      if (hour.available) {
-        vm.data.selectedHour = hour;
-        scrollTo(hour.value);
+      vm.data.selectedHour = hour;
+      scrollTo(hour.value);
+      if (!_.isEmpty(hour.slots)) {
+        var firstMatch = Object.keys(hour.slots)[0];
+        var field = _.find(vm.data.fields, function(field){
+          return field._id === hour.slots[firstMatch][0].field
+        });
+        vm.selectField(field);
+      } else {
+        vm.selectField(vm.data.fields[0]);
       }
     };
 
     vm.selectField = function(field) {
-      if (!field.booked) {
-        vm.data.selectedField = field;
+      vm.data.selectedField = field;
+      vm.data.match = _.find(vm.data.today.matches, function(match){
+        return match.field === field._id && match.startDate.getHours() === vm.data.selectedHour.value
+      });
+      if (!vm.data.match) {
         vm.data.match = {
-          maxPlayers: vm.data.teamSizes[0].value
+          maxPlayers: vm.data.teamSizes[0].value,
+          responsable: {},
+          field: field._id,
+          startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, vm.data.selectedHour.value),
+          endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, vm.data.selectedHour.value + 1)
         };
-        scrollTo(field._id);
-      } else {
-        _.forIn(vm.data.selectedHour.slots, function(status, matches){
-          vm.data.match = _.find(matches, function(match){
-            match.field === field._id;
-          })
-        });
       }
+      scrollTo(field._id);
     };
 
     function scrollTo(id) {
@@ -98,11 +106,8 @@
           value: hour,
           slots: {},
           status: 'free',
-          available: true
+          available: hour > 8 && hour < 23
         };
-        if (vm.data.today.realDate.getHours() === hour) {
-          vm.selectHour(toPush)
-        }
         _.each(vm.data.today.matches, function(match){
           if (match.startDate.getHours() !== hour) {
             return;
@@ -111,7 +116,7 @@
             field = _.find(vm.data.fields, function(field){
               return field._id === match.field;
             });
-            vm.data.fields[field].booked = true;
+            field.booked = true;
           }
           if (vm.data.statusToColor[match.status]) {
             if (!toPush.slots[match.status]) {
@@ -125,16 +130,15 @@
         if (count >= vm.data.identity.five.fields.length) {
           toPush.available = false;
         }
+        if (vm.data.today.realDate.getHours() === hour) {
+          vm.selectHour(toPush)
+        }
         vm.data.hours.push(toPush);
       });
-      vm.data.selectedField = _.find(vm.data.fields, function(field){
-        return !field.booked
-      });
-      scrollTo(vm.data.selectedField._id);
     };
 
     var init = function() {
-      vm.data.fields = angular.copy(vm.data.identity.five.fields);
+      vm.data.fields = vm.data.identity.five.fields;
       fetchMatches();
     };
     init();
