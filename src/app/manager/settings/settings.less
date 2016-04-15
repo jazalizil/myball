@@ -1,0 +1,44 @@
+#settings {
+  .heading {
+    font-size: 42px;
+    height: 40vh;
+    background-color: @white-transparent;
+    md-input-container {
+      font-size: 23px;
+    }
+    .city {
+      font-size: 30px;
+    }
+  }
+  md-tabs {
+    md-tabs-wrapper {
+      background-color: @white-transparent;
+    }
+    .md-tab {
+      color: @dark-grey;
+      .capitalize;
+      font-size: 18px;
+      &.md-active {
+        color: grey;
+      }
+    }
+    md-tab-content {
+      md-content {
+        height: calc(~"60vh - 48px");
+        overflow: scroll;
+      }
+    }
+    md-ink-bar {
+      color: @mb-color;
+      background-color: @mb-color;
+    }
+  }
+  md-input-container {
+    margin-bottom: 0;
+    &:not(.md-input-invalid) {
+      &.md-input-has-value label {
+        color: @grey;
+      }
+    }
+  }
+}

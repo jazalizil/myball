@@ -61,7 +61,7 @@
       controllerAs: 'navbar',
       templateUrl: 'app/manager/components/navbar/navbar.html',
       scope: {
-        opaq : '&'
+        opaq : '='
       },
       bindToController: true
     };

@@ -1,7 +1,7 @@
 <md-toolbar
     id="wb-navbar"
-    ng-class="{'fixed bg-transparent grey': !navbar.data.isSignupState && !navbar.opaq,
-    'fixed bg-dark-grey grey': !navbar.data.isSignupState && navbar.opaq}"
+    ng-class="{'fixed bg-transparent grey': !navbar.opaq,
+    'fixed bg-dark-grey grey': navbar.opaq}"
     class="md-accent md-whiteframe-z2 md-toolbar-sm"
     layout="row">
   <div class="md-toolbar-tools">
@@ -43,11 +43,19 @@
           <span>{{navbar.data.identity.manager.fullName}}</span>
           <md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
         </md-button>
-        <md-menu-content class="bg-grey" width="4">
+        <md-menu-content class="bg-black grey" width="4">
+          <md-menu-item class="md-toolbar-tool">
+              <md-button>
+                <a ui-sref="settings">
+                  <md-icon md-font-set="grey material-icons">settings</md-icon>
+                  <span class="valign grey" translate>Settings</span>
+                </a>
+              </md-button>
+          </md-menu-item>
           <md-menu-item class="md-toolbar-tool">
             <md-button ng-click="navbar.logout()">
-              <md-icon md-font-set="material-icons">exit_to_app</md-icon>
-              <span translate>Se déconnecter</span>
+              <md-icon md-font-set="grey material-icons">exit_to_app</md-icon>
+              <span class="valign grey" translate>Exit</span>
             </md-button>
           </md-menu-item>
         </md-menu-content>

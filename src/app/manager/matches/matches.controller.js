@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('MatchesController', MatchesController);
   /** @ngInject */
-  function MatchesController(UserService, gettextCatalog, MatchesService, _, $scope, $location, $anchorScroll, $log) {
+  function MatchesController(UserService, gettextCatalog, MatchesService, _, $scope, $location, $anchorScroll) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),

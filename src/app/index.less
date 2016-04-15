@@ -163,6 +163,18 @@ html {
 
 // Start utils
 
+.valign {
+  vertical-align: middle;
+}
+
+.avenir-heavy {
+  font-family: 'Avenir Heavy';
+}
+
+.avenir-light {
+  font-family: 'Avenir Light';
+}
+
 .scroll-content {
   height: calc(~'100vh - 42px');
 }
@@ -224,6 +236,10 @@ html {
 }
 
 .margin-l-3x {
+  margin-left: @padding-3x;
+}
+
+.margin-r-3x {
   margin-left: @padding-3x;
 }
 
@@ -318,8 +334,33 @@ html {
 md-input-container {
   label {
     font-size: 1rem;
-    color: @dark-grey;
+    color: @white;
     text-transform: uppercase;
+  }
+  &.md-icon-float {
+    input, textarea {
+      position: relative;
+    }
+  }
+  md-select {
+    .md-text {
+      color: @white;
+    }
+    .md-select-icon {
+      color: @white;
+    }
+    .md-select-value {
+      border-color: @white-transparent;
+    }
+  }
+  &:not(.md-input-invalid) {
+    &.md-input-has-value label {
+      color: @dark-grey;
+    }
+  }
+  .md-input {
+    border-color: @white-transparent;
+    color: @white;
   }
 }
 
@@ -333,7 +374,7 @@ md-toolbar {
       .md-button {
         min-height: 32px;
         height: 32px;
-        line-height: 0;
+        line-height: 32px;
       }
     }
   }
@@ -369,12 +410,6 @@ md-toolbar {
       shape-rendering: auto;
       vertical-align: bottom;
     }
-  }
-}
-
-md-input-container.md-icon-float {
-  input, textarea {
-    position: relative;
   }
 }
 

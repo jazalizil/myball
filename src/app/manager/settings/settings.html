@@ -1,0 +1,133 @@
+<div id="settings">
+  <mb-navbar></mb-navbar>
+  <md-content class="full-height bg-black">
+    <section class="heading avenir-light" layout>
+      <div class="fit-height grey fit-width" layout="column" ng-switch="settings.data.selectedTab">
+        <div layout="column" class="fit-width fit-height" layout-align="center center" ng-switch-when="1">
+          <div layout="row">
+            <span id="city" contenteditable ng-model="settings.data.identity.five.name">
+              {{settings.data.identity.five.name}}
+            </span>
+            <md-icon class="margin-l-3x dark-grey pointer" md-font-set="material-icons"
+                     ng-click="settings.editCity()">
+              mode_edit
+            </md-icon>
+          </div>
+          <div layout="row" class="city">
+            <md-icon class="pad-r-3x grey" md-font-set="material-icons">location_on</md-icon>
+            {{settings.data.identity.five.city}}
+          </div>
+        </div>
+        <div class="fit-width fit-height" layout="column" layout-align="center center" ng-switch-when="2">
+          <div layout="row" class="fit-width" layout-align="center">
+            <md-button  class="md-button-icon" ng-click="settings.previousField()">
+              <md-icon md-font-set="material-icons grey">keyboard_arrow_left</md-icon>
+            </md-button>
+            <span flex="20" class="center-text" ng-repeat="field in settings.data.identity.five.fields"
+                  ng-show="settings.data.identity.five.fields[settings.data.fieldIndex]._id === field._id"
+                  ng-hide="settings.data.identity.five.fields[settings.data.fieldIndex]._id !== field._id"
+            >
+              {{field.name}}
+            </span>
+            <md-button  class="md-button-icon" ng-click="settings.nextField()">
+              <md-icon md-font-set="material-icons grey">keyboard_arrow_right</md-icon>
+            </md-button>
+          </div>
+        </div>
+        <div layout="row" class="fit-width fit-height" layout-align="center center" ng-switch-default>
+          {{settings.data.welcomeSentence}}
+        </div>
+      </div>
+    </section>
+    <section>
+      <md-tabs md-center-tabs md-dynamic-height md-selected="settings.data.selectedTab">
+        <md-tab label="{{settings.data.labels.manager}}">
+          <md-content class="fit-height bg-black">
+            <md-content class="fit-height bg-black">
+              <div class="fit-height fit-width" layout="column" layout-padding>
+                <div class="fit-height" layout="row" layout-align="center center">
+                  <div layout="column" class="fit-height" layout-align="center center">
+                    <div layout="row" layout-align="center center">
+                      <md-input-container>
+                        <label>{{settings.data.labels.email}}</label>
+                        <input type="email" ng-model="settings.data.identity.manager.email" name="email">
+                      </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                      <md-input-container class="md-float">
+                        <label>{{settings.data.labels.oldPassword}}</label>
+                        <input type="password" ng-model="settings.data.identity.manager.oldPassword" name="oldPassword">
+                      </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                      <md-input-container class="md-float">
+                        <label>{{settings.data.labels.newPassword}}</label>
+                        <input type="password" ng-model="settings.data.identity.manager.newPassword" name="newPassword">
+                      </md-input-container>
+                    </div>
+                  </div>
+                </div>
+                <div layout="row" layout-align="center end">
+                  <md-button class="md-raised md-primary">
+                    <span class="white" translate>update</span>
+                  </md-button>
+                </div>
+              </div>
+          </md-content>
+        </md-tab>
+        <md-tab label="{{settings.data.labels.five}}">
+          <md-content class="fit-height bg-black">
+            <div class="fit-height fit-width" layout="column" layout-padding>
+              <div class="fit-height" layout="row" layout-align="center center">
+                <div layout="column" class="fit-height" layout-align="center center">
+                  <div layout="row" layout-align="center center">
+                    <md-input-container>
+                      <label>{{settings.data.labels.phone}}</label>
+                      <input type="text" ng-model="settings.data.identity.five.phone" name="phone">
+                    </md-input-container>
+                  </div>
+                </div>
+              </div>
+              <div layout="row" layout-align="center end">
+                <md-button class="md-raised md-primary">
+                  <span class="white" translate>update</span>
+                </md-button>
+              </div>
+            </div>
+          </md-content>
+        </md-tab>
+        <md-tab label="{{settings.data.labels.field}}">
+          <md-content class="fit-height bg-black">
+            <div class="fit-height fit-width" layout="column" layout-padding>
+              <div class="fit-height" layout="row" layout-align="center center">
+                <div layout="column" class="fit-height" layout-align="center center">
+                  <div layout="row" layout-align="center center">
+                    <md-input-container>
+                      <label>{{settings.data.labels.fieldName}}</label>
+                      <input type="text" ng-model="settings.data.identity.five.fields[settings.data.fieldIndex].name"
+                             name="fieldName">
+                    </md-input-container>
+                  </div>
+                  <div class="fit-width" layout="row" layout-align="center center">
+                    <md-input-container class="fit-width" layout>
+                      <span layout class="fit-width grey" layout-align="start center">{{settings.data.labels.available}}
+                      </span>
+                      <md-switch layout layout-align="end center" class="fit-width md-primary" aria-label="field available"
+                                 ng-model="settings.data.identity.five.fields[settings.data.fieldIndex].available">
+                      </md-switch>
+                    </md-input-container>
+                  </div>
+                </div>
+              </div>
+              <div layout="row" layout-align="center end">
+                <md-button class="md-raised md-primary">
+                  <span class="white" translate>update</span>
+                </md-button>
+              </div>
+            </div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </section>
+  </md-content>
+</div>

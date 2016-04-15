@@ -76,6 +76,12 @@
       templateUrl: "app/manager/players/players.html",
       controller: "PlayersController",
       controllerAs: "players"
+    }).state('settings', {
+      parent: "protected",
+      url: "/settings",
+      templateUrl: "app/manager/settings/settings.html",
+      controller: "SettingsController",
+      controllerAs: "settings"
     });
     /** End manager routes **/
     $urlRouterProvider.otherwise('/404');
