@@ -5,10 +5,21 @@
     md-autocomplete {
       background-color: @dark-grey;
       min-width: 400px;
+      height: 30px;
+      border-radius: 3px;
       .md-whiteframe-z1 {
         box-shadow: none;
         input {
+          height: 30px;
+          line-height: 20px;
           color: @grey;
+        }
+        button {
+          margin: 0;
+        }
+        md-progress-linear {
+          bottom: 0;
+          top: 30px;
         }
       }
     }

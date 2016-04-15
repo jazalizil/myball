@@ -5,11 +5,11 @@
     class="md-accent md-whiteframe-z2 md-toolbar-sm"
     layout="row">
   <div class="md-toolbar-tools">
-    <md-button aria-label="home" layout layout-align="left center">
-      <a ui-sref="main">
-        <un-svg svg-src="assets/icons/myball.svg"></un-svg>
-      </a>
-    </md-button>
+    <a ui-sref="main">
+      <md-button aria-label="home" layout layout-align="left center">
+          <un-svg svg-src="assets/icons/myball.svg"></un-svg>
+      </md-button>
+    </a>
     <span flex></span>
     <div ng-if="!navbar.data.isSignupState" layout>
       <div class="links-ctn" layout-padding layout-align="start center" ng-hide="navbar.data.isSearching">
