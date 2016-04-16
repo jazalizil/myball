@@ -67,8 +67,8 @@
     }).state('matchs', {
       parent: "protected",
       url: "/matches",
-      templateUrl: "app/manager/matches/matches.html",
-      controller: "MatchesController",
+      templateUrl: "app/manager/matches/matches-tabs.html",
+      controller: "MatchesTabController",
       controllerAs: "matches"
     }).state('players', {
       parent: "protected",

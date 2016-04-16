@@ -4,280 +4,672 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/fields/field-edit.tpl.html:70
+#: app/manager/fields/field-edit.tpl.html:71
 msgid "à"
 msgstr ""
 
-#: app/components/autocomplete/address.directive.js:16
+#: app/common/home/home.html:70
+msgid "À propos de weBall"
+msgstr ""
+
+#: app/manager/components/navbar/navbar.directive.js:15
+msgid "Accueil"
+msgstr ""
+
+#: app/common/signin/signin.controller.js:11
+msgid "Addresse email"
+msgstr ""
+
+#: app/manager/components/autocomplete/address.directive.js:14
 msgid "Adresse"
 msgstr ""
 
-#: app/components/autocomplete/address.tpl.html:15
+#: app/manager/components/autocomplete/address.tpl.html:15
 msgid "Adresse invalide"
 msgstr ""
 
-#: app/signup/signup.html:38
+#: app/manager/signup/signup.html:38
 msgid "Ajouter un logo"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:4
-#: app/signup/signup.controller.js:12
+#: app/manager/fields/field-edit.tpl.html:4
+#: app/manager/signup/signup.controller.js:12
 msgid "Ajouter un terrain"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:92
+#: app/manager/fields/field-edit.tpl.html:93
 msgid "Annuler"
 msgstr ""
 
-#: app/fields/fields.service.js:19
-#: app/fields/fields.service.js:28
+#: app/common/components/core/calendar.service.js:97
+msgid "Aou"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:96
+msgid "Août"
+msgstr ""
+
+#: app/manager/matches/matches.html:105
+msgid "at"
+msgstr ""
+
+#: app/manager/components/fields/fields.service.js:19
+#: app/manager/components/fields/fields.service.js:28
 msgid "Autre"
 msgstr ""
 
-#: app/signup/signup.html:6
+#: app/manager/matches/matches.html:34
+msgid "available"
+msgstr ""
+
+#: app/manager/settings/settings.controller.js:24
+msgid "Available"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:77
+msgid "Avr"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:76
+msgid "Avril"
+msgstr ""
+
+#: app/common/home/home.controller.js:36
+msgid "Bénéficiez de myBall, le meilleur outil pour gérer vos réservations"
+msgstr ""
+
+#: app/manager/signup/signup.html:6
 msgid "Bienvenue !"
 msgstr ""
 
-#: app/components/autocomplete/address.tpl.html:16
-#: app/components/autocomplete/zipCode.tpl.html:16
-#: app/fields/field-edit.tpl.html:15
-#: app/signup/signup.html:113
-#: app/signup/signup.html:123
-#: app/signup/signup.html:134
-#: app/signup/signup.html:143
-#: app/signup/signup.html:155
-#: app/signup/signup.html:164
-#: app/signup/signup.html:49
-#: app/signup/signup.html:60
-#: app/signup/signup.html:73
-#: app/signup/signup.html:93
+#: app/manager/matches/matches.html:94
+msgid "book"
+msgstr ""
+
+#: app/manager/matches/matches.html:59
+msgid "Book"
+msgstr ""
+
+#: app/manager/components/autocomplete/address.tpl.html:16
+#: app/manager/components/autocomplete/zipCode.tpl.html:16
+#: app/manager/fields/field-edit.tpl.html:15
+#: app/manager/signup/signup.html:113
+#: app/manager/signup/signup.html:123
+#: app/manager/signup/signup.html:134
+#: app/manager/signup/signup.html:143
+#: app/manager/signup/signup.html:155
+#: app/manager/signup/signup.html:164
+#: app/manager/signup/signup.html:49
+#: app/manager/signup/signup.html:60
+#: app/manager/signup/signup.html:73
+#: app/manager/signup/signup.html:93
 msgid "Ce champ est requis"
 msgstr ""
 
-#: app/signin/signin.controller.js:23
+#: app/common/signin/signin.controller.js:22
 msgid "Cet utilisateur n'existe pas"
 msgstr ""
 
-#: app/404/404.html:6
+#: app/common/home/home.html:37
+msgid "Chaque joueur possède des statistiques afin d'avoir un aperçu de son niveau"
+msgstr ""
+
+#: app/common/404/404.html:6
 msgid "Click"
 msgstr ""
 
-#: app/components/autocomplete/zipCode.directive.js:14
+#: app/manager/components/autocomplete/zipCode.directive.js:12
 msgid "Code Postal"
 msgstr ""
 
-#: app/components/autocomplete/zipCode.tpl.html:15
+#: app/manager/components/autocomplete/zipCode.tpl.html:15
 msgid "Code postal invalide"
 msgstr ""
 
-#: app/signup/signup.html:138
+#: app/manager/matches/matches.controller.js:16
+msgid "Complete Name"
+msgstr ""
+
+#: app/common/home/home.html:91
+#: app/common/register/register-manager.tpl.html:42
+msgid "Conditions générales d'utilisation"
+msgstr ""
+
+#: app/common/register/register-manager.tpl.html:31
+#: app/manager/signup/signup.html:138
 msgid "Confirmation du mot de passe"
 msgstr ""
 
-#: app/fields/fields.service.js:59
+#: app/common/components/wbNavbar/wbNavbar.tpl.html:15
+#: app/common/signin/signin.html:13
+msgid "Connexion"
+msgstr ""
+
+#: app/common/home/home.html:72
+msgid "Contactez-nous"
+msgstr ""
+
+#: app/manager/matches/matches.html:100
+msgid "Created with"
+msgstr ""
+
+#: app/common/register/register-manager.tpl.html:54
+msgid "créer un compte"
+msgstr ""
+
+#: app/common/register/register-manager.tpl.html:48
+msgid "de weBall."
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:117
+msgid "Dec"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:116
+msgid "Décembre"
+msgstr ""
+
+#: app/manager/matches/matches.html:110
+msgid "delete"
+msgstr ""
+
+#: app/common/home/home.controller.js:32
+msgid "Devenez partenaire de la communauté weBall !"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:25
+msgid "Dim"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:24
 msgid "Dimanche"
 msgstr ""
 
-#: app/fields/fields.service.js:15
+#: app/common/home/home.controller.js:35
+msgid "Donnez de la visibilité à votre enseigne et triplez vos réservations"
+msgstr ""
+
+#: app/manager/components/fields/fields.service.js:15
 msgid "Du lundi au samedi"
 msgstr ""
 
-#: app/signup/signup.html:150
+#: app/common/register/register-manager.tpl.html:17
+#: app/manager/signup/signup.html:150
 msgid "Email"
 msgstr ""
 
-#: app/signin/signin.controller.js:11
+#: app/manager/settings/settings.controller.js:18
 msgid "Email adress"
 msgstr ""
 
-#: app/signin/signin.controller.js:23
-#: app/signin/signin.controller.js:26
-#: app/signin/signin.controller.js:30
-#: app/signup/signup.controller.js:75
-#: app/signup/signup.controller.js:80
-#: app/signup/signup.controller.js:94
+#: app/common/register/register-manager.tpl.html:40
+msgid "En créant un compte, vous acceptez les"
+msgstr ""
+
+#: app/common/register/register.html:19
+msgid ""
+"En tant que manager, l'application web myBall vous permettra de gérer au mieux vos réservations et vos\n"
+"              paiements à travers un site ergonomique et intuitif."
+msgstr ""
+
+#: app/common/register/register.html:15
+msgid ""
+"En vous inscrivant sur weBall en tant que joueur, vous aurez la possibilité de trouver un terrain et\n"
+"              des coéquipiers ou adversaires afin d'organiser un match dans le terrain de votre choix."
+msgstr ""
+
+#: app/common/signin/signin.controller.js:22
+#: app/common/signin/signin.controller.js:25
+#: app/common/signin/signin.controller.js:29
+#: app/manager/signup/signup.controller.js:72
+#: app/manager/signup/signup.controller.js:77
+#: app/manager/signup/signup.controller.js:91
 msgid "Erreur"
 msgstr ""
 
-#: app/signin/signin.html:24
-msgid "Forgot password?"
+#: app/common/register/register-manager.tpl.html:44
+msgid "et comprenez la"
 msgstr ""
 
-#: app/signup/signup.controller.js:10
+#: app/common/home/home.controller.js:22
+msgid "Et si organiser un match devenait un jeu d'enfants ?"
+msgstr ""
+
+#: app/manager/components/navbar/navbar.html:58
+msgid "Exit"
+msgstr ""
+
+#: app/common/home/home.html:33
+msgid "Faites-vous une place parmi la communauté weBall"
+msgstr ""
+
+#: app/common/home/home.html:73
+msgid "FAQ"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:67
+msgid "Fev"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:66
+msgid "Février"
+msgstr ""
+
+#: app/manager/settings/settings.controller.js:17
+msgid "Field"
+msgstr ""
+
+#: app/manager/settings/settings.controller.js:23
+msgid "Field name"
+msgstr ""
+
+#: app/manager/settings/settings.controller.js:16
+msgid "Five"
+msgstr ""
+
+#: app/manager/settings/settings.controller.js:22
+msgid "Five name"
+msgstr ""
+
+#: app/common/home/home.html:99
+#: app/manager/signup/signup.controller.js:10
 msgid "France"
 msgstr ""
 
-#: app/signup/signup.html:102
+#: app/manager/signup/signup.html:102
 msgid "Gérant"
 msgstr ""
 
-#: app/404/404.html:6
+#: app/manager/settings/settings.controller.js:29
+msgid "Hello"
+msgstr ""
+
+#: app/common/404/404.html:7
 msgid "here"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:52
+#: app/manager/fields/field-edit.tpl.html:53
 msgid "Horaires d'ouverture"
 msgstr ""
 
-#: app/signin/signin.controller.js:29
-#: app/signup/signup.controller.js:93
+#: app/common/signin/signin.controller.js:28
+#: app/manager/signup/signup.controller.js:90
 msgid "Impossible de joindre le serveur. Veuillez réessayer ultérieurement"
 msgstr ""
 
-#: app/signup/signup.html:13
+#: app/manager/signup/signup.html:13
 msgid "Informations du five"
 msgstr ""
 
-#: app/signup/signup.controller.js:75
+#: app/manager/signup/signup.controller.js:72
 msgid "Informations incorrectes"
 msgstr ""
 
-#: app/fields/fields.service.js:47
+#: app/common/components/wbNavbar/wbNavbar.tpl.html:20
+#: app/common/register/register.html:13
+msgid "Inscription"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:62
+msgid "Jan"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:61
+msgid "Janvier"
+msgstr ""
+
+#: app/common/register/register.html:29
+msgid "Je suis gérant d'un five"
+msgstr ""
+
+#: app/common/register/register.html:26
+msgid "Je suis un joueur"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:45
+msgid "Jeu"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:44
 msgid "Jeudi"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:61
+#: app/manager/components/navbar/navbar.directive.js:23
+msgid "Joueurs"
+msgstr ""
+
+#: app/common/home/home.controller.js:26
+msgid "joueurs de foot"
+msgstr ""
+
+#: app/manager/fields/field-edit.tpl.html:62
 msgid "Jour"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:33
+#: app/manager/fields/field-edit.tpl.html:34
 msgid "Jours d'ouverture"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:26
+#: app/common/components/core/calendar.service.js:92
+msgid "Jui"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:91
+msgid "Juillet"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:86
+msgid "Juin"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:87
+msgid "Jun"
+msgstr ""
+
+#: app/manager/fields/field-edit.tpl.html:26
 msgid "Laissez ce champ vide si le terrain n'est pas diponible"
 msgstr ""
 
-#: app/signin/signin.controller.js:26
+#: app/common/signin/signin.controller.js:25
 msgid "Le mot de passe est invalide"
 msgstr ""
 
-#: app/signup/signup.html:92
+#: app/manager/signup/signup.html:92
 msgid "Le numéro de téléphone est invalide"
 msgstr ""
 
-#: app/signup/signup.html:58
+#: app/manager/signup/signup.html:58
 msgid "Le numéro SIREN doit contenir 9 chiffres"
 msgstr ""
 
-#: app/signup/signup.html:59
+#: app/manager/signup/signup.html:59
 msgid "Le numéro SIREN est invalide"
 msgstr ""
 
-#: app/signup/signup.html:144
+#: app/common/home/home.html:13
+msgid ""
+"Les five partenaires sont accessibles depuis l'application, vous pourrez ainsi retrouver votre five préféré et\n"
+"            en découvrir de nouveaux !"
+msgstr ""
+
+#: app/manager/signup/signup.html:144
 msgid "Les mots de passes ne correspondent pas"
 msgstr ""
 
-#: app/signin/signin.html:23
-#: app/signin/signin.html:7
-msgid "Login"
+#: app/common/components/core/calendar.service.js:30
+msgid "Lun"
 msgstr ""
 
-#: app/fields/fields.service.js:35
+#: app/common/components/core/calendar.service.js:29
 msgid "Lundi"
 msgstr ""
 
-#: app/fields/fields.service.js:39
+#: app/common/components/core/calendar.service.js:81
+#: app/common/components/core/calendar.service.js:82
+msgid "Mai"
+msgstr ""
+
+#: app/manager/settings/settings.controller.js:15
+msgid "Manager"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:35
+#: app/common/components/core/calendar.service.js:72
+msgid "Mar"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:34
 msgid "Mardi"
 msgstr ""
 
-#: app/fields/fields.service.js:43
+#: app/common/components/core/calendar.service.js:71
+msgid "Mars"
+msgstr ""
+
+#: app/manager/components/navbar/navbar.directive.js:19
+msgid "Matchs"
+msgstr ""
+
+#: app/common/home/home.html:93
+msgid "Mentions légales"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:40
+msgid "Mer"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:39
 msgid "Mercredi"
 msgstr ""
 
-#: app/signup/signup.html:27
+#: app/manager/signup/signup.html:27
 msgid "Modifier le logo"
 msgstr ""
 
-#: app/signup/signup.html:129
+#: app/common/register/register-manager.tpl.html:24
+#: app/common/signin/signin.controller.js:12
+#: app/manager/signup/signup.html:129
 msgid "Mot de passe"
 msgstr ""
 
-#: app/signup/signup.html:108
+#: app/manager/settings/settings.controller.js:20
+msgid "New password"
+msgstr ""
+
+#: app/common/register/register-manager.tpl.html:10
+#: app/manager/signup/signup.html:108
 msgid "Nom"
 msgstr ""
 
-#: app/signup/signup.html:44
+#: app/manager/signup/signup.html:44
 msgid "Nom de la société"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:10
+#: app/manager/fields/field-edit.tpl.html:10
 msgid "Nom du terrain"
 msgstr ""
 
-#: app/signup/signup.html:159
-#: app/signup/signup.html:87
+#: app/common/components/core/calendar.service.js:112
+msgid "Nov"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:111
+msgid "Novembre"
+msgstr ""
+
+#: app/manager/signup/signup.html:159
+#: app/manager/signup/signup.html:87
 msgid "Numéro de téléphone"
 msgstr ""
 
-#: app/signup/signup.html:53
+#: app/manager/signup/signup.html:53
 msgid "Numéro SIREN"
 msgstr ""
 
-#: app/404/404.html:5
+#: app/common/components/core/calendar.service.js:107
+msgid "Oct"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:106
+msgid "Octobre"
+msgstr ""
+
+#: app/manager/settings/settings.controller.js:19
+msgid "Old password"
+msgstr ""
+
+#: app/common/404/404.html:5
 msgid "Or something went wrong..."
 msgstr ""
 
-#: app/404/404.html:4
+#: app/common/home/home.controller.js:19
+msgid "Organisez des matchs rapidement parmi la communauté weBall !"
+msgstr ""
+
+#: app/common/home/home.html:47
+msgid "Organisez un match"
+msgstr ""
+
+#: app/common/404/404.html:4
 msgid "Page not Found"
 msgstr ""
 
-#: app/signin/signin.controller.js:12
-msgid "Password"
+#: app/manager/matches/matches.controller.js:15
+msgid "Paid"
 msgstr ""
 
-#: app/signup/signup.html:66
+#: app/common/home/home.controller.js:24
+msgid "Passez des moments incroyables avec les joueurs de votre choix !"
+msgstr ""
+
+#: app/manager/signup/signup.html:66
 msgid "Pays"
 msgstr ""
 
-#: app/signup/signup.html:118
+#: app/manager/settings/settings.controller.js:21
+msgid "Phone number"
+msgstr ""
+
+#: app/manager/matches/matches.controller.js:17
+msgid "Phone Number"
+msgstr ""
+
+#: app/common/register/register-manager.tpl.html:46
+msgid "Politique de confidentialité"
+msgstr ""
+
+#: app/common/register/register-manager.tpl.html:5
+#: app/manager/signup/signup.html:118
 msgid "Prénom"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:68
+#: app/manager/fields/field-edit.tpl.html:69
 msgid "Prix de"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:19
+#: app/manager/fields/field-edit.tpl.html:19
 msgid "Prix horaire par défault"
 msgstr ""
 
-#: app/signup/signup.html:173
+#: app/common/home/home.html:71
+msgid "Qui sommes-nous?"
+msgstr ""
+
+#: app/manager/components/navbar/navbar.directive.js:27
+msgid "Rechercher un joueur"
+msgstr ""
+
+#: app/manager/signup/signup.html:173
 msgid "S'enregistrer"
 msgstr ""
 
-#: app/fields/fields.service.js:55
+#: app/common/components/core/calendar.service.js:55
+msgid "Sam"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:54
 msgid "Samedi"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:93
+#: app/manager/fields/field-edit.tpl.html:94
 msgid "Sauvegarder"
 msgstr ""
 
-#: app/404/404.html:6
+#: app/common/signin/signin.html:27
+msgid "Se connecter"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:102
+msgid "Sep"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:101
+msgid "Septembre"
+msgstr ""
+
+#: app/manager/components/navbar/navbar.html:51
+msgid "Settings"
+msgstr ""
+
+#: app/common/home/home.html:64
+msgid "Télécharger l'application"
+msgstr ""
+
+#: app/common/home/home.controller.js:38
+msgid "terrain five"
+msgstr ""
+
+#: app/common/404/404.html:8
 msgid "to go back to the portal."
 msgstr ""
 
-#: app/fields/fields.service.js:24
+#: app/manager/components/fields/fields.service.js:24
 msgid "Tous les jours de 9h à 00h"
 msgstr ""
 
-#: app/fields/fields.service.js:51
+#: app/common/home/home.html:88
+msgid "Tout droits réservés."
+msgstr ""
+
+#: app/common/home/home.html:31
+msgid "Trouvez des joueurs"
+msgstr ""
+
+#: app/common/home/home.html:12
+msgid "Trouvez un five"
+msgstr ""
+
+#: app/common/home/home.controller.js:23
+msgid "Trouvez un five, Invitez vos amis et"
+msgstr ""
+
+#: app/manager/matches/matches.html:113
+#: app/manager/settings/settings.html:124
+#: app/manager/settings/settings.html:72
+#: app/manager/settings/settings.html:93
+msgid "update"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:50
+msgid "Ven"
+msgstr ""
+
+#: app/common/components/core/calendar.service.js:49
 msgid "Vendredi"
 msgstr ""
 
-#: app/signup/signup.controller.js:79
+#: app/manager/signup/signup.controller.js:76
 msgid "Veuillez ajouter au moins un terrain"
 msgstr ""
 
-#: app/signup/signup.html:7
+#: app/manager/signup/signup.html:7
 msgid "Veuillez prendre quelques minutes pour remplir ce formulaire d'inscription afin d'accéder à la plateforme myBall"
 msgstr ""
 
-#: app/fields/field-edit.tpl.html:24
+#: app/manager/fields/field-edit.tpl.html:24
 msgid "Veuillez renseigner un prix par défault pour les heures d'ouverture du terrain"
 msgstr ""
 
-#: app/signup/signup.html:78
+#: app/manager/signup/signup.html:78
 msgid "Ville"
+msgstr ""
+
+#: app/common/home/home.controller.js:31
+msgid "Vous gérez un Five ?"
+msgstr ""
+
+#: app/common/home/home.controller.js:18
+msgid "Vous jouez au foot ?"
+msgstr ""
+
+#: app/common/home/home.html:66
+msgid "weBall pour Android"
+msgstr ""
+
+#: app/common/home/home.html:65
+msgid "weBall pour iOS"
+msgstr ""
+
+#: app/common/home/home.html:67
+msgid "weBall pour Windows Phone"
 msgstr ""

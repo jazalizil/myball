@@ -417,6 +417,27 @@ md-dialog {
   min-width: 700px;
 }
 
+md-tabs {
+  .md-tab {
+    color: @dark-grey;
+    .capitalize;
+    font-size: 18px;
+    &.md-active {
+      color: grey;
+    }
+  }
+  md-tab-content {
+    md-content {
+      height: calc(~"60vh - 48px");
+      overflow: scroll;
+    }
+  }
+  md-ink-bar {
+    color: @mb-color;
+    background-color: @mb-color;
+  }
+}
+
 a {
   text-decoration: none;
 }

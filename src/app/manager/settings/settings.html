@@ -42,37 +42,36 @@
     <section>
       <md-tabs md-center-tabs md-dynamic-height md-selected="settings.data.selectedTab">
         <md-tab label="{{settings.data.labels.manager}}">
-          <md-content class="fit-height bg-black">
-            <md-content class="fit-height bg-black">
-              <div class="fit-height fit-width" layout="column" layout-padding>
-                <div class="fit-height" layout="row" layout-align="center center">
-                  <div layout="column" class="fit-height" layout-align="center center">
-                    <div layout="row" layout-align="center center">
-                      <md-input-container>
-                        <label>{{settings.data.labels.email}}</label>
-                        <input type="email" ng-model="settings.data.identity.manager.email" name="email">
-                      </md-input-container>
-                    </div>
-                    <div layout="row" layout-align="center center">
-                      <md-input-container class="md-float">
-                        <label>{{settings.data.labels.oldPassword}}</label>
-                        <input type="password" ng-model="settings.data.identity.manager.oldPassword" name="oldPassword">
-                      </md-input-container>
-                    </div>
-                    <div layout="row" layout-align="center center">
-                      <md-input-container class="md-float">
-                        <label>{{settings.data.labels.newPassword}}</label>
-                        <input type="password" ng-model="settings.data.identity.manager.newPassword" name="newPassword">
-                      </md-input-container>
-                    </div>
+          <md-content class="bg-black">
+            <div class="fit-height fit-width" layout="column" layout-padding>
+              <div class="fit-height" layout="row" layout-align="center center">
+                <div layout="column" class="fit-height" layout-align="center center">
+                  <div layout="row" layout-align="center center">
+                    <md-input-container>
+                      <label>{{settings.data.labels.email}}</label>
+                      <input type="email" ng-model="settings.data.identity.manager.email" name="email">
+                    </md-input-container>
+                  </div>
+                  <div layout="row" layout-align="center center">
+                    <md-input-container class="md-float">
+                      <label>{{settings.data.labels.oldPassword}}</label>
+                      <input type="password" ng-model="settings.data.identity.manager.oldPassword" name="oldPassword">
+                    </md-input-container>
+                  </div>
+                  <div layout="row" layout-align="center center">
+                    <md-input-container class="md-float">
+                      <label>{{settings.data.labels.newPassword}}</label>
+                      <input type="password" ng-model="settings.data.identity.manager.newPassword" name="newPassword">
+                    </md-input-container>
                   </div>
                 </div>
-                <div layout="row" layout-align="center end">
-                  <md-button class="md-raised md-primary">
-                    <span class="white" translate>update</span>
-                  </md-button>
-                </div>
               </div>
+              <div layout="row" layout-align="center end">
+                <md-button class="md-raised md-primary">
+                  <span class="white" translate>update</span>
+                </md-button>
+              </div>
+            </div>
           </md-content>
         </md-tab>
         <md-tab label="{{settings.data.labels.five}}">

@@ -1,0 +1,54 @@
+#matches-tabs {
+  .transition-hover {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    &:hover {
+      border-color: @white-transparent;
+      background-color: @grey-transparent;
+    }
+  }
+  md-content {
+    padding-top: @header-height;
+    font-size: 16px;
+    md-tabs {
+      md-tabs-wrapper {
+        visibility: hidden;
+      }
+      md-tabs-content-wrapper {
+        top: 0px;
+        md-tab-content {
+          md-content {
+            padding-top: 0;
+            height: calc(~"60vh - 90px");
+            .hour-ctn {
+              border: solid 3px @dark-grey;
+              border-radius: 50%;
+              height: 70px;
+              width: 70px;
+              .transition-hover;
+            }
+            md-card {
+              height: 250px;
+              .md-toolbar-tools {
+                min-height: 40px;
+                height: 40px;
+                font-size: 14px;
+                background-color: rgba(0, 0, 0, 0.4);
+              }
+              md-card-content {
+                background-color: rgba(0, 0, 0, 0.1);
+                i.material-icons {
+                  font-size: 75px;
+                }
+                .transition-hover;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

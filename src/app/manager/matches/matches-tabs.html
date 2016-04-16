@@ -1,0 +1,63 @@
+<div id="matches-tabs">
+  <mb-navbar></mb-navbar>
+  <md-content class="scroll-content bg-black">
+    <section>
+      <mb-calendar matches="matches.data.allMatches" today="matches.data.today" layout></mb-calendar>
+    </section>
+    <md-tabs md-center-tabs md-selected="matches.data.selectedTabIndex" md-dynamic-height md-no-select-click>
+      <md-tab label="Hours" layout>
+        <md-content class="fit-width bg-black">
+          <div class="fit-width fit-height" layout="column" layout-padding>
+            <div layout="row" class="fit-height" layout-align="center center">
+              <div layout="column" flex="15" layout-align="center center" class="grey"
+                   ng-repeat="hour in matches.data.hours | limitTo: 16 | startFrom: 9">
+                <div class="hour-ctn pointer" layout="column" ng-click="matches.goToTab(1, hour)">
+                  <span class="fit-width fit-height dark-grey" layout layout-align="center center">{{hour.value}}:00h</span>
+                  <span class="fit-width points-ctn" layout layout-align="center end">
+                    <span ng-repeat="match in hour.matches" class="circle {{matches.data.statusToColor[match.status]}}">
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div layout="row" class="fit-height" layout-align="center center">
+              <div layout="column" flex="15" layout-align="center center" class="grey" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 16">
+                <div class="hour-ctn pointer" layout="column" ng-click="matches.goToTab(1, hour)">
+                  <span class="fit-width fit-height dark-grey" layout layout-align="center center">{{hour.value}}:00h</span>
+                  <span class="fit-width points-ctn" layout layout-align="center end">
+                    <span ng-repeat="match in hour.matches" class="circle {{matches.data.statusToColor[match.status]}}">
+                    </span>
+                  </span>
+                </div>
+            </div>
+          </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Fields">
+        <md-content class="fit-width bg-black">
+          <div class="fit-width fit-height" layout="column">
+            <div class="fit-height" layout="row" layout-align="center start">
+              <md-card ng-repeat="field in matches.data.fields" class="fit-height bg-black" flex="25" layout="column">
+                <div class="md-accent md-toolbar-tools white fit-width center-text" layout>
+                  {{field.name}}
+                </div>
+                <md-card-content layout="row" class="fit-width fit-height pointer">
+                  <div layout="row" class="fit-width">
+                    <div class="fit-width" layout="column" layout-align="center center">
+                      <i class="material-icons green">add_circle</i>
+                    </div>
+                  </div>
+                </md-card-content>
+              </md-card>
+            </div>
+            <div class="fit-width" layout="row" layout-align="center end">
+              <md-button  class="md-button-icon md-raised md-primary" ng-click="matches.goToTab(0)">
+                <md-icon md-font-set="material-icons grey">keyboard_arrow_left</md-icon>
+              </md-button>
+            </div>
+          </div>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
