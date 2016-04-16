@@ -78,6 +78,21 @@
 					deferred.reject(err);
 				});
 				return deferred.promise;
+			},
+			update: function(type, user) {
+				var deferred;
+				deferred = $q.defer();
+				Restangular.one('/' + type + '/me').patch(user).then(function(user) {
+					deferred.resolve(user);
+				}, function(err) {
+					return deferred.reject(err);
+				});
+				return deferred.promise;
+			},
+			getFives: function(lat, lgt) {
+				return Restangular.one('five').get({lat: lat, lgt: lgt}).then(function(five) {
+					return five;
+				});
 			}
 		};
 	}

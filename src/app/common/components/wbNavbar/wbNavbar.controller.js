@@ -10,7 +10,7 @@
 
 		vm.isAuthed = isAuthed;
 		vm.getFullName = getFullName;
-		vm.goProfil = goProfil;
+		vm.goState = goState;
 		vm.logout = logout;
 
 		function isAuthed() {
@@ -25,8 +25,8 @@
 			}
 		}
 
-		function goProfil() {
-			$state.go('profil');
+		function goState(state) {
+			$state.go(state);
 		}
 
 		function logout() {

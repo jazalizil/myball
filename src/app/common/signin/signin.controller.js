@@ -5,14 +5,17 @@
 	/** @ngInject */
 	function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog) {
 		var vm = this;
+
+		vm.login = login;
 		vm.datas = {
 			isLoading: false,
 			placeholders: {
-				email: gettextCatalog.getString("Nom d'utilisateur"),
+				email: gettextCatalog.getString("Email"),
 				password: gettextCatalog.getString("Mot de passe")
 			}
 		};
-		vm.login = function() {
+
+		function login() {
 			vm.datas.isLoading = true;
 			return AuthorizationService.login(vm.datas.login, vm.datas.password).then(function() {
 				$state.go('home');
@@ -31,6 +34,6 @@
 				vm.datas.isLoading = false;
 				$log.debug(err);
 			});
-		};
+		}
 	}
 })();

@@ -18,6 +18,7 @@
 				'gettext',
 				'wyvernzora.un-svg',
 				'chart.js',
-				'ngPercentDisplay'
+				'ngPercentDisplay',
+				'ngMap'
 			]);
 })();

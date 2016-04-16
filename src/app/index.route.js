@@ -46,12 +46,32 @@
 			controller: 'StartController',
 			controllerAs: 'start',
 			templateUrl: ''
+		}).state('cgu', {
+			parent: 'public',
+			url: '/cgu',
+			templateUrl: 'app/common/cgu/cgu.html'
+		}).state('confidentiality', {
+			parent: 'public',
+			url: '/confidentiality',
+			templateUrl: 'app/common/confidentiality/confidentiality.html'
 		}).state('profil', {
 			parent: 'public',
 			url: '/profil',
-			templateUrl: 'app/common/profil/profil.html',
+			templateUrl: 'app/user/profil/profil.html',
 			controller: 'ProfilController',
 			controllerAs: 'profil'
+		}).state('parameters', {
+			parent: 'public',
+			url: '/parameters',
+			templateUrl: 'app/user/parameters/parameters.html',
+			controller: 'ParametersController',
+			controllerAs: 'parameters'
+		}).state('five', {
+			parent: 'public',
+			url: '/five',
+			templateUrl: 'app/user/five/five.html',
+			controller: 'FiveController',
+			controllerAs: 'five'
 		}).state('404', {
 			parent: 'public',
 			url: '/404',

@@ -1,30 +1,70 @@
 #register {
-  md-content {
-    padding-top: 64px;
-    md-icon {
-      height: 20px;
-      width: 25px;
-      padding-top: 4px;
-    }
-  }
-}
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9999;
 
-md-datepicker {
-	padding-bottom: 25px;
-}
+	#register-content {
+		padding-top: 40px;
+		color: white;
 
-#inscription-container {
-	padding-bottom: 20px;
+		#register-subheader {
 
-	div.title-container {
-		text-align: center;
+			.title-container {
+				margin: 0 15px 0 15px;
 
-		h2 {
-			margin: 0;
+				h2 {
+					margin: 0;
+					font-size: 1.5em;
+				}
+				span {
+					text-align: center;
+					font-size: 0.8em;
+				}
+			}
+		}
+
+		#register-picture {
+			margin: 40px 0 40px 0;
+
+			span {
+				font-size: 0.8em;
+				margin-bottom: 10px;
+			}
+			img {
+				width: 150px;
+				height: 150px;
+			}
+		}
+
+		#register-form {
+
+			#register-cgu {
+				text-align: center;
+				margin: 40px 0 40px 0;
+				font-size: 0.8em;
+				color: grey;
+				
+				a {
+					color: white;
+				}
+			}
+			form {
+
+				.form-row {
+					margin-bottom: 10px;
+
+					md-input-container {
+						margin: 0;
+
+						input {
+							color: white;
+						}
+					}
+				}
+			}
 		}
 	}
-}
-
-#show-form-container {
-	padding-top: 20px;
 }

@@ -48,25 +48,26 @@
 			registerUser: function(five) {
 				var deferred;
 				deferred = $q.defer();
-				Restangular.one('/').post('users', five).then(function() {
-					$log.debug("Registration successful for user " + five.user.firstName + " " + five.user.lastName);
-					return deferred.resolve(methods.login(five.user.username, five.user.password));
+				Restangular.one('/').post('users', five).then(function(user) {
+					$log.debug("Registration successful for user " + user.fullName);
+					return deferred.resolve(methods.login(five.user.email, five.user.password));
 				}, function(err) {
 					return deferred.reject(err);
 				});
 				return deferred.promise;
 			},
 			registerManager: function(five) {
+				/*Not on date*/
 				var deferred;
 				deferred = $q.defer();
-				Restangular.one('/').post('managers', five).then(function() {
-					$log.debug("Registration successful for manager " + five.manager.firstName + " " + five.manager.lastName);
+				Restangular.one('/').post('managers', five).then(function(manager) {
+					$log.debug("Registration successful for manager " + manager.firstName + " " + manager.lastName);
 					return deferred.resolve(methods.login(five.manager.email, five.manager.password));
 				}, function(err) {
 					return deferred.reject(err);
 				});
 				return deferred.promise;
-			},
+			}
 		};
 	}
 })();
