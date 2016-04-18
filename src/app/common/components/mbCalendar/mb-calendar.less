@@ -24,11 +24,12 @@ mb-calendar{
     .week-ctn {
       padding: 0;
       .week {
-        -webkit-transition: transform 0.1s ease-in-out;
-        -moz-transition: transform 0.1s ease-in-out;
-        -ms-transition: transform 0.1s ease-in-out;
-        -o-transition: transform 0.1s ease-in-out;
-        transition: transform 0.1s ease-in-out;
+        // Work well on chrome but not on safari, fuck!
+        //-webkit-transition: transform 0.1s ease-in-out;
+        //-moz-transition: transform 0.1s ease-in-out;
+        //-ms-transition: transform 0.1s ease-in-out;
+        //-o-transition: transform 0.1s ease-in-out;
+        //transition: transform 0.1s ease-in-out;
         .day {
           cursor: pointer;
           height: 30px;

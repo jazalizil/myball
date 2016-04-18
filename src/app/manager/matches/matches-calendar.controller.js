@@ -7,10 +7,15 @@
   angular.module('myBall')
     .controller('MatchesCalendarController', MatchesCalendarController);
   /** @ngInject */
-  function MatchesCalendarController(UserService, MatchesService, _, $scope) {
+  function MatchesCalendarController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog) {
     var vm = this;
     vm.data = {
       identity: angular.copy(UserService.getIdentity()),
+      placeholders: {
+        paid: gettextCatalog.getString('Paid'),
+        name: gettextCatalog.getString('Complete Name'),
+        phone: gettextCatalog.getString('Phone Number')
+      },
       today: {
         realDate: new Date()
       },
@@ -46,6 +51,32 @@
       }
       getHours();
     }, true);
+
+    vm.openSidenav = function(hour, field) {
+      vm.data.match = null;
+      vm.data.selectedHour = null;
+      if (hour.value * 10 % 10 !== 0) {
+        hour.value = Math.floor(hour.value);
+        hour.isHalf = true;
+        if (!vm.data.match.createdDate) {
+          vm.data.match.startDate.setMinutes(30);
+          vm.data.match.endDate.setMinutes(30);
+        }
+      }
+      $mdSidenav('right')
+        .toggle()
+        .then(function(){
+          vm.data.selectedHour = hour;
+          vm.data.match = hour.matches[field._id] || {
+              maxPlayers: vm.data.teamSizes[0].value,
+              createdWith: 'myBall',
+              responsable: {},
+              field: field._id,
+              startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(hour.value)),
+              endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(hour.value) + 1)
+            };
+        });
+    };
 
     var getHours = function(){
       var toPush, hours = _.range(9, 26, 0.5);
