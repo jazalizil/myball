@@ -8,7 +8,13 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
     $urlRouterProvider.when('', '/');
-    $stateProvider.state('protected', {
+    $stateProvider.state('start', {
+      parent: 'public',
+      url: '/',
+      controller: 'StartController',
+      controllerAs: 'start',
+      templateUrl: ''
+    }).state('protected', {
       abstract: true,
       resolve: {
         authorize: function(AuthorizationService) {
@@ -40,12 +46,6 @@
       templateUrl: 'app/common/register/register.html',
       controller: 'RegisterController',
       controllerAs: 'register'
-    }).state('start', {
-      parent: 'public',
-      url: '/',
-      controller: 'StartController',
-      controllerAs: 'start',
-      templateUrl: ''
     }).state('404', {
       parent: 'public',
       url: '/404',
@@ -67,8 +67,8 @@
     }).state('matchs', {
       parent: "protected",
       url: "/matches",
-      templateUrl: "app/manager/matches/matches-tabs.html",
-      controller: "MatchesTabController",
+      templateUrl: "app/manager/matches/matches-calendar.html",
+      controller: "MatchesCalendarController",
       controllerAs: "matches"
     }).state('players', {
       parent: "protected",

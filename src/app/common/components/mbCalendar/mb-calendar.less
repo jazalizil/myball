@@ -1,17 +1,19 @@
 mb-calendar{
-  height: 40vh;
+  height: 100%;
   .year-ctn {
     min-width: 82px;
     .year {
       cursor: pointer;
-      font-size:1.5em;
+      font-size:1.2em;
     }
   }
-  .month-ctn {
-    min-width: 82px;
-    .month {
-      cursor: pointer;
-      font-size: 1em;
+  .months {
+    .month-ctn {
+      min-width: 82px;
+      .month {
+        cursor: pointer;
+        font-size: 1em;
+      }
     }
   }
   .days-ctn {
@@ -20,7 +22,7 @@ mb-calendar{
       margin: 0;
     }
     .week-ctn {
-      padding-right: 0;
+      padding: 0;
       .week {
         -webkit-transition: transform 0.1s ease-in-out;
         -moz-transition: transform 0.1s ease-in-out;
@@ -54,5 +56,7 @@ mb-calendar{
   }
   .vr {
     border-right: 1px solid @grey;
+    padding: 0;
+    margin: 8px 0;
   }
 }

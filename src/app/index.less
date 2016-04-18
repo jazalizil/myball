@@ -24,6 +24,7 @@
 @blue: #416CBF;
 @white-transparent: rgba(255,255,255, 0.2);
 @grey-transparent: rgba(255, 255, 255, 0.5);
+@black-transparent: rgba(0,0,0, 0.4);
 
 //paddings
 @padding: 5px;
@@ -163,6 +164,10 @@ html {
 
 // Start utils
 
+.main-content {
+  padding-top: @header-height;
+}
+
 .valign {
   vertical-align: middle;
 }
@@ -189,6 +194,10 @@ html {
 
 .center-content {
   justify-content: center;
+}
+
+.pad-t-2x {
+  padding-top: @padding-2x;
 }
 
 .pad-t-3x {
@@ -225,6 +234,10 @@ html {
 
 .margin-t {
  margin-top: @padding;
+}
+
+.margin-t-2x {
+  margin-top: @padding-2x;
 }
 
 .margin-t-3x {
@@ -325,6 +338,14 @@ html {
 .hint.ng-enter.ng-enter-active {
   bottom: 7px;
   opacity: 1;
+}
+
+.transition-hover {
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
 // End utils
@@ -445,6 +466,7 @@ a {
 :focus {
   outline: none;
 }
+
 
 // End angular material rebranding
 

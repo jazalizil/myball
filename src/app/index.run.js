@@ -36,11 +36,15 @@
       // track the state the user wants to go to; authorization service needs this
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;
-
+      $rootScope.isLoaded = false;
       // if the principal is resolved, do an authorization check immediately. otherwise,
       // it'll be done when the state itresolved.
       if (UserService.isIdentityResolved()) AuthorizationService.authorize();
     });
+    deregistrationCallbacks.viewContentLoaded = $rootScope.$on('$viewContentLoaded', function(){
+      $rootScope.isLoaded = true;
+    });
+    $rootScope.$on('$destroy', deregistrationCallbacks.viewContentLoaded);
     $rootScope.$on('$destroy', deregistrationCallbacks.stateChangeStart);
     $rootScope.$on('$destroy', deregistrationCallbacks.watch);
   }

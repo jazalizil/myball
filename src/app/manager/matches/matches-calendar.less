@@ -1,0 +1,62 @@
+#matches-calendar {
+  @first-column-width: 130px;
+  @first-row-height: 70px;
+  @row-height: 75px;
+  @first-row-padding: 20px;
+  @column-width: 170px;
+  .t-head {
+    position: fixed;
+    overflow-y: auto;
+    min-height: @row-height;
+    .field {
+      min-width: @column-width;
+    }
+  }
+  .t-body {
+    position: fixed;
+    overflow: auto;
+    margin-top: @row-height;
+    .slot-ctn {
+      min-height: @row-height;
+      .slot {
+        &.border-dashed {
+          border-top: dashed @dark-grey 1px;
+        }
+        &.border-solid {
+          border-top: solid @dark-grey 1px;
+        }
+        position: relative;
+        top: @padding-2x;
+        min-width: @column-width;
+        margin-left: @padding-3x;
+        margin-right: @padding-3x;
+        .match-ctn {
+          height: 200%;
+          width: 100%;
+          .transition-hover;
+          .match {
+            z-index: 1;
+            position: relative;
+            i {
+              font-size: 50px;
+              visibility: hidden;
+            }
+            &.booked {
+              background-color: @black-transparent;
+            }
+          }
+          &:hover {
+            background-color: @black-transparent;
+            i {
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+  ::-webkit-scrollbar {
+    display: none;
+    //width: 0;
+  }
+}
