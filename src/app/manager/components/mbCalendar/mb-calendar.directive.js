@@ -242,7 +242,7 @@
       restrict: 'E',
       controller: mbCalendarController,
       controllerAs: 'calendar',
-      templateUrl: 'app/common/components/mbCalendar/mb-calendar.tpl.html',
+      templateUrl: 'app/manager/components/mbCalendar/mb-calendar.tpl.html',
       bindToController: true,
       scope: {
         matches : '=',

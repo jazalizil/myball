@@ -46,11 +46,11 @@
         <span class="day"
               ng-click="calendar.selectDay(dayToDisplay)"
               ng-class="{
-              'white bg-green': dayToDisplay.date === calendar.data.realDate.day &&
+              'dark-grey bg-green': dayToDisplay.date === calendar.data.realDate.day &&
               dayToDisplay.month === calendar.data.realDate.month &&
               dayToDisplay.year === calendar.data.realDate.year,
               'dark-grey': dayToDisplay.month !== calendar.data.currentMonth,
-              'grey': dayToDisplay.month === calendar.data.currentMonth}"
+              'grey': dayToDisplay.month === calendar.data.currentMonth && dayToDisplay.date !== calendar.data.realDate.day}"
               layout="row" layout-align="center center">
           {{dayToDisplay.date}}
         </span>
