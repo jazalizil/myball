@@ -1,0 +1,122 @@
+<div id="matches">
+
+  <mb-navbar></mb-navbar>
+
+  <md-content class="scroll-content bg-black">
+    <section>
+      <mb-calendar matches="matches.data.allMatches" today="matches.data.today" layout></mb-calendar>
+    </section>
+    <section class="matches" layout="row">
+      <md-card class="bg-black" flex="100" layout="column" layout-align="center center">
+        <div class="md-accent md-toolbar-tools white" layout>
+          {{matches.data.today.name + ' ' + matches.data.today.date + ' ' + matches.data.today.monthName + ' ' +
+          matches.data.today.year}}
+        </div>
+        <div layout="row" class="fit-width">
+          <md-content class="fit-width" flex="30">
+            <div layout="row" id="{{hour.value}}" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 9">
+              <span layout="column" layout-align="center center" class="hour-ctn grey">{{hour.value}}:00</span>
+              <span class="line-nav">&nbsp;</span>
+              <span ng-click="matches.selectHour(hour)"
+                    class="pointer circle {{matches.data.statusToColor[hour.status]}}"
+                    ng-class="{'pointer': hour.available}"
+              >&nbsp;</span>
+              <span ng-click="matches.selectHour(hour)"
+                    class="triangle-left"
+                    ng-class="{'selected': matches.data.selectedHour.value === hour.value, 'pointer': hour.available}"
+              ></span>
+              <div ng-click="matches.selectHour(hour)"
+                   class="container"
+                   ng-class="{'selected': matches.data.selectedHour.value === hour.value, 'pointer': hour.available}"
+                   ng-switch="hour.slots | isEmpty"
+              >
+                <div layout="column" class="fit-height pad-2x" ng-switch-when="true">
+                  <div class="uppercase white fit-height" layout="row" layout-align="start center" translate>
+                    available
+                  </div>
+                </div>
+                <div layout="column" class="fit-height pad-2x" ng-switch-default>
+                  <div ng-repeat="(status, matchesArray) in hour.slots"
+                       class="uppercase white fit-height" layout="row" layout-align="start center"
+                  >
+                    <span class="circle-sm {{matches.data.statusToColor[status]}}"></span>
+                    <span>{{matchesArray.length}}&nbsp;</span>
+                    <span>{{status}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </md-content>
+          <md-content class="fit-width bordered" flex="30">
+            <div layout="row fit-width" id="{{field._id}}" ng-repeat="field in matches.data.identity.five.fields">
+              <div class="field fit-width pointer" ng-click="matches.selectField(field)" layout-margin layout="column"
+              ng-class="{'selected': matches.data.selectedField._id === field._id}"
+              >
+                <div layout="row" layout-align="center start" class="white">{{field.name}}</div>
+                <div layout="row" layout-align="center center" class="green fit-height">
+                  <span class="green">
+                    <md-icon md-font-set="material-icons green">add_circle_outline</md-icon>
+                    <span class="upercase" translate>Book</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </md-content>
+          <md-content class="fit-width bordered extra-padded" flex="40">
+            <md-input-container class="md-icon-float md-block">
+              <label>{{matches.data.placeholders.name}}</label>
+              <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
+              <input type="text" name="name" ng-model="matches.data.match.responsable.name">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+              <label>{{matches.data.placeholders.phone}}</label>
+              <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
+              <input type="text" name="phone" ng-model="matches.data.match.responsable.phone">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+              <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
+              <md-select ng-model="matches.data.match.matchPlayers" aria-label="team size">
+                <md-option ng-repeat="size in matches.data.teamSizes" value="{{size.value}}"
+                           ng-selected="matches.data.match.maxPlayers === size.value">
+                  {{size.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block switch-ctn">
+              <md-icon md-svg-src="/assets/icons/paiement.svg"></md-icon>
+              <span>{{matches.data.placeholders.paid}}</span>
+              <md-switch class="md-primary" aria-label="match paid" ng-disabled="matches.data.match.alreadyPaid" ng-model="matches.data.match.justPaid">
+              </md-switch>
+            </md-input-container>
+            <div layout="row" class="fit-width" ng-switch="!matches.data.match.createdAt">
+              <div layout="column" class="fit-width" ng-switch-when="true">
+                <md-button class="md-raised md-primary fit-width">
+                  <span class="white" translate>book</span>
+                </md-button>
+              </div>
+              <div class="grey fit-width" layout ng-switch-default>
+                <div class="created fit-width" flex>
+                  <div flex>
+                    <span translate>Created with</span>
+                    <span>&nbsp;{{matches.data.match.createdWith}}</span>
+                  </div>
+                  <div flex>
+                    <span>{{matches.data.match.createdAt | date: 'd MMMM yyyy'}} </span>
+                    <span translate>at</span>
+                    <span> {{matches.data.match.createdAt | date: 'HH:mm'}}</span>
+                  </div>
+                </div>
+                <md-button flex class="fit-width">
+                  <span class="red" translate>delete</span>
+                </md-button>
+                <md-button flex class="md-raised md-primary fit-width">
+                  <span class="white" translate>update</span>
+                </md-button>
+              </div>
+            </div>
+          </md-content>
+        </div>
+      </md-card>
+    </section>
+  </md-content>
+</div>

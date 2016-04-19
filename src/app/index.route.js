@@ -67,15 +67,15 @@
     }).state('matchs', {
       parent: "protected",
       url: "/matches",
-      templateUrl: "app/manager/matches/matches-calendar.html",
-      controller: "MatchesCalendarController",
+      templateUrl: "app/manager/matches/matches.html",
+      controller: "MatchesController",
       controllerAs: "matches"
-    }).state('players', {
+    }).state('dashboard', {
       parent: "protected",
-      url: "/players",
-      templateUrl: "app/manager/players/players.html",
-      controller: "PlayersController",
-      controllerAs: "players"
+      url: "/dashboard",
+      templateUrl: "app/manager/dashboard/dashboard.html",
+      controller: "DahboardController",
+      controllerAs: "dashboard"
     }).state('settings', {
       parent: "protected",
       url: "/settings",

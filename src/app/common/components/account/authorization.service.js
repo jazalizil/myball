@@ -3,7 +3,7 @@
   angular.module('myBall').factory('AuthorizationService', AuthorizationService);
 
   /** @ngInject */
-  function AuthorizationService(UserService, $state, $rootScope, Restangular, $q, localStorageService, $cookies, $log) {
+  function AuthorizationService(UserService, $state, $rootScope, Restangular, localStorageService) {
     var methods;
     return methods = {
       authorize: function() {
@@ -34,26 +34,18 @@
           login: email,
           password: password
         }).then(function(res) {
-          $log.debug("Signin in successful, token : " + res.token);
           UserService.updateToken(res.token);
         });
       },
       logout: function() {
         UserService.authenticate(void 0);
-        $cookies.remove('token');
         localStorageService.clearAll();
-        $state.go('signin');
+        $state.go('home');
       },
       register: function(five) {
-        var deferred;
-        deferred = $q.defer();
-        Restangular.one('/').post('managers', five).then(function() {
-          $log.debug("Registration successful for manager " + five.manager.firstName + " " + five.manager.lastName);
-          return deferred.resolve(methods.login(five.manager.email, five.manager.password));
-        }, function(err) {
-          return deferred.reject(err);
+        return Restangular.one('/').post('managers', five).then(function() {
+          return methods.login(five.manager.email, five.manager.password);
         });
-        return deferred.promise;
       }
     };
   }

@@ -1,0 +1,113 @@
+#matches {
+  md-content {
+    padding-top: @header-height;
+    font-size: 16px;
+    overflow-x: hidden;
+    .matches {
+      height: calc(~"60vh - 80px");
+      md-card {
+        height: 100%;
+        .md-toolbar-tools {
+          min-height: 40px;
+          height: 40px;
+          font-size: 14px;
+          background-color: rgba(0,0,0, 0.4);
+        }
+        md-content {
+          background-color: rgba(0,0,0, 0.1);
+          padding: @padding-4x;
+          &.bordered {
+            border-left: solid 1px @true-black;
+          }
+          &.extra-padded {
+            padding: 0 @padding-12x;
+          }
+          .hour-ctn {
+            width: 80px;
+            height: 100px;
+          }
+          .line-nav {
+            width: 3px;
+            background-color: @white;
+            height: 100px;
+            opacity: 0.1;
+          }
+          .triangle-left {
+            &.selected {
+              border-right-color: @grey-transparent;
+            }
+            width: 0;
+            height: 0;
+            border-top: 35px solid transparent;
+            border-right: 15px solid @white-transparent;
+            border-bottom: 35px solid transparent;
+            margin-top: 15px;
+            margin-left: 7px;
+          }
+          .container {
+            background-color: @white-transparent;
+            height: 70px;
+            margin-top: 15px;
+            width: 320px;
+            &.selected {
+              background-color: @grey-transparent;
+            }
+            .circle-sm {
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              margin-top: -1px;
+              margin-right: 10px;
+            }
+          }
+          .field {
+            background-color: @white-transparent;
+            height: 150px;
+            &.selected {
+              background-color: @grey-transparent;
+            }
+          }
+          .circle {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: absolute;
+            margin-top: 42px;
+            margin-left: -10px;
+          }
+          .created {
+            font-size: 11px;
+            margin: 6px 0px;
+          }
+          md-input-container {
+            min-height: 10px;
+            height: 40px;
+            padding-bottom: 0;
+            label {
+              color: @dark-grey;
+            }
+            &.switch-ctn {
+              md-icon {
+                position: absolute;
+                top: 2px;
+                left: 2px;
+              }
+              span {
+                margin-left: 36px;
+                color: @white;
+              }
+              md-switch {
+                display: inline-flex;
+                float: right;
+                margin: 0px;
+              }
+            }
+            md-select {
+              margin-left: 36px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div id="main">
+
+  <mb-navbar opaq></mb-navbar>
+
+  <md-content class="scroll-content bg-black">
+    <section>
+      <mb-carousel timeout="5000" imgs="main.data.imgs"/>
+    </section>
+    <section id="content" layout="row">
+      <md-card class="bg-black" flex="20">
+        <div class="md-accent md-toolbar-tools white" layout>
+          <span translate>Matchs organisés</span>
+        </div>
+        <md-card-content>
+          <highchart id="chart1" options="main.data.chartConfig"></highchart>
+        </md-card-content>
+      </md-card>
+    </section>
+  </md-content>
+</div>

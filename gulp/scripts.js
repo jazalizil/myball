@@ -16,10 +16,8 @@ gulp.task('scripts', function () {
     .pipe($.size())
 });
 
-gulp.task('values', function() {
-  return gulp.src(path.join(conf.paths.src, '/data/**/*.js'))
-    .pipe($.eslint())
-    .pipe($.eslint.format())
+gulp.task('lib', function() {
+  return gulp.src(path.join(conf.paths.src, '/lib/**/*.js'))
     .pipe(browserSync.reload({ stream: true }))
     .pipe($.size())
 });

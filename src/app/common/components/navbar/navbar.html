@@ -1,22 +1,22 @@
 <md-toolbar
-    id="wb-navbar"
-    ng-class="{'fixed bg-transparent grey': !navbar.opaq,
-    'fixed bg-dark-grey grey': navbar.opaq}"
-    class="md-accent md-whiteframe-z2 md-toolbar-sm"
+    id="mb-navbar"
+    ng-class="{'bg-transparent grey': !navbar.opaq,
+    'bg-dark-grey grey': navbar.opaq}"
+    class="md-accent md-whiteframe-z2 md-toolbar-sm fixed"
     layout="row">
-  <div class="md-toolbar-tools">
-    <a ui-sref="main">
-      <md-button aria-label="home" layout layout-align="left center">
+  <div class="md-toolbar-tools" layout="row">
+    <a ui-sref="home" layout layout-align="left center">
+      <md-button aria-label="home" class="no-margin">
           <un-svg svg-src="assets/icons/myball.svg"></un-svg>
       </md-button>
     </a>
     <span flex></span>
-    <div ng-if="!navbar.data.isSignupState" layout>
+    <div ng-if="navbar.data.identity" layout layout-align="center center">
       <div class="links-ctn" layout-padding layout-align="start center" ng-hide="navbar.data.isSearching">
-        <a ng-repeat="link in navbar.data.links" class="navbar-link" ui-sref="{{link.url}}">
-        <span ng-class="{'grey' : navbar.data.activeState === link.url}">
-          {{link.text}}
-        </span>
+        <a ng-repeat="link in navbar.data.links" class="navbar-link" ui-sref="{{link.url}}" ui-sref-active="grey">
+          <span>
+            {{link.text}}
+          </span>
         </a>
       </div>
       <div class="search-ctn" layout layout-align="center center" ng-if="navbar.data.isSearching">
@@ -33,7 +33,7 @@
     </div>
     <span flex></span>
 
-    <div ng-if="!navbar.data.isSignupState" layout layout-align="end end">
+    <div ng-if="navbar.data.identity" layout layout-align="center end">
       <md-button class="md-icon-button no-pad" ng-click="navbar.toggleSearch()">
         <md-icon md-font-set="material-icons">{{navbar.data.searchIcon}}</md-icon>
       </md-button>
@@ -48,19 +48,30 @@
               <md-button>
                 <a ui-sref="settings">
                   <md-icon md-font-set="grey material-icons">settings</md-icon>
-                  <span class="valign grey" translate>Settings</span>
+                  <span class="valign grey" translate>Paramètres</span>
                 </a>
               </md-button>
           </md-menu-item>
           <md-menu-item class="md-toolbar-tool">
             <md-button ng-click="navbar.logout()">
               <md-icon md-font-set="grey material-icons">exit_to_app</md-icon>
-              <span class="valign grey" translate>Exit</span>
+              <span class="valign grey" translate>Se déconnecter</span>
             </md-button>
           </md-menu-item>
         </md-menu-content>
       </md-menu>
-
+    </div>
+    <div ng-if="!navbar.data.identity" layout layout-align="center end">
+      <md-button class="action-button" aria-label="signin">
+        <a ui-sref="signin">
+          <span class="grey" translate>Connexion</span>
+        </a>
+      </md-button>
+      <md-button class="action-button" aria-label="register">
+        <a ui-sref="register">
+          <span class="grey" translate>Inscription</span>
+        </a>
+      </md-button>
     </div>
   </div>
 </md-toolbar>

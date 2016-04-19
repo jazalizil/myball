@@ -2,26 +2,8 @@
   width: 400px;
 }
 
-.signin {
-  .logo {
-    fill: @grey;
-    width: 75%;
+#signin {
+  md-content {
+    padding-top: @header-height;
   }
-
-  md-input-container {
-    input {
-      color: @grey;
-    }
-    &.md-input-invalid {
-      md-icon {
-        color: red;
-      }
-    }
-    &.md-input-has-value:not(.md-input-invalid) {
-      label {
-        color: @grey;
-      }
-    }
-  }
-
 }

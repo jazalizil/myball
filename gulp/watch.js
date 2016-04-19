@@ -32,14 +32,21 @@ gulp.task('watch', ['inject'], function () {
       gulp.start('inject');
     }
   });
-
-  gulp.watch(path.join(conf.paths.src, '/data/**/*.js'), function(event){
+  gulp.watch(path.join(conf.paths.src, '/lib/**/*.js'), function(event) {
     if(isOnlyChange(event)) {
-      gulp.start('values');
+      gulp.start('lib');
     } else {
       gulp.start('inject');
     }
   });
+
+  // gulp.watch(path.join(conf.paths.src, '/data/**/*.js'), function(event){
+  //   if(isOnlyChange(event)) {
+  //     gulp.start('values');
+  //   } else {
+  //     gulp.start('inject');
+  //   }
+  // });
 
   gulp.watch(path.join(conf.paths.po, '/**/*.po'), function(event){
     if(isOnlyChange(event)) {

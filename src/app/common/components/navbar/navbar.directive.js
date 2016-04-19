@@ -4,11 +4,9 @@
 
   function mbNavbar() {
     /** @ngInject */
-    function NavbarController($state, UserService, AuthorizationService, gettextCatalog) {
+    function NavbarController(UserService, AuthorizationService, gettextCatalog) {
       var vm = this;
       vm.data = {
-        activeState : $state.current.name,
-        isSignupState : $state.current.name === 'signup',
         identity: UserService.getIdentity(),
         links: [
           {
@@ -20,8 +18,8 @@
             url: 'matchs'
           },
           {
-            text: gettextCatalog.getString('Joueurs'),
-            url: 'players'
+            text: gettextCatalog.getString('Statistiques'),
+            url: 'dashboard'
           }
         ],
         searchPlaceholder: gettextCatalog.getString('Rechercher un joueur'),
@@ -59,7 +57,7 @@
       restrict: 'E',
       controller: NavbarController,
       controllerAs: 'navbar',
-      templateUrl: 'app/manager/components/navbar/navbar.html',
+      templateUrl: 'app/common/components/navbar/navbar.html',
       scope: {
         opaq : '='
       },

@@ -5,9 +5,12 @@
   /** @ngInject */
   function UserService($q, Restangular, localStorageService) {
     var _authenticated, _identity, _token;
-    _identity = localStorageService.get('identity') || void 0;
+    _identity = localStorageService.get('identity');
     _authenticated = false;
     _token = void 0;
+    if (typeof _identity === 'undefined') {
+      _identity = void 0;
+    }
     return {
       updateToken: function(token) {
         _token = token;
@@ -29,7 +32,7 @@
         return _identity;
       },
       isIdentityResolved: function() {
-        return angular.isDefined(_identity);
+        return _identity !== null;
       },
       isAuthenticated: function() {
         return _authenticated;
@@ -68,16 +71,12 @@
           deferred.resolve(_identity);
           return deferred.promise;
         }
-        Restangular.one('managers', 'me').get().then(function(user) {
+        return Restangular.one('managers', 'me').get().then(function(user) {
           _identity = user;
           _identity.roles = [user.roles];
           localStorageService.set('identity', _identity);
           _authenticated = true;
-          deferred.resolve(user);
-        }, function(err) {
-          deferred.reject(err);
         });
-        return deferred.promise;
       }
     };
   }

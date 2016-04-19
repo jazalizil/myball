@@ -237,7 +237,6 @@
       }
       init();
     }
-        
 
     return {
       restrict: 'E',

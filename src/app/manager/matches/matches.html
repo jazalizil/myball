@@ -1,77 +1,85 @@
-<div id="matches">
-
+<div id="matches-calendar">
   <mb-navbar></mb-navbar>
-
-  <md-content class="scroll-content bg-black">
+  <md-content class="main-content scroll-content bg-black">
     <section>
       <mb-calendar matches="matches.data.allMatches" today="matches.data.today" layout></mb-calendar>
     </section>
-    <section class="matches" layout="row">
-      <md-card class="bg-black" flex="100" layout="column" layout-align="center center">
-        <div class="md-accent md-toolbar-tools white" layout>
-          {{matches.data.today.name + ' ' + matches.data.today.date + ' ' + matches.data.today.monthName + ' ' +
-          matches.data.today.year}}
+    <section>
+      <md-content class="fit-height bg-black pad-t-3x">
+        <div class="t-head full-width" layout="row">
+          <div flex="10"></div>
+          <div layout layout-align="center center" flex="25" class="field white"
+               ng-repeat="field in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
+            {{field.name}}
+          </div>
         </div>
-        <div layout="row" class="fit-width">
-          <md-content class="fit-width" flex="30">
-            <div layout="row" id="{{hour.value}}" ng-repeat="hour in matches.data.hours | limitTo: 23 | startFrom: 9">
-              <span layout="column" layout-align="center center" class="hour-ctn grey">{{hour.value}}:00</span>
-              <span class="line-nav">&nbsp;</span>
-              <span ng-click="matches.selectHour(hour)"
-                    class="pointer circle {{matches.data.statusToColor[hour.status]}}"
-                    ng-class="{'pointer': hour.available}"
-              >&nbsp;</span>
-              <span ng-click="matches.selectHour(hour)"
-                    class="triangle-left"
-                    ng-class="{'selected': matches.data.selectedHour.value === hour.value, 'pointer': hour.available}"
-              ></span>
-              <div ng-click="matches.selectHour(hour)"
-                   class="container"
-                   ng-class="{'selected': matches.data.selectedHour.value === hour.value, 'pointer': hour.available}"
-                   ng-switch="hour.slots | isEmpty"
-              >
-                <div layout="column" class="fit-height pad-2x" ng-switch-when="true">
-                  <div class="uppercase white fit-height" layout="row" layout-align="start center" translate>
-                    available
+        <div class="t-body fit-height fit-width" layout="column">
+          <div layout="row" class="slot-ctn" ng-repeat="hour in matches.data.hours" ng-hide="hour.value > 24" ng-class="{'first' : $first}">
+            <div layout layout-align="center start" flex="10" class="white">
+              <span ng-show="hour.value * 10 % 10 === 0">{{hour.value}}h</span>
+            </div>
+            <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
+                 ng-repeat="slot in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
+              <div class="match-ctn absolute pointer" ng-click="matches.openSidenav(hour, slot)" id="{{hour.value + '-' + slot._id}}"
+                   ng-hide="matches.data.hours[$parent.$index - 1].matches[slot._id] ||
+                   matches.data.hours[$parent.$index + 1].matches[slot._id] || hour.value >= 21.5">
+                <div layout="row" class="match fit-height fit-width" ng-hide="hour.matches[slot._id]">
+                  <div layout="column" layout-align="center center" class="fit-width">
+                    <i class="material-icons green">add_circle</i>
                   </div>
                 </div>
-                <div layout="column" class="fit-height pad-2x" ng-switch-default>
-                  <div ng-repeat="(status, matchesArray) in hour.slots"
-                       class="uppercase white fit-height" layout="row" layout-align="start center"
-                  >
-                    <span class="circle-sm {{matches.data.statusToColor[status]}}"></span>
-                    <span>{{matchesArray.length}}&nbsp;</span>
-                    <span>{{status}}</span>
+                <div layout="row" class="match booked fit-height fit-width" ng-if="hour.matches[slot._id]">
+                  <div layout="column" class="fit-width fit-height">
+                    <div layout="row" layout-align="center center" class="fit-width fit-height">
+                      <div flex="45" layout layout-align="center center">
+                        <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
+                        <span class="red">&nbsp;{{hour.matches[slot._id].teams[0].length || '0'}}</span>
+                      </div>
+                      <div class="grey uppercase" flex="10" layout layout-align="center center">
+                        vs
+                      </div>
+                      <div flex="45" layout layout-align="center center">
+                        <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
+                        <span class="red">&nbsp;{{hour.matches[slot._id].teams[1].length || '0'}}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </md-content>
-          <md-content class="fit-width bordered" flex="30">
-            <div layout="row fit-width" id="{{field._id}}" ng-repeat="field in matches.data.identity.five.fields">
-              <div class="field fit-width pointer" ng-click="matches.selectField(field)" layout-margin layout="column"
-              ng-class="{'selected': matches.data.selectedField._id === field._id}"
-              >
-                <div layout="row" layout-align="center start" class="white">{{field.name}}</div>
-                <div layout="row" layout-align="center center" class="green fit-height">
-                  <span class="green">
-                    <md-icon md-font-set="material-icons green">add_circle_outline</md-icon>
-                    <span class="upercase" translate>Book</span>
-                  </span>
-                </div>
+          </div>
+        </div>
+      </md-content>
+      <md-sidenav
+          class="md-sidenav-right"
+          md-component-id="right"
+          md-whiteframe="2">
+        <md-content class="fit-height fit-width">
+          <div layout="column" class="fit-height fit-width sidenav">
+            <div layout="column" class="date-ctn white" layout-padding layout-align="center start">
+              <div layout class="date">
+                {{matches.data.today.name + ' ' + matches.data.today.date + ' ' +
+              matches.data.today.monthName + ' ' + matches.data.today.year}}
               </div>
+              <div layout class="hour pad-t-3x">
+                <i class="material-icons">access_time</i>&nbsp;
+                {{matches.data.selectedHour.value + 'h'}}
+                <span ng-show="matches.data.selectedHour.isHalf">30</span>
+                &nbsp;-&nbsp;
+                {{matches.data.selectedHour.value + 1 + 'h'}}
+                <span ng-show="matches.data.selectedHour.isHalf">30</span>
+              </div>
+              <span></span>
             </div>
-          </md-content>
-          <md-content class="fit-width bordered extra-padded" flex="40">
             <md-input-container class="md-icon-float md-block">
               <label>{{matches.data.placeholders.name}}</label>
               <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
-              <input type="text" name="name" ng-model="matches.data.match.responsable.name">
+              <input  md-autofocus="!matches.data.match.responsable.name" type="text" name="name" ng-model="matches.data.match.responsable.name">
             </md-input-container>
             <md-input-container class="md-icon-float md-block">
               <label>{{matches.data.placeholders.phone}}</label>
               <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
-              <input type="text" name="phone" ng-model="matches.data.match.responsable.phone">
+              <input type="text" name="name" ng-model="matches.data.match.responsable.phone">
             </md-input-container>
             <md-input-container class="md-icon-float md-block">
               <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
@@ -114,9 +122,9 @@
                 </md-button>
               </div>
             </div>
-          </md-content>
-        </div>
-      </md-card>
+          </div>
+        </md-content>
+      </md-sidenav>
     </section>
   </md-content>
 </div>

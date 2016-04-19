@@ -363,6 +363,22 @@ md-input-container {
       position: relative;
     }
   }
+  &.switch-ctn {
+    md-icon {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+    }
+    span {
+      margin-left: 36px;
+      color: @white;
+    }
+    md-switch {
+      display: inline-flex;
+      float: right;
+      margin: 0px;
+    }
+  }
   md-select {
     .md-text {
       color: @white;
@@ -456,6 +472,23 @@ md-tabs {
   md-ink-bar {
     color: @mb-color;
     background-color: @mb-color;
+  }
+}
+
+md-card {
+  height: 100%;
+  .md-toolbar-tools {
+    min-height: 40px;
+    height: 40px;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  md-content {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: @padding-4x;
+    &.bordered {
+      border-left: solid 1px @true-black;
+    }
   }
 }
 

@@ -1,5 +1,8 @@
-#wb-navbar {
+#mb-navbar {
   z-index: 3;
+  .md-button {
+    //margin: 0;
+  }
   .search-ctn {
     margin-left: 200px;
     md-autocomplete {
@@ -28,13 +31,19 @@
   .links-ctn {
     margin-left: 100px;
     &.ng-hide-remove {
-      animation: fadeIn 2.5s;
+      animation: fadeIn .5s;
     }
   }
 
   .search-ctn {
     &.ng-enter {
-      animation: fadeIn 2.5s;
+      animation: fadeIn .5s;
     }
+  }
+
+  .action-button {
+    border: 1px solid @grey;
+    border-radius: 7%;
+    padding: 0 15px;
   }
 }
