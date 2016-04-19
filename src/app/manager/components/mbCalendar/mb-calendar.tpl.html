@@ -6,7 +6,7 @@
           <span layout="column" layout-align="center center" class="circle grey"></span>
         </div>
         <span class="year" layout="row" layout-align="center center" ng-click="calendar.selectYear(year)"
-        ng-class="calendar.data.realDate.year === year ? 'grey' : 'dark-grey'"
+        ng-class="calendar.data.currentYear === year ? 'grey bold' : 'dark-grey'"
         >
           {{year}}
         </span>
@@ -20,7 +20,7 @@
           <span layout="column" layout-align="center center" class="circle grey"></span>
         </div>
         <span class="month" layout="row" layout-align="center center" ng-click="calendar.selectMonth(month.number)"
-        ng-class="month.number === calendar.data.currentMonth ? 'grey' : 'dark-grey'">
+        ng-class="month.number === calendar.data.currentMonth ? 'grey bold' : 'dark-grey'">
           {{month.shortName}}
         </span>
       </div>
@@ -43,14 +43,13 @@
             <div class="circle-sm {{calendar.data.matchStatusToColor[match.status]}}"></div>
           </div>
         </div>
-        <span class="day"
+        <span class="day grey"
               ng-click="calendar.selectDay(dayToDisplay)"
               ng-class="{
               'dark-grey bg-green': dayToDisplay.date === calendar.data.realDate.day &&
               dayToDisplay.month === calendar.data.realDate.month &&
               dayToDisplay.year === calendar.data.realDate.year,
-              'dark-grey': dayToDisplay.month !== calendar.data.currentMonth,
-              'grey': dayToDisplay.month === calendar.data.currentMonth && dayToDisplay.date !== calendar.data.realDate.day}"
+              'dark-grey': dayToDisplay.month !== calendar.data.currentMonth}"
               layout="row" layout-align="center center">
           {{dayToDisplay.date}}
         </span>

@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('MatchesController', MatchesController);
   /** @ngInject */
-  function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog) {
+  function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog, $rootScope) {
     var vm = this;
     vm.data = {
       identity: angular.copy(UserService.getIdentity()),
@@ -47,7 +47,10 @@
       }
       else if (oldVal.year && oldVal.year !== newVal.year) {
         vm.data.today.realDate.setFullYear(+newVal.year);
-        fetchMatches(+newVal);
+        $rootScope.isLoaded = false;
+        fetchMatches(+newVal).then(function(){
+          $rootScope.isLoaded = true;
+        });
       }
       getHours();
     }, true);
@@ -100,15 +103,18 @@
       var params = {}, year = y || vm.data.today.realDate.getFullYear();
       params.startDate = new Date(year, 0, 15);
       params.endDate = new Date(year, 12, 31);
-      MatchesService.fetchMatches(vm.data.identity, params)
+      return MatchesService.fetchMatches(vm.data.identity, params)
         .then(function(res){
           vm.data.allMatches = res;
         });
     };
 
     var init = function() {
-      vm.data.fields = vm.data.identity.five.fields;
-      fetchMatches();
+      vm.data.fields = [vm.data.identity.five.fields[0]];
+      $rootScope.isLoading = false;
+      fetchMatches().then(function(){
+        $rootScope.isLoading = true;
+      });
     };
     init();
   }

@@ -8,7 +8,7 @@
       <md-content class="fit-height bg-black pad-t-3x">
         <div class="t-head full-width" layout="row">
           <div flex="10"></div>
-          <div layout layout-align="center center" flex="25" class="field white"
+          <div layout layout-align="center center" flex class="field white"
                ng-repeat="field in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
             {{field.name}}
           </div>
@@ -18,7 +18,7 @@
             <div layout layout-align="center start" flex="10" class="white">
               <span ng-show="hour.value * 10 % 10 === 0">{{hour.value}}h</span>
             </div>
-            <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
+            <div layout flex class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
                  ng-repeat="slot in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
               <div class="match-ctn absolute pointer" ng-click="matches.openSidenav(hour, slot)" id="{{hour.value + '-' + slot._id}}"
                    ng-hide="matches.data.hours[$parent.$index - 1].matches[slot._id] ||

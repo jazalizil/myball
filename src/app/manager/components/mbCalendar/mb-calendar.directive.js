@@ -126,7 +126,7 @@
         if (_.isEmpty(days[0])) {
           days = getDaysOfLastDecember(days);
         }
-        if (days[days.length - 1].day !== 0) {
+        else if (days[days.length - 1].day !== 0) {
           days = getDaysOfNextJanuary(days);
         }
         return days;
@@ -175,8 +175,9 @@
         year = +year;
         vm.data.yearsDisplayed = _.range(year - 1, year + 5);
         vm.data.currentYear = year;
-        vm.data.daysToDisplay = getDaysToDisplay();
         vm.today.year = year;
+        vm.data.isLoading = true;
+        vm.data.daysToDisplay = getDaysToDisplay();
       };
 
       vm.selectMonth = function (monthIndex) {
@@ -224,16 +225,17 @@
 
       function init() {
         var realDate = vm.today.realDate;
+        vm.data.isLoading = true;
         vm.data.daysToDisplay = getDaysToDisplay();
         vm.data.weekIndex = getFirstWeekIndex();
         var day = _.filter(vm.data.daysToDisplay, function(day){
           return day.year === vm.today.realDate.getFullYear() &&
             day.month === vm.today.realDate.getMonth() &&
-              day.date === vm.today.realDate.getDate()
+            day.date === vm.today.realDate.getDate()
         });
         vm.today = day[0];
         vm.today.realDate = realDate;
-        $log.debug('day:', day[0]);
+        vm.data.isLoading = false;
       }
       init();
     }
