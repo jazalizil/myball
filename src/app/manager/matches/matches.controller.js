@@ -54,18 +54,18 @@
 
     vm.openSidenav = function(hour, field) {
       vm.data.match = null;
-      vm.data.selectedHour = hour;
+      vm.data.selectedHour = angular.copy(hour);
       vm.data.match = hour.matches[field._id] || {
           maxPlayers: vm.data.teamSizes[0].value,
           createdWith: 'myBall',
           responsable: {},
           field: field._id,
-          startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(hour.value)),
-          endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(hour.value) + 1)
+          startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value)),
+          endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value) + 1)
         };
-      if (hour.value * 10 % 10 !== 0) {
-        hour.value = Math.floor(hour.value);
-        hour.isHalf = true;
+      if (vm.data.selectedHour.value * 10 % 10 !== 0) {
+        vm.data.selectedHour.value = Math.floor(vm.data.selectedHour.value);
+        vm.data.selectedHour.isHalf = true;
         if (!vm.data.match.createdDate) {
           vm.data.match.startDate.setMinutes(30);
           vm.data.match.endDate.setMinutes(30);

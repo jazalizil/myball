@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="t-body fit-height fit-width" layout="column">
-          <div layout="row" class="slot-ctn" ng-repeat="hour in matches.data.hours" ng-hide="hour.value > 24" ng-class="{'first' : $first}">
+          <div layout="row" class="slot-ctn" ng-repeat="hour in matches.data.hours" ng-hide="hour.value > 25" ng-class="{'first' : $first}">
             <div layout layout-align="center start" flex="10" class="white">
               <span ng-show="hour.value * 10 % 10 === 0">{{hour.value}}h</span>
             </div>
