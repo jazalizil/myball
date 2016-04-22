@@ -7,83 +7,13 @@
   angular.module('myBall')
     .factory('CalendarService', CalendarService);
   /** @ngInject */
-  function CalendarService(gettextCatalog, _) {
+  function CalendarService(gettextCatalog) {
     return {
       getNumberDaysOfMonth: function(month, year) {
         return new Date(year, month, 0).getDate();
       },
       getFirstDayOfMonth : function(month, year) {
         return new Date(year, month, 1).getDay();
-      },
-      getDaysToPrint: function(data) {
-        var nbrDays = this.getNumberDaysOfMonth(data.currentMonth, data.currentYear);
-        var firstDay = this.getFirstDayOfMonth(data.currentMonth, data.currentYear);
-        var days = [], i, dayThread = 1, len, toPush;
-        if (firstDay !== 1) {
-          var nbrDaysInPreviousMonth = data.currentMonth === 0 ?
-            this.getNumberDaysOfMonth(12, data.currentYear - 1) :
-            this.getNumberDaysOfMonth(data.currentMonth, data.currentYear);
-          for(i=nbrDaysInPreviousMonth - firstDay + 2; i <= nbrDaysInPreviousMonth; i++, dayThread++) {
-            toPush = {
-              day: dayThread,
-              date: i,
-              text: data.daysDisplayed[dayThread - 1].shortName,
-              matches: []
-            };
-            _.each(data.matches, function(match) {
-              var d = new Date(data.currentYear, data.currentMonth, dayThread);
-              if (match.startDate === d.toJSON()) {
-                toPush.matches.push(match);
-              }
-            });
-            days.push(toPush);
-          }
-        }
-        else if (data.daysToDisplay && data.daysToDisplay[data.daysToDisplay.length - 1].daysLeft === 7) {
-          for (i=7; i > 0; i--, dayThread++) {
-            if (dayThread === 7) {
-              dayThread = 0;
-            }
-            toPush = {
-              day: dayThread,
-              date: data.daysToDisplay[data.daysToDisplay.length - 1].date + 8 - i,
-              text: dayThread === 0 ?
-                data.daysDisplayed[6].shortName :
-                data.daysDisplayed[dayThread - 1].shortName,
-              matches: []
-            };
-            _.each(data.matches, function(match) {
-              var d = new Date(data.currentYear, data.currentMonth, dayThread);
-              if (match.startDate === d.toJSON()) {
-                toPush.matches.push(match);
-              }
-            });
-            days.push(toPush);
-          }
-        }
-        len = days.length;
-        for(i=1; i <= 28 - len; i++, dayThread++) {
-          if (dayThread === 7) {
-            dayThread = 0;
-          }
-          toPush = {
-            day: dayThread,
-            date: i,
-            text: dayThread === 0 ?
-              data.daysDisplayed[6].shortName :
-              data.daysDisplayed[dayThread - 1].shortName,
-            daysLeft: nbrDays - i,
-            matches: []
-          };
-          _.each(data.matches, function(match) {
-            var d = new Date(data.currentYear, data.currentMonth, dayThread);
-            if (match.startDate === d.toJSON()) {
-              toPush.matches.push(match);
-            }
-          });
-          days.push(toPush);
-        }
-        return days;
       },
       getDatas : function() {
         return {

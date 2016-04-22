@@ -15,7 +15,8 @@
 
     // Register Fontawesome icons
     //$mdIconProvider.iconSet('fa', '../../bower_components/font-awesome/fonts/fontawesome-webfont.svg');
-    $mdIconProvider.fontSet('fa', 'FontAwesome');
+    $mdIconProvider
+			.fontSet('fa', 'FontAwesome');
 
     // Set CORS
     $sceDelegateProvider.resourceUrlWhitelist([

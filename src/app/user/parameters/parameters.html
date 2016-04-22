@@ -1,0 +1,75 @@
+<div class="blurred-background"></div>
+<div class="black-filter"></div>
+<div id="parameters">
+	<wb-navbar opaq="true"></wb-navbar>
+	<md-content class="scroll-content" layout-fill>
+		<div id="player-subheader" layout-align="center center" layout="column">
+			<div class="subheader-content" layout layout-align="center center">
+				<div layout="column" layout-align="center center">
+					<md-icon md-font-set="material-icons">account_circle</md-icon>
+					<span>{{ parameters.me.fullName }}</span>
+					<span>{{ parameters.me.city }}</span>
+				</div>
+			</div>
+			<md-tabs md-center-tabs class="subheader-tabs">
+				<md-tab md-on-select="parameters.selectTab('informations')" label="informations">
+					<md-tab-label>
+						<h3>Informations</h3>
+					</md-tab-label>
+				</md-tab>
+				<md-tab md-on-select="parameters.selectTab('password')" label="password">
+					<md-tab-label>
+						<h3>Mot de passe</h3>
+					</md-tab-label>
+				</md-tab>
+			</md-tabs>
+		</div>
+		<div id="player-parameters">
+			<md-tab-body layout layout-align="center center" id="player-informations" ng-Show="parameters.isSelected('informations')">
+				<form layout="column" layout layout-align="center center" flex="30" class="parameters-form">
+					<div layout="row" layout layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Prénom</label>
+							<input required ng-model="parameters.user.firstName">
+						</md-input-container>
+					</div>
+					<div layout="row" layout layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Nom</label>
+							<input required ng-model="parameters.user.lastName">
+						</md-input-container>
+					</div>
+					<div layout="row" layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Date de naissance</label>
+							<input ng-model="parameters.user.birthday">
+						</md-input-container>
+					</div>
+					<div layout="row" layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Ville</label>
+							<input ng-model="parameters.user.city">
+						</md-input-container>
+					</div>
+					<div layout="row" layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Email</label>
+							<input required type="email" ng-model="parameters.user.email">
+						</md-input-container>
+					</div>
+					<span flex="30" class="form-error" ng-show="parameters.error">{{ parameters.error }}</span>
+					<div layout="row" layout-fill layout-align="center center">
+						<md-button flex="50" class="md-raised md-primary" ng-click="parameters.submit()" v-busy="parameters.isLoading">
+							<span translate>Confirmer</span>
+						</md-button>
+					</div>
+				</form>
+			</md-tab-body>
+
+
+			<md-tab-body id="player-password" ng-Show="parameters.isSelected('password')">
+
+			</md-tab-body>
+		</div>
+	</md-content>
+</div>

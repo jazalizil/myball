@@ -1,41 +1,68 @@
+.md-toolbar-tools {
+	padding: 0;
+	padding-left: 16px;
+}
+
 #wb-navbar {
-	@media screen and (min-width: @tablet-width-min) {
-		height: 50px;
-		min-height: 50px;
-		max-height: 50px;
-	}
 	.action-button {
 		border: 1px solid @grey;
 		border-radius: 7%;
 	}
 
-	#wb-toolbar-tools {
-		height: 50px;
-		min-height: 50px;
-		max-height: 50px;
+	#account-button-container {
+		height: 100%;
+		
+		.md-button.dropdown {
+			overflow: visible; /*reset*/
 
-		#wb-home-button {
-			height: 50px;
-			margin-left: -16px;
+			md-icon {
+				margin-right: 10px;
+			}
 
-			a {
-				line-height: 42px;
-
-				svg {
-					height: 38px;
-				}
+			#account-name {
+				font-size: 1.2em;
+				/*float: right;*/
+				margin-right: 25px;
+				color: white;
+			}
+			.expand-more-icon {
+				position: absolute;
+				top: 50%;
+				margin-top: -0.5em;
+				right: 0;
 			}
 		}
 
-		#wb-signin-button,
-		#wb-signup-button {
-			min-height: 25px;
-			height: 25px;
-			line-height: 25px;
+		.dropdown .dropdown-menu {
+			width: inherit;
+			max-width: 0;
+			position: absolute;
+			left: 40px;
+			top: 100%;
+			margin: 0;
+			padding: 0;
+			opacity: 0;
+			overflow: hidden;
+			background-color: #fff;
+			list-style: none;
+			transition: min-width 0.2s ease-in-out, left 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		}
 
-		#wb-signup-button {
+		.dropdown .dropdown-menu .md-button {
+			min-width: 100%;
+			border-radius: 0;
+			margin: 0;
+			padding: 6px 16px;
 
+			span {
+				color: black;
+			}
+		}
+
+		.dropdown.active .dropdown-menu {
+			max-width: 300px; /* set a maxwidth bigger than the widest element */
+			left: 0;
+			opacity: 1;
 		}
 	}
 }

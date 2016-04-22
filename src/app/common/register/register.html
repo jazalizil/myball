@@ -1,48 +1,123 @@
+<div class="blurred-background"></div>
+<div class="black-filter"></div>
 <div id="register">
-  <wb-navbar opaq="true"></wb-navbar>
-  <md-content class="scroll-content" layout-fill layout layout-align="center center">
-    <div layout="column" layout-fill layout-align="center start">
-      <div layout="row" layout-padding class="full-width">
-        <span flex="5"></span>
-        <div flex="20" layout>
-          <span layout layout-align="center center">
-            <hr class="full-width">
-          </span>
-        </div>
-        <span flex="50" layout="column">
-          <h2 class="uppercase dark-grey" layout layout-align="center center" translate>Inscription</h2>
-          <div ng-show="!register.data.form">
-            <p class="justify-text no-margin" translate>
-              En vous inscrivant sur weBall en tant que joueur, vous aurez la possibilité de trouver un terrain et
-              des coéquipiers ou adversaires afin d'organiser un match dans le terrain de votre choix.
-            </p>
-            <p class="justify-text no-margin margin-t-3x" translate>
-              En tant que manager, l'application web myBall vous permettra de gérer au mieux vos réservations et vos
-              paiements à travers un site ergonomique et intuitif.
-            </p>
-          </div>
-          <div ng-hide="register.data.form" layout="column">
-            <md-button class="md-raised md-primary margin-t-3x" ng-click="register.showForm('USER')" layout layout-align="center center">
-              <span translate>Je suis un joueur</span>
-            </md-button>
-            <md-button class="md-raised md-accent" ng-click="register.showForm('MANAGER')" layout layout-align="center center">
-              <span translate>Je suis gérant d'un five</span>
-            </md-button>
-          </div>
-        </span>
-        <span flex="20" layout>
-          <span layout layout-align="center center">
-            <hr class="full-width">
-          </span>
-        </span>
-        <span flex="5"></span>
-      </div>
-      <div layout="column" layout-fill layout-align="start start" ng-show="register.data.form">
-        <div layout="row" class="full-width">
-          <span flex="25"></span>
-          <div layout-fill flex="50" ng-show="register.data.form == 'MANAGER'" ng-include="'app/common/register/register-manager.tpl.html'"></div>
-        </div>
-      </div>
-    </div>
-  </md-content>
+	<wb-navbar opaq="true"></wb-navbar>
+
+	<div layout="column" layout-fill id="register-content">
+		<div id="register-subheader" layout="row" layout-align="center center">
+			<div flex="30" layout layout-align="center center">
+				<hr class="full-width">
+			</div>
+			<div layout="column" layout-align="center center" class="title-container" flex="30">
+				<h2 class="uppercase" layout layout-align="center center" translate>Inscription</h2>
+				<span>En s’inscrivant sur weBall, l’application vous permet de trouver un terrain, des joueurs et organiser un match.</span>
+			</div>
+			<div flex="30" layout layout-align="center center">
+				<hr class="full-width">
+			</div>
+		</div>
+
+		<div id="register-picture" layout-align="center center" layout="column">
+			<span>Ajoutez une photo</span>
+			<img src="../assets/icons/add-photo.png"/>
+		</div>
+
+		<div id="register-form" layout layout-align="center center">
+			<form layout="column" layout-align="center center" flex="30">
+				<div layout="row" layout-fill class="form-row">
+					<md-input-container flex="50" class="md-icon-float md-block">
+						<label translate>Prénom</label>
+						<md-icon md-svg-src="assets/icons/user.svg"></md-icon>
+						<input required name="firstName" ng-model="register.user.firstName" type="text">
+					</md-input-container>
+					<md-input-container flex="50" class="margin-l-3x md-float md-block">
+						<label translate>Nom</label>
+						<input required name="lastName" ng-model="register.user.lastName" type="text">
+					</md-input-container>
+				</div>
+				<div layout="row" layout-fill class="form-row">
+					<md-input-container flex class="md-icon-float md-block">
+						<label translate>Email</label>
+						<md-icon class="grey" md-svg-src="assets/icons/email.svg"></md-icon>
+						<input type="email" required ng-model="register.user.email" name="email">
+					</md-input-container>
+				</div>
+				<div layout="row" layout-fill class="form-row">
+					<md-input-container flex class="md-icon-float md-block">
+						<label translate>Mot de passe</label>
+						<md-icon class="grey" md-svg-src="assets/icons/password.svg"></md-icon>
+						<input type="password" required ng-model="register.user.password" name="password">
+					</md-input-container>
+				</div>
+				<div layout="row" layout-fill class="form-row">
+					<md-input-container flex class="md-icon-float md-block">
+						<label translate>Répétez le mot de passe</label>
+						<md-icon class="grey" md-svg-src="assets/icons/password.svg"></md-icon>
+						<input type="password" required ng-model="register.user.passwordConf" name="passwordConf">
+					</md-input-container>
+				</div>
+				<span flex="30" id="register-cgu">
+					En créant un compte, vous acceptez les
+					<a href="javascript:void(0)" ng-click="register.goState('cgu')">Conditions Générales d’Utilisation</a>
+					et la
+					<a href="javascript:void(0)" ng-click="register.goState('confidentiality')">Politique de confidentialité</a>
+					de weBall.
+				</span>
+				<md-button layout-fill class="md-raised md-primary" ng-click="register.user.submit()" v-busy="register.data.isLoading">
+					<span translate>S'inscrire</span>
+				</md-button>
+			</form>
+		</div>
+	</div>
+	<!--<md-content class="scroll-content" layout-fill layout>
+		<div layout="column" layout-fill>
+			<div layout="row" layout-padding class="full-width" id="inscription-container">
+				<span flex="5"></span>
+				<div flex="20" layout>
+					<span layout layout-align="center center">
+						<hr class="full-width">
+					</span>
+				</div>
+				<div flex="50" layout class="title-container">
+					<h2 class="uppercase dark-grey" flex layout layout-align="center center" translate>Inscription</h2>
+				</div>
+				<span flex="20" layout>
+					<span layout layout-align="center center">
+						<hr class="full-width">
+					</span>
+				</span>
+				<span flex="5"></span>
+			</div>
+			<div layout="row" layout-fill layout-padding class="full-width" ng-hide="register.data.form">
+				<span flex="25"></span>
+				<div flex="50" layout="column" layout-align="center center">
+					<div layout="column">
+						<p class="justify-text no-margin" translate>
+							En vous inscrivant sur weBall en tant que joueur, vous aurez la possibilité de trouver un terrain et
+							des coéquipiers ou adversaires afin d'organiser un match dans le terrain de votre choix.
+						</p>
+						<p class="justify-text no-margin margin-t-3x" translate>
+							En tant que manager, l'application web myBall vous permettra de gérer au mieux vos réservations et vos
+							paiements à travers un site ergonomique et intuitif.
+						</p>
+					</div>
+					<div layout="column" class="full-width" id="show-form-container">
+						<md-button class="md-raised md-primary margin-t-3x" ng-click="register.showForm('USER')" layout layout-align="center center">
+							<span translate>Je suis un joueur</span>
+						</md-button>
+						<md-button class="md-raised md-accent" ng-click="register.showForm('MANAGER')" layout layout-align="center center">
+							<span translate>Je suis gérant d'un five</span>
+						</md-button>
+					</div>
+				</div>
+				<span flex="25"></span>
+			</div>
+			<div layout="column" layout-fill layout-align="start start" ng-show="register.data.form">
+				<div layout="row" layout-fill layout-align="center center" class="full-width">
+					<div flex="50" ng-show="register.data.form == 'MANAGER'" ng-include="'app/common/register/register-manager.tpl.html'"></div>
+					<div flex="50" ng-show="register.data.form == 'USER'" ng-include="'app/common/register/register-user.tpl.html'"></div>
+				</div>
+			</div>
+		</div>
+	</md-content>-->
 </div>

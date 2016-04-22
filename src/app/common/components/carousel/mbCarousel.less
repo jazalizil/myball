@@ -1,5 +1,6 @@
 #mb-carousel {
   .background {
+    height: 50vh;
     overflow: hidden;
     .absolute;
     z-index: 0;
@@ -9,94 +10,23 @@
       opacity: 0.2;
     }
   }
-  @media screen and (max-width: @phone-width-max) {
-    .background {
-      height: 27vh;
-    }
-    .titles {
-      height: 27vh;
-      p {
-        line-height: 2px;
-      }
-      .main {
-        font-size: 0.8em;
-        line-height: 16px;
-      }
-      .sub {
-        margin-top: @padding-3x;
-        font-size: 0.3em;
-        line-height: 5px;
-      }
-    }
-    .circle:first-child {
-      left: -4vw;
-    }
-    .counters {
-      top: calc(24vh);
-    }
-  }
-  @media screen and (max-width: @tablet-width-max) and (min-width: @tablet-width-min) {
-    .background {
-      height: 50vh;
-    }
-    .titles {
-      height: 50vh;
-      p {
-        line-height: 15px;
-      }
-      .main {
-        font-size: 1.2em;
-        line-height: 18px;
-      }
-      .sub {
-        margin-top: @padding;
-        font-size: 0.7em;
-        line-height: 1px;
-      }
-    }
-    .counters {
-      top: calc(45vh);
-    }
-    .circle:first-child {
-      left: -2vw;
-    }
-  }
-  @media screen and (min-width: @desktop-width-min) {
-    .background {
-      height: 50vh;
-    }
-    .titles {
-      height: 50vh;
-      p {
-        line-height: 15px;
-      }
-      .main {
-        font-size: 1.8em;
-        line-height: 23px;
-      }
-      .sub {
-        margin-top: @padding-3x;
-        font-size: 1em;
-        line-height: 5px;
-      }
-    }
-    .circle:first-child {
-      left: -1vw;
-    }
-    .counters {
-      top: calc(45vh);
-    }
-  }
+
   .titles {
     .absolute;
     width: 100vw;
+    height: 50vh;
     top: 10vh;
     color: @grey;
     .main {
+      font-size: 1.8em;
       font-weight: 500;
+      line-height: 23px;
     }
     .sub {
+      margin-top: @padding-3x;
       font-weight: 300;
+      font-size: 1em;
+      line-height: 5px;
     }
     text-align: center;
   }
@@ -105,6 +35,11 @@
     .absolute;
     z-index: 2;
     left: calc(50vw);
+    top: calc(50vh - 5px);
+  }
+
+  .circle:first-child {
+    left: -1vw;
   }
 
   .circle {

@@ -32,17 +32,12 @@
     <div class="week-ctn" ng-class="{'vr' : !$last}" layout layout-padding ng-repeat="week in calendar.data.nbWeeks">
       <div layout="column" ng-repeat="dayToDisplay in calendar.data.daysToDisplay | startFrom: 7 * week | limitTo: 7">
         <div layout="row">{{dayToDisplay.text}}</div>
-        <div layout="row">
-
-        </div>
-        <div layout="row" layout-align="center">
-          <span ng-repeat="match in day.matchs" ng-class="'circle-sm ' + calendar.data.statusColors[match.status]"></span>
-        </div>
+        <div layout="row" layout-align="center" class="circle-sm dark-grey"></div>
         <span class="day"
               ng-click="calendar.selectDay(dayToDisplay.date)"
               ng-class="dayToDisplay.date === calendar.data.realDate.day &&
               calendar.data.currentMonth === calendar.data.realDate.month &&
-              calendar.data.currentYear === calendar.data.realDate.year ? 'white bg-green' : 'dark-grey'"
+              calendar.data.currentYear === calendar.data.realDate.year ? 'white bg-green' : 'grey'"
               layout="row" layout-align="center center">
           {{dayToDisplay.date}}
         </span>

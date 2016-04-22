@@ -21,7 +21,10 @@
     "ng-file-upload": "~10.1.9",
     "angular-gettext": "~2.1.2",
     "angular-resizable": "~1.2.0",
-    "angular-un-svg": "~1.0.4"
+    "angular-un-svg": "~1.0.4",
+    "angular-chart.js": "^0.9.0",
+    "ngPercentDisplay": "*",
+    "ngmap": "^1.17.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"
