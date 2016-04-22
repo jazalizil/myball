@@ -3,7 +3,7 @@
 	angular.module('myBall').controller('FiveController', FiveController);
 
 	/** @ngInject */
-	function FiveController($log, UserService, $scope, $mdDialog, $mdMedia) {
+	function FiveController(UserService, $scope, $mdDialog) {
 		var vm = this;
 
 		vm.selectedSite = null;
@@ -28,7 +28,6 @@
 		}
 
 		function showSites(evt, index) {
-			console.log('show:' + index);
 			vm.selectedSite = vm.markers[index];
 			$scope.showInfoWindow.apply(vm, [evt, 'bar-info-window']);
 		}
@@ -36,13 +35,13 @@
 		function showInformations(ev, title) {
 			$mdDialog.show(
 					$mdDialog.alert()
-							.parent(angular.element(document.querySelector('#popupContainer')))
+							/*.parent(angular.element(document.querySelector('#popupContainer')))*/
 							.clickOutsideToClose(true)
 							.title(title)
 							.textContent('Five proche de chez vous')
+							/*.targetEvent(ev)*/
 							.ariaLabel('Five description')
-							.ok('Got it!')
-							.targetEvent(ev)
+							.ok('OK')
 			);
 		}
 	}

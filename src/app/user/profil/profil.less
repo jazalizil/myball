@@ -5,73 +5,111 @@
 	left: 0;
 	top: 0;
 	z-index: 9999;
+	background: none;
 
-	#player-subheader {
-		color: white;
-		background-color: rgba(0, 0, 0, 0.2);
+	md-content {
+		background: none;
 
-		.subheader-content {
-			padding-top: 50px;
-			padding-bottom: 50px;
+		#player-subheader {
+			color: white;
+			height: 350px;
+			position: relative;
+			margin-bottom: 20px;
 
-			md-icon {
-				z-index: 9999;
-				font-size: 200px;
-				margin: 0;
-				color: white;
-			}
+			.subheader-content {
 
-			div {
-				width: 25%;
-				z-index: 9999;
+				md-icon {
+					font-size: 150px;
+					margin: 0;
+					color: white;
+				}
 
 				span {
-					font-size: 2em;
+					font-size: 1.5em;
+				}
+			}
+
+			.subheader-informations {
+				width: 100%;
+				position: absolute;
+				bottom: 0;
+
+				span {
+					font-size: 1.5em;
+				}
+				.matches {
+					margin-right: 20px;
+				}
+				.teammates {
+
 				}
 			}
 		}
 
-		md-tabs {
-
-			md-tab-item {
-				color: grey;
-				padding: 2px 15px 2px 15px;
-
-				h3 {
-					margin: 0;
-				}
-			}
-		}
-
-		md-ink-bar {
-			background: #2CD71B;
-			margin-bottom: 5px;
-		}
-	}
-
-	#player-profil {
-		width: 100%;
-
-		#player-resume {
+		#player-profil {
 			width: 100%;
 
-			#resume-history {
-				text-align: center;
-				color: white;
+			#player-resume {
+				width: 100%;
 
-				.resume-chart-container {
-					padding-top: 50px;
-					padding-bottom: 50px;
+				#resume-history {
+					color: white;
+					background-color: rgba(0, 0, 0, 0.2);
+					margin-bottom: 50px;
+					text-align: center;
 
-					.chart-container {
-						margin: auto;
+				}
+
+				#resume-incoming {
+					text-align: center;
+					color: white;
+					background-color: rgba(0, 0, 0, 0.2);
+					margin-bottom: 50px;
+
+					.incoming-container {
+						padding-bottom: 20px;
+
+						.incoming-match {
+							width: 150px;
+							margin: auto;
+							margin-bottom: 10px;
+						}
+						.incoming-match:after {
+							content: "";
+							display: block;
+							width: 100%;
+							height:0;
+							padding-bottom: 100%;
+							background: #000000;
+							-moz-border-radius: 50%;
+							-webkit-border-radius: 50%;
+							border-radius: 50%;
+						}
+						.incoming-match div {
+							float:left;
+							width:100%;
+							padding-top:50%;
+							line-height:1em;
+							margin-top:-0.5em;
+							text-align:center;
+							color:white;
+							font-size: 1.5em;
+						}
 					}
-					.chart-container:nth-child(1) {
-						margin-bottom: 0;
+				}
+
+				.no-matches {
+					font-size: 2em;
+					text-align: center;
+					color: white;
+					background-color: rgba(0, 0, 0, 0.2);
+					margin-bottom: 50px;
+
+					h2 {
+						margin: 50px 0 50px 0;
+
 					}
-					.chart-container:nth-child(3) {
-						margin-bottom: 0;
-					}
+
 				}
 			}
 		}

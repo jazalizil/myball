@@ -1,8 +1,8 @@
 <div class="blurred-background"></div>
 <div class="black-filter"></div>
-<div id="parameters">
+<md-content id="parameters">
 	<wb-navbar opaq="true"></wb-navbar>
-	<md-content class="scroll-content" layout-fill>
+	<md-content layout-fill>
 		<div id="player-subheader" layout-align="center center" layout="column">
 			<div class="subheader-content" layout layout-align="center center">
 				<div layout="column" layout-align="center center">
@@ -42,7 +42,7 @@
 					<div layout="row" layout-fill layout-align="center center">
 						<md-input-container class="md-block">
 							<label>Date de naissance</label>
-							<input ng-model="parameters.user.birthday">
+							<input type="text" datetime="dd-MM-yyyy" ng-model="parameters.user.date">
 						</md-input-container>
 					</div>
 					<div layout="row" layout-fill layout-align="center center">
@@ -72,4 +72,5 @@
 			</md-tab-body>
 		</div>
 	</md-content>
-</div>
+</md-content>
+</md-content>

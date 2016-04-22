@@ -16,12 +16,13 @@
 		vm.data = {
 			isLoading: false
 		};
-/*		vm.manager = {
-			submit: managerSubmit
-		};*/
 		vm.user = {
 			submit: userSubmit
 		};
+		/*vm.manager = {
+		 submit: managerSubmit
+		 };*/
+		vm.captchaKey = "6Lfj-B0TAAAAAIh_LnMnm8aJxml4U1oVjS9ihrVc";
 
 		function goState(state) {
 			$state.go(state);
@@ -44,7 +45,10 @@
 				vm.error = "Mising fields";
 			} else if (vm.user.password !== vm.user.passwordConf) {
 				vm.error = "Passwords doesn't match";
+			} else if (!vm.validation) {
+				vm.error = "Captcha not validated";
 			} else {
+				vm.error = "";
 				var data = {
 					'user': {
 						fullName: vm.user.firstName + ' ' + vm.user.lastName,

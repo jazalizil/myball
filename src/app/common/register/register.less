@@ -5,63 +5,78 @@
 	left: 0;
 	top: 0;
 	z-index: 9999;
+	background: none;
 
-	#register-content {
-		padding-top: 40px;
-		color: white;
+	md-content {
+		background: none;
 
-		#register-subheader {
+		#register-content {
+			padding-top: 40px;
+			color: white;
 
-			.title-container {
-				margin: 0 15px 0 15px;
+			#register-subheader {
+				height: 100%;
 
-				h2 {
-					margin: 0;
-					font-size: 1.5em;
-				}
-				span {
-					text-align: center;
-					font-size: 0.8em;
-				}
-			}
-		}
+				.title-container {
+					margin: 0 15px 0 15px;
 
-		#register-picture {
-			margin: 40px 0 40px 0;
-
-			span {
-				font-size: 0.8em;
-				margin-bottom: 10px;
-			}
-			img {
-				width: 150px;
-				height: 150px;
-			}
-		}
-
-		#register-form {
-
-			#register-cgu {
-				text-align: center;
-				margin: 40px 0 40px 0;
-				font-size: 0.8em;
-				color: grey;
-				
-				a {
-					color: white;
-				}
-			}
-			form {
-
-				.form-row {
-					margin-bottom: 10px;
-
-					md-input-container {
+					h2 {
 						margin: 0;
+						font-size: 1.5em;
+					}
+					span {
+						text-align: center;
+						font-size: 0.8em;
+					}
+				}
+			}
 
-						input {
-							color: white;
+			#register-picture {
+				height: 100%;
+				margin: 40px 0 40px 0;
+
+				span {
+					font-size: 0.8em;
+					margin-bottom: 10px;
+				}
+				img {
+					width: 150px;
+					height: 150px;
+				}
+			}
+
+			#register-form {
+
+				#register-cgu {
+					text-align: center;
+					margin: 40px 0 40px 0;
+					font-size: 0.8em;
+					color: grey;
+
+					a {
+						color: white;
+					}
+				}
+				form {
+
+					.form-row {
+						margin-bottom: 10px;
+
+						md-input-container {
+							margin: 0;
+
+							input {
+								color: white;
+							}
 						}
+					}
+
+					.form-error {
+						color: red;
+					}
+
+					button {
+						margin: 40px 0 40px 0;
 					}
 				}
 			}

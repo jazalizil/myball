@@ -19,6 +19,7 @@
 				'wyvernzora.un-svg',
 				'chart.js',
 				'ngPercentDisplay',
-				'ngMap'
+				'ngMap',
+				'vcRecaptcha'
 			]);
 })();

@@ -3,7 +3,7 @@
 	angular.module('myBall').controller('ParametersController', ParametersController);
 
 	/** @ngInject */
-	function ParametersController($log, UserService, toastr, gettextCatalog) {
+	function ParametersController($log, UserService, toastr, gettextCatalog, $scope) {
 		var vm = this;
 
 		vm.error = null;
@@ -14,11 +14,16 @@
 		vm.submit = submit;
 		initiate();
 
+		$scope.$on('user-updated', function() {
+			vm.me = UserService.getIdentity();
+		});
+
 		function initiate() {
 			var Identity = UserService.getIdentity();
 
 			vm.me = Identity;
 			vm.user = JSON.parse(JSON.stringify(Identity));
+			console.log(vm.user);
 			var parsedFullName = Identity.fullName.split(" ");
 			vm.user.firstName = parsedFullName[0];
 			vm.user.lastName = parsedFullName[1];
@@ -37,6 +42,7 @@
 				vm.error = 'Please fill all required fields';
 			} else {
 				vm.isLoading = true;
+				vm.error = "";
 				var data = {
 					'user': {
 						fullName: vm.user.firstName + ' ' + vm.user.lastName,

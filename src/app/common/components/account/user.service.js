@@ -3,7 +3,7 @@
 	angular.module('myBall').factory('UserService', UserService);
 
 	/** @ngInject */
-	function UserService($q, Restangular, $cookies, localStorageService) {
+	function UserService($q, Restangular, $cookies, localStorageService, $rootScope) {
 		var _authenticated, _identity, _token;
 		_identity = localStorageService.get('identity') || void 0;
 		_authenticated = false;
@@ -83,6 +83,15 @@
 				var deferred;
 				deferred = $q.defer();
 				Restangular.one('/' + type + '/me').patch(user).then(function(user) {
+					Restangular.one('users', 'me').get().then(function(user) {
+						_identity = user;
+						_identity.roles = [user.roles];
+						localStorageService.set('identity', _identity);
+						_authenticated = true;
+						$rootScope.$broadcast('user-updated');
+					}, function(err) {
+						deferred.reject(err);
+					});
 					deferred.resolve(user);
 				}, function(err) {
 					return deferred.reject(err);

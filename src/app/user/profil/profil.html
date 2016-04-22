@@ -1,58 +1,72 @@
 <div class="blurred-background"></div>
 <div class="black-filter"></div>
-<div id="profil">
+<!--<div id="profil">-->
+<md-content id="profil">
 	<wb-navbar opaq="true"></wb-navbar>
-	<div id="player-subheader">
-		<div class="subheader-content" layout layout-fill layout-align="center center">
-			<div layout="column" layout-align="center center">
+	<md-content flex>
+		<div id="player-subheader" layout="column" layout-align="center center">
+			<div class="subheader-content" layout="column" layout-align="center center">
 				<md-icon md-font-set="material-icons">account_circle</md-icon>
-				<span>{{ profil.me.fullName }}</span>
+				<span>{{ profil.me.fullName }}<span ng-show="profil.me.age">, {{ profil.me.age }}</span></span>
+				<span>{{ profil.me.city }}</span>
+			</div>
+			<div class="subheader-informations" layout="row" layout-align="center center">
+				<span flex="25"></span>
+				<div flex="10" layout="column" layout-align="center center" class="matches">
+					<span>Matches</span>
+					<span>50</span>
+				</div>
+				<div flex="30"></div>
+				<div flex="10" layout="column" layout-align="center center" class="teammates">
+					<span>Teammates</span>
+					<span>84</span>
+				</div>
+				<span flex="25"></span>
 			</div>
 		</div>
-	</div>
-	<div id="player-profil" layout>
-		<md-tab-body id="player-resume" ng-Show="profil.isSelected('resume')">
-			<div id="resume-history">
-				<div flex layout>
-					<span flex="10"></span>
-					<div flex="20" layout>
-							<span layout layout-align="center center">
-								<hr class="full-width">
-							</span>
-					</div>
-					<div flex="40">
-						<h2>{{ profil.me.nMatches.total }} Matchs Joués</h2>
-					</div>
-					<div flex="20" layout>
-							<span layout layout-align="center center">
-								<hr class="full-width">
-							</span>
-					</div>
-					<span flex="10"></span>
-				</div>
-				<div flex layout layout-align="center center" class="resume-chart-container">
-					<div layout>
-						<div class="chart-container">
-							<percent-display percent="22" side="150" colors="#EEEEEE #FCAB53"></percent-display>
-							<h3>{{ profil.me.nMatches.loose }} Nul</h3>
-						</div>
-
-						<div class="chart-container">
+		<div id="player-profil">
+			<md-tab-body id="player-resume" ng-Show="profil.isSelected('resume')">
+				<div id="resume-history" layout="column">
+					<h2>Matchs joués</h2>
+					<div layout="row" layout-align="center center">
+						<div flex="20" layout-align="center center" layout="column" class="chart-container">
 							<percent-display percent="58" side="150" colors="#EEEEEE #50D253"></percent-display>
-							<h3>{{ profil.me.nMatches.win }} Gagnés</h3>
+							<h3>Victoires</h3>
 						</div>
-
-						<div class="chart-container">
+						<div flex="20" layout-align="center center" layout="column" class="chart-container">
+							<percent-display percent="22" side="150" colors="#EEEEEE #FCAB53"></percent-display>
+							<h3>Nuls</h3>
+						</div>
+						<div flex="20" layout-align="center center" layout="column" class="chart-container">
 							<percent-display percent="12" side="150" colors="#EEEEEE #FF0058"></percent-display>
-							<h3>{{ profil.me.nMatches.nul }} Perdus</h3>
+							<h3>Défaites</h3>
 						</div>
 					</div>
 				</div>
-			</div>
-		</md-tab-body>
 
-		<md-tab-body id="player-trophes" ng-Show="profil.isSelected('trophes')">
-			Body for md-tab 2
-		</md-tab-body>
-	</div>
-</div>
+				<div id="resume-incoming" layout="column" ng-show="profil.incomingMatches">
+					<h2>Prochain matchs</h2>
+					<div layout="row" layout-align="center center" class="incoming-container">
+						<span flex="20"></span>
+						<div layout="column" flex ng-repeat="value in profil.incomingMatches">
+							<div class="incoming-match">
+								<div>{{ value.five.name }}</div>
+							</div>
+							<span>{{ value.startDate | date : 'dd MMM yyyy' }}</span>
+						</div>
+						<span flex="20"></span>
+					</div>
+				</div>
+
+				<div layout="row" ng-show="!profil.incomingMatches" class="no-matches" layout-align="center center">
+					<h2>Pas de matchs à venir</h2>
+				</div>
+			</md-tab-body>
+
+			<md-tab-body id="player-trophes" ng-Show="profil.isSelected('trophes')">
+				Body for md-tab 2
+			</md-tab-body>
+		</div>
+	</md-content>
+</md-content>
+<!--</div>-->
