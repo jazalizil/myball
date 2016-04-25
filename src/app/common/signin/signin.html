@@ -1,43 +1,32 @@
 <div id="signin">
   <mb-navbar opaq></mb-navbar>
-  <md-content class="full-height bg-black" layout-fill layout layout-align="center start">
-    <div layout="column" layout-align="center start">
-      <div layout="row" layout-padding class="full-width">
-        <span flex="5"></span>
-        <div flex="20" layout>
-          <span layout layout-align="center center">
-            <hr class="full-width">
-          </span>
+  <div class="fixed bg">
+    <img class="full-width" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
+  </div>
+  <md-content class="full-height bg-black-transparent" layout-fill layout layout-align="center start">
+    <div layout="row" layout-padding class="full-width fit-height">
+      <div class="fit-width" layout="column" layout-align="center center">
+        <h2 class="uppercase white" layout layout-align="center center" translate>
+          Connexion
+        </h2>
+        <div layout="row" layout-align="center center" class="margin-top-5x">
+          <form layout="column" ng-submit="signin.login()">
+            <md-input-container flex class="md-icon-float md-block grey">
+              <label>{{signin.datas.placeholders.email}}</label>
+              <md-icon class="grey" md-font-set="material-icons">email</md-icon>
+              <input required name="email" ng-model="signin.datas.login" type="email">
+            </md-input-container>
+            <md-input-container flex class="md-icon-float md-block white">
+              <label>{{signin.datas.placeholders.password}}</label>
+              <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
+              <input required name="password" ng-model="signin.datas.password" type="password">
+            </md-input-container>
+            <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134" v-busy="signin.datas.isLoading">
+              <span translate>Se connecter</span>
+            </md-button>
+          </form>
         </div>
-        <div flex="50" layout="column">
-          <h2 class="uppercase dark-grey" layout layout-align="center center" translate>Connexion</h2>
-          <div layout="row" layout-align="center center" class="margin-top-5x">
-            <form layout="column" ng-submit="signin.login()">
-              <md-input-container flex class="md-icon-float md-block">
-                <label>{{signin.datas.placeholders.email}}</label>
-                <md-icon class="grey" md-font-set="material-icons">email</md-icon>
-                <input required name="email" ng-model="signin.datas.login" type="email">
-              </md-input-container>
-              <md-input-container flex class="md-icon-float md-block">
-                <label>{{signin.datas.placeholders.password}}</label>
-                <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
-                <input required name="password" ng-model="signin.datas.password" type="password">
-              </md-input-container>
-              <md-button class="md-raised md-primary" v-busy="signin.datas.isLoading">
-                <span translate>Se connecter</span>
-              </md-button>
-              <input type="submit" class="hidden">
-            </form>
-          </div>
-        </div>
-        <div flex="20" layout>
-          <span layout layout-align="center center">
-            <hr class="full-width">
-          </span>
-        </div>
-        <span flex="5"></span>
       </div>
     </div>
-
   </md-content>
 </div>

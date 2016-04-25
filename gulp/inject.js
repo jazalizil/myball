@@ -15,21 +15,30 @@ gulp.task('inject', ['scripts', 'styles'], function () {
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
   ], { read: false });
 
+  var injectVendors = gulp.src([path.join(conf.paths.src, '/lib/**/*.js')], {read: false});
+
   var injectScripts = gulp.src([
     path.join(conf.paths.src, '/app/**/*.module.js'),
-    path.join(conf.paths.src, '/{app,lib}/**/*.js'),
+    path.join(conf.paths.src, '/app/**/*.js'),
     path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
     path.join('!' + conf.paths.src, '/app/**/*.mock.js')
   ])
-  .pipe($.angularFilesort()).on('error', conf.errorHandler('AngularFilesort'));
+    .pipe($.angularFilesort()).on('error', conf.errorHandler('AngularFilesort'));
 
   var injectOptions = {
     ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
     addRootSlash: false
   };
 
+  var vendorOptions= {
+    starttag: '<!-- inject:vendor -->',
+    ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
+    addRootSlash: false
+  };
+
   return gulp.src(path.join(conf.paths.src, '/*.html'))
     .pipe($.inject(injectStyles, injectOptions))
+    .pipe($.inject(injectVendors, vendorOptions))
     .pipe($.inject(injectScripts, injectOptions))
     .pipe(wiredep(_.extend({}, conf.wiredep)))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));

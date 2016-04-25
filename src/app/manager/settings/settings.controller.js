@@ -7,10 +7,10 @@
   angular.module('myBall')
     .controller('SettingsController', SettingsController);
   /** @ngInject */
-  function SettingsController(UserService, gettextCatalog, $log, $document) {
+  function SettingsController(UserService, gettextCatalog, $document, $log, _, AmazoneS3) {
     var vm = this;
     vm.data = {
-      identity: angular.copy(UserService.getIdentity()),
+      identity: UserService.getIdentity(),
       labels: {
         manager: gettextCatalog.getString('Manager'),
         five: gettextCatalog.getString('Five'),
@@ -23,10 +23,10 @@
         fieldName: gettextCatalog.getString('Field name'),
         available: gettextCatalog.getString('Available')
       },
+      photo: {},
       fieldIndex: 0
     };
 
-    vm.data.welcomeSentence = gettextCatalog.getString('Hello') + ' ' + vm.data.identity.manager.firstName;
     vm.editCity = function() {
       var cityEl = angular.element($document[0].getElementById('city'));
       cityEl.focus();
@@ -40,6 +40,27 @@
       if (vm.data.fieldIndex !== vm.data.identity.five.fields.length - 1) {
         vm.data.fieldIndex += 1;
       }
-    }
+    };
+    vm.upload = function() {
+      vm.data.isLoading = true;
+      uploadPhoto();
+    };
+
+    var uploadPhoto = function () {
+      var ext = vm.data.photo.name.split('.').pop();
+      vm.data.photo.name = vm.data.identity.five._id + '.' + ext;
+      AmazoneS3.upload(vm.data.photo, 'images/fives/').then(function(res){
+        vm.data.isLoading = false;
+        $log.debug(res);
+      }, function(){
+        vm.data.isLoading = false;
+      })
+    };
+    var init = function () {
+      vm.data.photo.src = vm.data.identity.five.photo;
+      vm.data.welcomeSentence = gettextCatalog.getString('Hello') + ' ' + vm.data.identity.manager.firstName;
+      vm.data.newIdentity = _.cloneDeep(vm.data.identity);
+    };
+    init();
   }
 })();

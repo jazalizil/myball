@@ -5,24 +5,39 @@
       "WEBALL_API_BASE_URL": "http://localhost:8080/",
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
+      "AMAZONE_S3_API_ACCESS_KEY": "AKIAIMSOGGGIT24IEX2Q",
+      "AMAZONE_S3_API_SECRET_KEY": "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",
+      "AMAZONE_S3_API_BASE_URL": "https://weball-bucket.s3-ap-southeast-1.amazonaws.com",
+      "AMAZONE_S3_BUCKET": "weball-bucket/media/",
+      "AMAZONE_S3_REGION": "ap-southeast-1",
       "CDN_BASE_URL": "https://d153u8w1ikjxem.cloudfront.net/"
     }
   },
   "staging": {
     "Conf": {
       "DEBUG": true,
-      "WEBALL_API_BASE_URL": "http://api.weball.fr/",
+      "WEBALL_API_BASE_URL": "https://api.weball.fr/",
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
+      "AMAZONE_S3_API_ACCESS_KEY": "AKIAIMSOGGGIT24IEX2Q",
+      "AMAZONE_S3_API_SECRET_KEY": "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",
+      "AMAZONE_S3_API_BASE_URL": "https://weball-bucket.s3-ap-southeast-1.amazonaws.com",
+      "AMAZONE_S3_BUCKET": "weball-bucket/media/",
+      "AMAZONE_S3_REGION": "ap-southeast-1",
       "CDN_BASE_URL": "https://d153u8w1ikjxem.cloudfront.net/"
     }
   },
   "prod": {
     "Conf": {
       "DEBUG": false,
-      "WEBALL_API_BASE_URL": "http://api.weball.fr/",
+      "WEBALL_API_BASE_URL": "https://api.weball.fr/",
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
+      "AMAZONE_S3_API_ACCESS_KEY": "AKIAIMSOGGGIT24IEX2Q",
+      "AMAZONE_S3_API_SECRET_KEY": "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",
+      "AMAZONE_S3_API_BASE_URL": "https://weball-bucket.s3-ap-southeast-1.amazonaws.com",
+      "AMAZONE_S3_BUCKET": "weball-bucket/media/",
+      "AMAZONE_S3_REGION": "ap-southeast-1",
       "CDN_BASE_URL": "https://d153u8w1ikjxem.cloudfront.net/"
     }
   }

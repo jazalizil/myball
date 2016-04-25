@@ -3,14 +3,15 @@
   angular.module('myBall').controller('SigninController', SigninController);
 
   /** @ngInject */
-  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog) {
+  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog, Conf) {
     var vm = this;
     vm.datas = {
       isLoading: false,
       placeholders: {
         email: gettextCatalog.getString("Addresse email"),
         password: gettextCatalog.getString("Mot de passe")
-      }
+      },
+      bgUrl: Conf.CDN_BASE_URL + 'images/field-factory.jpg'
     };
     vm.login = function() {
       vm.datas.isLoading = true;

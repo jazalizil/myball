@@ -6,7 +6,8 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, $rootScope, AuthorizationService, UserService, $state, $stateParams, Restangular, gettextCatalog) {
+  function runBlock($log, $rootScope, AuthorizationService, UserService, $state, $stateParams, Restangular,
+                    gettextCatalog, Conf) {
     var deregistrationCallbacks = {};
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
@@ -15,7 +16,7 @@
       var curHeaders, token;
       curHeaders = head;
       token = UserService.getToken();
-      if (token != null) {
+      if (token !== void 0 && url.startsWith(Conf.WEBALL_API_BASE_URL)) {
         curHeaders['x-access-token'] = token;
       }
       return {

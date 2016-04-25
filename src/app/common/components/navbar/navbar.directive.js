@@ -15,7 +15,7 @@
           },
           {
             text: gettextCatalog.getString('Matchs'),
-            url: 'matchs'
+            url: 'matches'
           },
           {
             text: gettextCatalog.getString('Statistiques'),

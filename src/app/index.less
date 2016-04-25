@@ -16,7 +16,7 @@
 @dark-grey: #333;
 @dark-blue: #2c3e50;
 @red: #d0021b;
-@mb-color: #29C134;
+@mb-color: #7ed321;
 @black: #1D1D26;
 @true-black: #000;
 @white: #FFF;
@@ -25,6 +25,8 @@
 @white-transparent: rgba(255,255,255, 0.2);
 @grey-transparent: rgba(255, 255, 255, 0.5);
 @black-transparent: rgba(0,0,0, 0.4);
+@black-transparent-2: rgba(0,0,0, .8);
+@green-transparent: rgba(126,211,33, .2);
 
 //paddings
 @padding: 5px;
@@ -144,8 +146,16 @@ html {
   background-color: @black !important;
 }
 
+.bg-black-transparent {
+  background-color: @black-transparent !important;
+}
+
+.bg-black-transparent-2 {
+  background-color: @black-transparent-2 !important;
+}
+
 .bg-transparent {
-  background-color: rgba(0,0,0,0.5) !important;
+  background-color: transparent;
 }
 
 .bg-gradient {
@@ -218,6 +228,10 @@ html {
 
 .pad-2x {
   padding: @padding-2x;
+}
+
+.pad-3x {
+  padding: @padding-3x;
 }
 
 .pad-4x {
@@ -359,8 +373,8 @@ html {
 md-input-container {
   label {
     font-size: 1rem;
-    color: @white;
-    text-transform: uppercase;
+    color: @grey !important;
+    text-transform: capitalize;
   }
   &.md-icon-float {
     input, textarea {
@@ -373,14 +387,17 @@ md-input-container {
       top: 2px;
       left: 2px;
     }
-    span {
-      margin-left: 36px;
-      color: @white;
-    }
     md-switch {
       display: inline-flex;
       float: right;
       margin: 0px;
+      .md-container {
+        margin-right: 0;
+      }
+      .md-label {
+        left: 5px;
+        position: absolute;
+      }
     }
   }
   md-select {
@@ -402,6 +419,46 @@ md-input-container {
   .md-input {
     border-color: @white-transparent;
     color: @white;
+  }
+}
+
+md-menu-item {
+  a {
+    border-radius: 0;
+    margin: auto 0;
+    font-size: 15px;
+    text-transform: none;
+    font-weight: 400;
+    text-align: left;
+    text-align: start;
+    height: 100%;
+    padding: 0;
+    display: inline-block;
+    -webkit-align-items: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+    width: 100%;
+    .md-button {
+      width: 100%;
+      text-align: start;
+      text-transform: capitalize;
+      font-size: 15px;
+      margin: 0;
+      font-size: 15px;
+      padding: 6px 16px;
+      md-icon {
+        margin-right: 16px;
+      }
+    }
+  }
+}
+
+.md-button.hover-green {
+  &:hover {
+    background-color: @green-transparent;
   }
 }
 
@@ -427,11 +484,10 @@ md-toolbar {
     }
   }
   .navbar-link {
-    color: @black-grey;
     cursor: pointer;
     line-height: 36px;
     min-height: 36px;
-    font-size: 14px;
+    font-size: .96rem;
     margin: 0 28px;
     min-width: 88px;
   }
@@ -496,6 +552,15 @@ md-card {
   }
 }
 
+md-progress-linear {
+  height: 2px !important;
+}
+
+a.md-button.md-default-theme:not([disabled]):hover, a.md-button:not([disabled]):hover,
+.md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover {
+  background-color: @green-transparent !important;
+}
+
 a {
   text-decoration: none;
 }
@@ -504,6 +569,13 @@ a {
   outline: none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: @grey !important;
+}
 
 // End angular material rebranding
 

@@ -46,6 +46,9 @@
         return Restangular.one('/').post('managers', five).then(function() {
           return methods.login(five.manager.email, five.manager.password);
         });
+      },
+      patch: function(manager) {
+        return Restangular.one('/').patch('managers', manager);
       }
     };
   }

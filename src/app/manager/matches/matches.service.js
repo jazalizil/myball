@@ -7,15 +7,20 @@
   angular.module('myBall')
     .service('MatchesService', MatchesService);
   /** @ngInject */
-  function MatchesService(Restangular){
+  function MatchesService(Restangular, UserService, $log){
+    var _identity = UserService.getIdentity();
     return {
-      fetchMatches : function(identity, params) {
+      fetchAll : function(params) {
         return Restangular.all('matches/five')
-          .get(identity.five._id, {
+          .get(_identity.five._id, {
             startDate: params.startDate.toJSON(),
             endDate: params.endDate.toJSON(),
             sort: 'startDate'
           });
+      },
+      put: function(match) {
+        $log.debug(match);
+        return Restangular.one('matches').post('manager', match);
       }
     }
   }

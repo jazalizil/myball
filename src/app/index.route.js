@@ -64,7 +64,7 @@
       templateUrl: "app/manager/main/main.html",
       controller: "MainController",
       controllerAs: "main"
-    }).state('matchs', {
+    }).state('matches', {
       parent: "protected",
       url: "/matches",
       templateUrl: "app/manager/matches/matches.html",
@@ -74,7 +74,7 @@
       parent: "protected",
       url: "/dashboard",
       templateUrl: "app/manager/dashboard/dashboard.html",
-      controller: "DahboardController",
+      controller: "DashboardController",
       controllerAs: "dashboard"
     }).state('settings', {
       parent: "protected",

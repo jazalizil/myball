@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, RestangularProvider, Conf, $mdThemingProvider, localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider) {
+  function config($provide, $logProvider, toastrConfig, RestangularProvider, Conf, $mdThemingProvider, localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider) {
     // Enable log if environment allows it
     $logProvider.debugEnabled(false);
     if (Conf.DEBUG) {
@@ -20,7 +20,8 @@
     // Set CORS
     $sceDelegateProvider.resourceUrlWhitelist([
       // Allow same origin resource loads.
-      'self'
+      'self',
+      Conf.AMAZONE_S3_API_BASE_URL + '**'
     ]);
 
 
@@ -34,7 +35,7 @@
     RestangularProvider.setBaseUrl(Conf.WEBALL_API_BASE_URL);
 
     var wbPrimaryPalette = $mdThemingProvider.extendPalette('green', {
-      '500': '29C134'
+      '500': '7ed321'
     });
     var wbAccentPalette = $mdThemingProvider.extendPalette('grey', {
       //'500': '1A1C23',
@@ -48,6 +49,7 @@
       .accentPalette('wbAccentPalette');
 
     localStorageServiceProvider.setPrefix('wb');
+
   }
 
 })();

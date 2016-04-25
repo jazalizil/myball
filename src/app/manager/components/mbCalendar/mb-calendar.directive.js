@@ -168,6 +168,9 @@
         while (vm.data.daysToDisplay[i].month !== vm.data.currentMonth) {
           i += 7;
         }
+        while (vm.data.daysToDisplay[i].date + 7 <= vm.data.currentDay) {
+          i += 7;
+        }
         return vm.data.daysToDisplay[i].date === 1 ? i : i - 7;
       }
       
@@ -176,7 +179,6 @@
         vm.data.yearsDisplayed = _.range(year - 1, year + 5);
         vm.data.currentYear = year;
         vm.today.year = year;
-        vm.data.isLoading = true;
         vm.data.daysToDisplay = getDaysToDisplay();
       };
 
@@ -225,7 +227,6 @@
 
       function init() {
         var realDate = vm.today.realDate;
-        vm.data.isLoading = true;
         vm.data.daysToDisplay = getDaysToDisplay();
         vm.data.weekIndex = getFirstWeekIndex();
         var day = _.filter(vm.data.daysToDisplay, function(day){
@@ -235,7 +236,6 @@
         });
         vm.today = day[0];
         vm.today.realDate = realDate;
-        vm.data.isLoading = false;
       }
       init();
     }

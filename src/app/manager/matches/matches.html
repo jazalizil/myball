@@ -8,7 +8,7 @@
       <md-content class="fit-height bg-black pad-t-3x">
         <div class="t-head full-width" layout="row">
           <div flex="10"></div>
-          <div layout layout-align="center center" flex class="field white"
+          <div layout layout-align="center center" flex="25" class="field white"
                ng-repeat="field in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
             {{field.name}}
           </div>
@@ -18,7 +18,7 @@
             <div layout layout-align="center start" flex="10" class="white">
               <span ng-show="hour.value * 10 % 10 === 0">{{hour.value}}h</span>
             </div>
-            <div layout flex class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
+            <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
                  ng-repeat="slot in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
               <div class="match-ctn absolute pointer" ng-click="matches.openSidenav(hour, slot)" id="{{hour.value + '-' + slot._id}}"
                    ng-hide="matches.data.hours[$parent.$index - 1].matches[slot._id] ||
@@ -50,81 +50,7 @@
           </div>
         </div>
       </md-content>
-      <md-sidenav
-          class="md-sidenav-right"
-          md-component-id="right"
-          md-whiteframe="2">
-        <md-content class="fit-height fit-width">
-          <div layout="column" class="fit-height fit-width sidenav">
-            <div layout="column" class="date-ctn white" layout-padding layout-align="center start">
-              <div layout class="date">
-                {{matches.data.today.name + ' ' + matches.data.today.date + ' ' +
-              matches.data.today.monthName + ' ' + matches.data.today.year}}
-              </div>
-              <div layout class="hour pad-t-3x">
-                <i class="material-icons">access_time</i>&nbsp;
-                {{matches.data.selectedHour.value + 'h'}}
-                <span ng-show="matches.data.selectedHour.isHalf">30</span>
-                &nbsp;-&nbsp;
-                {{matches.data.selectedHour.value + 1 + 'h'}}
-                <span ng-show="matches.data.selectedHour.isHalf">30</span>
-              </div>
-              <span></span>
-            </div>
-            <md-input-container class="md-icon-float md-block">
-              <label>{{matches.data.placeholders.name}}</label>
-              <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
-              <input  md-autofocus="!matches.data.match.responsable.name" type="text" name="name" ng-model="matches.data.match.responsable.name">
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block">
-              <label>{{matches.data.placeholders.phone}}</label>
-              <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
-              <input type="text" name="name" ng-model="matches.data.match.responsable.phone">
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block">
-              <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
-              <md-select ng-model="matches.data.match.matchPlayers" aria-label="team size">
-                <md-option ng-repeat="size in matches.data.teamSizes" value="{{size.value}}"
-                           ng-selected="matches.data.match.maxPlayers === size.value">
-                  {{size.name}}
-                </md-option>
-              </md-select>
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block switch-ctn">
-              <md-icon md-svg-src="/assets/icons/paiement.svg"></md-icon>
-              <span>{{matches.data.placeholders.paid}}</span>
-              <md-switch class="md-primary" aria-label="match paid" ng-disabled="matches.data.match.alreadyPaid" ng-model="matches.data.match.justPaid">
-              </md-switch>
-            </md-input-container>
-            <div layout="row" class="fit-width" ng-switch="!matches.data.match.createdAt">
-              <div layout="column" class="fit-width" ng-switch-when="true">
-                <md-button class="md-raised md-primary fit-width">
-                  <span class="white" translate>book</span>
-                </md-button>
-              </div>
-              <div class="grey fit-width" layout ng-switch-default>
-                <div class="created fit-width" flex>
-                  <div flex>
-                    <span translate>Created with</span>
-                    <span>&nbsp;{{matches.data.match.createdWith}}</span>
-                  </div>
-                  <div flex>
-                    <span>{{matches.data.match.createdAt | date: 'd MMMM yyyy'}} </span>
-                    <span translate>at</span>
-                    <span> {{matches.data.match.createdAt | date: 'HH:mm'}}</span>
-                  </div>
-                </div>
-                <md-button flex class="fit-width">
-                  <span class="red" translate>delete</span>
-                </md-button>
-                <md-button flex class="md-raised md-primary fit-width">
-                  <span class="white" translate>update</span>
-                </md-button>
-              </div>
-            </div>
-          </div>
-        </md-content>
-      </md-sidenav>
+      <div class="match-edit" ng-include="'app/manager/matches/match-edit.tpl.html'"></div>
     </section>
   </md-content>
 </div>

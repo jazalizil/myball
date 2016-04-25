@@ -6,21 +6,17 @@
   function UserService($q, Restangular, localStorageService) {
     var _authenticated, _identity, _token;
     _identity = localStorageService.get('identity');
-    _authenticated = false;
+    _authenticated = true;
     _token = void 0;
     if (typeof _identity === 'undefined') {
       _identity = void 0;
+      _authenticated = false;
     }
     return {
       updateToken: function(token) {
         _token = token;
         _authenticated = true;
         localStorageService.set('token', token);
-        Restangular.withConfig(function(RestangularConfigurer) {
-          return RestangularConfigurer.setDefaultHeaders({
-            'x-access-token': token
-          });
-        });
       },
       getToken: function() {
         if (_token != null) {
@@ -71,12 +67,17 @@
           deferred.resolve(_identity);
           return deferred.promise;
         }
-        return Restangular.one('managers', 'me').get().then(function(user) {
+        Restangular.one('managers', 'me').get().then(function(user) {
           _identity = user;
           _identity.roles = [user.roles];
           localStorageService.set('identity', _identity);
           _authenticated = true;
+          deferred.resolve(_identity);
+        }, function(){
+          _authenticated = false;
+          deferred.reject();
         });
+        return deferred.promise;
       }
     };
   }

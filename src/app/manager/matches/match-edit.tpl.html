@@ -1,0 +1,86 @@
+<md-sidenav
+    class="md-sidenav-right"
+    md-component-id="right"
+    md-whiteframe="2">
+  <md-content class="fit-height fit-width">
+    <div layout="column" class="fit-height fit-width sidenav">
+      <div layout="column" class="date-ctn white" layout-padding layout-align="center start">
+        <div layout layout-align="center center" class="date">
+          {{matches.data.today.name + ' ' + matches.data.today.date + ' ' +
+          matches.data.today.monthName + ' ' + matches.data.today.year}}
+        </div>
+        <div layout layout-align="center center" class="hour pad-t-3x">
+          <i class="material-icons">access_time</i>&nbsp;
+          {{matches.data.selectedHour.value + 'h'}}
+          <span ng-show="matches.data.selectedHour.isHalf">30</span>
+          &nbsp;-&nbsp;
+          {{matches.data.selectedHour.value + 1 + 'h'}}
+          <span ng-show="matches.data.selectedHour.isHalf">30</span>
+        </div>
+      </div>
+      <form ng-submit="matches.send()" layout="column">
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.reponsable.errors.name}">
+          <label>{{matches.data.placeholders.name}}</label>
+          <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
+          <input md-autofocus="!matches.data.responsable.name" type="text" name="name"
+                 ng-model="matches.data.responsable.name">
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.responsable.errors.phone}">
+          <label>{{matches.data.placeholders.phone}}</label>
+          <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
+          <input type="text" name="name" ng-model="matches.data.responsable.phone">
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
+          <md-select ng-model="matches.data.match.maxPlayers" aria-label="team size">
+            <md-option ng-repeat="size in matches.data.teamSizes" ng-value="size.value"
+                       ng-selected="size.value === matches.data.match.maxPlayers">
+              {{size.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block switch-ctn">
+          <md-icon md-svg-src="/assets/icons/paiement.svg"></md-icon>
+          <md-switch class="md-primary grey" aria-label="match paid" ng-disabled="matches.data.match.alreadyPaid"
+                     ng-model="matches.data.match.justPaid">
+            {{matches.data.placeholders.paid}}
+          </md-switch>
+        </md-input-container>
+        <div layout="row" class="fit-width" ng-switch="!matches.data.match.createdAt">
+          <div layout="column" class="fit-width" ng-switch-when="true">
+            <md-button type="submit" class="md-raised md-primary fit-width" v-busy="matches.data.isUploadingMatch">
+              <span class="white" translate>réserver</span>
+            </md-button>
+          </div>
+          <div class="grey fit-width" layout="column" layout-align="center center" ng-switch-default>
+            <div layout="row" class="fit-width fit-height">
+              <md-button class="fit-width">
+                <span class="red" translate>supprimer</span>
+              </md-button>
+              <md-button type="submit" class="md-raised md-primary fit-width" v-busy="matches.data.isUploadingMatch">
+                <span class="white" translate>mettre à jour</span>
+              </md-button>
+            </div>
+            <div layout="row" layout-align="start" layout-padding class="fit-width">
+              <div layout="column">
+                <md-icon md-svg-src="/assets/icons/created-with-{{matches.data.match.createdWith}}.svg"></md-icon>
+              </div>
+              <div class="created fit-width" layout="column">
+                <div layout="row">
+                  <span translate>Crée avec</span>
+                  <span>&nbsp;{{matches.data.match.createdWith}}</span>
+                </div>
+                <div layout="row">
+                  <span translate>Le</span>
+                  <span>&nbsp;{{matches.data.match.createdAt | date: 'd/MM/yyyy'}}&nbsp;</span>
+                  <span translate>à</span>
+                  <span>&nbsp;{{matches.data.match.createdAt | date: 'HH:mm'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </md-content>
+</md-sidenav>

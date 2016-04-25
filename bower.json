@@ -12,13 +12,11 @@
     "angular-material": "~1.0.1",
     "material-design-iconfont": "~0.0.2",
     "angular-toastr": "~1.5.0",
-    "moment": "~2.10.6",
     "animate.css": "~3.4.0",
     "angular": "~1.4.2",
     "v-button": "~1.1.1",
     "angular-local-storage": "~0.2.3",
     "font-awesome": "~4.5.0",
-    "ng-file-upload": "~10.1.9",
     "angular-gettext": "~2.1.2",
     "angular-resizable": "~1.2.0",
     "angular-un-svg": "~1.0.4"

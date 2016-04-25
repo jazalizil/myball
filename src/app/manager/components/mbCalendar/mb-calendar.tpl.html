@@ -14,13 +14,13 @@
     </div>
   </div>
   <div class="no-pad  months full-width" layout-padding layout layout-align="center center">
-    <div class="month-ctn" layout ng-repeat="month in calendar.data.monthsDisplayed">
+    <div class="month-ctn" layout layout-align="center center" ng-repeat="month in calendar.data.monthsDisplayed">
       <div layout="column">
         <div ng-class="{'hidden': month.number !== calendar.data.currentMonth}" layout="row" layout-align="center center">
           <span layout="column" layout-align="center center" class="circle grey"></span>
         </div>
         <span class="month" layout="row" layout-align="center center" ng-click="calendar.selectMonth(month.number)"
-        ng-class="month.number === calendar.data.currentMonth ? 'grey bold' : 'dark-grey'">
+                      ng-class="month.number === calendar.data.currentMonth ? 'grey bold' : 'dark-grey'">
           {{month.shortName}}
         </span>
       </div>
@@ -43,16 +43,18 @@
             <div class="circle-sm {{calendar.data.matchStatusToColor[match.status]}}"></div>
           </div>
         </div>
-        <span class="day grey"
-              ng-click="calendar.selectDay(dayToDisplay)"
-              ng-class="{
-              'dark-grey bg-green': dayToDisplay.date === calendar.data.realDate.day &&
-              dayToDisplay.month === calendar.data.realDate.month &&
-              dayToDisplay.year === calendar.data.realDate.year,
-              'dark-grey': dayToDisplay.month !== calendar.data.currentMonth}"
-              layout="row" layout-align="center center">
-          {{dayToDisplay.date}}
-        </span>
+        <div layout="row" layout-align="center center">
+          <span class="day grey"
+                ng-click="calendar.selectDay(dayToDisplay)"
+                ng-class="{
+                'dark-grey bg-green': dayToDisplay.date === calendar.data.realDate.day &&
+                dayToDisplay.month === calendar.data.realDate.month &&
+                dayToDisplay.year === calendar.data.realDate.year,
+                'dark-grey': dayToDisplay.month !== calendar.data.currentMonth}"
+                layout="column" layout-align="center center">
+            {{dayToDisplay.date}}
+            </span>
+        </div>
       </div>
     </div>
     <div layout="column" layout-align="center center">
