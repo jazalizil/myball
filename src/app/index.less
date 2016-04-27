@@ -74,7 +74,7 @@
 }
 
 html {
-  font-family: 'Avenir Book', serif;
+  font-family: 'Helvetica Neue Light', serif;
 }
 
 //[layout=row] {
@@ -186,12 +186,8 @@ html {
   vertical-align: middle;
 }
 
-.avenir-heavy {
-  font-family: 'Avenir Heavy';
-}
-
-.avenir-light {
-  font-family: 'Avenir Light';
+.helvetica-normal {
+  font-family: 'Helvetica Neue';
 }
 
 .scroll-content {
@@ -476,6 +472,20 @@ md-toolbar {
       }
     }
   }
+  md-icon {
+    color: @grey !important;
+    &:hover {
+      color: @mb-color !important;
+    }
+    -webkit-transition: color .1s linear;
+    -moz-transition: color .1s linear;
+    -ms-transition: color .1s linear;
+    -o-transition: color .1s linear;
+    transition: color .1s linear;
+  }
+  md-menu {
+    margin: 0 !important;
+  }
   &.grey {
     .md-button {
       svg {
@@ -550,10 +560,6 @@ md-card {
       border-left: solid 1px @true-black;
     }
   }
-}
-
-md-progress-linear {
-  height: 2px !important;
 }
 
 a.md-button.md-default-theme:not([disabled]):hover, a.md-button:not([disabled]):hover,

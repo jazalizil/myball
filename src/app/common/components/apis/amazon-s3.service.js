@@ -8,14 +8,13 @@
   angular.module('myBall')
     .service('AmazoneS3', AmazoneS3);
   /** @ngInject */
-  function AmazoneS3(Conf, CryptoJs, Restangular, $q, $log) {
+  function AmazoneS3(Conf, CryptoJs, Restangular, $q) {
     return {
       upload: function(file, where) {
         var deferred = $q.defer();
         var authorization = 'AWS ' + Conf.AMAZONE_S3_API_ACCESS_KEY + ':';
         var now = new Date().toUTCString();
-        var md5 = CryptoJs.enc.Base64.stringify(CryptoJs.MD5(file.result));
-        $log.debug(file);
+        var md5 = CryptoJs.enc.Base64.stringify(CryptoJs.MD5(file.data));
         var message = 'PUT\n' +
           md5 + '\n' +
           file.type + '\n\n' +
@@ -32,9 +31,10 @@
             'x-amz-date': now,
             'Content-Type': file.type,
             'Content-MD5': md5,
-            'x-amz-acl': 'public-read'
+            'x-amz-acl': 'public-read',
+            'Content-Length': file.data.length
           })
-        }).one('media/' + where + file.name).customPUT(file.result).then(function(){
+        }).one('media/' + where + file.name).customPUT(file.data).then(function(){
           deferred.resolve(Conf.CDN_BASE_URL + where + file.name);
         }, function(){
           deferred.reject('Upload error');

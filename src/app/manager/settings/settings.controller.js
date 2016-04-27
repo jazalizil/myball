@@ -48,7 +48,7 @@
 
     var uploadPhoto = function () {
       var ext = vm.data.photo.name.split('.').pop();
-      vm.data.photo.name = vm.data.identity.five._id + '.' + ext;
+      // vm.data.photo.name = vm.data.identity.five._id + '.' + ext;
       AmazoneS3.upload(vm.data.photo, 'images/fives/').then(function(res){
         vm.data.isLoading = false;
         $log.debug(res);
@@ -58,7 +58,7 @@
     };
     var init = function () {
       vm.data.photo.src = vm.data.identity.five.photo;
-      vm.data.welcomeSentence = gettextCatalog.getString('Hello') + ' ' + vm.data.identity.manager.firstName;
+      vm.data.welcomeSentence = gettextCatalog.getString('Bonjour') + ' ' + vm.data.identity.manager.firstName;
       vm.data.newIdentity = _.cloneDeep(vm.data.identity);
     };
     init();

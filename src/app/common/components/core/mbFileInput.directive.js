@@ -17,12 +17,13 @@
           var reader = new FileReader();
           reader.onload = function(ev){
             scope.$apply(function() {
-              $log.debug(ev.target);
-              scope.file.result = ev.target.result;
+              $log.debug(file);
+              scope.file.data = event.target.result;
               scope.file.type = file.type;
               scope.file.name = file.name;
               if (file.type.startsWith('image')) {
-                scope.file.src = scope.file.result;
+                scope.file.src = 'data:' + file.type + ';base64,' + btoa(ev.target.result);
+                // scope.file.src = scope.file.data;
               }
               scope.loading = false;
             })

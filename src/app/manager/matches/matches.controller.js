@@ -94,6 +94,7 @@
         payload.match = vm.data.match;
         MatchesService.put(payload).then(function(match){
           $mdSidenav('right').close();
+          $log.debug(match);
           if (vm.data.selectedHour.isHalf) {
             vm.data.selectedHour.value += 0.5;
           }
