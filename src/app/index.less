@@ -574,9 +574,13 @@ md-card {
   }
 }
 
-a.md-button.md-default-theme:not([disabled]):hover, a.md-button:not([disabled]):hover,
-.md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover {
+a.md-button.md-default-theme:hover, a.md-button:hover,
+.md-button.md-default-theme:hover, .md-button:hover {
   background-color: @mb-color !important;
+}
+
+.md-button[disabled] {
+  color: @grey !important;
 }
 
 a {

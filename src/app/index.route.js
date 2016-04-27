@@ -40,6 +40,12 @@
       templateUrl: 'app/common/signin/signin.html',
       controller: 'SigninController',
       controllerAs: 'signin'
+    }).state('forgot', {
+      parent: 'public',
+      url: '/forgot',
+      templateUrl: 'app/common/signin/forgot.html',
+      controller: 'SigninController',
+      controllerAs: 'signin'
     }).state('register', {
       parent: 'public',
       url: '/register',

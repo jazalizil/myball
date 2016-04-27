@@ -15,16 +15,16 @@
             Bienvenue sur votre espace d'administration.
           </div>
         </div>
-        <div layout="row" layout-align="center center" class="margin-t-8x full-width fit-height" name="signinForm" novalidate>
-          <form layout="column" ng-submit="signin.login()" flex="30">
-            <md-input-container flex class="md-icon-float md-block grey"
-                                ng-class="{'md-input-invalid' : signinForm.email.$error}">
+        <div layout="row" layout-align="center center" class="margin-t-8x full-width fit-height">
+          <form layout="column" ng-submit="signin.login()" flex="30" novalidate name="signinForm">
+            <md-input-container flex class="mail-input md-icon-float md-block grey"
+                                ng-class="{'md-input-invalid' : signinForm.email.$invalid && !signinForm.email.$pristine}">
               <label>{{signin.datas.placeholders.email}}</label>
               <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
               <input required name="email" ng-model="signin.datas.login" type="email">
             </md-input-container>
             <md-input-container flex class="md-icon-float md-block white no-errors no-margin-bottom"
-                                ng-class="{'md-input-invalid' : signinForm.password.$error}">
+                                ng-class="{'md-input-invalid' : signinForm.password.$invalid && !signinForm.password.$pristine}">
               <label>{{signin.datas.placeholders.password}}</label>
               <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
               <input required name="password" ng-model="signin.datas.password" type="password">
@@ -32,7 +32,8 @@
             <a ui-sref="forgot" class="grey pointer forgot" layout layout-align="end start">
               <span translate>Mot de passe oublié?</span>
             </a>
-            <md-button type="submit" class="margin-t-5x white hover-green" md-ink-ripple="#29C134" v-busy="signin.datas.isLoading">
+            <md-button type="submit" class="margin-t-5x white hover-green" md-ink-ripple="#29C134"
+                       ng-disabled="signinForm.$invalid" v-busy="signin.datas.isLoading">
               <span translate>connexion</span>
             </md-button>
           </form>
