@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('SettingsController', SettingsController);
   /** @ngInject */
-  function SettingsController(UserService, gettextCatalog, $document, $log, _, AmazoneS3) {
+  function SettingsController(UserService, gettextCatalog, $document, _, $log) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
@@ -42,19 +42,18 @@
       }
     };
     vm.upload = function() {
+      var toSend = _.differenceWith(vm.data.newIdentity, vm.data.identity, angular.equals);
+      $log.debug(toSend, vm.data.identity, vm.data.newIdentity);
       vm.data.isLoading = true;
-      uploadPhoto();
-    };
-
-    var uploadPhoto = function () {
-      var ext = vm.data.photo.name.split('.').pop();
-      // vm.data.photo.name = vm.data.identity.five._id + '.' + ext;
-      AmazoneS3.upload(vm.data.photo, 'images/fives/').then(function(res){
-        vm.data.isLoading = false;
-        $log.debug(res);
+      UserService.patch(vm.data.newIdentity).then(function(){
+        UserService.identity(true).then(function(){
+          vm.data.isLoading = false;
+        }, function(){
+          vm.data.isLoading = false;
+        });
       }, function(){
         vm.data.isLoading = false;
-      })
+      });
     };
     var init = function () {
       vm.data.photo.src = vm.data.identity.five.photo;

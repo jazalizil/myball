@@ -1,30 +1,49 @@
 <div id="signin">
-  <mb-navbar opaq></mb-navbar>
-  <div class="fixed bg">
-    <img class="full-width" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
+  <div class="fixed bg full-height">
+    <img class="full-width" style="min-height: 100%" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
   </div>
   <md-content class="full-height bg-black-transparent" layout-fill layout layout-align="center start">
     <div layout="row" layout-padding class="full-width fit-height">
-      <div class="fit-width" layout="column" layout-align="center center">
-        <h2 class="uppercase white" layout layout-align="center center" translate>
-          Connexion
-        </h2>
-        <div layout="row" layout-align="center center" class="margin-top-5x">
-          <form layout="column" ng-submit="signin.login()">
+      <div class="fit-width fit-height" layout="column" layout-align="center center">
+        <div class="white fit-height" layout="column" layout-align="center center" translate>
+          <div class="fit-width" layout layout-align="center center">
+            <a href="http://www.weball.fr">
+              <un-svg style="height:80px;" class="fill-grey" svg-src="/assets/icons/weball.svg">
+            </a>
+          </div>
+          <div translate class="fit-width" layout layout-align="center center">
+            Bienvenue sur votre espace d'administration.
+          </div>
+        </div>
+        <div layout="row" layout-align="center center" class="margin-t-8x full-width fit-height">
+          <form layout="column" ng-submit="signin.login()" flex="30">
             <md-input-container flex class="md-icon-float md-block grey">
               <label>{{signin.datas.placeholders.email}}</label>
               <md-icon class="grey" md-font-set="material-icons">email</md-icon>
               <input required name="email" ng-model="signin.datas.login" type="email">
             </md-input-container>
-            <md-input-container flex class="md-icon-float md-block white">
+            <md-input-container flex class="md-icon-float md-block white no-errors no-margin-bottom">
               <label>{{signin.datas.placeholders.password}}</label>
               <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
               <input required name="password" ng-model="signin.datas.password" type="password">
             </md-input-container>
-            <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134" v-busy="signin.datas.isLoading">
-              <span translate>Se connecter</span>
+            <a ui-sref="forgot" class="grey pointer forgot" layout layout-align="end start">
+              <span translate>Mot de passe oublié?</span>
+            </a>
+            <md-button type="submit" class="margin-t-5x white hover-green" md-ink-ripple="#29C134" v-busy="signin.datas.isLoading">
+              <span translate>connexion</span>
             </md-button>
           </form>
+        </div>
+        <div class="fit-width fit-height grey" layout="row" layout-align="center end">
+          <span class="fit-width" layout layout-align="start center" translate>
+            Copyright &#169; 2016 myBall. Tout droits réservés
+          </span>
+          <span class="fit-width" layout layout-align="end center">
+            <img src="assets/icons/fr-flag.png" alt="flag France">
+            &nbsp;
+            <span translate>France</span>
+          </span>
         </div>
       </div>
     </div>

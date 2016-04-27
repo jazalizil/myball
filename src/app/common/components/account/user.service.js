@@ -78,6 +78,9 @@
           deferred.reject();
         });
         return deferred.promise;
+      },
+      patch: function(manager) {
+        return Restangular.one('managers', 'me').patch(manager);
       }
     };
   }

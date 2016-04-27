@@ -10,9 +10,7 @@
         <div class="fit-height text grey fit-width" layout="column" ng-switch="settings.data.selectedTab">
           <div layout="column" class="fit-width fit-height" layout-align="center center" ng-switch-when="1">
             <div layout="row">
-              <span id="city" contenteditable ng-model="settings.data.newIdentity.five.name">
-                {{settings.data.newIdentity.five.name}}
-              </span>
+              <span id="city" contenteditable ng-model="settings.data.newIdentity.five.name">{{settings.data.newIdentity.five.name}}</span>
               <md-icon class="margin-l-3x grey pointer" md-font-set="material-icons"
                        ng-click="settings.editCity()">
                 mode_edit
@@ -103,7 +101,7 @@
                   </div>
                   <div layout="row" layout-align="center end">
                     <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
-                               ng-click="settings.upload()">!
+                               ng-click="settings.upload()">
                       <span class="white" translate>update</span>
                     </md-button>
                   </div>

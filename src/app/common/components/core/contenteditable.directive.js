@@ -29,6 +29,9 @@
         });
         elm.bind('focus', function(){
           elm[0].selectionEnd = elm.html().length;
+          if (!elm[0].selectionEnd){
+            return;
+          }
           var sel = $window.getSelection();
           var range = $document[0].createRange();
           range.setStart(elm[0], 1);

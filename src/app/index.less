@@ -246,6 +246,10 @@ html {
   margin: 0;
 }
 
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
 .margin-t {
  margin-top: @padding;
 }
@@ -260,6 +264,10 @@ html {
 
 .margin-t-5x {
   margin-top: @padding-5x;
+}
+
+.margin-t-8x {
+  margin-top: @padding-8x;
 }
 
 .margin-l-3x {
@@ -370,7 +378,11 @@ md-input-container {
   label {
     font-size: 1rem;
     color: @grey !important;
-    text-transform: capitalize;
+  }
+  &.no-errors {
+    .md-errors-spacer {
+      min-height: 0;
+    }
   }
   &.md-icon-float {
     input, textarea {
