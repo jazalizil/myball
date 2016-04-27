@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="31px" height="25px" viewBox="0 0 31 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
-    <title>email</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="02.00-Register-User" sketch:type="MSArtboardGroup" transform="translate(-460.000000, -783.000000)">
-            <g id="email" sketch:type="MSLayerGroup" transform="translate(456.564219, 778.065141)">
-                <g transform="translate(0.000000, 0.654300)" id="group" sketch:type="MSShapeGroup">
-                    <g transform="translate(3.769293, 5.521518)" stroke="#4B4B4B">
-                        <rect id="shape" stroke-linecap="round" x="0" y="0" width="30.1543432" height="23.4664496"></rect>
-                        <path d="M29.9288972,0 L15.3414413,13.4657179 L0.753858579,0" id="shape"></path>
+<svg width="39px" height="32px" viewBox="0 0 39 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>D77C5A06-9AB3-4C8E-A2FD-FD529D748E5F</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.35 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" filter="url(#filter-1)">
+        <g id="00.03-Connexion---myBall" transform="translate(-522.000000, -532.000000)">
+            <g id="Group-3" transform="translate(522.000000, 529.000000)">
+                <g id="Group-2">
+                    <g id="email" transform="translate(1.000000, 0.000000)">
+                        <g id="group" transform="translate(3.769293, 5.521518)" stroke="#FFFFFF">
+                            <rect id="shape" stroke-linecap="round" x="0" y="0" width="30.1543432" height="23.4664496"></rect>
+                            <path d="M29.9288972,0 L15.3414413,13.4657179 L0.753858579,0" id="shape"></path>
+                        </g>
+                        <rect id="group" x="0" y="0" width="37.6929289" height="34.5094847"></rect>
                     </g>
-                    <rect x="0" y="0" width="37.6929289" height="34.5094847"></rect>
                 </g>
             </g>
         </g>

@@ -1,23 +1,20 @@
 <div id="signin">
-  <mb-navbar opaq></mb-navbar>
   <div class="fixed bg">
     <img class="full-width" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
   </div>
   <md-content class="full-height bg-black-transparent" layout-fill layout layout-align="center start">
     <div layout="row" layout-padding class="full-width fit-height">
       <div class="fit-width" layout="column" layout-align="center center">
-        <h2 class="uppercase white" layout layout-align="center center" translate>
-          Connexion
-        </h2>
-        <div layout="row" layout-align="center center" class="margin-top-5x">
-          <form layout="column" ng-submit="signin.login()">
-            <md-input-container flex class="md-icon-float md-block grey">
+        <div layout="row" layout-align="center center" class="full-width">
+          <form layout="column" ng-submit="signin.forgot()" flex="30" novalidate name="forgotForm">
+            <md-input-container flex class="md-icon-float md-block grey"
+                                ng-class="{'md-input-invalid' : forgotForm.email.$error}">
               <label>{{signin.datas.placeholders.email}}</label>
-              <md-icon class="grey" md-font-set="material-icons">email</md-icon>
+              <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
               <input required name="email" ng-model="signin.datas.login" type="email">
             </md-input-container>
             <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134" v-busy="signin.datas.isLoading">
-              <span translate>Se connecter</span>
+              <span translate>réinitialiser le mot de passer</span>
             </md-button>
           </form>
         </div>

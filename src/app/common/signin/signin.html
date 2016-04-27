@@ -15,14 +15,16 @@
             Bienvenue sur votre espace d'administration.
           </div>
         </div>
-        <div layout="row" layout-align="center center" class="margin-t-8x full-width fit-height">
+        <div layout="row" layout-align="center center" class="margin-t-8x full-width fit-height" name="signinForm" novalidate>
           <form layout="column" ng-submit="signin.login()" flex="30">
-            <md-input-container flex class="md-icon-float md-block grey">
+            <md-input-container flex class="md-icon-float md-block grey"
+                                ng-class="{'md-input-invalid' : signinForm.email.$error}">
               <label>{{signin.datas.placeholders.email}}</label>
-              <md-icon class="grey" md-font-set="material-icons">email</md-icon>
+              <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
               <input required name="email" ng-model="signin.datas.login" type="email">
             </md-input-container>
-            <md-input-container flex class="md-icon-float md-block white no-errors no-margin-bottom">
+            <md-input-container flex class="md-icon-float md-block white no-errors no-margin-bottom"
+                                ng-class="{'md-input-invalid' : signinForm.password.$error}">
               <label>{{signin.datas.placeholders.password}}</label>
               <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
               <input required name="password" ng-model="signin.datas.password" type="password">
