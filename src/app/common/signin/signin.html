@@ -1,11 +1,14 @@
 <div id="signin">
   <div class="fixed bg full-height">
-    <img class="full-width" style="min-height: 100%" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
+    <img class="full-width" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
   </div>
   <md-content class="full-height bg-black-transparent" layout-fill layout layout-align="center start">
     <div layout="row" layout-padding class="full-width fit-height">
       <div class="fit-width fit-height" layout="column" layout-align="center center">
-        <div class="white fit-height" layout="column" layout-align="center center" translate>
+        <!--<div class="white fit-height" layout="column" layout-align="center center" translate>-->
+
+        <!--</div>-->
+        <div layout="column" layout-align="center center" class="white full-width fit-height">
           <div class="fit-width" layout layout-align="center center">
             <a href="http://www.weball.fr">
               <un-svg style="height:80px;" class="fill-grey" svg-src="/assets/icons/weball.svg">
@@ -14,17 +17,15 @@
           <div translate class="fit-width" layout layout-align="center center">
             Bienvenue sur votre espace d'administration.
           </div>
-        </div>
-        <div layout="row" layout-align="center center" class="margin-t-8x full-width fit-height">
-          <form layout="column" ng-submit="signin.login()" flex="30" novalidate name="signinForm">
-            <md-input-container flex class="mail-input md-icon-float md-block grey"
-                                ng-class="{'md-input-invalid' : signinForm.email.$invalid && !signinForm.email.$pristine}">
+          <form class="margin-t-3x" layout="column" ng-submit="signin.login()"  novalidate name="signin.signinForm">
+            <md-input-container flex="60" layout="row" class="mail-input md-icon-float md-block grey"
+                                ng-class="{'md-input-invalid' : signin.signinForm.email.$invalid && !signin.signinForm.email.$pristine}">
               <label>{{signin.datas.placeholders.email}}</label>
               <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
               <input required name="email" ng-model="signin.datas.login" type="email">
             </md-input-container>
             <md-input-container flex class="md-icon-float md-block white no-errors no-margin-bottom"
-                                ng-class="{'md-input-invalid' : signinForm.password.$invalid && !signinForm.password.$pristine}">
+                                ng-class="{'md-input-invalid' : signin.signinForm.password.$invalid && !signin.signinForm.password.$pristine}">
               <label>{{signin.datas.placeholders.password}}</label>
               <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
               <input required name="password" ng-model="signin.datas.password" type="password">
@@ -33,12 +34,12 @@
               <span translate>Mot de passe oublié?</span>
             </a>
             <md-button type="submit" class="margin-t-5x white hover-green" md-ink-ripple="#29C134"
-                       ng-disabled="signinForm.$invalid" v-busy="signin.datas.isLoading">
+                       v-busy="signin.datas.isLoading">
               <span translate>connexion</span>
             </md-button>
           </form>
         </div>
-        <div class="fit-width fit-height grey" layout="row" layout-align="center end">
+        <div class="fit-width grey" layout="row" layout-align="center end">
           <span class="fit-width" layout layout-align="start center" translate>
             Copyright &#169; 2016 myBall. Tout droits réservés
           </span>

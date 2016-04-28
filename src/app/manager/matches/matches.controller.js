@@ -19,12 +19,7 @@
       today: {
         realDate: new Date()
       },
-      statusToColor : {
-        waiting: 'bg-yellow',
-        ready: 'bg-red',
-        over: 'bg-green',
-        free: 'bg-grey'
-      },
+      statusToColor: MatchesService.statusToColor,
       startFrom: 0,
       limitTo: 6,
       teamSizes: [

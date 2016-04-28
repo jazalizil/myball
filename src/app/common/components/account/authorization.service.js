@@ -46,6 +46,17 @@
         return Restangular.one('/').post('managers', five).then(function() {
           return methods.login(five.manager.email, five.manager.password);
         });
+      },
+      forgot: function(email) {
+        return Restangular.one('managers', 'resetpassword').patch({
+          email: email
+        });
+      },
+      reset: function(token, password) {
+        return Restangular.one('managers', 'me').patch({
+          password: password,
+          token: token
+        });
       }
     };
   }

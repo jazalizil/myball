@@ -21,6 +21,24 @@
       put: function(match) {
         $log.debug(match);
         return Restangular.one('matches').post('manager', match);
+      },
+      statusToColor : {
+        waiting: {
+          background: 'bg-yellow',
+          color: 'yellow'
+        },
+        ready: {
+          background: 'bg-red',
+          color: 'red'
+        },
+        over: {
+          background: 'bg-green',
+          color: 'green'
+        },
+        free: {
+          background: 'bg-grey',
+          color: 'grey'
+        }
       }
     }
   }

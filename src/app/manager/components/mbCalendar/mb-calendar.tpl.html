@@ -40,7 +40,7 @@
         </div>
         <div layout="row" class="min-height" layout-align="center">
           <div class="day-circle-ctn" ng-repeat="match in dayToDisplay.matches">
-            <div class="circle-sm {{calendar.data.matchStatusToColor[match.status]}}"></div>
+            <div class="circle-sm {{calendar.data.statusToColor[match.status].background}}"></div>
           </div>
         </div>
         <div layout="row" layout-align="center center">

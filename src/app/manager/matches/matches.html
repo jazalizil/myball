@@ -40,7 +40,9 @@
                       </div>
                       <div flex="45" layout layout-align="center center">
                         <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
-                        <span class="red">&nbsp;{{hour.matches[slot._id].teams[1].length || '0'}}</span>
+                        <span class="{{matches.data.statusToColor[hour.matches[slot._id]].color}}">
+                          &nbsp;{{hour.matches[slot._id].teams[1].length || '0'}}
+                        </span>
                       </div>
                     </div>
                   </div>

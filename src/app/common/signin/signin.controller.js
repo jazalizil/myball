@@ -3,7 +3,7 @@
   angular.module('myBall').controller('SigninController', SigninController);
 
   /** @ngInject */
-  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog, Conf, $scope) {
+  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog, Conf) {
     var vm = this;
     vm.datas = {
       isLoading: false,
@@ -21,12 +21,12 @@
         vm.datas.isLoading = false;
       }, function(err) {
         if (err.data && err.data.code === 404) {
-          toastr.error(gettextCatalog.getString("Cet utilisateur n'existe pas"), gettextCatalog.getString('Erreur'));
-          $scope.signinForm.$setValidity('email', false);
+          toastr.error(gettextCatalog.getString('Cet utilisateur n\'existe pas'), gettextCatalog.getString('Erreur'));
+          vm.signinForm.$setValidity('email', false);
         }
         else if (err.data && err.data.code === 403) {
-          toastr.error(gettextCatalog.getString("Le mot de passe est invalide"), gettextCatalog.getString('Erreur'));
-          $scope.signinForm.$setValidity('password', false);
+          toastr.error(gettextCatalog.getString('Le mot de passe est invalide'), gettextCatalog.getString('Erreur'));
+          vm.signinForm.$setValidity('password', false);
         }
         else {
           toastr.error(gettextCatalog.getString('Impossible de joindre le serveur. Veuillez réessayer ultérieurement'),
@@ -36,9 +36,5 @@
         $log.debug(err);
       });
     };
-    vm.forgot = function() {
-      vm.data.isLoading = true;
-      return AuthorizationService.forgot()
-    }
   }
 })();

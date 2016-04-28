@@ -9,7 +9,7 @@
 
   function mbCalendarDirective() {
     /** @ngInject */
-    function mbCalendarController(CalendarService, _, $scope, $window, $log) {
+    function mbCalendarController(CalendarService, _, $scope, $window, $log, MatchesService) {
       var vm = this;
       vm.data = CalendarService.getDatas();
       vm.data.currentYear = vm.data.date.getFullYear();
@@ -21,11 +21,7 @@
         year: vm.data.currentYear
       };
       vm.data.yearsDisplayed = _.range(vm.data.currentYear, vm.data.currentYear + 6);
-      vm.data.matchStatusToColor = {
-        waiting: 'bg-yellow',
-        ready: 'bg-red',
-        over: 'bg-green'
-      };
+      vm.data.statusToColor = MatchesService.statusToColor;
 
       // Watches
       var w = angular.element($window);

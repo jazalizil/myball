@@ -44,8 +44,14 @@
       parent: 'public',
       url: '/forgot',
       templateUrl: 'app/common/signin/forgot.html',
-      controller: 'SigninController',
-      controllerAs: 'signin'
+      controller: 'ForgotController',
+      controllerAs: 'forgot'
+    }).state('forgot.reset', {
+      parent: 'public',
+      url: '/forgot/:token',
+      templateUrl: 'app/common/signin/forgot.html',
+      controller: 'ForgotController',
+      controllerAs: 'forgot'
     }).state('register', {
       parent: 'public',
       url: '/register',

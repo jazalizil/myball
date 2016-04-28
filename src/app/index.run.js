@@ -15,7 +15,8 @@
     Restangular.setFullRequestInterceptor(function(el, op, route, url, head, params) {
       var curHeaders, token;
       curHeaders = head;
-      token = UserService.getToken();
+      token = params.token || UserService.getToken();
+      params.token = undefined;
       if (token !== void 0 && url.startsWith(Conf.WEBALL_API_BASE_URL)) {
         curHeaders['x-access-token'] = token;
       }

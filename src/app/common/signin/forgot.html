@@ -1,23 +1,51 @@
 <div id="signin">
   <div class="fixed bg full-height">
-    <img class="full-width" style="min-height: 100%" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
+    <img class="full-width" ng-src="{{forgot.data.bgUrl}}" alt="field factory">
   </div>
   <md-content class="full-height bg-black-transparent" layout-fill layout layout-align="center start">
     <div layout="row" layout-padding class="full-width fit-height">
-      <div class="fit-width" layout="column" layout-align="center center">
-        <div layout="row" layout-align="center center" class="full-width">
-          <form layout="column" ng-submit="signin.forgot()" flex="30" novalidate name="forgotForm">
-            <md-input-container flex class="mail-input md-icon-float md-block grey"
-                                ng-class="{'md-input-invalid' : forgotForm.email.$error && forgotForm.email.$pristine}">
-              <label>{{signin.datas.placeholders.email}}</label>
-              <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
-              <input required name="email" ng-model="signin.datas.login" type="email">
+      <div class="fit-height fit-width" layout="column" layout-align="center center">
+        <div layout="row" layout-align="center center" class="fit-height full-width" ng-switch="forgot.data.resetPassword">
+          <form layout="column" ng-submit="forgot.resetPassword()" flex="30" novalidate name="forgot.resetForm" ng-switch-when="true">
+            <md-input-container flex class="md-icon-float md-block grey"
+                                ng-class="{'md-input-invalid' : forgot.resetForm.password.$error && !forgot.resetForm.password.$pristine}">
+              <label>{{forgot.data.placeholders.password}}</label>
+              <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
+              <input required name="password" ng-model="forgot.data.password" type="password">
+            </md-input-container>
+            <md-input-container flex class="md-icon-float md-block grey"
+                                ng-class="{'md-input-invalid' : forgot.resetForm.passwordConfirmation.$error && !forgot.resetForm.passwordConfirmation.$pristine}">
+              <label>{{forgot.data.placeholders.passwordConfirmation}}</label>
+              <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
+              <input required name="password" ng-model="forgot.data.passwordConfirmation" type="password">
             </md-input-container>
             <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134"
-                       ng-disabled="forgotForm.$invalid" v-busy="signin.datas.isLoading">
+                       v-busy="forgot.data.isLoading">
               <span translate>réinitialiser le mot de passe</span>
             </md-button>
           </form>
+          <form layout="column" ng-submit="forgot.sendMail()" flex="30" novalidate name="forgot.forgotForm" ng-switch-default>
+            <md-input-container flex class="mail-input md-icon-float md-block grey"
+                                ng-class="{'md-input-invalid' : forgot.forgotForm.email.$error && !fforgot.orgotForm.email.$pristine}">
+              <label>{{forgot.data.placeholders.email}}</label>
+              <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
+              <input required name="email" ng-model="forgot.data.email" type="email">
+            </md-input-container>
+            <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134"
+                       v-busy="forgot.data.isLoading">
+              <span translate>envoyer</span>
+            </md-button>
+          </form>
+        </div>
+        <div class="fit-width grey" layout="row" layout-align="center end">
+          <span class="fit-width" layout layout-align="start center" translate>
+            Copyright &#169; 2016 myBall. Tout droits réservés
+          </span>
+          <span class="fit-width" layout layout-align="end center">
+            <img src="assets/icons/fr-flag.png" alt="flag France">
+            &nbsp;
+            <span translate>France</span>
+          </span>
         </div>
       </div>
     </div>
