@@ -5,7 +5,7 @@
       <section class="relative heading helvetica-normal bg-black" layout>
         <div class="fixed bg">
           <img class="full-width"
-               ng-src="{{settings.data.photo.src}}" alt="five photo">
+               ng-src="{{settings.data.newIdentity.five.photo}}" alt="five photo">
         </div>
         <div class="fit-height text grey fit-width" layout="column" ng-switch="settings.data.selectedTab">
           <div layout="column" class="fit-width fit-height" layout-align="center center" ng-switch-when="1">
@@ -41,7 +41,8 @@
             {{settings.data.welcomeSentence}}
           </div>
         </div>
-        <mb-file-input type="file" file="settings.data.photo" hidden id="fivePhoto" accept="image/*"
+
+        <mb-file-input type="file" file="settings.data.newIdentity.five.photo" hidden id="fivePhoto" accept="image/*"
                        loading="$root.isLoading"></mb-file-input>
         <label for="fivePhoto" class="absolute photo pointer pad-2x"  md-ink-ripple="#CCCCCC">
           <i class="grey material-icons">
@@ -60,27 +61,27 @@
                       <div layout="row" layout-align="center center">
                         <md-input-container>
                           <label>{{settings.data.labels.email}}</label>
-                          <input type="email" ng-model="settings.data.newIdentity.manager.email" name="email">
+                          <input autocomplete="off" type="email" ng-model="settings.data.newIdentity.manager.email" name="email">
                         </md-input-container>
                       </div>
                       <div layout="row" layout-align="center center">
                         <md-input-container class="md-float">
                           <label>{{settings.data.labels.oldPassword}}</label>
-                          <input type="password" ng-model="settings.data.newIdentity.manager.oldPassword" name="oldPassword">
+                          <input autocomplete="off" type="password" ng-model="settings.data.newIdentity.manager.oldPassword" name="oldPassword">
                         </md-input-container>
                       </div>
                       <div layout="row" layout-align="center center">
                         <md-input-container class="md-float">
                           <label>{{settings.data.labels.newPassword}}</label>
-                          <input type="password" ng-model="settings.data.newIdentity.manager.newPassword" name="newPassword">
+                          <input autocomplete="off" type="password" ng-model="settings.data.newIdentity.manager.newPassword" name="newPassword">
                         </md-input-container>
                       </div>
                     </div>
                   </div>
                   <div layout="row" layout-align="center end">
                     <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
-                               ng-click="settings.upload()">
-                      <span class="white" translate>update</span>
+                               ng-click="settings.update()">
+                      <span class="white" translate>mettre à jour</span>
                     </md-button>
                   </div>
                 </div>
@@ -101,8 +102,8 @@
                   </div>
                   <div layout="row" layout-align="center end">
                     <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
-                               ng-click="settings.upload()">
-                      <span class="white" translate>update</span>
+                               ng-click="settings.update()">
+                      <span class="white" translate>mettre à jour</span>
                     </md-button>
                   </div>
                 </div>
@@ -132,8 +133,8 @@
                   </div>
                   <div layout="row" layout-align="center end">
                     <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
-                               ng-click="settings.upload()">
-                      <span class="white" translate>update</span>
+                               ng-click="settings.update()">
+                      <span class="white" translate>mettre à jour</span>
                     </md-button>
                   </div>
                 </div>

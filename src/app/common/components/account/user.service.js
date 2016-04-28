@@ -4,7 +4,7 @@
 
   /** @ngInject */
   function UserService($q, Restangular, localStorageService) {
-    var _authenticated, _identity, _token;
+    var _authenticated, _identity, _token, _setIdentity;
     _identity = localStorageService.get('identity');
     _authenticated = true;
     _token = void 0;
@@ -12,6 +12,12 @@
       _identity = void 0;
       _authenticated = false;
     }
+    _setIdentity = function(identity) {
+      _identity = identity;
+      // _identity.roles = [identity.roles];
+      localStorageService.set('identity', _identity);
+      _authenticated = true;
+    };
     return {
       updateToken: function(token) {
         _token = token;
@@ -56,6 +62,9 @@
         _identity = identity;
         _authenticated = identity != null;
       },
+      setIdentity: function(identity) {
+        _setIdentity(identity);
+      },
       identity: function(force) {
         var deferred;
         deferred = $q.defer();
@@ -68,10 +77,7 @@
           return deferred.promise;
         }
         Restangular.one('managers', 'me').get().then(function(user) {
-          _identity = user;
-          _identity.roles = [user.roles];
-          localStorageService.set('identity', _identity);
-          _authenticated = true;
+          _setIdentity(user);
           deferred.resolve(_identity);
         }, function(){
           _authenticated = false;
@@ -80,7 +86,11 @@
         return deferred.promise;
       },
       patch: function(manager) {
-        return Restangular.one('managers', 'me').patch(manager);
+        return Restangular.one('managers', 'me').patch(manager)
+          .then(function(manager){
+            _identity.manager = manager;
+            _setIdentity(_identity);
+          });
       }
     };
   }

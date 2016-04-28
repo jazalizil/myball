@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('SettingsController', SettingsController);
   /** @ngInject */
-  function SettingsController(UserService, gettextCatalog, $document, _, $log) {
+  function SettingsController(UserService, gettextCatalog, $document, _, $log, FiveService) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
@@ -41,24 +41,25 @@
         vm.data.fieldIndex += 1;
       }
     };
-    vm.upload = function() {
-      var toSend = _.differenceWith(vm.data.newIdentity, vm.data.identity, angular.equals);
-      $log.debug(toSend, vm.data.identity, vm.data.newIdentity);
+    vm.update = function() {
+      var toSend = _.omitBy(_.pick(vm.data.newIdentity.five, ['photo', 'phone', 'name']), function(val, key){
+        return vm.data.identity.five[key] === val;
+      });
       vm.data.isLoading = true;
-      UserService.patch(vm.data.newIdentity).then(function(){
-        UserService.identity(true).then(function(){
-          vm.data.isLoading = false;
-        }, function(){
-          vm.data.isLoading = false;
-        });
+      FiveService.update(toSend).then(function(res){
+        vm.data.isLoading = false;
+        vm.data.identity.five = res;
+        UserService.setIdentity(vm.data.newIdentity);
+        vm.data.identity.photo = vm.data.newIdentity.photo;
+        $log.debug(res);
       }, function(){
         vm.data.isLoading = false;
       });
     };
     var init = function () {
-      vm.data.photo.src = vm.data.identity.five.photo;
       vm.data.welcomeSentence = gettextCatalog.getString('Bonjour') + ' ' + vm.data.identity.manager.firstName;
       vm.data.newIdentity = _.cloneDeep(vm.data.identity);
+      $log.debug(vm.data.newIdentity);
     };
     init();
   }

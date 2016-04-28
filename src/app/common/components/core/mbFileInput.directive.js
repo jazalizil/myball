@@ -7,41 +7,56 @@
   angular.module('myBall')
     .directive('mbFileInput', mbFileInput);
   /** @ngInject */
-  function mbFileInput($log) {
+  function mbFileInput(Utils) {
     return {
       restrict: 'E',
       transclude: true,
       link: function(scope, elm) {
-
-        function readFile(file) {
-          var reader = new FileReader();
-          reader.onload = function(ev){
-            scope.$apply(function() {
-              $log.debug(file);
-              scope.file.data = event.target.result;
-              scope.file.type = file.type;
-              scope.file.name = file.name;
-              if (file.type.startsWith('image')) {
-                scope.file.src = 'data:' + file.type + ';base64,' + btoa(ev.target.result);
-                // scope.file.src = scope.file.data;
-              }
-              scope.loading = false;
-            })
-          };
-          reader.onloadstart = function() {
-            scope.$apply(function(){
-              scope.loading = true;
-            })
-          };
-          reader.readAsBinaryString(file);
-        }
-
         elm.bind('change', function(ev) {
           var file = ev.target.files[0];
           if (!file) {
             return;
           }
-          readFile(file);
+          if (file.type.startsWith('image')) {
+            scope.loading = true;
+            var image = angular.element('<img style="display:none">')[0];
+            var canvas = angular.element('<canvas style="display:none"></canvas>')[0];
+            scope.$apply(function(){
+              Utils.getB64(file).then(function(res){
+                var context = canvas.getContext('2d');
+                var maxWidth = 1920, maxHeight = 1080, width, height;
+                image.onload = function() {
+                  scope.$apply(function(){
+                    height = image.height;
+                    width = image.width;
+                    if (width > height) {
+                      if (width > maxWidth) {
+                        height *= maxWidth / width;
+                        width = maxWidth;
+                      }
+                    }
+                    else {
+                      if (height > maxHeight) {
+                        width *= maxHeight / height;
+                        height = maxHeight;
+                      }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    context.drawImage(image, 0, 0, width, height);
+                    scope.file = canvas.toDataURL(file.type);
+                    scope.loading = false;
+                    image.remove();
+                    canvas.remove();
+                  });
+                };
+                image.src = res;
+              });
+            });
+          }
+          else {
+            scope.file = file;
+          }
         })
       },
       scope: {

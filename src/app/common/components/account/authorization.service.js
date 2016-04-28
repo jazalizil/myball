@@ -1,7 +1,7 @@
 (function(){
   'use strict';
-  angular.module('myBall').factory('AuthorizationService', AuthorizationService);
-
+  angular.module('myBall')
+    .factory('AuthorizationService', AuthorizationService);
   /** @ngInject */
   function AuthorizationService(UserService, $state, $rootScope, Restangular, localStorageService) {
     var methods;
