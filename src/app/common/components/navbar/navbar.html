@@ -16,7 +16,7 @@
         </a>
       </div>
       <div class="search-ctn" layout layout-align="center center" ng-if="navbar.data.isSearching">
-        <i class="grey material-icons">search</i>
+        <i class="white material-icons">search</i>
         <md-autocomplete md-autofocus
                          md-search-text="navbar.searchText"
                          md-items="item in navbar.querySearch(navbar.searchText)"
@@ -39,19 +39,19 @@
           <span>{{navbar.data.identity.manager.fullName}}</span>
           <md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
         </md-button>
-        <md-menu-content class="bg-black-transparent grey" width="4">
+        <md-menu-content class="bg-black-transparent white" width="4">
           <md-menu-item class="md-toolbar-tool">
             <a ui-sref="settings">
               <md-button md-ink-ripple="#29C134" class="hover-green">
-                <md-icon md-font-set="grey material-icons">settings</md-icon>
-                <span class="valign grey" translate>Paramètres</span>
+                <md-icon md-font-set="white material-icons">settings</md-icon>
+                <span class="valign white" translate>Paramètres</span>
               </md-button>
             </a>
           </md-menu-item>
           <md-menu-item class="md-toolbar-tool">
             <md-button md-ink-ripple="#29C134" class="hover-green" ng-click="navbar.logout()">
-              <md-icon md-font-set="grey material-icons">exit_to_app</md-icon>
-              <span class="valign grey" translate>Se déconnecter</span>
+              <md-icon md-font-set="white material-icons">exit_to_app</md-icon>
+              <span class="valign white" translate>Se déconnecter</span>
             </md-button>
           </md-menu-item>
         </md-menu-content>
@@ -60,12 +60,12 @@
     <div ng-if="!navbar.data.identity" layout layout-align="center end">
       <md-button class="action-button hover-green" md-ink-ripple="#29C134" aria-label="signin">
         <a ui-sref="signin">
-          <span class="grey" translate>Connexion</span>
+          <span class="white" translate>Connexion</span>
         </a>
       </md-button>
       <md-button class="action-button hover-green" aria-label="register">
         <a ui-sref="register">
-          <span class="grey" md-ink-ripple="#29C134" translate>Inscription</span>
+          <span class="white" md-ink-ripple="#29C134" translate>Inscription</span>
         </a>
       </md-button>
     </div>
