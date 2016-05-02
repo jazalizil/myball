@@ -2,7 +2,7 @@
   "dev": {
     "Conf": {
       "DEBUG": true,
-      "WEBALL_API_BASE_URL": "https://54.93.86.36",
+      "WEBALL_API_BASE_URL": "http://54.93.86.36",
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
       "AMAZONE_S3_API_ACCESS_KEY": "AKIAIMSOGGGIT24IEX2Q",
