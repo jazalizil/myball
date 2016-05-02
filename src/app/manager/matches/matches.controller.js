@@ -87,18 +87,26 @@
           return key !== 'errors';
         });
         payload.match = vm.data.match;
+        $log.debug(payload);
         MatchesService.put(payload).then(function(match){
-          $mdSidenav('right').close();
-          $log.debug(match);
+          $log.debug(match.plain());
           if (vm.data.selectedHour.isHalf) {
             vm.data.selectedHour.value += 0.5;
           }
           hour = _.find(vm.data.hours, function(hour){
-            return hour.value === vm.selectedHour.value;
+            return hour.value === vm.data.selectedHour.value;
           });
+          match.status = 'ready';
+          match.teams = [{
+            status: 'ready'
+          },{
+            status: 'ready'
+          }];
           hour.matches[match.field] = match;
-          toastr.success(gettextCatalog.getString('Match crée avec succès'));
+          vm.data.allMatches.push(match);
           vm.data.isUploadingMatch = false;
+          $mdSidenav('right').close();
+          toastr.success(gettextCatalog.getString('Match crée avec succès'));
         }, function(){
           toastr.error(gettextCatalog.getString('Erreur'), gettextCatalog.getString('Serveur indisponible'));
           vm.data.isUploadingMatch = false;
@@ -139,15 +147,24 @@
           //                 over if match.endDate < currentDate;
           //                 free else
           _.each(vm.data.allMatches, function(match){
+            match.teams = match.teams.length ? match.teams : [{},{}];
             var matchDate = new Date(match.endDate);
             if (matchDate.getTime() < vm.data.today.realDate.getTime()) {
               match.status = 'over';
+              match.teams[0].status = 'over';
+              match.teams[1].status = 'over';
             }
             else if (match.maxPlayers !== match.currentPlayers) {
               match.status = 'waiting';
+              match.teams[0].status = match.teams[0].users && match.teams[0].users.length === match.maxPlayers / 2 ?
+                'ready' : 'waiting';
+              match.teams[1].status = match.teams[1].users && match.teams[1].users.length === match.maxPlayers / 2 ?
+                'ready' : 'waiting';
             }
             else {
               match.status = 'ready';
+              match.teams[0].status = 'ready';
+              match.teams[1].status = 'ready';
             }
           })
         });

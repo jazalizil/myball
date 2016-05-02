@@ -14,14 +14,14 @@
       labels: {
         manager: gettextCatalog.getString('Manager'),
         five: gettextCatalog.getString('Five'),
-        field: gettextCatalog.getString('Field'),
-        email: gettextCatalog.getString('Email adress'),
-        oldPassword: gettextCatalog.getString('Old password'),
-        newPassword: gettextCatalog.getString('New password'),
-        phone: gettextCatalog.getString('Phone number'),
-        fiveName: gettextCatalog.getString('Five name'),
-        fieldName: gettextCatalog.getString('Field name'),
-        available: gettextCatalog.getString('Available')
+        field: gettextCatalog.getString('Terrains'),
+        email: gettextCatalog.getString('Adresse mail'),
+        oldPassword: gettextCatalog.getString('Ancien mot de passe'),
+        newPassword: gettextCatalog.getString('Nouveau mot de passe'),
+        phone: gettextCatalog.getString('Numéro de téléphone'),
+        fiveName: gettextCatalog.getString('Nom du five'),
+        fieldName: gettextCatalog.getString('Nom du terrain'),
+        available: gettextCatalog.getString('Disponib')
       },
       photo: {},
       fieldIndex: 0

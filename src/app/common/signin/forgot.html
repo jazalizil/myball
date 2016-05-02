@@ -10,14 +10,16 @@
             <md-input-container flex class="md-icon-float md-block grey"
                                 ng-class="{'md-input-invalid' : forgot.resetForm.password.$error && !forgot.resetForm.password.$pristine}">
               <label>{{forgot.data.placeholders.password}}</label>
-              <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
-              <input required name="password" ng-model="forgot.data.password" type="password">
+              <md-icon>
+                <un-svg svg-src="/assets/icons/lock.svg"></un-svg>
+              </md-icon>              <input required name="password" ng-model="forgot.data.password" type="password">
             </md-input-container>
             <md-input-container flex class="md-icon-float md-block grey"
                                 ng-class="{'md-input-invalid' : forgot.resetForm.passwordConfirmation.$error && !forgot.resetForm.passwordConfirmation.$pristine}">
               <label>{{forgot.data.placeholders.passwordConfirmation}}</label>
-              <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
-              <input required name="password" ng-model="forgot.data.passwordConfirmation" type="password">
+              <md-icon>
+                <un-svg svg-src="/assets/icons/lock.svg"></un-svg>
+              </md-icon>              <input required name="password" ng-model="forgot.data.passwordConfirmation" type="password">
             </md-input-container>
             <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134"
                        v-busy="forgot.data.isLoading">
@@ -28,8 +30,9 @@
             <md-input-container flex class="mail-input md-icon-float md-block grey"
                                 ng-class="{'md-input-invalid' : forgot.forgotForm.email.$error && !fforgot.orgotForm.email.$pristine}">
               <label>{{forgot.data.placeholders.email}}</label>
-              <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
-              <input required name="email" ng-model="forgot.data.email" type="email">
+              <md-icon>
+                <un-svg svg-src="/assets/icons/email.svg"></un-svg>
+              </md-icon>              <input required name="email" ng-model="forgot.data.email" type="email">
             </md-input-container>
             <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134"
                        v-busy="forgot.data.isLoading">

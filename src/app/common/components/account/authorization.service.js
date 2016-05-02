@@ -10,8 +10,6 @@
         return UserService.identity().then(function() {
           var isAuthenticated;
           isAuthenticated = UserService.isAuthenticated();
-          // store isAuthenticated in rootscope in order to show/hide the sidebar
-          $rootScope.isAuthenticated = isAuthenticated;
           if ($rootScope.toState.data && $rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !UserService.isInAnyRole($rootScope.toState.data.roles)) {
             if (isAuthenticated === true) {
               $state.go('accessdenied');
@@ -38,7 +36,7 @@
         });
       },
       logout: function() {
-        UserService.authenticate(void 0);
+        UserService.authenticate(null);
         localStorageService.clearAll();
         $state.go('home');
       },

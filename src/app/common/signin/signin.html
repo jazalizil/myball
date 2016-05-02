@@ -21,13 +21,18 @@
             <md-input-container flex="60" layout="row" class="mail-input md-icon-float md-block grey"
                                 ng-class="{'md-input-invalid' : signin.signinForm.email.$invalid && !signin.signinForm.email.$pristine}">
               <label>{{signin.datas.placeholders.email}}</label>
-              <md-icon class="grey" md-svg-src="/assets/icons/email.svg"></md-icon>
+              <md-icon>
+                <un-svg svg-src="/assets/icons/email.svg"></un-svg>
+              </md-icon>
               <input required name="email" ng-model="signin.datas.login" type="email">
             </md-input-container>
             <md-input-container flex class="md-icon-float md-block white no-errors no-margin-bottom"
                                 ng-class="{'md-input-invalid' : signin.signinForm.password.$invalid && !signin.signinForm.password.$pristine}">
               <label>{{signin.datas.placeholders.password}}</label>
-              <md-icon class="grey" md-font-set="material-icons">lock</md-icon>
+              <md-icon>
+                <un-svg svg-src="/assets/icons/lock.svg"></un-svg>
+              </md-icon>
+              <!--<un-svg svg-src="/assets/icons/lock.svg"></un-svg>-->
               <input required name="password" ng-model="signin.datas.password" type="password">
             </md-input-container>
             <a ui-sref="forgot" class="grey pointer forgot" layout layout-align="end start">

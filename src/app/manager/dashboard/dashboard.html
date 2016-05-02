@@ -1,20 +1,39 @@
-<div id="main">
+<div id="dashboard">
 
   <mb-navbar opaq></mb-navbar>
 
-  <md-content class="scroll-content bg-black">
-    <section>
-      <mb-carousel timeout="5000" imgs="main.data.imgs"/>
+  <md-content class="full-height bg-black">
+    <section class="fixed full-height bg">
+      <!--<mb-carousel timeout="5000" imgs="dashboard.data.imgs"/>-->
+      <img class="full-width" ng-src="{{dashboard.data.identity.five.photo}}" alt="five photo">
     </section>
-    <section id="content" layout="row">
-      <md-card class="bg-black" flex="20">
-        <div class="md-accent md-toolbar-tools white" layout>
-          <span translate>Matchs organisés</span>
+    <section id="content" layout="column" class="full-width full-height">
+      <div class="full-width white uppercase" layout="row" layout-margin layout-align="start center">
+        <span layout flex="15"></span>
+        <div class="bg-black full-width titles" layout="column" layout-align="center start" flex>
+          <div layout="row">42</div>
+          <div layout="row">matchs en attente</div>
         </div>
-        <md-card-content>
-          <highchart id="chart1" options="main.data.chartConfig"></highchart>
-        </md-card-content>
-      </md-card>
+        <div class="bg-black full-width titles" layout="column" layout-align="center start" flex>
+          <div layout="row">42</div>
+          <div layout="row">matchs complétés</div>
+        </div>
+        <div class="bg-black full-width titles" layout="column" layout-align="center start" flex>
+          <div layout="row">42</div>
+          <div layout="row">matchs organisés</div>
+        </div>
+        <span layout flex="15"></span>
+      </div>
+      <div class="full-width" layout="row" layout-align="center center">
+        <md-card class="bg-black fit-width" layout="column" flex="70" layout-align="start center">
+          <div class="md-accent md-toolbar-tools white" layout>
+            <span translate>Matchs organisés</span>
+          </div>
+          <md-card-content flex="100">
+            <highchart id="chart1" options="dashboard.data.chartConfig"></highchart>
+          </md-card-content>
+        </md-card>
+      </div>
     </section>
   </md-content>
 </div>

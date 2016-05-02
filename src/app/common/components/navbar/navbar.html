@@ -10,8 +10,8 @@
     </a>
     <span flex></span>
     <div ng-if="navbar.data.identity" class="full-width" layout layout-align="center center">
-      <div class="links-ctn" layout-padding layout-align="start center" ng-hide="navbar.data.isSearching">
-        <a ng-repeat="link in navbar.data.links" class="navbar-link" ui-sref="{{link.url}}" ui-sref-active="active bold">
+      <div class="links-ctn" layout="row" layout-padding layout-align="start center" ng-hide="navbar.data.isSearching">
+        <a ng-repeat="link in navbar.data.links" class="navbar-link" layout flex="33" ui-sref="{{link.url}}" ui-sref-active="active bold">
           {{link.text}}
         </a>
       </div>

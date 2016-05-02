@@ -33,14 +33,15 @@
                     <div layout="row" layout-align="center center" class="fit-width fit-height">
                       <div flex="45" layout layout-align="center center">
                         <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
-                        <span class="red">&nbsp;{{hour.matches[slot._id].teams[0].length || '0'}}</span>
+                        <span class="{{matches.data.statusToColor[hour.matches[slot._id].teams[0].status].color}}">
+                          &nbsp;{{hour.matches[slot._id].teams[0].length || '0'}}</span>
                       </div>
                       <div class="grey uppercase" flex="10" layout layout-align="center center">
                         vs
                       </div>
                       <div flex="45" layout layout-align="center center">
                         <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
-                        <span class="{{matches.data.statusToColor[hour.matches[slot._id].status].color}}">
+                        <span class="{{matches.data.statusToColor[hour.matches[slot._id].teams[1].status].color}}">
                           &nbsp;{{hour.matches[slot._id].teams[1].length || '0'}}
                         </span>
                       </div>
