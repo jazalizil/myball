@@ -7,13 +7,16 @@
   }
   #content {
     padding-top: @header-height;
-    .bg-black {
-      z-index: 1;
-    }
+    .relative;
     .titles {
       line-height: 1.5;
       padding: @padding-3x;
       font-size: 14px;
+      background: @black-transparent-2;
+      &:hover {
+        .transition-hover;
+        .bg-black;
+      }
     }
   }
 }

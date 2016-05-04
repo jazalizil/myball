@@ -114,6 +114,10 @@ html {
   color: @black;
 }
 
+.blue {
+  color: @blue;
+}
+
 .yellow {
   color: @yellow;
 }
@@ -279,7 +283,11 @@ html {
 }
 
 .margin-r-3x {
-  margin-left: @padding-3x;
+  margin-right: @padding-3x;
+}
+
+.margin-3x {
+  margin: @padding-3x;
 }
 
 .uppercase {
@@ -576,6 +584,48 @@ md-card {
       border-left: solid 1px @true-black;
     }
   }
+}
+
+md-select {
+  .white;
+}
+md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
+  .white;
+}
+md-select-menu {
+  md-content {
+    background: none;
+    md-option {
+      .transition-hover;
+      background-color: @mb-color;
+      &.hover-green {
+        background-color: @black-transparent-2 !important;
+        &:hover {
+          background-color: @mb-color !important;
+          .black;
+        }
+      }
+      &:hover {
+        .white;
+        .bold;
+        background-color: @black-transparent-2 !important;
+      }
+    }
+  }
+}
+
+.md-select-value .md-select-icon:after {
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.45em;
+  left: 0.15em;
+  position: relative;
+  vertical-align: top;
+  width: 0.45em;
+  top: 2px;
+  transform: rotate(135deg);
 }
 
 a.md-button.md-default-theme:hover, a.md-button:hover,

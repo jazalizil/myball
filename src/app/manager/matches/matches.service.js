@@ -39,6 +39,19 @@
           background: 'bg-grey',
           color: 'grey'
         }
+      },
+      fetchToday : function() {
+        var date = new Date(), today, tomorrow;
+        date.setHours(0);
+        today = date.toJSON();
+        date.setHours(23);
+        tomorrow = date.toJSON();
+        return Restangular.all('matches/five')
+          .get(_identity.five._id, {
+            startDate : today,
+            endDate: tomorrow,
+            sort: 'startDate'
+          });
       }
     }
   }

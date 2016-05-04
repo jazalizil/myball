@@ -3,8 +3,49 @@
   <mb-navbar opaq></mb-navbar>
 
   <md-content class="full-height bg-black">
-    <section>
-      <mb-carousel timeout="5000" imgs="main.data.imgs"/>
+    <section class="bg full-width">
+      <img class="full-width" ng-src="{{main.data.content.img}}" alt="soccer indoor">
+      <div layout="column" class="fit-height fit-width bg-black-transparent relative white pad-4x">
+        <div layout="row" class="fit-height fit-width" layout-align="center end">
+          <span translate ng-show="main.data.matches.length" translate-n="main.data.matches.length"
+                translate-plural="Aujourd'hui, {{$count}} matches sont prévus.">Aujourd'hui, 1 match est prévu.</span>
+          <span translate ng-hide="main.data.matches.length">Aujourd'hui, aucun match n'est prévu.</span>
+        </div>
+        <div class="fit-height fit-width" layout="row" layout-align="end end">
+          {{main.data.calendar.daysDisplayed[main.data.calendar.date.getDay()].shortName}}.&nbsp;
+          <span class="bold">{{main.data.calendar.date | date: 'HH:mm:ss'}}</span>
+        </div>
+      </div>
+    </section>
+    <section class="content relative bg-black" layout="column" layout-align="center center">
+      <div layout="column" flex="15" layout-align="start center">
+        <md-select ng-model="main.data.slotIndex" aria-label="team size" ng-change="main.refreshFields()">
+          <md-option ng-repeat="slot in main.data.slots" ng-value="$index" class="white bg-black-transparent-2 hover-green"
+                     ng-selected="$index === main.data.slotIndex" md-ink-ripple="#29C134">
+            {{slot.text}}
+          </md-option>
+        </md-select>
+      </div>
+      <div class="fit-width" layout="column" flex="85" layout-align="center center">
+        <div layout="column" class="fields" layout-align="center center">
+          <div layout="row" class="fit-width" ng-repeat="fields in main.data.fieldsChunked"
+               layout-align="center center" flex>
+            <div class="field bg-black-transparent white fit-width margin-3x" layout="column" flex="25"
+                 ng-repeat="field in fields" layout-padding>
+              <div class="fit-width fit-height" layout="row" layout-align="center end">
+                {{field.name}}
+              </div>
+              <div class="fit-width fit-height status uppercase {{main.data.statuses[field.status].class}}" layout="row"
+                   layout-align="center start">
+                {{main.data.statuses[field.status].text}}
+              </div>
+              <div class="fit-height fit-width infos" layout="row" layout-align="start end">
+                <md-icon ng-if="field.match" class="no-margin" md-svg-src="assets/icons/created-with-{{field.match.createdWith}}.svg"></md-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </md-content>
 </div>

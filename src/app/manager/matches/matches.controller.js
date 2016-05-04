@@ -172,9 +172,9 @@
 
     var init = function() {
       vm.data.fields = vm.data.identity.five.fields;
-      $rootScope.isLoading = true;
+      $scope.$emit('loading', true);
       fetchMatches().then(function(){
-        $rootScope.isLoading = false;
+        $scope.$emit('loading', false);
       });
     };
     init();

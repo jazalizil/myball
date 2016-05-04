@@ -32,8 +32,8 @@
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
           <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
-          <md-select ng-model="matches.data.match.maxPlayers" aria-label="team size">
-            <md-option ng-repeat="size in matches.data.teamSizes" ng-value="size.value"
+          <md-select class="white" ng-model="matches.data.match.maxPlayers" aria-label="team size">
+            <md-option class="bg-green" ng-repeat="size in matches.data.teamSizes" ng-value="size.value"
                        ng-selected="size.value === matches.data.match.maxPlayers">
               {{size.name}}
             </md-option>
