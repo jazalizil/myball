@@ -8,7 +8,7 @@
     vm.datas = {
       isLoading: false,
       placeholders: {
-        email: gettextCatalog.getString("Addresse email"),
+        email: gettextCatalog.getString("Adresse email"),
         password: gettextCatalog.getString("Mot de passe")
       },
       bgUrl: Conf.CDN_BASE_URL + 'images/field-factory.jpg'
