@@ -3,8 +3,13 @@
   angular.module('myBall').controller('StartController', StartController);
 
   /** @ngInject */
-  function StartController($state, $log) {
+  function StartController($state, $log, UserService) {
     $log.debug('startCtrl');
-    $state.go('signin');
+    if (UserService.isIdentityResolved()) {
+      $state.go('main');
+    }
+    else {
+      $state.go('signin');
+    }
   }
 })();
