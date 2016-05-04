@@ -9,53 +9,57 @@
     vm.data = {
       identity: UserService.getIdentity(),
       content: {
-        img: Conf.CDN_BASE_URL + "images/footsalle-field.png",
+        img: Conf.CDN_BASE_URL + "images/footsalle-field.png"
       },
       slots: [],
       calendar: CalendarService.getDatas(),
       statuses: {
         in_progress: {
           class: 'yellow',
-          text: gettextCatalog.getString('match en cours')
+          text: gettextCatalog.getString('Match en cours')
         },
         available: {
           class: 'green',
-          text: gettextCatalog.getString('disponible')
+          text: gettextCatalog.getString('Disponible')
         },
         over: {
           class: 'blue',
-          text: gettextCatalog.getString('terminé')
+          text: gettextCatalog.getString('Terminé')
         }
       }
     };
 
     var getFieldStatus = function(field) {
       var endDate, startDate, now;
-      if (!field.match) {
+      if (!field.matches) {
         field.status = 'available';
         return;
       }
-      startDate = new Date(field.match.startDate);
-      endDate = new Date(field.match.endDate);
-      startDate = startDate.getTime();
-      endDate = endDate.getTime();
-      now = vm.data.calendar.date.getTime();
-      if (endDate > now && startDate < now) {
-        field.status = 'in_progress';
-      }
-      else if (endDate < now) {
-        field.status = 'available';
-      }
-      else {
-        field.status = 'over';
-      }
+      _.each(field.matches, function(match){
+        startDate = new Date(match.startDate);
+        endDate = new Date(match.endDate);
+        now = new Date(vm.data.calendar.date.toJSON());
+        startDate = startDate.getTime();
+        endDate = endDate.getTime();
+        now.setHours(vm.data.slots[vm.data.slotIndex].hour);
+        now = now.getTime();
+        if (endDate > now && startDate < now && now === vm.data.calendar.date.getTime()) {
+          field.status = 'in_progress';
+        }
+        else if (endDate < now && field.status !== 'in_progress') {
+          field.status = 'available';
+        }
+        else {
+          field.status = 'over';
+        }
+      });
     };
 
     vm.refreshFields = function() {
       _.each(vm.data.fieldsChunked, function(fields) {
         _.each(fields, function(field){
           if (vm.data.slots[vm.data.slotIndex].matches[field._id]) {
-            field.match = vm.data.slots[vm.data.slotIndex].matches[field._id][0];
+            field.matches = vm.data.slots[vm.data.slotIndex].matches[field._id];
           }
           getFieldStatus(field);
           $log.debug('status', vm.data.statuses[field.status]);
@@ -77,6 +81,7 @@
             vm.data.slotIndex = vm.data.slots.length;
           }
           vm.data.slots.push({
+            hour: slotTime,
             text: slotTime + 'h - ' + (slotTime + 1) + 'h',
             matches: _.groupBy(_.filter(matches, function(match){
               var date = new Date(match.startDate);
@@ -89,9 +94,10 @@
         $scope.$emit('loading', false);
       });
       $scope.$emit('loading', true);
-      $interval(function(){
+      var timer = $interval(function(){
         vm.data.calendar.date = new Date();
-      }, 1000).then(function(){
+      }, 1000);
+      timer.then(function(){
         _.each(vm.data.fieldsChunked, function(fields){
           _.each(fields, getFieldStatus);
         })

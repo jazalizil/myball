@@ -40,7 +40,7 @@
                 {{main.data.statuses[field.status].text}}
               </div>
               <div class="fit-height fit-width infos" layout="row" layout-align="start end">
-                <md-icon ng-if="field.match" class="no-margin" md-svg-src="assets/icons/created-with-{{field.match.createdWith}}.svg"></md-icon>
+                <md-icon ng-if="field.matches.length" class="no-margin" md-svg-src="assets/icons/created-with-{{field.matches[0].createdWith}}.svg"></md-icon>
               </div>
             </div>
           </div>

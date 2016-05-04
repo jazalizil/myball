@@ -78,7 +78,7 @@
         yAxis: {
           gridLineColor: '#000000'
         },
-        useHighStocks: false,
+        useHighStocks: false
         // size: {
         //   width: 200,
         //   height: 100
