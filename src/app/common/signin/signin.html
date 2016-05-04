@@ -14,8 +14,8 @@
           <div translate class="fit-width" layout layout-align="center center">
             Bienvenue sur votre espace d'administration.
           </div>
-          <form class="margin-t-3x" layout="column" ng-submit="signin.login()"  novalidate name="signin.signinForm">
-            <md-input-container flex="60" layout="row" class="mail-input md-icon-float md-block white"
+          <form class="margin-t-12x" layout="column" ng-submit="signin.login()"  novalidate name="signin.signinForm">
+            <md-input-container flex="60" layout="row" class="mail-input md-icon-float md-block white no-errors"
                                 ng-class="{'md-input-invalid' : signin.signinForm.email.$invalid && !signin.signinForm.email.$pristine}">
               <label>{{signin.datas.placeholders.email}}</label>
               <md-icon>
@@ -34,7 +34,7 @@
             <a ui-sref="forgot" class="white pointer forgot" layout layout-align="end start">
               <span translate>Mot de passe oublié?</span>
             </a>
-            <md-button type="submit" class="margin-t-5x white hover-green" md-ink-ripple="#29C134"
+            <md-button type="submit" class="margin-t-8x white hover-green" md-ink-ripple="#29C134"
                        v-busy="signin.datas.isLoading">
               <span translate>connexion</span>
             </md-button>
