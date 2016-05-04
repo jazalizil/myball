@@ -16,6 +16,11 @@
     
     vm.login = function() {
       vm.datas.isLoading = true;
+      if (vm.signinForm.$invalid) {
+        vm.datas.isLoading = false;
+        toastr.error(gettextCatalog.getString('Mauvaises informations'), gettextCatalog.getString('Erreur'));
+        return;
+      }
       AuthorizationService.login(vm.datas.login, vm.datas.password).then(function() {
         $state.go('main');
         vm.datas.isLoading = false;
