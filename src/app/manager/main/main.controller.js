@@ -4,7 +4,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($log, UserService, Conf, MatchesService, $scope, CalendarService, $interval, _, gettextCatalog) {
+  function MainController($log, UserService, Conf, MatchesService, $rootScope, CalendarService, $interval, _, gettextCatalog) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
@@ -91,9 +91,11 @@
         });
         vm.data.fieldsChunked = _.chunk(vm.data.identity.five.fields, 3);
         vm.refreshFields();
-        $scope.$emit('loading', false);
+        $rootScope.$broadcast('loading', false);
+      }, function(){
+        $rootScope.$broadcast('loading', false);
       });
-      $scope.$emit('loading', true);
+      $rootScope.$broadcast('loading', true);
       $interval(function(){
         vm.data.calendar.date = new Date();
         if (vm.data.calendar.date.getMinutes() === 30 && vm.data.calendar.date.getSeconds() === 0) {

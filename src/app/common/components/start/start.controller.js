@@ -5,11 +5,10 @@
   /** @ngInject */
   function StartController($state, $log, UserService) {
     $log.debug('startCtrl');
-    if (UserService.isIdentityResolved()) {
+    UserService.identity(true).then(function(){
       $state.go('main');
-    }
-    else {
+    }, function(){
       $state.go('signin');
-    }
+    })
   }
 })();

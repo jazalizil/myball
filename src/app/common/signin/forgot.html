@@ -3,44 +3,54 @@
     <img class="full-width" ng-src="{{forgot.data.bgUrl}}" alt="field factory">
   </div>
   <md-content class="full-height" layout-fill layout layout-align="center start">
-    <div layout="row" layout-padding class="full-width fit-height">
+    <div layout="row" class="full-width fit-height">
       <div class="fit-height fit-width" layout="column" layout-align="center center">
         <div layout="row" layout-align="center center" class="fit-height full-width" ng-switch="forgot.data.resetPassword">
-          <form layout="column" ng-submit="forgot.resetPassword()" flex="30" novalidate name="forgot.resetForm" ng-switch-when="true">
-            <md-input-container class="md-icon-float md-block white no-errors"
-                                ng-class="{'md-input-invalid' : forgot.resetForm.password.$error && !forgot.resetForm.password.$pristine}">
-              <label>{{forgot.data.placeholders.password}}</label>
-              <md-icon>
-                <un-svg svg-src="/assets/icons/lock.svg"></un-svg>
-              </md-icon>
-              <input required name="password" ng-model="forgot.data.password" type="password">
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block white no-errors"
-                                ng-class="{'md-input-invalid' : forgot.resetForm.passwordConfirmation.$error && !forgot.resetForm.passwordConfirmation.$pristine}">
-              <label>{{forgot.data.placeholders.passwordConfirmation}}</label>
-              <md-icon>
-                <un-svg svg-src="/assets/icons/lock.svg"></un-svg>
-              </md-icon>
-              <input required name="password" ng-model="forgot.data.passwordConfirmation" type="password">
-            </md-input-container>
-            <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134"
-                       v-busy="forgot.data.isLoading">
-              <span class="bold" translate>réinitialiser le mot de passe</span>
-            </md-button>
-          </form>
-          <form layout="column" ng-submit="forgot.sendMail()" flex="30" novalidate name="forgot.forgotForm" ng-switch-default>
-            <md-input-container class="mail-input md-icon-float md-block white"
-                                ng-class="{'md-input-invalid' : forgot.forgotForm.email.$error && !forgotForm.email.$pristine}">
-              <label>{{forgot.data.placeholders.email}}</label>
-              <md-icon>
-                <un-svg svg-src="/assets/icons/email.svg"></un-svg>
-              </md-icon>              <input required name="email" ng-model="forgot.data.email" type="email">
-            </md-input-container>
-            <md-button type="submit" class="white hover-green" md-ink-ripple="#29C134"
-                       v-busy="forgot.data.isLoading">
-              <span class="bold" translate>envoyer</span>
-            </md-button>
-          </form>
+          <div layout="column" layout-align="center center" class="white full-width fit-height">
+            <div class="fit-width" layout layout-align="center center">
+              <a href ui-sref="start">
+                <un-svg style="height:80px;" class="fill-white" svg-src="/assets/icons/myball-txt.svg">
+              </a>
+            </div>
+            <div translate class="fit-width" layout layout-align="center center">
+              Bienvenue sur votre espace d'administration.
+            </div>
+            <form class="margin-t-5x" layout="column" ng-submit="forgot.resetPassword()" flex="30" novalidate name="forgot.resetForm" ng-switch-when="true">
+              <md-input-container class="md-icon-float md-block white no-errors"
+                                  ng-class="{'md-input-invalid' : forgot.resetForm.password.$error && !forgot.resetForm.password.$pristine}">
+                <label>{{forgot.data.placeholders.password}}</label>
+                <md-icon>
+                  <un-svg svg-src="/assets/icons/lock.svg"></un-svg>
+                </md-icon>
+                <input required name="password" ng-model="forgot.data.password" type="password">
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block white no-errors"
+                                  ng-class="{'md-input-invalid' : forgot.resetForm.passwordConfirmation.$error && !forgot.resetForm.passwordConfirmation.$pristine}">
+                <label>{{forgot.data.placeholders.passwordConfirmation}}</label>
+                <md-icon>
+                  <un-svg svg-src="/assets/icons/lock.svg"></un-svg>
+                </md-icon>
+                <input required name="password" ng-model="forgot.data.passwordConfirmation" type="password">
+              </md-input-container>
+              <md-button type="submit" class="margin-t-3x white hover-green" md-ink-ripple="#29C134"
+                         v-busy="forgot.data.isLoading">
+                <span class="bold" translate>réinitialiser le mot de passe</span>
+              </md-button>
+            </form>
+            <form class="margin-t-5x" layout="column" ng-submit="forgot.sendMail()" flex="30" novalidate name="forgot.forgotForm" ng-switch-default>
+              <md-input-container class="mail-input md-icon-float md-block white"
+                                  ng-class="{'md-input-invalid' : forgot.forgotForm.email.$error && !forgotForm.email.$pristine}">
+                <label>{{forgot.data.placeholders.email}}</label>
+                <md-icon>
+                  <un-svg svg-src="/assets/icons/email.svg"></un-svg>
+                </md-icon>              <input required name="email" ng-model="forgot.data.email" type="email">
+              </md-input-container>
+              <md-button type="submit" class="margin-t-3x white hover-green" md-ink-ripple="#29C134"
+                         v-busy="forgot.data.isLoading">
+                <span class="bold" translate>envoyer</span>
+              </md-button>
+            </form>
+          </div>
         </div>
         <div class="fit-width white footer" layout="row" layout-align="center end">
           <span class="fit-width" layout layout-align="start center" translate>

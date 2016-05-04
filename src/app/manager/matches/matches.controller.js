@@ -7,7 +7,8 @@
   angular.module('myBall')
     .controller('MatchesController', MatchesController);
   /** @ngInject */
-  function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog, $rootScope, toastr, $log) {
+  function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog, toastr,
+                             $log, $rootScope) {
     var vm = this;
     vm.data = {
       identity: angular.copy(UserService.getIdentity()),
@@ -172,9 +173,11 @@
 
     var init = function() {
       vm.data.fields = vm.data.identity.five.fields;
-      $scope.$emit('loading', true);
+      $rootScope.$broadcast('loading', true);
       fetchMatches().then(function(){
-        $scope.$emit('loading', false);
+        $rootScope.$broadcast('loading', false);
+      }, function(){
+        $rootScope.$broadcast('loading', false);
       });
     };
     init();

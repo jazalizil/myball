@@ -13,7 +13,7 @@
       url: '/',
       controller: 'StartController',
       controllerAs: 'start',
-      templateUrl: ''
+      templateUrl: 'app/common/components/start/splash.html'
     }).state('protected', {
       abstract: true,
       resolve: {

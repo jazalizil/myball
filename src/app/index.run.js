@@ -12,7 +12,7 @@
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.lang = 'fr';
-    Restangular.setFullRequestInterceptor(function(el, op, route, url, head, params) {
+    Restangular.addFullRequestInterceptor(function(el, op, route, url, head, params) {
       var curHeaders, token;
       curHeaders = head;
       token = params.token || UserService.getToken();
@@ -20,6 +20,7 @@
       if (token !== void 0 && url.startsWith(Conf.WEBALL_API_BASE_URL)) {
         curHeaders['x-access-token'] = token;
       }
+      $rootScope.$broadcast('loading', true);
       return {
         element: el,
         params: params,
