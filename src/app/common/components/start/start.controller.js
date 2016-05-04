@@ -5,6 +5,6 @@
   /** @ngInject */
   function StartController($state, $log) {
     $log.debug('startCtrl');
-    $state.go('home');
+    $state.go('signin');
   }
 })();
