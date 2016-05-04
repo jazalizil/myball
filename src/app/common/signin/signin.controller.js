@@ -15,6 +15,10 @@
     };
     
     vm.login = function() {
+      if (!vm.datas.login || !vm.datas.password) {
+        toastr.error(gettextCatalog.getString('Mauvaises informations'), gettextCatalog.getString('Erreur'));
+        return;
+      }
       vm.datas.isLoading = true;
       AuthorizationService.login(vm.datas.login, vm.datas.password).then(function() {
         $state.go('main');

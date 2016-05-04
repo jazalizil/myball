@@ -170,6 +170,10 @@ html {
   fill: @grey;
 }
 
+.fill-white {
+  fill: @white;
+}
+
 .fill-black {
   fill: @black;
 }
@@ -385,7 +389,7 @@ html {
 md-input-container {
   label {
     font-size: 1rem;
-    color: @grey !important;
+    color: @white !important;
   }
   &.no-errors {
     .md-errors-spacer {
@@ -509,7 +513,7 @@ md-toolbar {
   &.grey {
     .md-button {
       svg {
-        .fill-grey;
+        .fill-white;
       }
     }
   }
@@ -650,7 +654,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: @grey !important;
+  -webkit-text-fill-color: @white !important;
 }
 
 // End angular material rebranding
