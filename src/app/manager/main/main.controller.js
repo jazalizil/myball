@@ -94,14 +94,14 @@
         $scope.$emit('loading', false);
       });
       $scope.$emit('loading', true);
-      var timer = $interval(function(){
+      $interval(function(){
         vm.data.calendar.date = new Date();
+        if (vm.data.calendar.date.getMinutes() === 30 && vm.data.calendar.date.getSeconds() === 0) {
+          _.each(vm.data.fieldsChunked, function(fields){
+            _.each(fields, getFieldStatus);
+          })        
+        }
       }, 1000);
-      timer.then(function(){
-        _.each(vm.data.fieldsChunked, function(fields){
-          _.each(fields, getFieldStatus);
-        })
-      });
     };
     init();
   }

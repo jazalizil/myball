@@ -28,12 +28,6 @@
     }).state('accessdenied', {
       parent: 'public',
       url: '/accessdenied'
-    }).state('home', {
-      parent: 'public',
-      url: '/home',
-      templateUrl: 'app/common/home/home.html',
-      controller: 'HomeController',
-      controllerAs: 'home'
     }).state('signin', {
       parent: 'public',
       url: '/signin',

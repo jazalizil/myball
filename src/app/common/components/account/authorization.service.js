@@ -38,7 +38,7 @@
       logout: function() {
         UserService.authenticate(null);
         localStorageService.clearAll();
-        $state.go('home');
+        $state.go('signin');
       },
       register: function(five) {
         return Restangular.one('/').post('managers', five).then(function() {

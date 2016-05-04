@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('ForgotController', ForgotController);
   /** @ngInject */
-  function ForgotController(toastr, AuthorizationService, gettextCatalog, $stateParams, Conf, $state, $scope, $log) {
+  function ForgotController(toastr, AuthorizationService, gettextCatalog, $stateParams, Conf, $state) {
     var vm = this;
     vm.data = {
       placeholders: {
