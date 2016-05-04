@@ -28,7 +28,7 @@
           </form>
           <form layout="column" ng-submit="forgot.sendMail()" flex="30" novalidate name="forgot.forgotForm" ng-switch-default>
             <md-input-container flex class="mail-input md-icon-float md-block white"
-                                ng-class="{'md-input-invalid' : forgot.forgotForm.email.$error && !fforgot.orgotForm.email.$pristine}">
+                                ng-class="{'md-input-invalid' : forgot.forgotForm.email.$error && !forgotForm.email.$pristine}">
               <label>{{forgot.data.placeholders.email}}</label>
               <md-icon>
                 <un-svg svg-src="/assets/icons/email.svg"></un-svg>

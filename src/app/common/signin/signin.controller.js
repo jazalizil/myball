@@ -15,12 +15,11 @@
     };
     
     vm.login = function() {
-      vm.datas.isLoading = true;
-      if (vm.signinForm.$invalid) {
-        vm.datas.isLoading = false;
+      if (!vm.datas.login || !vm.datas.password) {
         toastr.error(gettextCatalog.getString('Mauvaises informations'), gettextCatalog.getString('Erreur'));
         return;
       }
+      vm.datas.isLoading = true;
       AuthorizationService.login(vm.datas.login, vm.datas.password).then(function() {
         $state.go('main');
         vm.datas.isLoading = false;
