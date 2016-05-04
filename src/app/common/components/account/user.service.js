@@ -69,7 +69,7 @@
         var deferred;
         deferred = $q.defer();
         if (force === true) {
-          _identity = void 0;
+          _setIdentity(null);
         }
         if (_identity) {
           _authenticated = true;

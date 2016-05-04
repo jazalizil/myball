@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('DashboardController', DashboardController);
   /** @ngInject */
-  function DashboardController(UserService, $scope, MatchesService, gettextCatalog, $log) {
+  function DashboardController(UserService, $rootScope, MatchesService, gettextCatalog, $log) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity()
@@ -90,11 +90,13 @@
       var params = {};
       params.startDate = new Date(2015, 0, 1);
       params.endDate = new Date(2042, 12, 31);
-      $scope.$emit('loading', true);
+      $rootScope.$broadcast('loading', true);
       MatchesService.fetchAll(params).then(function(res){
         vm.data.matches = res;
         $log.debug(res);
-        $scope.$emit('loading', false);
+        $rootScope.$broadcast('loading', false);
+      }, function(){
+        $rootScope.$broadcast('loading', false);
       });
       vm.data.imgs = [{
         src: vm.data.identity.five.photo,

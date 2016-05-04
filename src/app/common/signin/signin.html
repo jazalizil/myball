@@ -3,18 +3,18 @@
     <img class="full-width" ng-src="{{signin.datas.bgUrl}}" alt="field factory">
   </div>
   <md-content class="full-height" layout-fill layout layout-align="center start">
-    <div layout="row" layout-padding class="full-width fit-height">
+    <div layout="row" class="full-width fit-height">
       <div class="fit-width fit-height" layout="column" layout-align="center center">
         <div layout="column" layout-align="center center" class="white full-width fit-height">
           <div class="fit-width" layout layout-align="center center">
             <a href ui-sref="start">
-              <un-svg style="height:80px;" class="fill-white" svg-src="/assets/icons/weball-txt.svg">
+              <un-svg style="height:80px;" class="fill-white" svg-src="/assets/icons/myball-txt.svg">
             </a>
           </div>
           <div translate class="fit-width" layout layout-align="center center">
             Bienvenue sur votre espace d'administration.
           </div>
-          <form class="margin-t-12x" layout="column" ng-submit="signin.login()"  novalidate name="signin.signinForm">
+          <form class="margin-t-5x" layout="column" ng-submit="signin.login()"  novalidate name="signin.signinForm">
             <md-input-container layout="row" class="mail-input md-icon-float md-block white no-errors"
                                 ng-class="{'md-input-invalid' : signin.signinForm.email.$invalid && !signin.signinForm.email.$pristine}">
               <label>{{signin.datas.placeholders.email}}</label>
@@ -34,13 +34,13 @@
             <a ui-sref="forgot" class="white pointer forgot" layout layout-align="end start">
               <span translate>Mot de passe oublié?</span>
             </a>
-            <md-button type="submit" class="margin-t-12x white hover-green" md-ink-ripple="#29C134"
+            <md-button type="submit" class="margin-t-8x white hover-green" md-ink-ripple="#29C134"
                        v-busy="signin.datas.isLoading">
               <span class="bold" translate>connexion</span>
             </md-button>
           </form>
         </div>
-        <div class="fit-width white footer" layout="row" layout-align="center end">
+        <div class="fit-width white footer" layout="row" layout-align="center center">
           <span class="fit-width" layout layout-align="start center" translate>
             Copyright &#169; 2016 myBall. Tout droits réservés
           </span>
