@@ -25,7 +25,21 @@
 
 		function initiate() {
 			vm.me = UserService.getIdentity();
-			if (vm.me.matchs) {
+			console.log(vm.me);
+
+			/* Valeurs en dur */
+			vm.me._nMatches.total = 69;
+			vm.me._nMatches.win = 33;
+			vm.me._nMatches.nul = 20;
+			vm.me._nMatches.loose = 16;
+			vm.me._relationShip.nRelations = 42;
+
+			/* Calcule les % */
+			vm.me._nMatches.winPercent = Math.round((vm.me._nMatches.total * vm.me._nMatches.win) / 100);
+			vm.me._nMatches.nulPercent = Math.round((vm.me._nMatches.total * vm.me._nMatches.nul) / 100);
+			vm.me._nMatches.loosePercent = (vm.me._nMatches.total > 0) ? 100 - vm.me._nMatches.winPercent - vm.me._nMatches.nulPercent : 0;
+
+			if (vm.me && vm.me.matchs) {
 				getNextThreeIncoming();
 			}
 		}

@@ -1,7 +1,9 @@
 {
   "name": "myBall",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "angular-datetime-input": "^3.1.1"
+  },
   "scripts": {
     "test": "gulp test"
   },

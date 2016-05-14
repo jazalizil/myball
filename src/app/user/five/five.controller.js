@@ -24,6 +24,11 @@
 					};
 				}
 				vm.markers = markers;
+
+				vm.customIcon = {
+					"scaledSize": [40, 60],
+					"url": "../../assets/icons/weball-icon.svg"
+				};
 			});
 		}
 

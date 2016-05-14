@@ -20,6 +20,7 @@
 				'chart.js',
 				'ngPercentDisplay',
 				'ngMap',
-				'vcRecaptcha'
+				'vcRecaptcha',
+				'datetime'
 			]);
 })();

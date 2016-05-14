@@ -1,6 +1,6 @@
 <div id="five-map" layout-fill>
 	<wb-navbar></wb-navbar>
 	<ng-map layout-fill center="[48.864716, 2.349014]" zoom="12">
-		<marker ng-repeat="value in five.markers" id="{{$index}}" position="{{value.position}}" on-click="five.showInformations(event, value.title)"></marker>
+		<marker ng-repeat="value in five.markers" id="{{$index}}" icon="{{five.customIcon}}" position="{{value.position}}" on-click="five.showInformations(event, value.title)"></marker>
 	</ng-map>
 </div>

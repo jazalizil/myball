@@ -42,7 +42,7 @@
 					<div layout="row" layout-fill layout-align="center center">
 						<md-input-container class="md-block">
 							<label>Date de naissance</label>
-							<input type="text" datetime="dd-MM-yyyy" ng-model="parameters.user.date">
+							<input type="text" datetime="dd-MM-yyyy" ng-model="parameters.user.birthday">
 						</md-input-container>
 					</div>
 					<div layout="row" layout-fill layout-align="center center">
@@ -67,8 +67,33 @@
 			</md-tab-body>
 
 
-			<md-tab-body id="player-password" ng-Show="parameters.isSelected('password')">
-
+			<md-tab-body layout layout-align="center center" id="player-password" ng-Show="parameters.isSelected('password')">
+				<form layout="column" layout layout-align="center center" flex="30" class="parameters-form">
+					<div layout="row" layout layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Ancien mot de passe</label>
+							<input required type="password" ng-model="parameters.user.oldPassword">
+						</md-input-container>
+					</div>
+					<div layout="row" layout layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Nouveau mot de passe</label>
+							<input required type="password" ng-model="parameters.user.newPassword">
+						</md-input-container>
+					</div>
+					<div layout="row" layout layout-fill layout-align="center center">
+						<md-input-container class="md-block">
+							<label>Répétez le nouveau mot de passe</label>
+							<input required type="password" ng-model="parameters.user.newPasswordVerif">
+						</md-input-container>
+					</div>
+					<span flex="30" class="form-error" ng-show="parameters.error">{{ parameters.error }}</span>
+					<div layout="row" layout-fill layout-align="center center">
+						<md-button flex="50" class="md-raised md-primary" ng-click="parameters.passwordSubmit()" v-busy="parameters.isLoading">
+							<span translate>Confirmer</span>
+						</md-button>
+					</div>
+				</form>
 			</md-tab-body>
 		</div>
 	</md-content>

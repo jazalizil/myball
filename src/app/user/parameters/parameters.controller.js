@@ -3,7 +3,7 @@
 	angular.module('myBall').controller('ParametersController', ParametersController);
 
 	/** @ngInject */
-	function ParametersController($log, UserService, toastr, gettextCatalog, $scope) {
+	function ParametersController($log, UserService, toastr, gettextCatalog, $scope, datetime) {
 		var vm = this;
 
 		vm.error = null;
@@ -22,11 +22,13 @@
 			var Identity = UserService.getIdentity();
 
 			vm.me = Identity;
-			vm.user = JSON.parse(JSON.stringify(Identity));
-			console.log(vm.user);
+			vm.user = angular.fromJson(angular.toJson(Identity));
 			var parsedFullName = Identity.fullName.split(" ");
 			vm.user.firstName = parsedFullName[0];
 			vm.user.lastName = parsedFullName[1];
+			if (vm.user.birthday) {
+				vm.user.birthday = new Date(vm.user.birthday);
+			}
 		}
 
 		function selectTab(tab) {
@@ -69,6 +71,10 @@
 					$log.debug("Err : ", err);
 				});
 			}
+		}
+
+		function passwordSubmit() {
+
 		}
 	}
 })();

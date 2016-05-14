@@ -14,12 +14,12 @@
 				<span flex="25"></span>
 				<div flex="10" layout="column" layout-align="center center" class="matches">
 					<span>Matches</span>
-					<span>50</span>
+					<span>{{ profil.me._nMatches.total }}</span>
 				</div>
 				<div flex="30"></div>
 				<div flex="10" layout="column" layout-align="center center" class="teammates">
 					<span>Teammates</span>
-					<span>84</span>
+					<span>{{ profil.me._relationShip.nRelations }}</span>
 				</div>
 				<span flex="25"></span>
 			</div>
@@ -27,23 +27,25 @@
 		<div id="player-profil">
 			<md-tab-body id="player-resume" ng-Show="profil.isSelected('resume')">
 				<div id="resume-history" layout="column">
-					<h2>Matchs joués</h2>
+					<h2>{{ profil.me._nMatches.total }} Matchs joués</h2>
 					<div layout="row" layout-align="center center">
 						<div flex="20" layout-align="center center" layout="column" class="chart-container">
-							<percent-display percent="58" side="150" colors="#EEEEEE #50D253"></percent-display>
-							<h3>Victoires</h3>
+							<percent-display percent="profil.me._nMatches.winPercent" side="150" colors="#EEEEEE #50D253"></percent-display>
+							<h3>{{ profil.me._nMatches.win }} Victoires</h3>
 						</div>
 						<div flex="20" layout-align="center center" layout="column" class="chart-container">
-							<percent-display percent="22" side="150" colors="#EEEEEE #FCAB53"></percent-display>
-							<h3>Nuls</h3>
+							<percent-display percent="profil.me._nMatches.nulPercent" side="150" colors="#EEEEEE #FCAB53"></percent-display>
+							<h3>{{ profil.me._nMatches.nul }} Nuls</h3>
 						</div>
 						<div flex="20" layout-align="center center" layout="column" class="chart-container">
-							<percent-display percent="12" side="150" colors="#EEEEEE #FF0058"></percent-display>
-							<h3>Défaites</h3>
+							<percent-display percent="profil.me._nMatches.loosePercent" side="150" colors="#EEEEEE #FF0058"></percent-display>
+							<h3>{{ profil.me._nMatches.loose }} Défaites</h3>
 						</div>
 					</div>
 				</div>
 
+				<!-- Elyas a demandé à le retirer pour le moment
+				//Div des prochains matchs
 				<div id="resume-incoming" layout="column" ng-show="profil.incomingMatches">
 					<h2>Prochain matchs</h2>
 					<div layout="row" layout-align="center center" class="incoming-container">
@@ -58,9 +60,11 @@
 					</div>
 				</div>
 
+				//Quand il n'y a pas de match
 				<div layout="row" ng-show="!profil.incomingMatches" class="no-matches" layout-align="center center">
 					<h2>Pas de matchs à venir</h2>
 				</div>
+				-->
 			</md-tab-body>
 
 			<md-tab-body id="player-trophes" ng-Show="profil.isSelected('trophes')">

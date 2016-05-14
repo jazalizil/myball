@@ -59,9 +59,9 @@
 
 				vm.data.isLoading = true;
 				return AuthorizationService.registerUser(data).then(function() {
-					$log.debug("Redirect to profil");
+					$log.debug("Redirect to home");
 					vm.data.isLoading = false;
-					$state.go('profil');
+					$state.go('home');
 				}, function(err) {
 					if (err.data && err.data.code === 400) {
 						toastr.error(gettextCatalog.getString("Nom d'utilisateur invalide"), gettextCatalog.getString('Erreur'));
