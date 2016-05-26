@@ -33,7 +33,7 @@
         <md-input-container class="md-icon-float md-block">
           <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
           <md-select class="white" ng-model="matches.data.match.maxPlayers" aria-label="team size">
-            <md-option class="bg-green" ng-repeat="size in matches.data.teamSizes" ng-value="size.value"
+            <md-option ng-repeat="size in matches.data.teamSizes" ng-value="size.value"
                        ng-selected="size.value === matches.data.match.maxPlayers">
               {{size.name}}
             </md-option>
@@ -41,7 +41,7 @@
         </md-input-container>
         <md-input-container class="md-icon-float md-block switch-ctn">
           <md-icon md-svg-src="/assets/icons/paiement.svg"></md-icon>
-          <md-switch class="md-primary grey" aria-label="match paid" ng-disabled="matches.data.match.alreadyPaid"
+          <md-switch class="md-primary white" aria-label="match paid" ng-disabled="matches.data.match.alreadyPaid"
                      ng-model="matches.data.match.justPaid">
             {{matches.data.placeholders.paid}}
           </md-switch>
@@ -52,7 +52,7 @@
               <span class="white" translate>réserver</span>
             </md-button>
           </div>
-          <div class="grey fit-width" layout="column" layout-align="center center" ng-switch-default>
+          <div class="white fit-width" layout="column" layout-align="center center" ng-switch-default>
             <div layout="row" class="fit-width fit-height">
               <md-button class="fit-width">
                 <span class="red" translate>supprimer</span>
@@ -61,7 +61,7 @@
                 <span class="white" translate>mettre à jour</span>
               </md-button>
             </div>
-            <div layout="row" layout-align="start" layout-padding class="fit-width">
+            <div layout="row" layout-align="start" layout-padding class="fit-width created-ctn">
               <div layout="column">
                 <md-icon md-svg-src="/assets/icons/created-with-{{matches.data.match.createdWith}}.svg"></md-icon>
               </div>
