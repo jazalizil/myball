@@ -3,12 +3,8 @@
   angular.module('myBall').controller('StartController', StartController);
 
   /** @ngInject */
-  function StartController($state, $log, UserService, AuthorizationService) {
+  function StartController($state, $log) {
     $log.debug('startCtrl');
-    UserService.identity(true).then(function(){
-      $state.go('main');
-    }, function(){
-      AuthorizationService.logout();
-    })
+    $state.go('main');
   }
 })();

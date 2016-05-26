@@ -16,7 +16,7 @@
       var curHeaders, token;
       curHeaders = head;
       token = el.token || UserService.getToken();
-      if (token !== null && url.startsWith(Conf.WEBALL_API_BASE_URL)) {
+      if (token !== null && typeof token !== 'undefined' && url.startsWith(Conf.WEBALL_API_BASE_URL)) {
         curHeaders['x-access-token'] = token;
       }
       return {
@@ -37,14 +37,17 @@
       // track the state the user wants to go to; authorization service needs this
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;
-      $rootScope.$broadcast('loading', true);
       // if the principal is resolved, do an authorization check immediately. otherwise,
       // it'll be done when the state itresolved.
       if (UserService.isIdentityResolved()) AuthorizationService.authorize();
     });
+    deregistrationCallbacks.viewContentLoading = $rootScope.$on('$viewContentLoading', function(){
+      $rootScope.$broadcast('loading', true);
+    });
     deregistrationCallbacks.viewContentLoaded = $rootScope.$on('$viewContentLoaded', function(){
       $rootScope.$broadcast('loading', false);
     });
+    $rootScope.$on('$destroy', deregistrationCallbacks.viewContentLoading);
     $rootScope.$on('$destroy', deregistrationCallbacks.viewContentLoaded);
     $rootScope.$on('$destroy', deregistrationCallbacks.stateChangeStart);
     $rootScope.$on('$destroy', deregistrationCallbacks.watch);
