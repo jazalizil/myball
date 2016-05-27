@@ -32,9 +32,10 @@
     <span flex></span>
 
     <div ng-if="navbar.data.identity" class="full-width" layout layout-align="end center">
-      <a class="no-pad" href="" ng-click="navbar.toggleSearch()">
-        <md-icon md-font-set="material-icons">{{navbar.data.searchIcon}}</md-icon>
-      </a>
+      <!--No search bar for the moment-->
+      <!--<a class="no-pad" href="" ng-click="navbar.toggleSearch()">-->
+        <!--<md-icon md-font-set="material-icons">{{navbar.data.searchIcon}}</md-icon>-->
+      <!--</a>-->
       <md-menu md-offset="50">
         <md-button ng-click="navbar.toggleMenu($mdOpenMenu, ev)">
           <md-icon md-font-set="material-icons">account_circle</md-icon>

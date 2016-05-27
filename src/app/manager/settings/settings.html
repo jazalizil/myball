@@ -8,7 +8,7 @@
                ng-src="{{settings.data.newIdentity.five.photo}}" alt="five photo">
         </div>
         <div class="fit-height text grey fit-width" layout="column" ng-switch="settings.data.selectedTab">
-          <div layout="column" class="fit-width fit-height" layout-align="center center" ng-switch-when="1">
+          <div layout="column" class="fit-width fit-height title" layout-align="center center" ng-switch-when="1">
             <div layout="row">
               <span id="city" contenteditable ng-model="settings.data.newIdentity.five.name">{{settings.data.newIdentity.five.name}}</span>
               <md-icon class="margin-l-3x grey pointer" md-font-set="material-icons"
@@ -21,7 +21,7 @@
               {{settings.data.identity.five.city}}
             </div>
           </div>
-          <div class="fit-width fit-height" layout="column" layout-align="center center" ng-switch-when="2">
+          <div class="fit-width fit-height title" layout="column" layout-align="center center" ng-switch-when="2">
             <div layout="row" class="fit-width" layout-align="center">
               <md-button  class="md-button-icon" ng-click="settings.previousField()">
                 <md-icon md-font-set="material-icons grey">keyboard_arrow_left</md-icon>
@@ -37,7 +37,7 @@
               </md-button>
             </div>
           </div>
-          <div layout="row" class="fit-width fit-height" layout-align="center center" ng-switch-default>
+          <div layout="row" class="fit-width fit-height title" layout-align="center center" ng-switch-default>
             {{settings.data.welcomeSentence}}
           </div>
         </div>
@@ -81,7 +81,7 @@
                   <div layout="row" layout-align="center end">
                     <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
                                ng-click="settings.update()">
-                      <span class="white" translate>mettre à jour</span>
+                      <span class="white" translate>Mettre à jour</span>
                     </md-button>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                   <div layout="row" layout-align="center end">
                     <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
                                ng-click="settings.update()">
-                      <span class="white" translate>mettre à jour</span>
+                      <span class="white" translate>Mettre à jour</span>
                     </md-button>
                   </div>
                 </div>
@@ -134,7 +134,7 @@
                   <div layout="row" layout-align="center end">
                     <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
                                ng-click="settings.update()">
-                      <span class="white" translate>mettre à jour</span>
+                      <span class="white" translate>Mettre à jour</span>
                     </md-button>
                   </div>
                 </div>
