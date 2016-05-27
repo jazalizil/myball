@@ -22,6 +22,9 @@
           font-size: 30px;
         }
       }
+      .title {
+        padding-top: @header-height;
+      }
     }
     md-tabs {
       md-tabs-wrapper {
@@ -42,6 +45,11 @@
           color: @grey;
         }
       }
+    }
+    button[type="submit"] {
+      text-transform: none;
+      .bold;
+      width: 22%;
     }
   }
 }
