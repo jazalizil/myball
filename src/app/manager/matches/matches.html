@@ -1,21 +1,21 @@
 <div id="matches-calendar">
   <mb-navbar></mb-navbar>
-  <md-content class="main-content scroll-content bg-black">
+  <md-content class="main-content scroll-content bg-img">
     <section>
       <mb-calendar matches="matches.data.allMatches" today="matches.data.today" layout></mb-calendar>
     </section>
     <section>
-      <md-content class="fit-height bg-black pad-t-3x">
+      <md-content class="fit-height">
         <div class="t-head full-width" layout="row">
           <div flex="10"></div>
-          <div layout layout-align="center center" flex="25" class="field white"
+          <div layout layout-align="center center" flex="25" class="field white bold"
                ng-repeat="field in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
             {{field.name}}
           </div>
         </div>
         <div class="t-body fit-height fit-width" layout="column">
           <div layout="row" class="slot-ctn" ng-repeat="hour in matches.data.hours" ng-hide="hour.value > 25" ng-class="{'first' : $first}">
-            <div layout layout-align="center start" flex="10" class="white">
+            <div layout layout-align="center start" flex="10" class="white bold">
               <span ng-show="hour.value * 10 % 10 === 0">{{hour.value}}h</span>
             </div>
             <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
@@ -34,7 +34,7 @@
                       <div flex="45" layout layout-align="center center">
                         <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
                         <span class="{{matches.data.statusToColor[hour.matches[slot._id].teams[0].status].color}}">
-                          &nbsp;{{hour.matches[slot._id].teams[0].length || '0'}}</span>
+                          &nbsp;{{hour.matches[slot._id].teams[0].currentPlayers || '0'}}</span>
                       </div>
                       <div class="grey uppercase" flex="10" layout layout-align="center center">
                         vs
@@ -42,7 +42,7 @@
                       <div flex="45" layout layout-align="center center">
                         <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
                         <span class="{{matches.data.statusToColor[hour.matches[slot._id].teams[1].status].color}}">
-                          &nbsp;{{hour.matches[slot._id].teams[1].length || '0'}}
+                          &nbsp;{{hour.matches[slot._id].teams[1].currentPlayers || '0'}}
                         </span>
                       </div>
                     </div>

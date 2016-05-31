@@ -42,10 +42,10 @@
       if (UserService.isIdentityResolved()) AuthorizationService.authorize();
     });
     deregistrationCallbacks.viewContentLoading = $rootScope.$on('$viewContentLoading', function(){
-      $rootScope.$broadcast('loading', true);
+      $rootScope.$emit('loading', true);
     });
     deregistrationCallbacks.viewContentLoaded = $rootScope.$on('$viewContentLoaded', function(){
-      $rootScope.$broadcast('loading', false);
+      $rootScope.$emit('loading', false);
     });
     $rootScope.$on('$destroy', deregistrationCallbacks.viewContentLoading);
     $rootScope.$on('$destroy', deregistrationCallbacks.viewContentLoaded);

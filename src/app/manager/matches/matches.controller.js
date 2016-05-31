@@ -43,9 +43,11 @@
       }
       else if (oldVal.year && oldVal.year !== newVal.year) {
         vm.data.today.realDate.setFullYear(+newVal.year);
-        $rootScope.isLoaded = false;
+        $rootScope.$broadcast('loading', true);
         fetchMatches(+newVal).then(function(){
-          $rootScope.isLoaded = true;
+          $rootScope.$broadcast('loading', false);
+        }, function(){
+          $rootScope.$broadcast('loading', false);
         });
       }
       getHours();
@@ -108,8 +110,15 @@
           vm.data.isUploadingMatch = false;
           $mdSidenav('right').close();
           toastr.success(gettextCatalog.getString('Match crée avec succès'));
-        }, function(){
-          toastr.error(gettextCatalog.getString('Erreur'), gettextCatalog.getString('Serveur indisponible'));
+        }, function(err){
+          var now = new Date();
+          if (vm.data.match.startDate.getTime() < now.getTime()) {
+            toastr.error(gettextCatalog.getString('Impossible de créer un match dans le passé'), gettextCatalog.getString('Erreur'));
+          }
+          else {
+            toastr.error(typeof err.data.message === 'string' ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
+          }
+          $log.debug(vm.data.match, err);
           vm.data.isUploadingMatch = false;
         })
       }
