@@ -1,12 +1,12 @@
 <div class="relative" layout="column" class="full-width">
-  <div class="no-pad  full-width" layout-padding layout layout-align="center center">
+  <div class="no-pad full-width" layout-padding layout layout-align="center center">
     <div class="year-ctn" layout ng-repeat="year in calendar.data.yearsDisplayed">
       <div layout="column">
         <div ng-class="{'hidden' : year !== calendar.data.currentYear}" layout="row" layout-align="center center">
           <span layout="column" layout-align="center center" class="circle grey"></span>
         </div>
         <span class="year" layout="row" layout-align="center center" ng-click="calendar.selectYear(year)"
-        ng-class="calendar.data.currentYear === year ? 'grey bold' : 'dark-grey'"
+        ng-class="calendar.data.currentYear === year ? 'white bold' : 'grey'"
         >
           {{year}}
         </span>
@@ -17,10 +17,10 @@
     <div class="month-ctn" layout layout-align="center center" ng-repeat="month in calendar.data.monthsDisplayed">
       <div layout="column">
         <div ng-class="{'hidden': month.number !== calendar.data.currentMonth}" layout="row" layout-align="center center">
-          <span layout="column" layout-align="center center" class="circle grey"></span>
+          <span layout="column" layout-align="center center" class="circle white"></span>
         </div>
         <span class="month" layout="row" layout-align="center center" ng-click="calendar.selectMonth(month.number)"
-                      ng-class="month.number === calendar.data.currentMonth ? 'grey bold' : 'dark-grey'">
+                      ng-class="month.number === calendar.data.currentMonth ? 'white bold' : 'grey'">
           {{month.shortName}}
         </span>
       </div>
@@ -29,28 +29,33 @@
   <div class="days-ctn  full-width" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
       <md-button class="md-button-icon" ng-click="calendar.previousDays()">
-        <md-icon md-font-set="material-icons grey">keyboard_arrow_left</md-icon>
+        <md-icon md-font-set="material-icons white">keyboard_arrow_left</md-icon>
       </md-button>
     </div>
     <div class="week-ctn" layout layout-padding ng-repeat="week in calendar.data.nbWeeks">
       <div ng-class="{'vr' : !$first}"></div>
       <div layout="column" class="week" ng-repeat="dayToDisplay in calendar.data.daysToDisplay | startFrom: calendar.data.weekIndex + week * 7 | limitTo: 7">
         <div layout="row" layout-align="center">
-          <span class="grey">{{dayToDisplay.text}}</span>
+          <span ng-class="{
+          'grey': dayToDisplay.month !== calendar.data.currentMonth,
+          'white': dayToDisplay.month === calendar.data.currentMonth}">
+            {{dayToDisplay.text}}
+          </span>
         </div>
         <div layout="row" class="min-height" layout-align="center">
-          <div class="day-circle-ctn" ng-repeat="match in dayToDisplay.matches">
-            <div class="circle-sm {{calendar.data.statusToColor[match.status].background}}"></div>
+          <div class="day-circle-ctn" ng-repeat="status in dayToDisplay.statuses">
+            <div class="circle-sm {{calendar.data.statusToColor[status].background}}"></div>
           </div>
         </div>
         <div layout="row" layout-align="center center">
-          <span class="day grey helvetica-normal"
+          <span class="day helvetica-normal"
                 ng-click="calendar.selectDay(dayToDisplay)"
                 ng-class="{
                 'black bg-green': dayToDisplay.date === calendar.data.realDate.day &&
                 dayToDisplay.month === calendar.data.realDate.month &&
                 dayToDisplay.year === calendar.data.realDate.year,
-                'dark-grey': dayToDisplay.month !== calendar.data.currentMonth}"
+                'grey': dayToDisplay.month !== calendar.data.currentMonth,
+                'white': dayToDisplay.month === calendar.data.currentMonth}"
                 layout="column" layout-align="center center">
             {{dayToDisplay.date}}
             </span>
@@ -59,7 +64,7 @@
     </div>
     <div layout="column" layout-align="center center">
       <md-button class="md-button-icon" ng-click="calendar.nextDays()">
-        <md-icon md-font-set="material-icons grey">keyboard_arrow_right</md-icon>
+        <md-icon md-font-set="material-icons white">keyboard_arrow_right</md-icon>
       </md-button>
     </div>
   </div>

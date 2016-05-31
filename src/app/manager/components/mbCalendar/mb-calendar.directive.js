@@ -43,7 +43,7 @@
         $scope.$apply();
       });
 
-      $scope.$watch(function(){
+      $scope.$watchCollection(function(){
         return vm.matches
       }, function(newVal){
         if (newVal) {
@@ -56,6 +56,7 @@
         var date, toPush;
         _.each(vm.data.daysToDisplay, function(day){
           day.matches = [];
+          day.statuses = [];
           _.each(vm.matches, function(match) {
             date = new Date(match.startDate);
             if(date.getFullYear() === day.year && date.getMonth() === day.month && date.getDate() === day.date) {
@@ -63,6 +64,9 @@
               toPush.startDate = new Date(match.startDate);
               toPush.endDate = new Date(match.endDate);
               toPush.createdAt = new Date(match.createdAt);
+              if (_.indexOf(day.statuses, match.status) < 0) {
+                day.statuses.push(match.status);
+              }
               day.matches.push(toPush);
             }
           })
@@ -225,6 +229,7 @@
         var realDate = vm.today.realDate;
         vm.data.daysToDisplay = getDaysToDisplay();
         vm.data.weekIndex = getFirstWeekIndex();
+        // vm.data.matchStatus =
         var day = _.filter(vm.data.daysToDisplay, function(day){
           return day.year === vm.today.realDate.getFullYear() &&
             day.month === vm.today.realDate.getMonth() &&
