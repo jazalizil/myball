@@ -54,8 +54,9 @@
           </div>
           <div class="white fit-width" layout="column" layout-align="center center" ng-switch-default>
             <div layout="row" class="fit-width fit-height">
-              <md-button class="fit-width">
-                <span class="red" translate>supprimer</span>
+              <md-button class="delete-btn">
+                <md-icon md-font-set="material-icons" class="white">delete</md-icon>
+                <!--<span class="red" translate>supprimer</span>-->
               </md-button>
               <md-button type="submit" class="md-raised md-primary fit-width" v-busy="matches.data.isUploadingMatch">
                 <span class="white" translate>mettre à jour</span>
