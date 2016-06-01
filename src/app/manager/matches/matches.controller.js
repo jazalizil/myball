@@ -116,7 +116,7 @@
             toastr.error(gettextCatalog.getString('Impossible de créer un match dans le passé'), gettextCatalog.getString('Erreur'));
           }
           else {
-            toastr.error(typeof err.data.message === 'string' ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
+            toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
           }
           $log.debug(vm.data.match, err);
           vm.data.isUploadingMatch = false;
