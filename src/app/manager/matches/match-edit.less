@@ -4,7 +4,7 @@
   }
   md-sidenav {
     background: @black-transparent;
-    width: 320px;
+    width: 340px;
     md-content {
       background: @black-transparent-2;
       .sidenav {
@@ -26,6 +26,20 @@
             font-size: 11px;
             margin: 6px 0px;
           }
+        }
+        .delete-btn {
+          border: 1px solid @white;
+          padding: 0;
+          margin: 6px 35px;
+          width: 50%;
+          min-width: 0;
+          &:hover {
+            background-color: transparent !important;
+          }
+        }
+        button[type='submit'] {
+          font-size: 11px;
+          .bold;
         }
         md-input-container {
           min-height: 10px;
