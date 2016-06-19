@@ -63,7 +63,7 @@
           </div>
           <div class="white fit-width" layout="column" layout-align="center center" ng-switch-default>
             <div layout="row" class="fit-width fit-height">
-              <md-button class="delete-btn action-btn" ng-click="matches.delete()">
+              <md-button class="delete-btn action-btn" ng-click="matches.delete()" v-busy="matches.data.isDeletingMatch">
                 <md-icon md-font-set="material-icons" class="white">delete</md-icon>
                 <!--<span class="red" translate>supprimer</span>-->
               </md-button>
