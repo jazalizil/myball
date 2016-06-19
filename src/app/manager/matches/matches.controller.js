@@ -62,9 +62,11 @@
           startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value)),
           endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value) + 1)
         };
-      vm.data.responsable = {
-        errors: {}
-      };
+      vm.data.responsable = {};
+      if (hour.matches[field._id]) {
+        vm.data.responsable = hour.matches[field._id].responsable;
+      }
+      vm.data.responsable.errors = {};
       vm.data.currentField = field;
       if (vm.data.selectedHour.value * 10 % 10 !== 0) {
         vm.data.selectedHour.value = Math.floor(vm.data.selectedHour.value);
@@ -79,9 +81,22 @@
     };
     
     vm.delete = function() {
-      $log.debug(vm.data.match);
+      vm.data.isDeletingMatch = true;
       MatchesService.delete(vm.data.match._id).then(function(){
-        $log.debug('match deleted');
+        var hour = _.find(vm.data.hours, function(hour){
+          return hour.value === vm.data.selectedHour.value;
+        });
+        hour.matches[vm.data.match.field] = {};
+        var matchIndex = _.findIndex(vm.data.allMatches, function(match){
+          return match._id === vm.data.match._id;
+        });
+        vm.data.allMatches.splice(matchIndex, 1);
+        vm.data.isDeletingMatch = false;
+        $mdSidenav('right').close();
+        toastr.success(gettextCatalog.getString('Match supprimé avec succès'));
+      }, function(){
+        vm.data.isDeletingMatch = false;
+        toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
       })
     };
 
@@ -95,13 +110,12 @@
       }
       else {
         vm.data.isUploadingMatch = true;
-        payload.responsable = _.pickBy(vm.data.responsable, function(val, key){
+        payload.match = vm.data.match;
+        payload.match.responsable = _.pickBy(vm.data.responsable, function(val, key){
           return key !== 'errors';
         });
-        payload.match = vm.data.match;
         $log.debug(payload);
         MatchesService.put(payload).then(function(match){
-          $log.debug(match.plain());
           if (vm.data.selectedHour.isHalf) {
             vm.data.selectedHour.value += 0.5;
           }
