@@ -1,8 +1,8 @@
 <md-toolbar
     id="mb-navbar"
-    ng-class="{'bg-black-transparent grey': !navbar.opaq,
+    ng-class="{'bg-transparent grey': !navbar.opaq,
     'bg-dark-grey grey': navbar.opaq}"
-    class="md-accent md-whiteframe-z2 md-toolbar-sm fixed"
+    class="md-accent md-whiteframe-z0 md-toolbar-sm fixed"
     layout="row">
   <div class="md-toolbar-tools" layout="row">
     <div class="full-width" layout layout-align="start center">
@@ -11,66 +11,82 @@
       </a>
     </div>
     <span flex></span>
-    <div ng-if="navbar.data.identity" class="full-width" layout layout-align="center center">
-      <div class="links-ctn" layout="row" layout-padding layout-align="start center" ng-hide="navbar.data.isSearching">
-        <a ng-repeat="link in navbar.data.links" class="navbar-link" layout flex="33" ui-sref="{{link.url}}" ui-sref-active="active bold">
-          {{link.text}}
+
+    <div class="full-width" layout layout-align="end center">
+      <!--Navbar links-->
+      <div class="links-ctn" layout="row" layout-align="start center" ng-hide="navbar.data.isSearching">
+        <a ng-repeat="link in navbar.data.links track by $index" layout class="navbar-link"
+           ui-sref="{{link.url}}" ui-sref-active="active bold"
+           ng-class="{'padded': !$first && !$last}"
+        >
+          <span class="relative">
+            {{link.text}}
+            <span class="bar"></span>
+          </span>
         </a>
       </div>
-      <div class="search-ctn" layout layout-align="center center" ng-if="navbar.data.isSearching">
-        <i class="white material-icons">search</i>
-        <md-autocomplete md-autofocus
-                         md-search-text="navbar.searchText"
-                         md-items="item in navbar.querySearch(navbar.searchText)"
-                         placeholder="{{navbar.data.searchPlaceholder}}">
-          <md-item-template>
-            <span md-highlight-text="navbar.searchText"></span>
-          </md-item-template>
-        </md-autocomplete>
-      </div>
-    </div>
-    <span flex></span>
 
-    <div ng-if="navbar.data.identity" class="full-width" layout layout-align="end center">
-      <!--No search bar for the moment-->
+      <!--Navbar search-->
+      <!--<div class="search-ctn" layout layout-align="center center" ng-if="navbar.data.isSearching">-->
+        <!--<i class="white material-icons">search</i>-->
+        <!--<md-autocomplete md-autofocus-->
+                         <!--md-search-text="navbar.searchText"-->
+                         <!--md-items="item in navbar.querySearch(navbar.searchText)"-->
+                         <!--placeholder="{{navbar.data.searchPlaceholder}}">-->
+          <!--<md-item-template>-->
+            <!--<span md-highlight-text="navbar.searchText"></span>-->
+          <!--</md-item-template>-->
+        <!--</md-autocomplete>-->
+      <!--</div>-->
+
+      <!--Navbar power button-->
+      <a href="" ng-click="navbar.logout()">
+        <md-icon class="white no-margin small danger" md-svg-src="assets/icons/power-button.svg"></md-icon>
+      </a>
+
+      <!--Search bar-->
       <!--<a class="no-pad" href="" ng-click="navbar.toggleSearch()">-->
         <!--<md-icon md-font-set="material-icons">{{navbar.data.searchIcon}}</md-icon>-->
       <!--</a>-->
-      <md-menu md-offset="50">
-        <md-button ng-click="navbar.toggleMenu($mdOpenMenu, ev)">
-          <md-icon md-font-set="material-icons">account_circle</md-icon>
-          <span>{{navbar.data.identity.manager.fullName}}</span>
-          <md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
-        </md-button>
-        <md-menu-content class="bg-black-transparent-2 white" width="4">
-          <md-menu-item class="md-toolbar-tool">
-            <a ui-sref="settings">
-              <md-button md-ink-ripple="#29C134" class="hover-green">
-                <md-icon md-font-set="white material-icons">settings</md-icon>
-                <span class="valign white" translate>Paramètres</span>
-              </md-button>
-            </a>
-          </md-menu-item>
-          <md-menu-item class="md-toolbar-tool">
-            <md-button md-ink-ripple="#29C134" class="hover-green" ng-click="navbar.logout()">
-              <md-icon md-font-set="white material-icons">exit_to_app</md-icon>
-              <span class="valign white" translate>Se déconnecter</span>
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+
+      <!--Navbar menu-->
+      <!--<md-menu md-offset="50">-->
+        <!--<md-button ng-click="navbar.toggleMenu($mdOpenMenu, ev)">-->
+          <!--<md-icon md-font-set="material-icons">account_circle</md-icon>-->
+          <!--<span>{{navbar.data.identity.manager.fullName}}</span>-->
+          <!--<md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>-->
+        <!--</md-button>-->
+        <!--<md-menu-content class="bg-black-transparent-2 white" width="4">-->
+          <!--<md-menu-item class="md-toolbar-tool">-->
+            <!--<a ui-sref="settings">-->
+              <!--<md-button md-ink-ripple="#29C134" class="hover-green">-->
+                <!--<md-icon md-font-set="white material-icons">settings</md-icon>-->
+                <!--<span class="valign white" translate>Paramètres</span>-->
+              <!--</md-button>-->
+            <!--</a>-->
+          <!--</md-menu-item>-->
+          <!--<md-menu-item class="md-toolbar-tool">-->
+            <!--<md-button md-ink-ripple="#29C134" class="hover-green" ng-click="navbar.logout()">-->
+              <!--<md-icon md-font-set="white material-icons">exit_to_app</md-icon>-->
+              <!--<span class="valign white" translate>Se déconnecter</span>-->
+            <!--</md-button>-->
+          <!--</md-menu-item>-->
+        <!--</md-menu-content>-->
+      <!--</md-menu>-->
+
     </div>
-    <div ng-if="!navbar.data.identity" layout layout-align="center end">
-      <md-button class="action-button hover-green" md-ink-ripple="#29C134" aria-label="signin">
-        <a ui-sref="signin">
-          <span class="white" translate>Connexion</span>
-        </a>
-      </md-button>
-      <md-button class="action-button hover-green" aria-label="register">
-        <a ui-sref="register">
-          <span class="white" md-ink-ripple="#29C134" translate>Inscription</span>
-        </a>
-      </md-button>
-    </div>
+    <!--Affichage navbar deconnecte-->
+    <!--<div ng-if="!navbar.data.identity" layout layout-align="center end">-->
+      <!--<md-button class="action-button hover-green" md-ink-ripple="#29C134" aria-label="signin">-->
+        <!--<a ui-sref="signin">-->
+          <!--<span class="white" translate>Connexion</span>-->
+        <!--</a>-->
+      <!--</md-button>-->
+      <!--<md-button class="action-button hover-green" aria-label="register">-->
+        <!--<a ui-sref="register">-->
+          <!--<span class="white" md-ink-ripple="#29C134" translate>Inscription</span>-->
+        <!--</a>-->
+      <!--</md-button>-->
+    <!--</div>-->
   </div>
 </md-toolbar>

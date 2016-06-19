@@ -15,6 +15,11 @@
       getFirstDayOfMonth : function(month, year) {
         return new Date(year, month, 1).getDay();
       },
+      getWeekOfYear: function(date) {
+        var onejan = new Date(date.getFullYear(),0,1);
+        var millisecsInDay = 86400000;
+        return Math.ceil((((date - onejan) /millisecsInDay) + onejan.getDay()+1)/7);
+      },
       getDatas : function() {
         return {
           date : new Date(),

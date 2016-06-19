@@ -165,7 +165,7 @@ html {
 }
 
 .bg-transparent {
-  background-color: transparent;
+  background: transparent !important;
 }
 
 .bg-gradient {
@@ -234,6 +234,9 @@ html {
 
 .pad-r-3x {
   padding-right: @padding-3x;
+}
+.pad-l-3x {
+  padding-left: @padding-3x;
 }
 
 .pad-2x {
@@ -500,6 +503,7 @@ md-menu-item {
 }
 
 md-toolbar {
+  font-family: 'Avenir';
   &.md-toolbar-sm {
     min-height: 42px;
     height: 42px;
@@ -515,14 +519,21 @@ md-toolbar {
   }
   md-icon {
     color: @white !important;
-    &:hover {
+    &:hover:not(.danger) {
       color: @mb-color !important;
+    }
+    &.danger:hover {
+      color: @red !important;
     }
     -webkit-transition: color .1s linear;
     -moz-transition: color .1s linear;
     -ms-transition: color .1s linear;
     -o-transition: color .1s linear;
     transition: color .1s linear;
+    &.small {
+      height: 17px;
+      width: 17px;
+    }
   }
   md-menu {
     margin: 0 !important;
@@ -534,13 +545,32 @@ md-toolbar {
       }
     }
   }
+  //comment for search bar
   .navbar-link {
+    //line-height: 36px;
+    //min-height: 36px;
+    //margin: 0 28px;
+    //min-width: 88px;
     cursor: pointer;
-    line-height: 36px;
-    min-height: 36px;
-    font-size: .96rem;
-    margin: 0 28px;
-    min-width: 88px;
+    font-size: .8rem;
+    .relative;
+    .uppercase;
+    .bar {
+      position: absolute;
+      bottom: -1.5px;
+      height: 1.5px;
+      width: 100%;
+      left: 0;
+      padding: 0;
+    }
+    &.padded {
+      padding: 0px 50px;
+    }
+    &.active {
+      .bar {
+        background: @mb-color;
+      }
+    }
   }
   .md-button {
     a {
@@ -608,6 +638,12 @@ md-select {
 }
 md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
   .white;
+}
+md-select-menu:not(.md-overflow) {
+  md-content {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 }
 
 .md-select-value .md-select-icon:after {

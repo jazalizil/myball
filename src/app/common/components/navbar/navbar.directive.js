@@ -14,12 +14,12 @@
             url: 'main'
           },
           {
-            text: gettextCatalog.getString('Matchs'),
+            text: gettextCatalog.getString('Réservations'),
             url: 'matches'
           },
           {
-            text: gettextCatalog.getString('Statistiques'),
-            url: 'dashboard'
+            text: gettextCatalog.getString('Paramètres'),
+            url: 'settings'
           }
         ],
         searchPlaceholder: gettextCatalog.getString('Rechercher un joueur'),

@@ -7,7 +7,7 @@
   angular.module('myBall')
     .controller('SettingsController', SettingsController);
   /** @ngInject */
-  function SettingsController(UserService, gettextCatalog, $document, _, $log, FiveService) {
+  function SettingsController(UserService, gettextCatalog, _, $log, FiveService) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
@@ -21,16 +21,17 @@
         phone: gettextCatalog.getString('Numéro de téléphone'),
         fiveName: gettextCatalog.getString('Nom du five'),
         fieldName: gettextCatalog.getString('Nom du terrain'),
-        available: gettextCatalog.getString('Disponib')
+        available: gettextCatalog.getString('Disponible')
       },
+      sentences: [
+        gettextCatalog.getString('Modifier vos informations personnelles.'),
+        gettextCatalog.getString('Modifier les informations de votre five.'),
+        gettextCatalog.getString('Modifier les informations de vos terrains.')
+      ],
       photo: {},
       fieldIndex: 0
     };
 
-    vm.editCity = function() {
-      var cityEl = angular.element($document[0].getElementById('city'));
-      cityEl.focus();
-    };
     vm.previousField = function() {
       if (vm.data.fieldIndex !== 0) {
         vm.data.fieldIndex -= 1;

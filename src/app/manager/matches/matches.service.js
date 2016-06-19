@@ -52,6 +52,9 @@
             endDate: tomorrow,
             sort: 'startDate'
           });
+      },
+      delete : function(id) {
+        return Restangular.one('matches', id).remove();
       }
     }
   }
