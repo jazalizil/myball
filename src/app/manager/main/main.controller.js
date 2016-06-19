@@ -4,7 +4,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(UserService, MatchesService, CalendarService, gettextCatalog, $rootScope) {
+  function MainController(UserService, MatchesService, CalendarService, gettextCatalog, $rootScope, _) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
