@@ -1,13 +1,7 @@
 #mb-navbar {
   z-index: 3;
   .white;
-  .links-ctn {
-    a {
-      &:hover:not(.active) {
-        .bold;
-      }
-    }
-  }
+
   .search-ctn {
     md-autocomplete {
       background-color: @dark-grey;
@@ -44,8 +38,16 @@
   }
 
   .links-ctn {
+    line-height: 27px;
+    margin-right: @padding-8x;
+    border-bottom: 1.5px solid @white-transparent;
     &.ng-hide-remove {
       animation: fadeIn .5s;
+    }
+    a {
+      &:hover:not(.active) {
+        .bold;
+      }
     }
   }
 

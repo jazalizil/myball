@@ -2,14 +2,14 @@
   <div class="no-pad full-width" layout-padding layout layout-align="center center">
     <div class="year-ctn" layout ng-repeat="year in calendar.data.yearsDisplayed">
       <div layout="column">
-        <div ng-class="{'hidden' : year !== calendar.data.currentYear}" layout="row" layout-align="center center">
-          <span layout="column" layout-align="center center" class="circle grey"></span>
-        </div>
         <span class="year" layout="row" layout-align="center center" ng-click="calendar.selectYear(year)"
         ng-class="calendar.data.currentYear === year ? 'white bold' : 'grey'"
         >
           {{year}}
         </span>
+        <div ng-class="{'hidden' : year !== calendar.data.currentYear}" layout="row" layout-align="center center">
+          <span layout="column" layout-align="center center" class="circle grey"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
           <span class="day helvetica-normal"
                 ng-click="calendar.selectDay(dayToDisplay)"
                 ng-class="{
-                'black bg-green': dayToDisplay.date === calendar.data.realDate.day &&
+                'bold bg-green': dayToDisplay.date === calendar.data.realDate.day &&
                 dayToDisplay.month === calendar.data.realDate.month &&
                 dayToDisplay.year === calendar.data.realDate.year,
                 'grey': dayToDisplay.month !== calendar.data.currentMonth,

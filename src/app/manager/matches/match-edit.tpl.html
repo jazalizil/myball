@@ -10,12 +10,16 @@
           matches.data.today.monthName + ' ' + matches.data.today.year}}
         </div>
         <div layout layout-align="center center" class="hour pad-t-3x">
-          <i class="material-icons">access_time</i>&nbsp;
-          {{matches.data.selectedHour.value + 'h'}}
+          <i class="material-icons">access_time</i>
+          {{matches.data.selectedHour.value + ':'}}
           <span ng-show="matches.data.selectedHour.isHalf">30</span>
-          &nbsp;-&nbsp;
-          {{matches.data.selectedHour.value + 1 + 'h'}}
+          <span ng-hide="matches.data.selectedHour.isHalf">00</span>
+          &nbsp;-&nbsp;{{matches.data.selectedHour.value + 1 + ':'}}
           <span ng-show="matches.data.selectedHour.isHalf">30</span>
+          <span ng-hide="matches.data.selectedHour.isHalf">00</span>
+          <span class="pad-l-3x">
+            &nbsp;{{matches.data.currentField.name}}
+          </span>
         </div>
       </div>
       <form ng-submit="matches.send()" layout="column">
@@ -29,6 +33,11 @@
           <label>{{matches.data.placeholders.phone}}</label>
           <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
           <input type="text" phone-prefix name="name" ng-model="matches.data.responsable.phone">
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <label>{{matches.data.placeholders.email}}</label>
+          <md-icon md-svg-src="/assets/icons/email.svg"></md-icon>
+          <input type="email" name="email" ng-model="matches.data.responsable.email">
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
           <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
@@ -54,11 +63,11 @@
           </div>
           <div class="white fit-width" layout="column" layout-align="center center" ng-switch-default>
             <div layout="row" class="fit-width fit-height">
-              <md-button class="delete-btn">
+              <md-button class="delete-btn action-btn" ng-click="matches.delete()">
                 <md-icon md-font-set="material-icons" class="white">delete</md-icon>
                 <!--<span class="red" translate>supprimer</span>-->
               </md-button>
-              <md-button type="submit" class="md-raised md-primary fit-width" v-busy="matches.data.isUploadingMatch">
+              <md-button type="submit" class="md-raised md-primary fit-width action-btn" v-busy="matches.data.isUploadingMatch">
                 <span class="white" translate>mettre à jour</span>
               </md-button>
             </div>
@@ -67,16 +76,10 @@
                 <md-icon md-svg-src="/assets/icons/created-with-{{matches.data.match.createdWith}}.svg"></md-icon>
               </div>
               <div class="created fit-width" layout="column">
-                <div layout="row">
-                  <span translate>Crée avec</span>
-                  <span>&nbsp;{{matches.data.match.createdWith}}</span>
-                </div>
-                <div layout="row">
-                  <span translate>Le</span>
-                  <span>&nbsp;{{matches.data.match.createdAt | date: 'd/MM/yyyy'}}&nbsp;</span>
-                  <span translate>à</span>
-                  <span>&nbsp;{{matches.data.match.createdAt | date: 'HH:mm'}}</span>
-                </div>
+                <i layout="row">
+                  Crée avec {{matches.data.match.createdWith}} -
+                  {{matches.data.match.createdAt | date: 'Le d/MM/yyyy à HH:mm'}}
+                </i>
               </div>
             </div>
           </div>

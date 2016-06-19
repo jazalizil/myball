@@ -8,15 +8,15 @@
       <md-content class="fit-height">
         <div class="t-head full-width" layout="row">
           <div flex="10"></div>
-          <div layout layout-align="center center" flex="25" class="field white bold"
+          <div layout layout-align="center center" flex="25" class="field white"
                ng-repeat="field in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
             {{field.name}}
           </div>
         </div>
         <div class="t-body fit-height fit-width" layout="column">
           <div layout="row" class="slot-ctn" ng-repeat="hour in matches.data.hours" ng-hide="hour.value > 25" ng-class="{'first' : $first}">
-            <div layout layout-align="center start" flex="10" class="white bold">
-              <span ng-show="hour.value * 10 % 10 === 0">{{hour.value}}h</span>
+            <div layout layout-align="center start" flex="10" class="white">
+              <span ng-show="hour.value * 10 % 10 === 0">{{hour.text}}</span>
             </div>
             <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
                  ng-repeat="slot in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
@@ -32,7 +32,7 @@
                   <div layout="column" class="fit-width fit-height">
                     <div layout="row" layout-align="center center" class="fit-width fit-height">
                       <div flex="45" layout layout-align="center center">
-                        <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
+                        <img src="assets/icons/user-2.svg"/>
                         <span class="{{matches.data.statusToColor[hour.matches[slot._id].teams[0].status].color}}">
                           &nbsp;{{hour.matches[slot._id].teams[0].currentPlayers || '0'}}</span>
                       </div>
@@ -40,7 +40,7 @@
                         vs
                       </div>
                       <div flex="45" layout layout-align="center center">
-                        <un-svg svg-src="assets/icons/user-2.svg"></un-svg>
+                        <img src="assets/icons/user-2.svg"/>
                         <span class="{{matches.data.statusToColor[hour.matches[slot._id].teams[1].status].color}}">
                           &nbsp;{{hour.matches[slot._id].teams[1].currentPlayers || '0'}}
                         </span>

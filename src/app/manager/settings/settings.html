@@ -1,60 +1,44 @@
 <div id="settings">
   <mb-navbar></mb-navbar>
-  <md-content class="ctn bg-black">
+  <md-content class="ctn bg-img">
     <form ng-submit="settings.send()">
-      <section class="relative heading helvetica-normal bg-black" layout>
-        <div class="fixed bg">
-          <img class="full-width"
-               ng-src="{{settings.data.newIdentity.five.photo}}" alt="five photo">
-        </div>
-        <div class="fit-height text grey fit-width" layout="column" ng-switch="settings.data.selectedTab">
-          <div layout="column" class="fit-width fit-height title" layout-align="center center" ng-switch-when="1">
-            <div layout="row">
-              <span id="city" contenteditable ng-model="settings.data.newIdentity.five.name">{{settings.data.newIdentity.five.name}}</span>
-              <md-icon class="margin-l-3x grey pointer" md-font-set="material-icons"
-                       ng-click="settings.editCity()">
-                mode_edit
-              </md-icon>
-            </div>
-            <div layout="row" class="city">
-              <md-icon class="pad-r-3x grey" md-font-set="material-icons">location_on</md-icon>
-              {{settings.data.identity.five.city}}
-            </div>
-          </div>
-          <div class="fit-width fit-height title" layout="column" layout-align="center center" ng-switch-when="2">
-            <div layout="row" class="fit-width" layout-align="center">
-              <md-button  class="md-button-icon" ng-click="settings.previousField()">
-                <md-icon md-font-set="material-icons grey">keyboard_arrow_left</md-icon>
-              </md-button>
-              <span flex="20" class="center-text" ng-repeat="field in settings.data.identity.five.fields"
-                    ng-show="settings.data.identity.five.fields[settings.data.fieldIndex]._id === field._id"
-                    ng-hide="settings.data.identity.five.fields[settings.data.fieldIndex]._id !== field._id"
-              >
-                {{field.name}}
-              </span>
-              <md-button class="md-button-icon" ng-click="settings.nextField()">
-                <md-icon md-font-set="material-icons grey">keyboard_arrow_right</md-icon>
-              </md-button>
-            </div>
-          </div>
-          <div layout="row" class="fit-width fit-height title" layout-align="center center" ng-switch-default>
-            {{settings.data.welcomeSentence}}
+      <section class="relative heading bg-black-transparent" layout>
+        <div class="fit-height text grey fit-width" layout="column">
+          <!--<div layout="column" class="fit-width fit-height title" layout-align="center center" ng-switch-when="1">-->
+            <!--<div layout="row">-->
+              <!--<span id="city" contenteditable ng-model="settings.data.newIdentity.five.name">{{settings.data.newIdentity.five.name}}</span>-->
+              <!--<md-icon class="margin-l-3x grey pointer" md-font-set="material-icons"-->
+                       <!--ng-click="settings.editCity()">-->
+                <!--mode_edit-->
+              <!--</md-icon>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="fit-width fit-height title" layout="column" layout-align="center center" ng-switch-when="2">-->
+            <!--<div layout="row" class="fit-width" layout-align="center">-->
+              <!--<md-button  class="md-button-icon" ng-click="settings.previousField()">-->
+                <!--<md-icon md-font-set="material-icons grey">keyboard_arrow_left</md-icon>-->
+              <!--</md-button>-->
+              <!--<span flex="20" class="center-text" ng-repeat="field in settings.data.identity.five.fields"-->
+                    <!--ng-show="settings.data.identity.five.fields[settings.data.fieldIndex]._id === field._id"-->
+                    <!--ng-hide="settings.data.identity.five.fields[settings.data.fieldIndex]._id !== field._id"-->
+              <!--&gt;-->
+                <!--{{field.name}}-->
+              <!--</span>-->
+              <!--<md-button class="md-button-icon" ng-click="settings.nextField()">-->
+                <!--<md-icon md-font-set="material-icons grey">keyboard_arrow_right</md-icon>-->
+              <!--</md-button>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div layout="row" class="fit-width fit-height title" layout-align="center center">
+            {{settings.data.sentences[settings.data.selectedTab]}}
           </div>
         </div>
-
-        <mb-file-input type="file" file="settings.data.newIdentity.five.photo" hidden id="fivePhoto" accept="image/*"
-                       loading="app.data.isLoading"></mb-file-input>
-        <label for="fivePhoto" class="absolute photo pointer pad-2x"  md-ink-ripple="#CCCCCC">
-          <i class="grey material-icons">
-            photo_camera
-          </i>
-        </label>
       </section>
       <section class="fit-width">
         <md-content class="bg-transparent fit-width" layout="column">
           <md-tabs md-center-tabs md-dynamic-height md-selected="settings.data.selectedTab">
             <md-tab label="{{settings.data.labels.manager}}">
-              <md-content class="bg-black">
+              <md-content class="bg-transparent">
                 <div class="fit-height fit-width" layout="column" layout-padding>
                   <div class="fit-height" layout="row" layout-align="center center">
                     <div layout="column" class="fit-height" layout-align="center center">
@@ -88,15 +72,35 @@
               </md-content>
             </md-tab>
             <md-tab label="{{settings.data.labels.five}}">
-              <md-content class="bg-black">
+              <md-content class="bg-transparent">
                 <div class="fit-height fit-width" layout="column" layout-padding>
                   <div class="fit-height" layout="row" layout-align="center center">
                     <div layout="column" class="fit-height" layout-align="center center">
                       <div layout="row" layout-align="center center">
                         <md-input-container>
+                          <label>{{settings.data.labels.fiveName}}</label>
+                          <input type="text" ng-model="settings.data.newIdentity.five.name" name="name">
+                        </md-input-container>
+                      </div>
+                      <div layout="row" layout-align="center center">
+                        <md-input-container>
                           <label>{{settings.data.labels.phone}}</label>
                           <input phone-prefix type="text" ng-model="settings.data.newIdentity.five.phone" name="phone">
                         </md-input-container>
+                      </div>
+                      <div layout="row" class="white ph-input" layout-align="center center">
+                        <div class="fit-width" >
+                          Changer la photo de couverture
+                        </div>
+                        <div >
+                          <mb-file-input type="file" file="settings.data.newIdentity.five.photo" hidden id="fivePhoto" accept="image/*"
+                                         loading="app.data.isLoading"></mb-file-input>
+                          <label for="fivePhoto" class="pointer pad-2x">
+                            <i class="grey material-icons">
+                              photo_camera
+                            </i>
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -110,10 +114,18 @@
               </md-content>
             </md-tab>
             <md-tab label="{{settings.data.labels.field}}">
-              <md-content class="bg-black">
+              <md-content class="bg-transparent">
                 <div class="fit-height fit-width" layout="column" layout-padding>
                   <div class="fit-height" layout="row" layout-align="center center">
                     <div layout="column" class="fit-height" layout-align="center center">
+                      <div layout="row" layout-align="center center">
+                        <md-select ng-model="settings.data.fieldIndex" aria-label="field name">
+                          <md-option ng-repeat="field in settings.data.identity.five.fields" ng-value="$index" class="white bg-black-transparent-2 hover-green"
+                                     ng-selected="$index === settings.data.fieldIndex" md-ink-ripple="#29C134">
+                            {{field.name}}
+                          </md-option>
+                        </md-select>
+                      </div>
                       <div layout="row" layout-align="center center">
                         <md-input-container>
                           <label>{{settings.data.labels.fieldName}}</label>

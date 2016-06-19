@@ -15,6 +15,7 @@
       placeholders: {
         paid: gettextCatalog.getString('Payé'),
         name: gettextCatalog.getString('Nom complet'),
+        email: gettextCatalog.getString('Email'),
         phone: gettextCatalog.getString('Numéro de téléphone')
       },
       today: {
@@ -64,6 +65,7 @@
       vm.data.responsable = {
         errors: {}
       };
+      vm.data.currentField = field;
       if (vm.data.selectedHour.value * 10 % 10 !== 0) {
         vm.data.selectedHour.value = Math.floor(vm.data.selectedHour.value);
         vm.data.selectedHour.isHalf = true;
@@ -74,6 +76,13 @@
       }
       $log.debug(vm.data.match);
       $mdSidenav('right').toggle();
+    };
+    
+    vm.delete = function() {
+      $log.debug(vm.data.match);
+      MatchesService.delete(vm.data.match._id).then(function(){
+        $log.debug('match deleted');
+      })
     };
 
     vm.send = function() {
@@ -130,6 +139,7 @@
       _.each(hours, function(hour){
         toPush = {
           value: hour,
+          text: hour + ':00',
           slots: {},
           matches: {},
           status: 'free'
@@ -179,7 +189,7 @@
           })
         });
     };
-
+    
     var init = function() {
       vm.data.fields = vm.data.identity.five.fields;
       $rootScope.$broadcast('loading', true);

@@ -2,7 +2,7 @@
   .ctn {
     height: calc(~"100% - 36px");
     .heading {
-      font-size: 42px;
+      font-size: 30px;
       height: 40vh;
       .text {
         z-index: 1;
@@ -28,14 +28,24 @@
     }
     md-tabs {
       md-tabs-wrapper {
-        background-color: transparent;
+        .bg-black-transparent;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
         .md-tab {
+          font-family: 'Avenir';
+          font-size: 15px;
           .grey;
+          .uppercase;
           &.md-active {
             .bold;
           }
         }
       }
+    }
+    .ph-input {
+      border-bottom: 1px solid @white-transparent;
+      min-width: 300px;
+      font-size: 15px;
     }
     md-input-container {
       min-width: 300px;
@@ -49,6 +59,8 @@
     button[type="submit"] {
       text-transform: none;
       .bold;
+      .uppercase;
+      font-family: 'Avenir';
       width: 22%;
     }
   }

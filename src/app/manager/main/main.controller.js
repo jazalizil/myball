@@ -4,107 +4,76 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($log, UserService, Conf, MatchesService, $rootScope, CalendarService, $interval, _, gettextCatalog) {
+  function MainController(UserService, MatchesService, CalendarService, gettextCatalog, $rootScope) {
     var vm = this;
     vm.data = {
       identity: UserService.getIdentity(),
-      content: {
-        img: Conf.CDN_BASE_URL + "images/footsalle-field.png"
-      },
-      slots: [],
-      calendar: CalendarService.getDatas(),
-      statuses: {
-        in_progress: {
-          class: 'yellow',
-          text: gettextCatalog.getString('Match en cours')
+      counters: [
+        {
+          text: gettextCatalog.getString('en attente'),
+          number: 0
         },
-        available: {
-          class: 'green',
-          text: gettextCatalog.getString('Disponible')
+        {
+          text: gettextCatalog.getString('confirmés'),
+          number: 0
         },
-        over: {
-          class: 'blue',
-          text: gettextCatalog.getString('Terminé')
+        {
+          text: gettextCatalog.getString('aujourd\'hui'),
+          number: 0
+        },
+        {
+          text: gettextCatalog.getString('cette semaine'),
+          number: 0
+        },
+        {
+          text: gettextCatalog.getString('ce mois'),
+          number: 0
         }
+      ]
+    };
+    
+    var checkStatus = function(match, today) {
+      var endDate = new Date(match.endDate);
+      if (_.isEmpty(match.teams) || match.teams[0].length + match.teams[1].length !== match.maxPlayers) {
+        vm.data.counters[0].number += 1;
+      }
+      else if (endDate.getTime() < today.getTime()) {
+        vm.data.counters[1].number += 1;
       }
     };
-
-    var getFieldStatus = function(field) {
-      var endDate, startDate, now;
-      if (!field.matches) {
-        field.status = 'available';
-        return;
-      }
-      _.each(field.matches, function(match){
-        startDate = new Date(match.startDate);
-        endDate = new Date(match.endDate);
-        now = new Date(vm.data.calendar.date.toJSON());
-        startDate = startDate.getTime();
-        endDate = endDate.getTime();
-        now.setHours(vm.data.slots[vm.data.slotIndex].hour);
-        now = now.getTime();
-        if (endDate > now && startDate < now && now === vm.data.calendar.date.getTime()) {
-          field.status = 'in_progress';
-        }
-        else if (endDate < now && field.status !== 'in_progress') {
-          field.status = 'available';
-        }
-        else {
-          field.status = 'over';
-        }
-      });
-    };
-
-    vm.refreshFields = function() {
-      _.each(vm.data.fieldsChunked, function(fields) {
-        _.each(fields, function(field){
-          if (vm.data.slots[vm.data.slotIndex].matches[field._id]) {
-            field.matches = vm.data.slots[vm.data.slotIndex].matches[field._id];
+    
+    var checkDate = function(match, today) {
+      var startDate = new Date(match.startDate);
+      if (startDate.getFullYear() === today.getFullYear()){
+        if (startDate.getMonth() === today.getMonth()) {
+          vm.data.counters[2].number += 1;
+          if (CalendarService.getWeekOfYear(startDate) === CalendarService.getWeekOfYear(today)){
+            vm.data.counters[3].number += 1;
+            if (startDate.getDate() === today.getDate()) {
+              vm.data.counters[4].number += 1;
+            }
           }
-          getFieldStatus(field);
-          $log.debug('status', vm.data.statuses[field.status]);
-        })
-      });
-      $log.debug('fields', vm.data.fieldsChunked, '\n' +
-        'slotIndex', vm.data.slotIndex + '\n' +
-        'slots', vm.data.slots);
+        }
+      }
     };
-
+    
     var init = function() {
-      var rangeHours = _.range(9, 23, 2);
-      MatchesService.fetchToday().then(function(matches){
-        matches.push();
-        vm.data.matches = matches;
-        vm.data.slotIndex = 0;
-        _.each(rangeHours, function(slotTime){
-          if (slotTime === vm.data.calendar.date.getHours() || slotTime + 1 === vm.data.calendar.date.getHours()) {
-            vm.data.slotIndex = vm.data.slots.length;
-          }
-          vm.data.slots.push({
-            hour: slotTime,
-            text: slotTime + 'h - ' + (slotTime + 1) + 'h',
-            matches: _.groupBy(_.filter(matches, function(match){
-              var date = new Date(match.startDate);
-              return date.getHours() == slotTime || date.getHours() == slotTime + 1;
-            }), 'field')
-          });
-        });
-        vm.data.fieldsChunked = _.chunk(vm.data.identity.five.fields, 3);
-        vm.refreshFields();
-        $rootScope.$broadcast('loading', false);
-      }, function(){
-        $rootScope.$broadcast('loading', false);
-      });
+      var today = new Date();
+      var params = {
+        startDate: today,
+        endDate: new Date(today.getFullYear() + 10, today.getMonth(), today.getDate())
+      };
       $rootScope.$broadcast('loading', true);
-      $interval(function(){
-        vm.data.calendar.date = new Date();
-        if (vm.data.calendar.date.getMinutes() === 30 && vm.data.calendar.date.getSeconds() === 0) {
-          _.each(vm.data.fieldsChunked, function(fields){
-            _.each(fields, getFieldStatus);
-          })        
-        }
-      }, 1000);
+      MatchesService.fetchAll(params).then(function(matches){
+        _.each(matches, function(match){
+          checkStatus(match, today);
+          checkDate(match, today);
+        });
+        $rootScope.$broadcast('loading', false);
+      }, function() {
+        $rootScope.$broadcast('loading', false);
+      })
     };
-    init();
+    init()
   }
 })();
