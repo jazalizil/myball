@@ -94,7 +94,7 @@
         vm.data.isDeletingMatch = false;
         $mdSidenav('right').close();
         toastr.success(gettextCatalog.getString('Match supprimé avec succès'));
-      }, function(){
+      }, function(err){
         vm.data.isDeletingMatch = false;
         toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
       })
