@@ -46,8 +46,9 @@
       animation: fadeIn .5s;
     }
     a {
+      .grey;
       &:hover:not(.active) {
-        .bold;
+        .white;
       }
     }
   }
@@ -65,6 +66,7 @@
       line-height: 42px;
       font-size: 15px;
       transition: .5s linear all;
+      .grey;
       &.ng-hide-add,
       &.ng-hide-remove {
         display: block !important;
@@ -80,7 +82,8 @@
       &.ng-hide-add.ng-hide-add-active {
         height: 0;
       }
-      &:focus {
+      &:hover {
+        .white;
         .bg-black-transparent;
       }
     }

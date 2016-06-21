@@ -574,12 +574,7 @@ md-toolbar {
       }
     }
   }
-  //comment for search bar
   .navbar-link {
-    //line-height: 36px;
-    //min-height: 36px;
-    //margin: 0 28px;
-    //min-width: 88px;
     cursor: pointer;
     font-size: .8rem;
     .relative;
@@ -732,6 +727,19 @@ md-sidenav {
         padding-bottom: 0;
         label {
           color: @white;
+        }
+        &.md-img-float {
+          .relative;
+          img {
+            .absolute;
+            height: 24px;
+            top: 4px;
+            left: 0px;
+          }
+          label {
+            left: 36px;
+          }
+          padding-left: 36px;
         }
         md-icon {
           height: 18px;

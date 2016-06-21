@@ -58,7 +58,7 @@
     </div>
   </md-toolbar>
   <div class="full-width" layout hide-gt-sm>
-    <div class="fit-width bg-black-transparent-2 menu-mobile white uppercase" layout="column" >
+    <div class="fit-width bg-black-transparent-2 menu-mobile uppercase" layout="column" >
       <div class="navbar-black fit-width menu-el" ng-show="navbar.data.menuOpen"></div>
       <a ng-repeat="link in navbar.data.links track by $index" layout="row" class="menu-el link center-text fit-width"
          ui-sref="{{link.url}}" ui-sref-active="active bold"
@@ -69,8 +69,8 @@
             {{link.text}}
           </span>
       </a>
-      <a href="navbar-link" class="menu-el link center-text fit-width"
-         layout="row" ng-click="navbar.toggleMenu(false) && navbar.logout()"
+      <a href="" class="menu-el link center-text fit-width"
+         layout="row" ng-click="navbar.toggleMenu(false) ; navbar.logout()"
          ng-show="navbar.data.menuOpen">
         <span class="fit-width">
           Déconnection

@@ -17,10 +17,29 @@
           .hour {
             font-family: 'Avenir Light';
           }
+          .alert {
+            margin-top: 25px;
+            transition: .5s linear all;
+            &.ng-hide-add,
+            &.ng-hide-remove {
+              display: block !important;
+              height: 0px;
+            }
+
+            &.ng-hide-remove.ng-hide-remove-active {
+              height: @header-height;
+            }
+            &.ng-hide-add{
+              height: @header-height;
+            }
+            &.ng-hide-add.ng-hide-add-active {
+              height: 0;
+            }
+          }
           .date {
             font-size: 18px;
           }
-          margin-bottom: 50px;
+          margin-bottom: 25px;
           padding-left: 4px;
         }
         .created-ctn {
