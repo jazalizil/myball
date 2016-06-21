@@ -1,7 +1,7 @@
 #mb-navbar {
   z-index: 3;
   .white;
-
+  transition: .5s linear all;
 
   .search-ctn {
     md-autocomplete {
@@ -54,11 +54,15 @@
 
   .menu-mobile {
     position: absolute;
-    top: @header-height;
+    top: 0;
     z-index: 2;
     height: calc("100vh - 42px");
-    .link {
-      line-height: 50px;
+    .navbar-black {
+      padding-bottom: @header-height;
+      .bg-black-transparent-2;
+    }
+    .menu-el {
+      line-height: 42px;
       font-size: 15px;
       transition: .5s linear all;
       &.ng-hide-add,
@@ -68,10 +72,10 @@
       }
 
       &.ng-hide-remove.ng-hide-remove-active {
-        height: 50px;
+        height: @header-height;
       }
       &.ng-hide-add{
-        height: 50px;
+        height: @header-height;
       }
       &.ng-hide-add.ng-hide-add-active {
         height: 0;

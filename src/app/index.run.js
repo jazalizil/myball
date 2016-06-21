@@ -7,11 +7,15 @@
 
   /** @ngInject */
   function runBlock($log, $rootScope, AuthorizationService, UserService, $state, $stateParams, Restangular,
-                    gettextCatalog, Conf) {
+                    gettextCatalog, Conf, $q, $http) {
     var deregistrationCallbacks = {};
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.lang = 'fr';
+
+    /*
+    * Restangular
+    * */
     Restangular.addFullRequestInterceptor(function(el, op, route, url, head, params) {
       var curHeaders, token;
       curHeaders = head;
@@ -25,12 +29,31 @@
         headers: curHeaders
       };
     });
+
+    Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+      if(response.status === 401) {
+        $state.go('signin');
+        // Repeat the request and then call the handlers the usual way.
+        $http(response.config).then(responseHandler, deferred.reject);
+        // Be aware that no request interceptors are called this way.
+
+        return false; // error handled
+      }
+
+      return true; // error not handled
+    });
+    /*
+    * Internationalization
+    * */
     deregistrationCallbacks.watch = $rootScope.$watch('lang', function(newVal){
       if (newVal) {
         gettextCatalog.setCurrentLanguage(newVal);
         gettextCatalog.loadRemote("/translations/" + newVal + ".json");
       }
     });
+    /*
+    * Access states
+    * */
     deregistrationCallbacks.stateChangeStart = $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
       //http://stackoverflow.com/questions/22537311/angular-ui-router-login-authentication
       $log.debug('State change start : ' + toState.name);
@@ -41,6 +64,9 @@
       // it'll be done when the state itresolved.
       if (UserService.isIdentityResolved()) AuthorizationService.authorize();
     });
+    /*
+    * Progress
+    * */
     deregistrationCallbacks.viewContentLoading = $rootScope.$on('$viewContentLoading', function(){
       $rootScope.$emit('loading', true);
     });
