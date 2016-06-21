@@ -1,9 +1,12 @@
 <div id="main">
 
-  <mb-navbar opaq></mb-navbar>
+  <mb-navbar></mb-navbar>
 
-  <md-content class="full-height bg-img">
-    <div class="fit-height" layout="column" layout-align="center center">
+  <div class="fixed bg full-height">
+    <div class="bg-img fit-height full-width"></div>
+  </div>
+  <md-content class="full-height ">
+    <div class="fit-height relative z-index" layout="column" layout-align="center center">
       <div class="fit-width heading white" layout="row" layout-align="center center">
         Bonjour {{main.data.identity.manager.firstName}}
       </div>

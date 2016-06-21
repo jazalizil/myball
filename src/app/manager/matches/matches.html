@@ -1,10 +1,13 @@
 <div id="matches-calendar">
   <mb-navbar></mb-navbar>
-  <md-content class="main-content scroll-content bg-img">
-    <section>
+  <div class="fixed bg full-height">
+    <div class="bg-img fit-height full-width"></div>
+  </div>
+  <md-content class="main-content scroll-content">
+    <section class="relative z-index">
       <mb-calendar matches="matches.data.allMatches" today="matches.data.today" layout></mb-calendar>
     </section>
-    <section>
+    <section class="relative z-index">
       <md-content class="fit-height">
         <div class="t-head full-width" layout="row">
           <div flex="10"></div>
