@@ -1,67 +1,80 @@
 #settings {
   .ctn {
     height: calc(~"100% - 36px");
-    .heading {
-      font-size: 30px;
-      height: 40vh;
-      .text {
-        z-index: 1;
-      }
-      .bg {
-        opacity: .3;
-      }
-      .city {
+    #settings-form {
+      .heading {
         font-size: 30px;
-      }
-      .photo {
-        right: 10px;
-        bottom: -47px;
-        z-index: 1;
-        font-size: 0px;
-        i {
+        height: 40vh;
+        .text {
+          z-index: 1;
+        }
+        .bg {
+          opacity: .3;
+        }
+        .city {
           font-size: 30px;
         }
+        .photo {
+          right: 10px;
+          bottom: -47px;
+          z-index: 1;
+          font-size: 0px;
+          i {
+            font-size: 30px;
+          }
+        }
+        .title {
+          padding-top: @header-height;
+        }
       }
-      .title {
-        padding-top: @header-height;
+      md-content {
+        z-index: 1;
       }
-    }
-    md-tabs {
-      md-tabs-wrapper {
-        .bg-black-transparent;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        .md-tab {
-          font-family: 'Avenir';
-          font-size: 15px;
-          .grey;
-          .uppercase;
-          &.md-active {
-            .bold;
+      section {
+        z-index: 1;
+      }
+      md-tabs {
+        md-tabs-wrapper {
+          .bg-black-transparent;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          .md-tab {
+            font-family: 'Avenir';
+            font-size: 15px;
+            .grey;
+            .uppercase;
+            &.md-active {
+              .bold;
+            }
           }
         }
       }
-    }
-    .ph-input {
-      border-bottom: 1px solid @white-transparent;
-      min-width: 300px;
-      font-size: 15px;
-    }
-    md-input-container {
-      min-width: 300px;
-      margin-bottom: 0;
-      &:not(.md-input-invalid) {
-        &.md-input-has-value label {
-          color: @grey;
+      .ph-input {
+        border-bottom: 1px solid @white-transparent;
+        min-width: 300px;
+        font-size: 15px;
+      }
+      md-input-container {
+        min-width: 300px;
+        margin-bottom: 0;
+        &:not(.md-input-invalid) {
+          &.md-input-has-value label {
+            color: @grey;
+          }
         }
       }
+      button[type="submit"] {
+        text-transform: none;
+        .bold;
+        .uppercase;
+        font-family: 'Avenir';
+        width: 22%;
+      }
     }
-    button[type="submit"] {
-      text-transform: none;
-      .bold;
-      .uppercase;
-      font-family: 'Avenir';
-      width: 22%;
-    }
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+    //width: 0;
   }
 }

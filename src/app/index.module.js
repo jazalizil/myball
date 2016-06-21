@@ -17,6 +17,7 @@
       'LocalStorageModule',
       'gettext',
       'angularResizable',
-      'wyvernzora.un-svg'
+      'wyvernzora.un-svg',
+      'btford.socket-io'
     ]);
 })();

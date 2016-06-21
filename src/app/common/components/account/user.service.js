@@ -86,11 +86,7 @@
         return deferred.promise;
       },
       patch: function(manager) {
-        return Restangular.one('managers', 'me').patch(manager)
-          .then(function(manager){
-            _identity.manager = manager;
-            _setIdentity(_identity);
-          });
+        return Restangular.one('managers', 'me').patch(manager);
       }
     };
   }

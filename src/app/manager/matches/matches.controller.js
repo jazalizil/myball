@@ -8,7 +8,7 @@
     .controller('MatchesController', MatchesController);
   /** @ngInject */
   function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog, toastr,
-                             $log, $rootScope) {
+                             $log, $rootScope, Socket) {
     var vm = this;
     vm.data = {
       identity: angular.copy(UserService.getIdentity()),
@@ -35,6 +35,20 @@
         }
       ]
     };
+
+    $scope.$on('socket:new match', function(ev, data){
+      $log.debug('Socket new match:', data);
+      MatchesService.setStatus(data);
+      vm.data.allMatches.push(data);
+      var startDate = new Date(data.startDate);
+      var hourIdx = _.findIndex(vm.data.hours, function(hour){
+        return hour.value === startDate.getHours();
+      });
+      vm.data.hours[hourIdx].matches[data.field] = data;
+      if (vm.data.matchEditing && vm.data.selectedHour.value === startDate.getHours()) {
+        toastr.error(gettextCatalog.getString('Le match que vous éditez vient d\'être réservé via weBall'));
+      }
+    });
 
     $scope.$watch(function(){
       return vm.data.today
@@ -64,7 +78,7 @@
         };
       vm.data.responsable = {};
       if (hour.matches[field._id]) {
-        vm.data.responsable = hour.matches[field._id].responsable;
+        vm.data.responsable = hour.matches[field._id].responsable || {};
       }
       vm.data.responsable.errors = {};
       vm.data.currentField = field;
@@ -77,7 +91,7 @@
         }
       }
       $log.debug(vm.data.match);
-      $mdSidenav('right').toggle();
+      $mdSidenav('match').toggle();
     };
     
     vm.delete = function() {
@@ -92,7 +106,7 @@
         });
         vm.data.allMatches.splice(matchIndex, 1);
         vm.data.isDeletingMatch = false;
-        $mdSidenav('right').close();
+        $mdSidenav('match').close();
         toastr.success(gettextCatalog.getString('Match supprimé avec succès'));
       }, function(err){
         vm.data.isDeletingMatch = false;
@@ -131,7 +145,7 @@
           hour.matches[match.field] = match;
           vm.data.allMatches.push(match);
           vm.data.isUploadingMatch = false;
-          $mdSidenav('right').close();
+          $mdSidenav('match').close();
           toastr.success(gettextCatalog.getString('Match crée avec succès'));
         }, function(err){
           var now = new Date();
@@ -176,30 +190,8 @@
       return MatchesService.fetchAll(params)
         .then(function(res){
           vm.data.allMatches = res;
-          // WIP : status  =  ready if match.maxPlayers == match.currentPlayers ;
-          //                 waiting else if match.maxPlayers != match.currentPlayers;
-          //                 over if match.endDate < currentDate;
-          //                 free else
           _.each(vm.data.allMatches, function(match){
-            match.teams = match.teams.length ? match.teams : [{},{}];
-            var matchDate = new Date(match.endDate);
-            if (matchDate.getTime() < vm.data.today.realDate.getTime()) {
-              match.status = 'over';
-              match.teams[0].status = 'over';
-              match.teams[1].status = 'over';
-            }
-            else if (match.maxPlayers !== match.currentPlayers) {
-              match.status = 'waiting';
-              match.teams[0].status = match.teams[0].users && match.teams[0].users.length === match.maxPlayers / 2 ?
-                'ready' : 'waiting';
-              match.teams[1].status = match.teams[1].users && match.teams[1].users.length === match.maxPlayers / 2 ?
-                'ready' : 'waiting';
-            }
-            else {
-              match.status = 'ready';
-              match.teams[0].status = 'ready';
-              match.teams[1].status = 'ready';
-            }
+            MatchesService.setStatus(match);
           })
         });
     };
@@ -212,6 +204,10 @@
       }, function(){
         $rootScope.$broadcast('loading', false);
       });
+      Socket.emit('join five', vm.data.identity.five._id, function(cb){
+        $log.debug('emit:', cb);
+      });
+      Socket.forward('new match', $scope);
     };
     init();
   }

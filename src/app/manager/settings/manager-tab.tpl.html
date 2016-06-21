@@ -1,0 +1,32 @@
+<md-content class="bg-transparent">
+  <div class="fit-height fit-width" layout="column" layout-padding>
+    <div class="fit-height" layout="row" layout-align="center center">
+      <div layout="column" class="fit-height" layout-align="center center">
+        <div layout="row" layout-align="center center">
+          <md-input-container>
+            <label>{{settings.data.labels.email}}</label>
+            <input autocomplete="off" type="email" ng-model="settings.data.newIdentity.manager.email" name="email">
+          </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+          <md-input-container class="md-float">
+            <label>{{settings.data.labels.oldPassword}}</label>
+            <input autocomplete="off" type="password" ng-model="settings.data.newIdentity.manager.oldPassword" name="oldPassword">
+          </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+          <md-input-container class="md-float">
+            <label>{{settings.data.labels.newPassword}}</label>
+            <input autocomplete="off" type="password" ng-model="settings.data.newIdentity.manager.newPassword" name="newPassword">
+          </md-input-container>
+        </div>
+      </div>
+    </div>
+    <div layout="row" layout-align="center end">
+      <md-button v-busy="settings.data.isLoading" type="submit" class="md-raised md-primary"
+                 ng-click="settings.update()">
+        <span class="white" translate>Mettre à jour</span>
+      </md-button>
+    </div>
+  </div>
+</md-content>

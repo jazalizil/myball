@@ -76,12 +76,6 @@
       templateUrl: "app/manager/matches/matches.html",
       controller: "MatchesController",
       controllerAs: "matches"
-    }).state('dashboard', {
-      parent: "protected",
-      url: "/dashboard",
-      templateUrl: "app/manager/dashboard/dashboard.html",
-      controller: "DashboardController",
-      controllerAs: "dashboard"
     }).state('settings', {
       parent: "protected",
       url: "/settings",
