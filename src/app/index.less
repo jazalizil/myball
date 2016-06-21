@@ -118,6 +118,15 @@ html {
   color: @yellow;
 }
 
+.bg {
+  background-color: @black;
+  z-index: 1;
+  img {
+    opacity: .9;
+    min-height: 100%;
+  }
+}
+
 .bg-red {
   background-color: @red;
 }
@@ -162,6 +171,10 @@ html {
 
 .bg-black-transparent-2 {
   background-color: @black-transparent-2 !important;
+}
+
+.bg-white-transparent {
+  background-color: @white-transparent !important;
 }
 
 .bg-transparent {
@@ -406,6 +419,8 @@ md-progress-linear {
   }
 }
 
+
+// Input
 md-input-container {
   label {
     font-size: 1rem;
@@ -502,6 +517,7 @@ md-menu-item {
   }
 }
 
+// Navbar
 md-toolbar {
   font-family: 'Avenir';
   &.md-toolbar-sm {
@@ -595,6 +611,7 @@ md-dialog {
   min-width: 700px;
 }
 
+// Tabs
 md-tabs {
   .md-tab {
     color: @dark-grey;
@@ -616,6 +633,7 @@ md-tabs {
   }
 }
 
+// Card
 md-card {
   height: 100%;
   .md-toolbar-tools {
@@ -633,6 +651,7 @@ md-card {
   }
 }
 
+// Select
 md-select {
   .white;
 }
@@ -658,6 +677,78 @@ md-select-menu:not(.md-overflow) {
   width: 0.45em;
   top: 2px;
   transform: rotate(135deg);
+}
+
+// Sidenav
+md-backdrop.md-opaque {
+  background-color: @black-transparent;
+}
+md-sidenav {
+  background: @black-transparent;
+  width: 340px;
+  md-content {
+    background: @black-transparent-2;
+    .sidenav {
+      padding: 40px 20px;
+      .delete-btn {
+        border: 1px solid @white;
+        padding: 0;
+        margin: 6px 35px;
+        width: 50%;
+        min-width: 0;
+        &:hover {
+          background-color: transparent !important;
+        }
+      }
+      .action-btn {
+        height: 38px;
+        font-family: 'Avenir';
+      }
+      button[type='submit'] {
+        font-size: 11px;
+        .bold;
+      }
+      md-input-container {
+        label {
+          font-size: 15px;
+        }
+        font-size: 15px;
+        font-family: 'Avenir';
+        min-height: 10px;
+        height: 30px;
+        padding-bottom: 0;
+        label {
+          color: @white;
+        }
+        md-icon {
+          height: 18px;
+          width: 18px;
+          top: 8px;
+        }
+        .switch-ctn {
+          font-family: 'Avenir';
+          md-icon {
+            top: 8px;
+          }
+        }
+        md-switch {
+          .md-label {
+            margin-left: 36px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Tooltip
+md-tooltip {
+  .md-content {
+    font-family: 'Avenir';
+    font-size: 14px;
+    font-weight: 600;
+    color: @white;
+  }
 }
 
 a.md-button.md-default-theme:hover, a.md-button:hover,

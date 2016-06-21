@@ -1,0 +1,50 @@
+<md-sidenav
+    class="md-sidenav-right"
+    md-component-id="authorization"
+    md-whiteframe="2">
+  <md-content class="fit-height fit-width white">
+    <div layout="column" class="fit-height fit-width sidenav">
+      <div class="fit-width day-name" layout="row" layout-align="center center">
+        {{settings.data.authorization.day.name}}
+      </div>
+      <form ng-submit="settings.updateAuthorizations()" layout="column">
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : settings.data.authorization.errors.start}">
+          <label>{{settings.data.labels.startFrom}}</label>
+          <md-icon md-font-set="white material-icons">access_time</md-icon>
+          <md-select ng-model="settings.data.authorization.start">
+            <md-option ng-value="hour.value" ng-repeat="hour in settings.data.authorization.startInterval" md-ink-ripple="#29C134">
+              {{hour.text}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : settings.data.authorization.errors.start}">
+          <label>{{settings.data.labels.endAt}}</label>
+          <md-icon md-font-set="white material-icons">access_time</md-icon>
+          <md-select ng-model="settings.data.authorization.end">
+            <md-option ng-value="hour.value" ng-repeat="hour in settings.data.authorization.endInterval">
+              {{hour.text}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <div layout="row" class="fit-width" ng-switch="settings.data.authorization.new">
+          <div layout="column" class="fit-width" ng-switch-when="true">
+            <md-button type="submit" class="md-raised md-primary fit-width" v-busy="settings.data.isUploadingAuth">
+              <span class="white" translate>créer</span>
+            </md-button>
+          </div>
+          <div class="white fit-width" layout="column" layout-align="center center" ng-switch-default>
+            <div layout="row" class="fit-width fit-height">
+              <md-button class="delete-btn action-btn" ng-click="settings.deleteAuthorization()" v-busy="settings.data.isDeletingAuth">
+                <md-icon md-font-set="material-icons" class="white">delete</md-icon>
+                <!--<span class="red" translate>supprimer</span>-->
+              </md-button>
+              <md-button type="submit" class="md-raised md-primary fit-width action-btn" v-busy="settings.data.isUploadingAuth">
+                <span class="white" translate>mettre à jour</span>
+              </md-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </md-content>
+</md-sidenav>

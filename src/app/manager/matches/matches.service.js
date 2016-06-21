@@ -53,6 +53,32 @@
             sort: 'startDate'
           });
       },
+      setStatus : function(match) {
+        //  status  :      ready if match.maxPlayers == match.currentPlayers ;
+        //                 waiting else if match.maxPlayers != match.currentPlayers;
+        //                 over if match.endDate < currentDate;
+        //                 free else
+        var today = new Date();
+        match.teams = match.teams.length ? match.teams : [{},{}];
+        var matchDate = new Date(match.endDate);
+        if (matchDate.getTime() < today.getTime()) {
+          match.status = 'over';
+          match.teams[0].status = 'over';
+          match.teams[1].status = 'over';
+        }
+        else if (match.maxPlayers !== match.currentPlayers) {
+          match.status = 'waiting';
+          match.teams[0].status = match.teams[0].users && match.teams[0].users.length === match.maxPlayers / 2 ?
+            'ready' : 'waiting';
+          match.teams[1].status = match.teams[1].users && match.teams[1].users.length === match.maxPlayers / 2 ?
+            'ready' : 'waiting';
+        }
+        else {
+          match.status = 'ready';
+          match.teams[0].status = 'ready';
+          match.teams[1].status = 'ready';
+        }
+      },
       delete : function(id) {
         return Restangular.one('matches', id).remove();
       }
