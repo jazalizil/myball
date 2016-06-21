@@ -2,6 +2,7 @@
   z-index: 3;
   .white;
 
+
   .search-ctn {
     md-autocomplete {
       background-color: @dark-grey;
@@ -50,6 +51,105 @@
       }
     }
   }
+
+  .menu-mobile {
+    position: absolute;
+    top: @header-height;
+    z-index: 2;
+    height: calc("100vh - 42px");
+    .link {
+      line-height: 50px;
+      font-size: 15px;
+      transition: .5s linear all;
+      &.ng-hide-add,
+      &.ng-hide-remove {
+        display: block !important;
+        height: 0px;
+      }
+
+      &.ng-hide-remove.ng-hide-remove-active {
+        height: 50px;
+      }
+      &.ng-hide-add{
+        height: 50px;
+      }
+      &.ng-hide-add.ng-hide-add-active {
+        height: 0;
+      }
+      &:focus {
+        .bg-black-transparent;
+      }
+    }
+  }
+
+  #menu-icon {
+    width: 60px;
+    height: 45px;
+    position: relative;
+    //margin: 50px auto;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+    span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 40%;
+      background: @white;
+      border-radius: 9px;
+      opacity: 1;
+      left: 20px;
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transition: .25s ease-in-out;
+      -moz-transition: .25s ease-in-out;
+      -o-transition: .25s ease-in-out;
+      transition: .25s ease-in-out;
+    }
+    span:nth-child(1) {
+      top: 18px;
+    }
+    span:nth-child(2), span:nth-child(3) {
+      top: 24px;
+    }
+    span:nth-child(4) {
+      top: 30px;
+    }
+    &.open {
+      span:nth-child(1) {
+        top: 18px;
+        width: 0%;
+        left: 50%;
+      }
+      span:nth-child(2) {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+      span:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+      span:nth-child(4) {
+        top: 18px;
+        width: 0%;
+        left: 50%;
+      }
+    }
+  }
+
 
   .search-ctn {
     &.ng-enter {
