@@ -18,6 +18,7 @@
       'gettext',
       'angularResizable',
       'wyvernzora.un-svg',
-      'btford.socket-io'
+      'btford.socket-io',
+      'countTo'
     ]);
 })();

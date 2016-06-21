@@ -199,15 +199,12 @@
     var init = function() {
       vm.data.fields = vm.data.identity.five.fields;
       $rootScope.$broadcast('loading', true);
+      Socket.forward('new match', $scope);
       fetchMatches().then(function(){
         $rootScope.$broadcast('loading', false);
       }, function(){
         $rootScope.$broadcast('loading', false);
       });
-      Socket.emit('join five', vm.data.identity.five._id, function(cb){
-        $log.debug('emit:', cb);
-      });
-      Socket.forward('new match', $scope);
     };
     init();
   }
