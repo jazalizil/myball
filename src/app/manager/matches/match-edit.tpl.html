@@ -22,6 +22,9 @@
             &nbsp;{{matches.data.currentField.name}}
           </span>
         </div>
+        <div ng-show="matches.data.matchBooked" layout layout-align="center center" class="alert">
+          <span class="red">Le match que vous éditez vient d'être réservé par un utilisateur de l'application weBall</span>
+        </div>
       </div>
       <form ng-submit="matches.send()" layout="column">
         <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.reponsable.errors.name}">
@@ -35,9 +38,9 @@
           <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
           <input type="text" phone-prefix name="name" ng-model="matches.data.responsable.phone">
         </md-input-container>
-        <md-input-container class="md-icon-float md-block">
+        <md-input-container class="md-img-float md-block">
           <label>{{matches.data.placeholders.email}}</label>
-          <md-icon md-svg-src="/assets/icons/email.svg"></md-icon>
+          <img src="/assets/icons/email.svg" alt="email icon">
           <input type="email" name="email" ng-model="matches.data.responsable.email">
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
@@ -64,7 +67,7 @@
           </div>
           <div class="white fit-width" layout="column" layout-align="center center" ng-switch-default>
             <div layout="row" class="fit-width fit-height">
-              <md-button class="delete-btn action-btn" ng-click="matches.delete()" v-busy="matches.data.isDeletingMatch">
+              <md-button class="delete-btn action-btn" ng-click="matches.delete(matches.data.match)" v-busy="matches.data.isDeletingMatch">
                 <md-icon md-font-set="material-icons" class="white">delete</md-icon>
                 <!--<span class="red" translate>supprimer</span>-->
               </md-button>

@@ -46,7 +46,8 @@
     
     var checkStatus = function(match, today) {
       var startDate = new Date(match.startDate);
-      if (!_.isEmpty(match.teams) && match.teams[0].length + match.teams[1].length === match.maxPlayers) {
+      if (startDate.getTime() > today.getTime() &&
+        !_.isEmpty(match.teams) && match.teams[0].length + match.teams[1].length === match.maxPlayers) {
         add(1);
       }
       else if (startDate.getTime() > today.getTime() &&
@@ -83,7 +84,6 @@
           checkStatus(match, today);
           checkDate(match, today);
         });
-        // Socket.forward('new match', $scope);
         $rootScope.$broadcast('loading', false);
       }, function() {
         $rootScope.$broadcast('loading', false);

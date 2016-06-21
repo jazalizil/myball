@@ -47,6 +47,8 @@
       vm.data.hours[hourIdx].matches[data.field] = data;
       if (vm.data.matchEditing && vm.data.selectedHour.value === startDate.getHours()) {
         toastr.warning(gettextCatalog.getString('Le match que vous éditez vient d\'être réservé via weBall'));
+        vm.data.matchBooked = true;
+        vm.data.match = vm.data.hours[hourIdx].matches[data.field];
       }
     });
 
@@ -68,16 +70,19 @@
       getHours();
     }, true);
 
-    vm.openSidenav = function(hour, field) {
+    var createMatch = function(hour, field) {
       vm.data.selectedHour = angular.copy(hour);
-      vm.data.match = hour.matches[field._id] || {
-          maxPlayers: vm.data.teamSizes[1].value,
-          field: field._id,
-          startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value)),
-          endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value) + 1)
-        };
+      vm.data.hour = hour;
+      vm.data.matchBooked = false;
+      vm.data.match = {
+        maxPlayers: vm.data.teamSizes[1].value,
+        field: field._id,
+        startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value)),
+        endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value) + 1)
+      };
       vm.data.responsable = {};
       if (hour.matches[field._id]) {
+        vm.data.match = hour.matches[field._id];
         vm.data.responsable = hour.matches[field._id].responsable || {};
       }
       vm.data.responsable.errors = {};
@@ -90,19 +95,23 @@
           vm.data.match.endDate.setMinutes(30);
         }
       }
+    };
+
+    vm.openSidenav = function(hour, field) {
+      createMatch(hour, field);
       $log.debug(vm.data.match);
-      $mdSidenav('match').toggle();
+      $mdSidenav('match').open();
     };
     
-    vm.delete = function() {
+    vm.delete = function(match) {
       vm.data.isDeletingMatch = true;
-      MatchesService.delete(vm.data.match._id).then(function(){
+      return MatchesService.delete(match._id).then(function(){
         var hour = _.find(vm.data.hours, function(hour){
           return hour.value === vm.data.selectedHour.value;
         });
-        hour.matches[vm.data.match.field] = {};
-        var matchIndex = _.findIndex(vm.data.allMatches, function(match){
-          return match._id === vm.data.match._id;
+        hour.matches[match.field] = {};
+        var matchIndex = _.findIndex(vm.data.allMatches, function(m){
+          return m._id === match._id;
         });
         vm.data.allMatches.splice(matchIndex, 1);
         vm.data.isDeletingMatch = false;
@@ -113,9 +122,55 @@
         toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
       })
     };
+    
+    var uploadMatch = function(){
+      var payload = {};
+      vm.data.isUploadingMatch = true;
+      payload.match = vm.data.match;
+      payload.match.responsable = _.pickBy(vm.data.responsable, function(val, key){
+        return key !== 'errors';
+      });
+      payload.match.teams = [{
+        name: gettextCatalog.getString('Équipe 1'),
+        currentPlayers: vm.data.maxPlayers / 2
+      },{
+        name: gettextCatalog.getString('Équipe 2'),
+        currentPlayers: vm.data.maxPlayers / 2
+      }];
+      $log.debug(payload);
+      MatchesService.put(payload).then(function(match){
+        var hour = _.find(vm.data.hours, function(hour){
+          return hour.value === vm.data.selectedHour.value;
+        });
+        if (vm.data.selectedHour.isHalf) {
+          vm.data.selectedHour.value += 0.5;
+        }
+        match.status = 'ready';
+        match.teams = [{
+          status: 'ready'
+        },{
+          status: 'ready'
+        }];
+        hour.matches[match.field] = match;
+        vm.data.allMatches.push(match);
+        vm.data.isUploadingMatch = false;
+        vm.data.matchBooked = false;
+        $mdSidenav('match').close();
+        toastr.success(gettextCatalog.getString('Match crée avec succès'));
+      }, function(err){
+        var now = new Date();
+        if (vm.data.match.startDate.getTime() < now.getTime()) {
+          toastr.error(gettextCatalog.getString('Impossible de créer un match dans le passé'), gettextCatalog.getString('Erreur'));
+        }
+        else {
+          toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
+        }
+        $log.debug(vm.data.match, err);
+        vm.data.isUploadingMatch = false;
+      })
+    };
 
     vm.send = function() {
-      var payload = {}, hour;
       if (!vm.data.responsable.name) {
         vm.data.responsable.errors.name = true;
       }
@@ -123,41 +178,7 @@
         vm.data.responsable.errors.phone = true;
       }
       else {
-        vm.data.isUploadingMatch = true;
-        payload.match = vm.data.match;
-        payload.match.responsable = _.pickBy(vm.data.responsable, function(val, key){
-          return key !== 'errors';
-        });
-        $log.debug(payload);
-        MatchesService.put(payload).then(function(match){
-          if (vm.data.selectedHour.isHalf) {
-            vm.data.selectedHour.value += 0.5;
-          }
-          hour = _.find(vm.data.hours, function(hour){
-            return hour.value === vm.data.selectedHour.value;
-          });
-          match.status = 'ready';
-          match.teams = [{
-            status: 'ready'
-          },{
-            status: 'ready'
-          }];
-          hour.matches[match.field] = match;
-          vm.data.allMatches.push(match);
-          vm.data.isUploadingMatch = false;
-          $mdSidenav('match').close();
-          toastr.success(gettextCatalog.getString('Match crée avec succès'));
-        }, function(err){
-          var now = new Date();
-          if (vm.data.match.startDate.getTime() < now.getTime()) {
-            toastr.error(gettextCatalog.getString('Impossible de créer un match dans le passé'), gettextCatalog.getString('Erreur'));
-          }
-          else {
-            toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
-          }
-          $log.debug(vm.data.match, err);
-          vm.data.isUploadingMatch = false;
-        })
+        uploadMatch();
       }
     };
 
