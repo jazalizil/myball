@@ -7,7 +7,6 @@
     function NavbarController(UserService, AuthorizationService, gettextCatalog) {
       var vm = this;
       vm.data = {
-        identity: UserService.getIdentity(),
         links: [
           {
             text: gettextCatalog.getString('Accueil'),
@@ -36,8 +35,8 @@
       vm.querySearch = function(query) {
         return createFilterFor(query);
       };
-      vm.toggleMenu = function($mdOpenMenu, ev) {
-        $mdOpenMenu(ev);
+      vm.toggleMenu = function(open) {
+        vm.data.menuOpen = open;
       };
       vm.toggleSearch = function() {
         if (vm.data.isSearching) {
