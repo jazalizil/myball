@@ -36,7 +36,7 @@
       ]
     };
 
-    $scope.$on('socket:new match', function(ev, data){
+    Socket.on('new match', function(data){
       $log.debug('Socket new match:', data);
       MatchesService.setStatus(data);
       vm.data.allMatches.push(data);
@@ -46,7 +46,7 @@
       });
       vm.data.hours[hourIdx].matches[data.field] = data;
       if (vm.data.matchEditing && vm.data.selectedHour.value === startDate.getHours()) {
-        toastr.error(gettextCatalog.getString('Le match que vous éditez vient d\'être réservé via weBall'));
+        toastr.warning(gettextCatalog.getString('Le match que vous éditez vient d\'être réservé via weBall'));
       }
     });
 
@@ -199,7 +199,7 @@
     var init = function() {
       vm.data.fields = vm.data.identity.five.fields;
       $rootScope.$broadcast('loading', true);
-      Socket.forward('new match', $scope);
+      Socket.emit('join five', vm.data.identity.five._id);
       fetchMatches().then(function(){
         $rootScope.$broadcast('loading', false);
       }, function(){

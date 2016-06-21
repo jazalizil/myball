@@ -7,12 +7,29 @@
   angular.module('myBall')
     .factory('Socket', SocketFactory);
   /** @ngInject */
-  function SocketFactory(Conf, socketFactory, $window) {
+  function SocketFactory(Conf, $window, $rootScope) {
     var socket = $window.io.connect(Conf.WEBALL_API_BASE_URL, {
       secure: true
     });
-    return socketFactory({
-      ioSocket: socket
-    });
+    return {
+      on: function (eventName, callback) {
+        socket.on(eventName, function () {
+          var args = arguments;
+          $rootScope.$apply(function () {
+            callback.apply(socket, args);
+          });
+        });
+      },
+      emit: function (eventName, data, callback) {
+        socket.emit(eventName, data, function () {
+          var args = arguments;
+          $rootScope.$apply(function () {
+            if (callback) {
+              callback.apply(socket, args);
+            }
+          });
+        })
+      }
+    };
   }
 })();
