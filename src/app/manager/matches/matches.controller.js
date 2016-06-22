@@ -83,7 +83,9 @@
       vm.data.responsable = {};
       if (hour.matches[field._id]) {
         vm.data.match = hour.matches[field._id];
-        vm.data.responsable = hour.matches[field._id].responsable || {};
+        vm.data.responsable = vm.data.match.responsable || {
+            name: vm.data.match.createdBy.fullName
+          };
       }
       vm.data.responsable.errors = {};
       vm.data.currentField = field;
@@ -123,20 +125,22 @@
       })
     };
     
-    var uploadMatch = function(){
+    var uploadMatch = function(created){
       var payload = {};
       vm.data.isUploadingMatch = true;
       payload.match = vm.data.match;
       payload.match.responsable = _.pickBy(vm.data.responsable, function(val, key){
         return key !== 'errors';
       });
-      payload.match.teams = [{
-        name: gettextCatalog.getString('Équipe 1'),
-        currentPlayers: vm.data.maxPlayers / 2
-      },{
-        name: gettextCatalog.getString('Équipe 2'),
-        currentPlayers: vm.data.maxPlayers / 2
-      }];
+      if (!created) {
+        payload.match.teams = [{
+          name: gettextCatalog.getString('Équipe 1'),
+          currentPlayers: vm.data.match.maxPlayers / 2
+        },{
+          name: gettextCatalog.getString('Équipe 2'),
+          currentPlayers: vm.data.match.maxPlayers / 2
+        }];
+      }
       $log.debug(payload);
       MatchesService.put(payload).then(function(match){
         var hour = _.find(vm.data.hours, function(hour){
@@ -178,7 +182,7 @@
         vm.data.responsable.errors.phone = true;
       }
       else {
-        uploadMatch();
+        uploadMatch(vm.data.match.createdAt);
       }
     };
 
