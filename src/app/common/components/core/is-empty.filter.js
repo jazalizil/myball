@@ -1,15 +1,15 @@
 /**
- * Created by jazalizil on 11/12/15.
+ * Created by jazalizil on 14/04/2016.
  */
 
 (function () {
   'use strict';
   angular.module('myBall')
-    .filter('price', priceFilter);
+    .filter('isEmpty', isEmpty);
   /** @ngInject */
-  function priceFilter() {
+  function isEmpty(_) {
     return function(input) {
-      return input + "€";
+      return _.isEmpty(input);
     }
   }
 })();

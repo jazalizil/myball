@@ -9,10 +9,16 @@
   /** @ngInject */
   function hourFilter() {
     return function(input) {
-      if (input == "24") {
-        return "00h";
+      if (+input === 24) {
+        input = "00h";
       }
-      return input + "h";
+      else if (+input * 10 % 10 !== 0) {
+        input = Math.ceil(+input) + "h30"
+      }
+      else {
+        input += "h";
+      }
+      return input;
     }
   }
 })();

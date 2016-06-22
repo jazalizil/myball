@@ -1,0 +1,81 @@
+<div id="mb-navbar">
+  <md-toolbar
+      id="mb-navbar"
+      class="md-accent md-whiteframe-z0 md-toolbar-sm fixed white bg-transparent"
+      layout="row">
+    <div class="md-toolbar-tools" layout="row">
+      <div class="full-width" layout layout-align="start center">
+        <a ui-sref="start" class="logo">
+          <md-icon class="relative white no-margin" md-svg-src="assets/icons/myball.svg"></md-icon>
+        </a>
+      </div>
+      <span flex></span>
+
+      <!--Screen-->
+      <div class="full-width" layout layout-align="end center" hide-xs hide-sm>
+        <!--Navbar links-->
+        <div class="links-ctn" layout="row" layout-align="start center" ng-hide="navbar.data.isSearching">
+          <a ng-repeat="link in navbar.data.links track by $index" layout class="navbar-link"
+             ui-sref="{{link.url}}" ui-sref-active="active bold"
+             ng-class="{'padded': !$first && !$last}"
+          >
+          <span class="relative">
+            {{link.text}}
+            <span class="bar"></span>
+          </span>
+          </a>
+        </div>
+
+        <!--Navbar search-->
+        <!--<div class="search-ctn" layout layout-align="center center" ng-if="navbar.data.isSearching">-->
+        <!--<i class="white material-icons">search</i>-->
+        <!--<md-autocomplete md-autofocus-->
+        <!--md-search-text="navbar.searchText"-->
+        <!--md-items="item in navbar.querySearch(navbar.searchText)"-->
+        <!--placeholder="{{navbar.data.searchPlaceholder}}">-->
+        <!--<md-item-template>-->
+        <!--<span md-highlight-text="navbar.searchText"></span>-->
+        <!--</md-item-template>-->
+        <!--</md-autocomplete>-->
+        <!--</div>-->
+
+        <!--Navbar power button-->
+        <a href="" ng-click="navbar.logout()">
+          <md-icon class="white no-margin small danger" md-svg-src="assets/icons/power-button.svg"></md-icon>
+        </a>
+
+      </div>
+
+      <!--Mobile and tablet-->
+      <div class="full-width" layout layout-align="end center" hide-gt-sm>
+        <div id="menu-icon" ng-class="{ 'open': navbar.data.menuOpen }" ng-click="navbar.toggleMenu(!navbar.data.menuOpen)">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
+  <div class="full-width" layout hide-gt-sm>
+    <div class="fit-width bg-black-transparent-2 menu-mobile uppercase" layout="column" >
+      <div class="navbar-black fit-width menu-el" ng-show="navbar.data.menuOpen"></div>
+      <a ng-repeat="link in navbar.data.links track by $index" layout="row" class="menu-el link center-text fit-width"
+         ui-sref="{{link.url}}" ui-sref-active="active bold"
+         ng-show="navbar.data.menuOpen"
+         ng-click="navbar.toggleMenu(false)"
+      >
+          <span class="fit-width">
+            {{link.text}}
+          </span>
+      </a>
+      <a href="" class="menu-el link center-text fit-width"
+         layout="row" ng-click="navbar.toggleMenu(false) ; navbar.logout()"
+         ng-show="navbar.data.menuOpen">
+        <span class="fit-width">
+          Déconnection
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

@@ -15,10 +15,20 @@
       getFirstDayOfMonth : function(month, year) {
         return new Date(year, month, 1).getDay();
       },
+      getWeekOfYear: function(date) {
+        var onejan = new Date(date.getFullYear(),0,1);
+        var millisecsInDay = 86400000;
+        return Math.ceil((((date - onejan) /millisecsInDay) + onejan.getDay()+1)/7);
+      },
       getDatas : function() {
         return {
           date : new Date(),
           daysDisplayed : [
+            {
+              number : 0,
+              name : gettextCatalog.getString('Dimanche'),
+              shortName : gettextCatalog.getString('Dim')
+            },
             {
               number : 1,
               name : gettextCatalog.getString('Lundi'),
@@ -48,11 +58,6 @@
               number : 6,
               name : gettextCatalog.getString('Samedi'),
               shortName : gettextCatalog.getString('Sam')
-            },
-            {
-              number : 0,
-              name : gettextCatalog.getString('Dimanche'),
-              shortName : gettextCatalog.getString('Dim')
             }
           ],
           monthsDisplayed : [

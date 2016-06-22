@@ -20,7 +20,6 @@
         if (typeof scope.carousel.imgs[scope.carousel.index] === 'undefined') {
           scope.carousel.index = 0;
         }
-        scope.carousel.currentImg = scope.carousel.imgs[scope.carousel.index];
       }
       timeOutPr = $interval(function(){
         nextImg();
