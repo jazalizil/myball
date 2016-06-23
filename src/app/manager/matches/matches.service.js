@@ -9,6 +9,8 @@
   /** @ngInject */
   function MatchesService(Restangular, UserService, $log){
     var _identity = UserService.getIdentity();
+    function z(n){ return (n < 10? '0' : '') + n }
+    function zz(n){ return (n < 100 ? '0' + z(n) : z(n)); }
     return {
       fetchAll : function(params) {
         return Restangular.all('matches/five')
@@ -52,6 +54,78 @@
             endDate: tomorrow,
             sort: 'startDate'
           });
+      },
+      initDates: function(match) {
+        var start = new Date(match.startDate);
+        var end = new Date(match.endDate);
+        start.setUTCHours(start.getUTCHours());
+        match.startDate = {
+          year: start.getUTCFullYear(),
+          month: start.getUTCMonth(),
+          date: start.getUTCDate(),
+          day: start.getDay(),
+          hours: start.getUTCHours(),
+          minutes: start.getUTCMinutes(),
+          seconds: start.getUTCSeconds(),
+          milliseconds: start.getUTCMilliseconds()
+        };
+        end.setUTCHours(end.getUTCHours());
+        match.endDate = {
+          year: end.getUTCFullYear(),
+          month: end.getUTCMonth(),
+          date: end.getUTCDate(),
+          day: end.getDay(),
+          hours: end.getUTCHours(),
+          minutes: end.getUTCMinutes(),
+          seconds: end.getUTCSeconds(),
+          milliseconds: end.getUTCMilliseconds()
+        };
+      },
+      cleanDates: function(match) {
+        var startHour = Math.floor(match.startDate.hours);
+        var endHour = Math.floor(match.endDate.hours);
+        var endMinutes = match.duration * 10 % 10 === 0 && match.startDate.minutes === 0 ? 0 : 30;
+        return {
+          startDate: match.startDate.year + '-' + z(match.startDate.month) + '-' +
+            z(match.startDate.date) + 'T' + z(startHour) + ':' +
+            z(match.startDate.minutes) + ':' + z(match.startDate.seconds) + '.' + zz(match.startDate.milliseconds) +'Z',
+          endDate: match.endDate.year + '-' + z(match.endDate.month) + '-' +
+            z(match.endDate.date) + 'T' + z(endHour) + ':' +
+            z(endMinutes) + ':' + z(match.endDate.seconds) + '.' + zz(match.endDate.milliseconds) +'Z'
+        }
+      },
+      getDates: function(hour) {
+        var today = new Date();
+        return {
+          start: {
+            year: today.getUTCFullYear(),
+            month: today.getUTCMonth() + 1,
+            date: today.getUTCDate(),
+            day: today.getDay(),
+            hours: hour.value,
+            minutes: hour.minutes,
+            seconds: today.getUTCSeconds(),
+            milliseconds: today.getUTCMilliseconds()
+          },
+          end: {
+            year: today.getUTCFullYear(),
+            month: today.getUTCMonth() + 1,
+            date: today.getUTCDate(),
+            day: today.getDay(),
+            hours: hour.value + 1,
+            minutes: hour.minutes,
+            seconds: today.getUTCSeconds(),
+            milliseconds: today.getUTCMilliseconds()
+          }
+        }
+      },
+      setDuration: function(match) {
+        var duration = match.endDate.hours - match.startDate.hours;
+        var minuteDiff = match.endDate.minutes - match.startDate.minutes;
+        if (minuteDiff != 0) {
+          duration += minuteDiff > 0 ? 0.5 : -0.5;
+        }
+        match.duration = duration;
       },
       setStatus : function(match) {
         //  status  :      ready if match.maxPlayers == match.currentPlayers ;

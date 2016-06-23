@@ -49,7 +49,6 @@
       .accentPalette('wbAccentPalette');
 
     localStorageServiceProvider.setPrefix('wb');
-
   }
 
 })();

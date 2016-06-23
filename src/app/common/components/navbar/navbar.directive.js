@@ -7,22 +7,9 @@
     function NavbarController(UserService, AuthorizationService, gettextCatalog) {
       var vm = this;
       vm.data = {
-        links: [
-          {
-            text: gettextCatalog.getString('Accueil'),
-            url: 'main'
-          },
-          {
-            text: gettextCatalog.getString('Réservations'),
-            url: 'matches'
-          },
-          {
-            text: gettextCatalog.getString('Paramètres'),
-            url: 'settings'
-          }
-        ],
         searchPlaceholder: gettextCatalog.getString('Rechercher un joueur'),
-        searchIcon: 'search'
+        searchIcon: 'search',
+        authenticated: UserService.isAuthenticated()
       };
 
       function createFilterFor(query) {
@@ -50,6 +37,25 @@
       vm.logout = function() {
         AuthorizationService.logout();
       };
+      var init = function() {
+        if (vm.data.authenticated) {
+          vm.data.links =  [
+            {
+              text: gettextCatalog.getString('Accueil'),
+              url: 'main'
+            },
+            {
+              text: gettextCatalog.getString('Réservations'),
+              url: 'matches'
+            },
+            {
+              text: gettextCatalog.getString('Paramètres'),
+              url: 'settings'
+            }
+          ];
+        }
+      };
+      init();
     }
 
     return {

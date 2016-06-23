@@ -47,7 +47,7 @@
       </div>
 
       <!--Mobile and tablet-->
-      <div class="full-width" layout layout-align="end center" hide-gt-sm>
+      <div class="full-width" layout layout-align="end center" hide-gt-sm ng-show="navbar.data.authenticated">
         <div id="menu-icon" ng-class="{ 'open': navbar.data.menuOpen }" ng-click="navbar.toggleMenu(!navbar.data.menuOpen)">
           <span></span>
           <span></span>
@@ -57,7 +57,7 @@
       </div>
     </div>
   </md-toolbar>
-  <div class="full-width" layout hide-gt-sm>
+  <div class="full-width" layout hide-gt-sm ng-show="navbar.data.authenticated">
     <div class="fit-width bg-black-transparent-2 menu-mobile uppercase" layout="column" >
       <div class="navbar-black fit-width menu-el" ng-show="navbar.data.menuOpen"></div>
       <a ng-repeat="link in navbar.data.links track by $index" layout="row" class="menu-el link center-text fit-width"
@@ -73,7 +73,7 @@
          layout="row" ng-click="navbar.toggleMenu(false) ; navbar.logout()"
          ng-show="navbar.data.menuOpen">
         <span class="fit-width">
-          Déconnection
+          Déconnexion
         </span>
       </a>
     </div>

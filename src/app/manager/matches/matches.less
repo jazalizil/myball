@@ -22,8 +22,13 @@
     overflow-y: auto;
     overflow-x: hidden;
     margin-top: @row-height;
+    padding-top: @padding-3x;
     .slot-ctn {
       min-height: @row-height;
+      .hour {
+        left: 0px;
+        top: -8px;
+      }
       .slot {
         &.border-dashed {
           border-top: dashed @grey 1px;
@@ -32,7 +37,6 @@
           border-top: solid @grey 1px;
         }
         position: relative;
-        top: @padding-2x;
         margin-left: @margin;
         margin-right: @margin;
         .match-ctn {
@@ -52,12 +56,15 @@
             }
             &.booked {
               background-color: @black-transparent;
+              &:hover, &.selected {
+                background-color: @black-transparent-2;
+              }
             }
-          }
-          &:hover, &.selected {
-            background-color: @black-transparent;
-            i {
-              visibility: visible;
+            &:hover, &.selected {
+              background-color: @black-transparent;
+              i {
+                visibility: visible;
+              }
             }
           }
         }

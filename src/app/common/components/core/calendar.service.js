@@ -20,6 +20,42 @@
         var millisecsInDay = 86400000;
         return Math.ceil((((date - onejan) /millisecsInDay) + onejan.getDay()+1)/7);
       },
+      getDuration: function(startD, endD) {
+        var start = new Date(startD);
+        var end = new Date(endD);
+        var diff = (end - start); // milliseconds between start & end
+        return {
+          days: Math.round(diff / 86400000),
+          hours: Math.round((diff % 86400000) / 3600000) - 1,
+          mins: Math.round(((diff % 86400000) % 3600000) / 60000)
+        }
+      },
+      getHourOffset : function() {
+        var today = new Date();
+        var offset = today.getTimezoneOffset() / 60;
+        var base = -2, val, ret;
+        if (base > offset) {
+          val = base - offset;
+          ret = {
+            fig : '-',
+            text : val % 10 === 0 ? '0' + val : val,
+            value: offset - base
+          }
+        } else {
+          val = offset - base;
+          ret = {
+            fig : '+',
+            text : val % 10 === 0 ? '0' + val : val,
+            value : base - offset
+          }
+        }
+        if (ret.value * 10 % 10 === 0) {
+          ret.text += ':00';
+        } else {
+          ret.text += ':30';
+        }
+        return ret;
+      },
       getDatas : function() {
         return {
           date : new Date(),

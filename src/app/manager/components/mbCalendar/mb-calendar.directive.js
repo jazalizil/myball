@@ -47,27 +47,30 @@
         return vm.matches
       }, function(newVal){
         if (newVal) {
-          $log.debug('matches:', vm.matches);
           addMatchesToDays();
+          vm.today.matches = _.filter(vm.matches, function(match){
+            $log.debug(match);
+            return match.startDate.year === vm.today.year && match.startDate.month === vm.today.month &&
+              match.startDate.date === vm.today.date;
+          });
+          $log.debug('today:', vm.today);
         }
       });
 
       function addMatchesToDays() {
-        var date, toPush;
+        var toPush;
         _.each(vm.data.daysToDisplay, function(day){
           day.matches = [];
           day.statuses = [];
           _.each(vm.matches, function(match) {
-            date = new Date(match.startDate);
-            if(date.getFullYear() === day.year && date.getMonth() === day.month && date.getDate() === day.date) {
+            if(match.startDate.year === day.year && match.startDate.month === day.month && match.startDate.date === day.date) {
               toPush = match;
-              toPush.startDate = new Date(match.startDate);
-              toPush.endDate = new Date(match.endDate);
-              toPush.createdAt = new Date(match.createdAt);
+              toPush.createdAt = match.createdAt;
               if (_.indexOf(day.statuses, match.status) < 0) {
                 day.statuses.push(match.status);
               }
               day.matches.push(toPush);
+              $log.debug('match push day', day.date);
             }
           })
         })
