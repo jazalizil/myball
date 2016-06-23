@@ -12,12 +12,9 @@
         </div>
         <div layout layout-align="center center" class="hour pad-t-3x">
           <i class="material-icons">access_time</i>
-          {{matches.data.selectedHour.value + ':'}}
-          <span ng-show="matches.data.selectedHour.isHalf">30</span>
-          <span ng-hide="matches.data.selectedHour.isHalf">00</span>
-          &nbsp;-&nbsp;{{matches.data.selectedHour.value + 1 + ':'}}
-          <span ng-show="matches.data.selectedHour.isHalf">30</span>
-          <span ng-hide="matches.data.selectedHour.isHalf">00</span>
+          {{matches.data.match.startDate.hours | roundDown}}:{{matches.data.match.startDate.minutes | addZero}}
+          &nbsp;-&nbsp;
+          {{matches.data.match.endDate.hours | roundDown}}:{{matches.data.match.endDate.minutes | addZero}}
           <span class="pad-l-3x">
             &nbsp;{{matches.data.currentField.name}}
           </span>
@@ -44,11 +41,22 @@
           <input type="email" name="email" ng-model="matches.data.responsable.email">
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
+          <label>{{matches.data.placeholders.teams}}</label>
           <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
           <md-select class="white" ng-model="matches.data.match.maxPlayers" aria-label="team size">
             <md-option ng-repeat="size in matches.data.teamSizes" ng-value="size.value"
                        ng-selected="size.value === matches.data.match.maxPlayers">
               {{size.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <label>{{matches.data.placeholders.duration}}</label>
+          <md-icon md-font-set="white material-icons">access_time</md-icon>
+          <md-select class="white" ng-model="matches.data.match.duration" aria-label="team size">
+            <md-option ng-repeat="duration in matches.data.durations" ng-value="duration.value"
+                       ng-selected="duration.value === matches.data.match.duration">
+              {{duration.text}}
             </md-option>
           </md-select>
         </md-input-container>

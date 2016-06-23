@@ -18,20 +18,21 @@
         </div>
         <div class="t-body fit-height fit-width" layout="column">
           <div layout="row" class="slot-ctn" ng-repeat="hour in matches.data.hours" ng-hide="hour.value > 25" ng-class="{'first' : $first}">
-            <div layout layout-align="center start" flex="10" class="white">
-              <span ng-show="hour.value * 10 % 10 === 0">{{hour.text}}</span>
+            <div layout layout-align="center start" flex="10" class="white relative">
+              <span ng-show="hour.value * 10 % 10 === 0" class="absolute center-text fit-width hour">{{hour.text}}</span>
             </div>
             <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
                  ng-repeat="slot in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
               <div class="match-ctn absolute pointer" ng-click="matches.openSidenav(hour, slot)" id="{{hour.value + '-' + slot._id}}"
                    ng-hide="matches.data.hours[$parent.$index - 1].matches[slot._id] ||
                    matches.data.hours[$parent.$index + 1].matches[slot._id] || hour.value >= 21.5">
-                <div layout="row" class="match fit-height fit-width" ng-hide="hour.matches[slot._id]">
+                <div layout="row" class="match fit-height fit-width" ng-hide="hour.matches[slot._id] || hour.booked[slot._id]">
                   <div layout="column" layout-align="center center" class="fit-width">
                     <i class="material-icons green">add_circle</i>
                   </div>
                 </div>
-                <div layout="row" class="match booked fit-height fit-width" ng-if="hour.matches[slot._id]">
+                <div layout="row" class="match booked fit-height fit-width" ng-if="hour.matches[slot._id]"
+                     ng-style="{'height': 100 * {{hour.matches[slot._id].duration}} + '%'}">
                   <div layout="column" class="fit-width fit-height">
                     <div layout="row" layout-align="center center" class="fit-width fit-height">
                       <div flex="45" layout layout-align="center center">

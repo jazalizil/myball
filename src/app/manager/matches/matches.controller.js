@@ -16,7 +16,8 @@
         paid: gettextCatalog.getString('Payé'),
         name: gettextCatalog.getString('Nom complet'),
         email: gettextCatalog.getString('Email'),
-        phone: gettextCatalog.getString('Numéro de téléphone')
+        phone: gettextCatalog.getString('Numéro de téléphone'),
+        duration: gettextCatalog.getString('Durée du match')
       },
       today: {
         realDate: new Date()
@@ -32,6 +33,20 @@
         {
           value: 10,
           name: '5 vs 5'
+        }
+      ],
+      durations: [
+        {
+          value: 1,
+          text: '1:00'
+        },
+        // {
+        //   value: 1.5,
+        //   text: '1:30'
+        // },
+        {
+          value: 2,
+          text: '2:00'
         }
       ]
     };
@@ -55,7 +70,7 @@
     $scope.$watch(function(){
       return vm.data.today
     }, function(newVal, oldVal){
-      if (!newVal) {
+      if (!newVal.matches) {
         return;
       }
       else if (oldVal.year && oldVal.year !== newVal.year) {
@@ -70,32 +85,35 @@
       getHours();
     }, true);
 
+
     var createMatch = function(hour, field) {
+      var dates;
       vm.data.selectedHour = angular.copy(hour);
       vm.data.hour = hour;
       vm.data.matchBooked = false;
-      vm.data.match = {
-        maxPlayers: vm.data.teamSizes[1].value,
-        field: field._id,
-        startDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value)),
-        endDate: new Date(vm.data.today.year, vm.data.today.month, vm.data.today.date, Math.floor(vm.data.selectedHour.value) + 1)
-      };
       vm.data.responsable = {};
       if (hour.matches[field._id]) {
         vm.data.match = hour.matches[field._id];
         vm.data.responsable = vm.data.match.responsable || {
-            name: vm.data.match.createdBy.fullName
+            name: vm.data.match.createdBy.fullName,
+            email: vm.data.match.createdBy.email,
+            phone: vm.data.match.createdBy.phone
           };
+      }
+      else {
+        dates = MatchesService.getDates(vm.data.selectedHour);
+        vm.data.match = {
+          maxPlayers: vm.data.teamSizes[1].value,
+          field: field._id,
+          startDate: dates.start,
+          endDate: dates.end,
+          duration: vm.data.durations[0].value
+        };
       }
       vm.data.responsable.errors = {};
       vm.data.currentField = field;
       if (vm.data.selectedHour.value * 10 % 10 !== 0) {
         vm.data.selectedHour.value = Math.floor(vm.data.selectedHour.value);
-        vm.data.selectedHour.isHalf = true;
-        if (!vm.data.match.createdDate) {
-          vm.data.match.startDate.setMinutes(30);
-          vm.data.match.endDate.setMinutes(30);
-        }
       }
     };
 
@@ -128,7 +146,7 @@
     var uploadMatch = function(created){
       var payload = {};
       vm.data.isUploadingMatch = true;
-      payload.match = vm.data.match;
+      payload.match = _.extend(MatchesService.cleanDates(vm.data.match), _.omit(vm.data.match, ['startDate', 'endDate', 'duration']));
       payload.match.responsable = _.pickBy(vm.data.responsable, function(val, key){
         return key !== 'errors';
       });
@@ -155,6 +173,8 @@
         },{
           status: 'ready'
         }];
+        MatchesService.initDates(match);
+        match.duration = vm.data.match.duration;
         hour.matches[match.field] = match;
         vm.data.allMatches.push(match);
         vm.data.isUploadingMatch = false;
@@ -163,7 +183,7 @@
         toastr.success(gettextCatalog.getString('Match crée avec succès'));
       }, function(err){
         var now = new Date();
-        if (vm.data.match.startDate.getTime() < now.getTime()) {
+        if (vm.data.match.startDate.hour < now.getHours() && vm.data.match.startDate.getMinutes() < now.getMinutes()) {
           toastr.error(gettextCatalog.getString('Impossible de créer un match dans le passé'), gettextCatalog.getString('Erreur'));
         }
         else {
@@ -192,19 +212,34 @@
       _.each(hours, function(hour){
         toPush = {
           value: hour,
-          text: hour + ':00',
+          text: hour + ':' + (hour * 10 % 10 === 0 ? '00' : '30'),
+          minutes: hour * 10 % 10 === 0 ? 0 : 30,
           slots: {},
           matches: {},
+          booked: {},
           status: 'free'
         };
-        _.each(vm.data.today.matches, function(match){
-          if (match.startDate.getHours() !== hour ||
-            (match.startDate.getMinutes() === 30 && match.startDate.getHours() !== Math.floor(hour))) {
-            return;
-          }
-          toPush.matches[match.field] = match;
-        });
         vm.data.hours.push(toPush);
+      });
+      $log.debug('hours:', vm.data.hours);
+      _.each(vm.data.today.matches, function(match){
+        var hour = match.startDate.hours;
+        var minutes = match.startDate.minutes;
+        var index = 0, tmpHour = 9, duration = 0;
+        while (tmpHour !== hour) {
+          tmpHour += 0.5;
+          index += 1;
+        }
+        if (minutes !== 0) {
+          index += 1;
+        }
+        vm.data.hours[index].matches[match.field] = match;
+        while (duration < match.duration) {
+          vm.data.hours[index].booked[match.field] = true;
+          duration += 0.5;
+          index += 1;
+        }
+        $log.debug('index:', index, 'match:', match);
       });
     };
 
@@ -214,10 +249,12 @@
       params.endDate = new Date(year, 12, 31);
       return MatchesService.fetchAll(params)
         .then(function(res){
-          vm.data.allMatches = res;
-          _.each(vm.data.allMatches, function(match){
+          _.each(res, function(match){
+            MatchesService.initDates(match);
             MatchesService.setStatus(match);
-          })
+            MatchesService.setDuration(match, vm.data.durations);
+          });
+          vm.data.allMatches = res;
         });
     };
     

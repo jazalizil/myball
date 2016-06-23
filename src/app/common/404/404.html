@@ -1,11 +1,13 @@
 <mb-navbar></mb-navbar>
-<md-content class="full-height" layout="row" layout-align="center">
-    <div layout="column" layout-align="center center">
+<div class="fixed bg full-height">
+    <div class="bg-img fit-height full-width"></div>
+</div>
+<md-content class="full-height bg-transparent z-index" layout="row" layout-align="center">
+    <div layout="column" layout-align="center center" class="white avenir">
         <h1 translate>Page non trouvée</h1>
-        <h2 translate>Ou quelque chose ne va pas...</h2>
         <p><span translate>Cliquez </span>
-            <a ui-sref="start" translate>ici</a>
-            <span translate> pour retourner au portail myBall.</span>
+            <a ui-sref="start" class="green" translate>ici</a>
+            <span translate> pour retourner à l'accueil.</span>
         </p>
     </div>
 </md-content>
