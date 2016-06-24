@@ -58,24 +58,28 @@
     </div>
   </md-toolbar>
   <div class="full-width" layout hide-gt-sm ng-show="navbar.data.authenticated">
-    <div class="fit-width bg-black-transparent-2 menu-mobile uppercase" layout="column" >
-      <div class="navbar-black fit-width menu-el" ng-show="navbar.data.menuOpen"></div>
-      <a ng-repeat="link in navbar.data.links track by $index" layout="row" class="menu-el link center-text fit-width"
-         ui-sref="{{link.url}}" ui-sref-active="active bold"
-         ng-show="navbar.data.menuOpen"
-         ng-click="navbar.toggleMenu(false)"
-      >
+    <div class="full-height full-width absolute menu-ctn">
+      <div class="fit-width bg-black-transparent-2 menu-mobile uppercase relative" layout="column">
+        <div class="navbar-black fit-width menu-el" ng-show="navbar.data.menuOpen"></div>
+        <a ng-repeat="link in navbar.data.links track by $index" layout="row" class="menu-el link center-text fit-width"
+           ui-sref="{{link.url}}" ui-sref-active="active bold"
+           ng-show="navbar.data.menuOpen"
+           ng-click="navbar.toggleMenu(!navbar.data.menuOpen)"
+        >
           <span class="fit-width">
             {{link.text}}
           </span>
-      </a>
-      <a href="" class="menu-el link center-text fit-width"
-         layout="row" ng-click="navbar.toggleMenu(false) ; navbar.logout()"
-         ng-show="navbar.data.menuOpen">
+        </a>
+        <a href="" class="menu-el link center-text fit-width"
+           layout="row" ng-click="navbar.toggleMenu(!navbar.data.menuOpen) ; navbar.logout()"
+           ng-show="navbar.data.menuOpen">
         <span class="fit-width">
           Déconnexion
         </span>
-      </a>
+        </a>
+      </div>
+      <div class="fit-height fit-width relative wrapper" ng-click="navbar.toggleMenu(!navbar.data.menuOpen)"
+           ng-show="navbar.data.menuOpen" ></div>
     </div>
   </div>
 </div>
