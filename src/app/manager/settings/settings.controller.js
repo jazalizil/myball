@@ -44,12 +44,15 @@
     * */
 
     // WIP photo
-    var computeFivePatch = function(patch) {
+    var computePatchFive = function(patch) {
       if (vm.data.newIdentity.five.phone !== vm.data.identity.five.phone) {
         patch.five.phone = vm.data.newIdentity.five.phone;
       }
       if (vm.data.newIdentity.five.name !== vm.data.identity.five.name) {
         patch.five.name = vm.data.newIdentity.five.name;
+      }
+      if (vm.data.newIdentity.five.photo !== vm.data.identity.five.photo) {
+        patch.five.photo = vm.data.newIdentity.five.photo;
       }
     };
 
@@ -83,7 +86,7 @@
         fields: [],
         manager: {}
       };
-      computeFivePatch(patch);
+      computePatchFive(patch);
       computePatchFields(patch);
       computePatchManager(patch);
       return patch;

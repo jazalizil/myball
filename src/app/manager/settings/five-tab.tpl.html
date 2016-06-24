@@ -15,12 +15,15 @@
           </md-input-container>
         </div>
         <div layout="row" class="white ph-input" layout-align="center center">
-          <div class="fit-width" >
+          <div class="fit-width" ng-hide="settings.data.photoName">
             Changer la photo de couverture
+          </div>
+          <div class="fit-width" ng-show="settings.data.photoName">
+            {{settings.data.photoName}}
           </div>
           <div >
             <mb-file-input type="file" file="settings.data.newIdentity.five.photo" hidden id="fivePhoto" accept="image/*"
-                           loading="app.data.isLoading"></mb-file-input>
+                           loading="app.data.isLoading" name="settings.data.photoName"></mb-file-input>
             <label for="fivePhoto" class="pointer pad-2x">
               <i class="grey material-icons">
                 photo_camera
