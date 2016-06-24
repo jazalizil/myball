@@ -21,12 +21,15 @@
             <div layout layout-align="center start" flex="10" class="white relative">
               <span ng-show="hour.value * 10 % 10 === 0" class="absolute center-text fit-width hour">{{hour.text}}</span>
             </div>
-            <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
+            <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}} relative"
                  ng-repeat="field in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
+              <div class="absolute unavailable fit-width" ng-show="$parent.$index === 0 && !field.available">
+              </div>
               <div class="match-ctn absolute pointer" ng-click="matches.openSidenav(hour, field)" id="{{hour.value + '-' + field._id}}"
                    ng-hide="matches.data.hours[$parent.$index - 1].matches[field._id] ||
                    matches.data.hours[$parent.$index + 1].matches[field._id] || hour.value >= 21.5">
-                <div layout="row" class="match fit-height fit-width" ng-hide="hour.matches[field._id] || hour.booked[field._id]">
+                <div layout="row" class="match fit-height fit-width"
+                     ng-hide="hour.matches[field._id] || hour.booked[field._id] || !field.available">
                   <div layout="column" layout-align="center center" class="fit-width">
                     <i class="material-icons green">add_circle</i>
                   </div>

@@ -30,9 +30,13 @@
         top: -8px;
       }
       .slot {
-        position: relative;
         margin-left: @margin;
         margin-right: @margin;
+        .unavailable {
+          height: 2650%;
+          .bg-red-transparent;
+          z-index: 1;
+        }
         .match-ctn {
           height: 200%;
           width: 100%;
