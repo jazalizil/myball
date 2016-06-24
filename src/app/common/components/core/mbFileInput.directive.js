@@ -45,6 +45,7 @@
                     canvas.height = height;
                     context.drawImage(image, 0, 0, width, height);
                     scope.file = canvas.toDataURL(file.type);
+                    scope.name = file.name;
                     scope.loading = false;
                     image.remove();
                     canvas.remove();
@@ -61,6 +62,7 @@
       },
       scope: {
         file: '=',
+        name: '=',
         maxSize: '=',
         loading: '='
       },
