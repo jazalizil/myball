@@ -19,12 +19,7 @@
       </div>
       <div class="white" layout="row" layout-align="center center">
         <div ng-repeat="counter in main.data.counters" layout="column" class="counter">
-          <div layout="row" class="fit-width green number" layout-align="center center"
-               count-to="{{counter.number}}"
-               duration="3.5"
-               value="0"
-          >
-          </div>
+          <mb-counter class="fit-width green number center-text" value="{{counter.number}}"></mb-counter>
           <div layout="row" class="uppercase text" layout-align="center center">
             {{counter.text}}
           </div>
