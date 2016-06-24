@@ -8,25 +8,27 @@
         {{settings.data.authorization.day.name}}
       </div>
       <form ng-submit="settings.updateAuthorizations()" layout="column">
-        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : settings.data.authorization.errors.start}">
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : settings.data.authorization.errors.from}">
           <label>{{settings.data.labels.startFrom}}</label>
           <md-icon md-font-set="white material-icons">access_time</md-icon>
-          <md-select ng-model="settings.data.authorization.start">
-            <md-option ng-value="hour.value" ng-repeat="hour in settings.data.authorization.startInterval" md-ink-ripple="#29C134">
+          <md-select ng-model="settings.data.authorization.from">
+            <md-option ng-value="hour.value" ng-repeat="hour in settings.data.startInterval" md-ink-ripple="#29C134"
+            ng-selected="settings.data.authorization.from === hour.value">
               {{hour.text}}
             </md-option>
           </md-select>
         </md-input-container>
-        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : settings.data.authorization.errors.start}">
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : settings.data.authorization.errors.to}">
           <label>{{settings.data.labels.endAt}}</label>
           <md-icon md-font-set="white material-icons">access_time</md-icon>
-          <md-select ng-model="settings.data.authorization.end">
-            <md-option ng-value="hour.value" ng-repeat="hour in settings.data.authorization.endInterval">
+          <md-select ng-model="settings.data.authorization.to">
+            <md-option ng-value="hour.value" ng-repeat="hour in settings.data.endInterval" md-ink-ripple="#29C134"
+                       ng-selected="settings.data.authorization.to === hour.value">
               {{hour.text}}
             </md-option>
           </md-select>
         </md-input-container>
-        <div layout="row" class="fit-width" ng-switch="settings.data.authorization.new">
+        <div layout="row" class="fit-width" ng-switch="settings.data.authorization.isNew">
           <div layout="column" class="fit-width" ng-switch-when="true">
             <md-button type="submit" class="md-raised md-primary fit-width" v-busy="settings.data.isUploadingAuth">
               <span class="white" translate>créer</span>

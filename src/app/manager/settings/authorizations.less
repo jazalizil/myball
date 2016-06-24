@@ -22,48 +22,51 @@
       .t-cell {
         margin: 0 @padding-3x;
         height: 50px;
-        border-top: 1px solid @white;
         .relative;
-        &.half {
-          border-top-style: dashed;
-        }
-        &.closed {
-          .bg-black-transparent;
-          .pointer;
-          &:not(.start) {
-            border: none !important;
-          }
-        }
-        &.free {
-          width: 100%;
-          .add-auth {
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-            //line-height: 0px;
-            padding: 0;
-            text-align: center;
-            &.double {
-              height: 200%;
-              line-height: 8.5;
+        .auth-ctn {
+          top: 0px;
+          left: 0px;
+          .booked {
+            .relative;
+            z-index: 1;
+            .lines {
+              bottom: 0px;
+              left: -8px;
+              .line {
+                width: 15px;
+                height: 1px;
+                background: @white;
+                padding: 0;
+                &.top {
+                  bottom: 10px;
+                }
+                &.bottom {
+                  bottom: 5px;
+                }
+              }
             }
+            .bg-black-transparent;
+            .pointer;
+            &:not(.start) {
+              border: none !important;
+            }
+            &:hover {
+              .bg-black-transparent-2;
+            }
+          }
+          .free {
             &:hover, &.selected {
-              .bg-white-transparent;
+              .bg-black-transparent;
               i {
                 visibility: visible;
               }
             }
-
             i {
               padding: 0;
-              font-size: 50px;
+              font-size: 25px;
               visibility: hidden;
             }
           }
-        }
-        &.highlight {
-          .bg-white-transparent;
         }
       }
     }
