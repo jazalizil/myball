@@ -52,7 +52,7 @@
             counter();
           }
         }, refreshInterval);
-      }
+      };
       var slowCounter = function(){
         scope.timoutId = $timeout(function () {
           lastNumberSlowCount --;
@@ -71,7 +71,7 @@
     }
     return {
       link: mbCounterLink,
-      restrict: 'E',
+      restrict: 'E'
     }
   }
 })();

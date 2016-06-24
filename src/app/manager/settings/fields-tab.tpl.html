@@ -3,10 +3,10 @@
     <div class="fit-height" layout="row" layout-align="center center">
       <div layout="column" class="fit-height" layout-align="center center">
         <div layout="row" layout-align="center center">
-          <md-select ng-model="settings.data.fieldIndex" aria-label="field name">
-            <md-option ng-repeat="field in settings.data.identity.five.fields" ng-value="$index"
+          <md-select ng-model="settings.data.selectedField" aria-label="field name">
+            <md-option ng-repeat="field in settings.data.newIdentity.five.fields" ng-value="field"
                        class="white bg-black-transparent-2 hover-green"
-                       ng-selected="$index === settings.data.fieldIndex" md-ink-ripple="#29C134">
+                       md-ink-ripple="#29C134">
               {{field.name}}
             </md-option>
           </md-select>
@@ -14,14 +14,14 @@
         <div layout="row" layout-align="center center">
           <md-input-container>
             <label>{{settings.data.labels.fieldName}}</label>
-            <input type="text" ng-model="settings.data.newIdentity.five.fields[settings.data.fieldIndex].name"
+            <input type="text" ng-model="settings.data.selectedField.name"
                    name="fieldName">
           </md-input-container>
         </div>
         <div class="fit-width" layout="row" layout-align="center center">
           <md-input-container class="fit-width switch-ctn" layout>
             <md-switch layout layout-align="end center" class="grey fit-width md-primary" aria-label="field available"
-                       ng-model="settings.data.newIdentity.five.fields[settings.data.fieldIndex].available">
+                       ng-model="settings.data.selectedField.available">
               {{settings.data.labels.available}}
             </md-switch>
           </md-input-container>

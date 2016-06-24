@@ -33,7 +33,6 @@
         gettextCatalog.getString('Modifier les informations de vos terrains.')
       ],
       patch: {},
-      fieldIndex: 0,
       photo: {},
       calendar: CalendarService.getDatas(),
       startInterval: [],
@@ -59,11 +58,10 @@
         if (vm.data.newIdentity.five.fields[idx].name !== vm.data.identity.five.fields[idx].name ||
           vm.data.newIdentity.five.fields[idx].available !== vm.data.identity.five.fields[idx].available) {
           patch.fields.push({
+            _id : vm.data.newIdentity.five.fields[idx]._id,
             available: vm.data.newIdentity.five.fields[idx].available,
             name: vm.data.newIdentity.five.fields[idx].name
           });
-        } else {
-          patch.fields.push({});
         }
       }
     };
@@ -149,24 +147,48 @@
       vm.data.isUploadingAuth = true;
       vm.update().then(function(){
         vm.data.isUploadingAuth = false;
-        initAuths();
+        delete vm.data.authorization.isNew;
+        addAuthToDisplay(vm.data.selectedHour);
         $mdSidenav('authorization').close();
       }, function(){
         vm.data.isUploadingAuth = false;
       });
     };
 
+    // Add auth to display
+    var addAuthToDisplay = function(hour) {
+      vm.data.authorization.duration = vm.data.authorization.to - vm.data.authorization.from;
+      hour.auths[vm.data.authorization.day.number] = vm.data.authorization;
+      var duration = 0.5;
+      var idx = _.findIndex(vm.data.hours, ['value', vm.data.authorization.from]);
+      while (duration < vm.data.authorization.duration) {
+        vm.data.hours[idx].booked[vm.data.authorization.day.number] = true;
+        duration += 0.5;
+        idx += 1;
+      }
+    };
+
+    // Delete auth to display
+    var deleteAuthToDisplay = function(hour) {
+      delete hour.auths[vm.data.authorization.day.number];
+      var idx = _.findIndex(vm.data.hours, ['value', vm.data.authorization.from]);
+      var duration = 0.5;
+      while (duration < vm.data.authorization.duration) {
+        vm.data.hours[idx].booked[vm.data.authorization.day.number] = false;
+        duration += 0.5;
+        idx += 1;
+      }
+    };
+
     // Delete authorization
     vm.deleteAuthorization = function() {
-      var dayIdx = _.findIndex(vm.data.newIdentity.five.days, function(day){
-        return day.day === vm.data.authorization.day.number;
+      var day = _.find(vm.data.newIdentity.five.days, ['day', vm.data.authorization.day.number]);
+      _.remove(day.hours, function(hours) {
+        return hours.from >= vm.data.authorization.from && hours.to <= vm.data.authorization.to
       });
-      _.remove(vm.data.newIdentity.five.days[dayIdx].hours, function(hours) {
-        return hours.from >= vm.data.authorization.start && hours.to <= vm.data.authorization.end
-      });
-      initAuths();
       vm.data.isDeletingAuth = true;
       vm.update().then(function(){
+        deleteAuthToDisplay(vm.data.selectedHour);
         vm.data.isDeletingAuth = false;
         $mdSidenav('authorization').close();
       }, function(){
@@ -221,7 +243,6 @@
               return;
             }
             tmp = vm.data.hours[idx];
-            tmp.booked[day.day] = true;
             auth = {
               from: hour.from,
               to: hour.to,
@@ -245,8 +266,8 @@
         vm.data.identity = identity;
         vm.data.newIdentity = angular.copy(vm.data.identity);
         vm.data.welcomeSentence = gettextCatalog.getString('Bonjour') + ' ' + vm.data.identity.manager.firstName;
-        vm.data.newIdentity = angular.copy(vm.data.identity);
         vm.data.calendar.daysDisplayed.push(vm.data.calendar.daysDisplayed.shift());
+        vm.data.selectedField = vm.data.newIdentity.five.fields[0];
         initHours();
         initAuths();
         createDisplayInterval();
