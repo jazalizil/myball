@@ -172,6 +172,7 @@ html {
   background: url(http://d153u8w1ikjxem.cloudfront.net/images/bg_field.jpg) no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
+  opacity: .8;
 }
 
 .bg-black-transparent {
@@ -365,6 +366,10 @@ html {
   height: 100%;
 }
 
+.double-height {
+  height: 200%;
+}
+
 .fit-width {
   width: 100%;
 }
@@ -387,6 +392,13 @@ html {
 
 .small {
   font-size: 12px;
+}
+
+.border-dashed {
+  border-top: dashed @grey 1px;
+}
+.border-solid {
+  border-top: solid @grey 1px;
 }
 
 .hint {
@@ -727,6 +739,11 @@ md-sidenav {
         padding-bottom: 0;
         label {
           color: @white;
+        }
+        &.md-input-invalid {
+          md-select-value {
+            border-color: @red;
+          }
         }
         &.md-img-float {
           .relative;

@@ -11,37 +11,36 @@
     </div>
   </div>
   <div class="t-body fit-height full-width" layout="column">
-    <div class="t-row full-width" layout="row" ng-repeat="(hIndex, hour) in settings.data.hours">
+    <div class="t-row full-width" layout="row" ng-repeat="hour in settings.data.hours">
       <div flex="9" layout="column" layout-align="center center" class="relative">
         <span class="hour fit-width" ng-hide="hour.isHalf || hour.value > 22">
-          {{hour.value}}:00
+          {{hour.text}}
         </span>
       </div>
-      <div flex="13" layout-padding class="t-cell free" layout-align="center center" layout="column"
+      <div flex="13" layout-padding class="t-cell {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}}"
+           layout-align="center center" layout="column"
            ng-repeat="day in settings.data.calendar.daysDisplayed"
-           ng-if="!hour.closedDays[day.number]"
-           ng-class="{'half': hour.isHalf, 'start': hour.start}">
-          <div class="absolute add-auth double pointer"
-               ng-click="settings.openSideNav(hour, day, 1)"
-               ng-show="!$last && settings.data.hours[hIndex+1].value < 22.5 && !settings.data.hours[hIndex+1].closedDays[day.number] && hour.value !== 21.5">
+           >
+        <div class="absolute auth-ctn fit-width fit-height" ng-click="settings.openSideNav(hour, day)"
+             ng-hide="settings.data.hours[$parent.$index - 1].auths[day.number] || hour.value >= 21.5">
+          <div class="free pointer fit-width center-text fit-height"
+               layout layout-align="center center"
+               ng-hide="hour.auths[day.number] || hour.booked[day.number]">
             <i class="material-icons green">add_circle</i>
           </div>
-          <div class="absolute add-auth pointer"
-               ng-click="settings.openSideNav(hour, day, 0.5)"
-               ng-show="!$last && settings.data.hours[hIndex+1].value < 22.5 && settings.data.hours[hIndex+1].closedDays[day.number] && hour.value !== 21.5">
-            <i class="material-icons green">add_circle</i>
+          <div layout-padding class="booked" layout-align="center center" layout="column"
+               class="pointer relative"
+               ng-if="hour.auths[day.number]"
+               id="{{day.number}}d{{hour.value}}"
+               ng-style="{'height': 200 * {{hour.auths[day.number].duration}} + '%'}"
+          >
+            <img src="assets/icons/created-with-weball.svg" alt="weball smartphone">
+            <div class="lines fit-width absolute center-text">
+              <span class="absolute line top"></span>
+              <span class="absolute line bottom"></span>
+            </div>
           </div>
-      </div>
-      <div flex="13" layout-padding class="t-cell closed" layout-align="center center" layout="column"
-           ng-repeat="day in settings.data.calendar.daysDisplayed"
-           ng-if="hour.closedDays[day.number]"
-           id="{{day.number}}d{{hour.value}}"
-           ng-mouseenter="settings.handleHours(hour, day)"
-           ng-click="settings.openSideNav()"
-           ng-class="{'start': hour.start}">
-        <md-tooltip >
-          Mofifier
-        </md-tooltip>
+        </div>
       </div>
     </div>
   </div>

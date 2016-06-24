@@ -107,7 +107,10 @@
           field: field._id,
           startDate: dates.start,
           endDate: dates.end,
-          duration: vm.data.durations[0].value
+          duration: vm.data.durations[0].value,
+          createdBy: {
+            name: 'Manager'
+          }
         };
       }
       vm.data.responsable.errors = {};

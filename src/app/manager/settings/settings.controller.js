@@ -8,10 +8,9 @@
     .controller('SettingsController', SettingsController);
   /** @ngInject */
   function SettingsController(UserService, gettextCatalog, _, $log, CalendarService, $mdSidenav,
-                              $document, toastr) {
+                              toastr) {
     var vm = this;
     vm.data = {
-      identity: UserService.getIdentity(),
       labels: {
         manager: gettextCatalog.getString('Manager'),
         five: gettextCatalog.getString('Five'),
@@ -33,62 +32,76 @@
         gettextCatalog.getString('Gérer les autorisations weBall'),
         gettextCatalog.getString('Modifier les informations de vos terrains.')
       ],
+      patch: {},
       fieldIndex: 0,
       photo: {},
-      calendar: CalendarService.getDatas()
+      calendar: CalendarService.getDatas(),
+      startInterval: [],
+      endInterval: []
     };
     
     /*
     *  All tabs
     * */
 
-    var cleanUpdate = function() {
-      var equalities = {
-        fields: angular.equals(vm.data.newIdentity.five.fields, vm.data.identity.five.fields),
-        five: _.isEqual(vm.data.newIdentity.five, vm.data.identity.five),
-        manager: _.isEqual(vm.data.newIdentity.manager, vm.data.identity.manager)
-      }, ret = {}, toPush, i;
-      $log.debug(vm.data.newIdentity.five.fields, '\n\n\n', vm.data.identity.five.fields);
-      if (!equalities.fields) {
-        ret.fields = [];
-        for (i = 0; i < vm.data.newIdentity.five.fields.length; i += 1) {
-          toPush = {};
-          if (vm.data.newIdentity.five.fields[i].name !== vm.data.identity.five.fields[i].name) {
-            toPush.name = vm.data.newIdentity.five.fields[i].name;
-            if (vm.data.newIdentity.five.fields[i].available !== vm.data.identity.five.fields[i].available) {
-              toPush.available = vm.data.newIdentity.five.fields[i].available;
-            }
-          }
-          ret.fields.push(toPush)
+    // WIP photo
+    var computeFivePatch = function(patch) {
+      if (vm.data.newIdentity.five.phone !== vm.data.identity.five.phone) {
+        patch.five.phone = vm.data.newIdentity.five.phone;
+      }
+      if (vm.data.newIdentity.five.name !== vm.data.identity.five.name) {
+        patch.five.name = vm.data.newIdentity.five.name;
+      }
+    };
+
+    var computePatchFields = function(patch) {
+      for (var idx = 0; idx < vm.data.newIdentity.five.fields.length; idx += 1) {
+        if (vm.data.newIdentity.five.fields[idx].name !== vm.data.identity.five.fields[idx].name ||
+          vm.data.newIdentity.five.fields[idx].available !== vm.data.identity.five.fields[idx].available) {
+          patch.fields.push({
+            available: vm.data.newIdentity.five.fields[idx].available,
+            name: vm.data.newIdentity.five.fields[idx].name
+          });
+        } else {
+          patch.fields.push({});
         }
       }
-      else if (!equalities.five) {
-        ret.five = _.difference(vm.data.newIdentity.five, vm.data.identity.five);
-        ret.five.days = [];
-        for(i = 0; i < vm.data.newIdentity.five.days.length; i += 1) {
-          if (!angular.equals(vm.data.newIdentity.five.days[i], vm.data.identity.five.days[i])) {
-            ret.five.days.push(vm.data.newIdentity.five.days[i]);
-          }
-        }
+    };
+
+    var computePatchManager = function(patch) {
+      if (vm.data.newIdentity.manager.email !== vm.data.identity.manager.email) {
+        patch.manager.email = vm.data.newIdentity.manager.email;
       }
-      else if (!equalities.manager) {
-        ret.manager = _.difference(vm.data.newIdentity.manager, vm.data.identity.manager);
+      if (vm.data.newIdentity.manager.password !== vm.data.identity.manager.password) {
+        patch.manager.password = vm.data.newIdentity.manager.password;
       }
-      $log.debug('cleaned:', ret);
-      return ret;
+    };
+
+    var computePatch = function() {
+      var patch = {
+        five: {
+          days: vm.data.newIdentity.five.days
+        },
+        fields: [],
+        manager: {}
+      };
+      computeFivePatch(patch);
+      computePatchFields(patch);
+      computePatchManager(patch);
+      return patch;
     };
     
     vm.update = function() {
       // var toSend = _.cloneDeep(vm.data.newIdentity);
-      var toSend = cleanUpdate();
+      var toSend = computePatch();
+      $log.debug('new id:', vm.data.newIdentity);
       vm.data.isLoading = true;
-      return UserService.patch(toSend).then(function(res){
+      return UserService.patch(toSend).then(function(){
         vm.data.isLoading = false;
         // vm.data.identity.five = res;
         UserService.setIdentity(vm.data.newIdentity);
         toastr.success(gettextCatalog.getString('Paramètres mises à jour avec succès'));
         // vm.data.identity.photo = vm.data.newIdentity.photo;
-        $log.debug(res);
       }, function(){
         toastr.error(gettextCatalog.getString('Un problème est survenu'), gettextCatalog.getString('Erreur'));
         vm.data.isLoading = false;
@@ -99,83 +112,44 @@
     *  Authorizations tab
     * */
 
-    // Highlight hours
-    vm.handleHours = function(hour, day) {
-      var start = hour.value;
-      var end = hour.value + 0.5;
-      var el = angular.element($document[0].getElementById(day.number + 'd' + start));
-      while (el.hasClass('closed')) {
-        start -= 0.5;
-        el = angular.element($document[0].getElementById(day.number + 'd' + start));
-      }
-      el = angular.element($document[0].getElementById(day.number + 'd' + end));
-      while (el.hasClass('closed')) {
-        end += 0.5;
-        el = angular.element($document[0].getElementById(day.number + 'd' + end));
-      }
-      vm.data.authorization = {
-        start: start,
-        end: end - 0.5,
-        day: day,
-        hour: hour
-      };
-    };
-
-    // // Unlight Hours
-    // vm.leaveHours = function(el) {
-    //   var hours = $document[0].getElementsByClassName('highlight');
-    //   $log.debug('hours:', hours);
-    //   _.each(hours, function(hour){
-    //     var elem = angular.element(hour);
-    //     elem.removeClass('highlight');
-    //   })
-    // };
-
     // Open Sidenvav
-    vm.openSideNav = function(hour, day, offset) {
-      if (hour) {
-        vm.data.authorization = {
-          start: hour.value,
-          end: hour.value + offset,
+    vm.openSideNav = function(hour, day) {
+      vm.data.authorization = hour.auths[day.number] || {
+          from: hour.value,
+          to: hour.value + 0.5,
           day: day,
           hour: hour,
-          new: true
-        }
-      }
-      vm.data.authorization.startInterval = [];
-      var range = _.range(9, 22, 0.5);
-      vm.data.authorization.endInterval = [];
-      _.each(range, function(slot){
-        var toPush = {
-          value: slot,
-          text: Math.ceil(slot) + 'h'
+          errors: {},
+          isNew: true
         };
-        if (slot * 10 % 10 === 0) {
-          toPush.text += '30';
-        }
-        vm.data.authorization.startInterval.push(toPush);
-        vm.data.authorization.endInterval.push(toPush);
-      });
-      $mdSidenav('authorization').toggle();
+      $log.debug('auth:', vm.data.authorization);
+      vm.data.selectedHour = hour;
+      $mdSidenav('authorization').open();
     };
 
     // Update authorizations
     vm.updateAuthorizations = function() {
-      var dayIdx = _.findIndex(vm.data.newIdentity.five.days, function(day){
-        return day.day === vm.data.authorization.day.number;
+      if (vm.data.authorization.from > vm.data.authorization.to) {
+        vm.data.authorization.errors.from = true;
+        return;
+      } else if (vm.data.authorization + 0.5 > vm.data.authorization.to) {
+        vm.data.authorization.errors.to = true;
+        return;
+      }
+      var day = _.find(vm.data.newIdentity.five.days, ['day', vm.data.authorization.day.number]);
+      _.remove(day.hours, function(hours) {
+        return hours.price === -1 && hours.from >= vm.data.authorization.from && hours.to <= vm.data.authorization.to
       });
-      _.remove(vm.data.newIdentity.five.days[dayIdx].hours, function(hours) {
-        return hours.price === -1 && hours.from >= vm.data.authorization.start && hours.to <= vm.data.authorization.end
-      });
-      vm.data.newIdentity.five.days[dayIdx].hours.push({
+      $log.debug('patched id:', vm.data.newIdentity);
+      day.hours.push({
         price: -1,
-        from: vm.data.authorization.start,
-        to: vm.data.authorization.end
+        from: vm.data.authorization.from,
+        to: vm.data.authorization.to
       });
-      initAuths();
       vm.data.isUploadingAuth = true;
       vm.update().then(function(){
         vm.data.isUploadingAuth = false;
+        initAuths();
         $mdSidenav('authorization').close();
       }, function(){
         vm.data.isUploadingAuth = false;
@@ -204,47 +178,79 @@
     var initHours = function() {
       var range = _.range(9, 23, 0.5);
       vm.data.hours = [];
-      _.each(range, function(val) {
+      _.each(range, function(hour) {
         var toPush = {
-          value: val,
-          closedDays: {}
+          value: hour,
+          text: hour + ':' + (hour * 10 % 10 === 0 ? '00' : '30'),
+          booked: {},
+          auths: {},
+          errors: {},
+          isHalf: hour * 10 % 10 !== 0
         };
-        if (val * 10 % 10 !== 0) {
-          toPush.isHalf = true;
-        }
         vm.data.hours.push(toPush);
-      })
+      });
+      $log.debug(vm.data.hours);
+    };
+
+    // Create display intervals
+    var createDisplayInterval = function() {
+      var range = _.range(9, 22.5, 0.5);
+      _.each(range, function(slot){
+        var toPush = {
+          value: slot,
+          text: Math.floor(slot) + 'h'
+        };
+        if (slot * 10 % 10 !== 0) {
+          toPush.text += '30';
+        }
+        vm.data.startInterval.push(toPush);
+        vm.data.endInterval.push(toPush);
+      });
     };
 
     // Parse auth from identity.five.days
     var initAuths = function() {
       _.each(vm.data.newIdentity.five.days, function(day){
-        var idx;
         _.each(day.hours, function(hour){
+          var tmp, auth, duration, idx;
           if (hour.price === -1) {
             idx = _.findIndex(vm.data.hours, function(h){
               return h.value === hour.from;
             });
-            if (idx == -1) {
+            if (idx < 0) {
               return;
             }
-            vm.data.hours[idx].start = true;
-            while (vm.data.hours[idx].value !== hour.to) {
-              vm.data.hours[idx].closedDays[day.day] = true;
+            tmp = vm.data.hours[idx];
+            tmp.booked[day.day] = true;
+            auth = {
+              from: hour.from,
+              to: hour.to,
+              duration: hour.to - hour.from,
+              day: _.find(vm.data.calendar.daysDisplayed, ['number', day.day])
+            };
+            duration = 0.5;
+            while (duration < auth.duration && vm.data.hours[idx].value < 22) {
+              vm.data.hours[idx].booked[day.day] = true;
+              duration += 0.5;
               idx += 1;
             }
+            tmp.auths[day.day] = auth;
           }
         })
       })
     };
 
     var init = function () {
-      vm.data.welcomeSentence = gettextCatalog.getString('Bonjour') + ' ' + vm.data.identity.manager.firstName;
-      vm.data.newIdentity = angular.copy(vm.data.identity);
-      $log.debug(vm.data.newIdentity);
-      vm.data.calendar.daysDisplayed.push(vm.data.calendar.daysDisplayed.shift());
-      initHours();
-      initAuths();
+      UserService.identity(true).then(function(identity){
+        vm.data.identity = identity;
+        vm.data.newIdentity = angular.copy(vm.data.identity);
+        vm.data.welcomeSentence = gettextCatalog.getString('Bonjour') + ' ' + vm.data.identity.manager.firstName;
+        vm.data.newIdentity = angular.copy(vm.data.identity);
+        vm.data.calendar.daysDisplayed.push(vm.data.calendar.daysDisplayed.shift());
+        initHours();
+        initAuths();
+        createDisplayInterval();
+      })
     };
     init();
   }
