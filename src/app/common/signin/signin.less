@@ -7,8 +7,17 @@
     background: transparent;
     z-index: 1;
   }
+  @media (max-width: @phone-width-max) {
+    form {
+      width: 70%;
+    }
+  }
+  @media (min-width: @phone-width-max) {
+    form {
+      width: 35%;
+    }
+  }
   form {
-    width: 35%;
     .md-button {
       border: 1px solid @white;
       border-radius: 5px;
