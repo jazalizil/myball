@@ -6,7 +6,8 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, RestangularProvider, Conf, $mdThemingProvider, localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider) {
+  function config($provide, $logProvider, toastrConfig, RestangularProvider, Conf, $mdThemingProvider,
+                  localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider, $locationProvider) {
     // Enable log if environment allows it
     $logProvider.debugEnabled(false);
     if (Conf.DEBUG) {
@@ -15,13 +16,13 @@
 
     // Register Fontawesome icons
     //$mdIconProvider.iconSet('fa', '../../bower_components/font-awesome/fonts/fontawesome-webfont.svg');
-    $mdIconProvider
-			.fontSet('fa', 'FontAwesome');
+    $mdIconProvider.fontSet('fa', 'FontAwesome');
 
     // Set CORS
     $sceDelegateProvider.resourceUrlWhitelist([
       // Allow same origin resource loads.
-      'self'
+      'self',
+      Conf.AMAZONE_S3_API_BASE_URL + '**'
     ]);
 
 
@@ -35,7 +36,7 @@
     RestangularProvider.setBaseUrl(Conf.WEBALL_API_BASE_URL);
 
     var wbPrimaryPalette = $mdThemingProvider.extendPalette('green', {
-      '500': '29C134'
+      '500': '7ed321'
     });
     var wbAccentPalette = $mdThemingProvider.extendPalette('grey', {
       //'500': '1A1C23',
@@ -49,6 +50,8 @@
       .accentPalette('wbAccentPalette');
 
     localStorageServiceProvider.setPrefix('wb');
+
+    $locationProvider.html5Mode(true);
   }
 
 })();

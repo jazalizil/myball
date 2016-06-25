@@ -1,5 +1,5 @@
 (function() {
-	'use strict';
+  'use strict';
 
 	angular
 			.module('myBall', [
@@ -18,7 +18,6 @@
 				'gettext',
 				'wyvernzora.un-svg',
 				'chart.js',
-				'ngPercentDisplay',
 				'ngMap',
 				'vcRecaptcha',
 				'datetime'
