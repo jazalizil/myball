@@ -31,7 +31,7 @@
     }).state('signin', {
       parent: 'public',
       url: '/signin',
-      templateUrl: 'app/common/signin/signin.html',
+      templateUrl: 'app/common/404/404.html',
       controller: 'SigninController',
       controllerAs: 'signin'
     }).state('forgot', {
@@ -49,7 +49,7 @@
     }).state('register', {
       parent: 'public',
       url: '/register',
-      templateUrl: 'app/common/register/register.html',
+      templateUrl: 'app/common/404/404.html',
       controller: 'RegisterController',
       controllerAs: 'register'
     }).state('404', {
