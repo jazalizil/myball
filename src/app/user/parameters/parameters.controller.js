@@ -3,7 +3,7 @@
 	angular.module('myBall').controller('ParametersController', ParametersController);
 
 	/** @ngInject */
-	function ParametersController($log, UserService, toastr, gettextCatalog, $scope, datetime) {
+	function ParametersController($log, UserService, toastr, gettextCatalog, $scope) {
 		var vm = this;
 
 		vm.error = null;
@@ -73,8 +73,5 @@
 			}
 		}
 
-		function passwordSubmit() {
-
-		}
 	}
 })();

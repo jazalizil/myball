@@ -3,8 +3,12 @@
 	angular.module('myBall').controller('FiveController', FiveController);
 
 	/** @ngInject */
-	function FiveController(UserService, $scope, $mdDialog) {
+	function FiveController(FiveService, $scope, $mdDialog, $log) {
 		var vm = this;
+		
+		vm.data = {
+			googleMapsUrl: 'http://maps.google.com/maps/api/js?key=AIzaSyCfjHRsNqjRFqOzFhxyruh3HAHkW3S-ScU'
+		};
 
 		vm.selectedSite = null;
 		vm.showSites = showSites;
@@ -12,7 +16,7 @@
 		loadFives();
 
 		function loadFives() {
-			UserService.getFives(48.864716, 2.349014).then(function(fives) {
+			FiveService.getFives(48.864716, 2.349014).then(function(fives) {
 				var markers = [];
 				for (var key in fives) {
 					if (isNaN(key)) {
@@ -24,10 +28,10 @@
 					};
 				}
 				vm.markers = markers;
-
+				$log.debug(markers);
 				vm.customIcon = {
-					"scaledSize": [40, 60],
-					"url": "../../assets/icons/weball-icon.svg"
+					// "scaledSize": [40, 60],
+					"url": "/assets/icons/myball.svg"
 				};
 			});
 		}

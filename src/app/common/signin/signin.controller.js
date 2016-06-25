@@ -3,7 +3,7 @@
   angular.module('myBall').controller('SigninController', SigninController);
 
   /** @ngInject */
-  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog, Conf) {
+  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog) {
     var vm = this;
     vm.datas = {
       isLoading: false,

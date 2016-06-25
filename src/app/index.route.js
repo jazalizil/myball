@@ -78,12 +78,12 @@
       templateUrl: 'app/user/parameters/parameters.html',
       controller: 'ParametersController',
       controllerAs: 'parameters'
-    }).state('five', {
+    }).state('fives', {
       parent: 'protected',
       url: '/five',
       templateUrl: 'app/user/five/five.html',
       controller: 'FiveController',
-      controllerAs: 'five'
+      controllerAs: 'fives'
     });
     /** End manager routes **/
     $urlRouterProvider.otherwise('/404');

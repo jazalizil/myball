@@ -1,6 +1,10 @@
-<div id="five-map" layout-fill>
-	<wb-navbar></wb-navbar>
-	<ng-map layout-fill center="[48.864716, 2.349014]" zoom="12">
-		<marker ng-repeat="value in five.markers" id="{{$index}}" icon="{{five.customIcon}}" position="{{value.position}}" on-click="five.showInformations(event, value.title)"></marker>
-	</ng-map>
+<div id="fives" layout-fill>
+	<wb-navbar opaq="true"></wb-navbar>
+	<div class="fit-height" map-lazy-load="https://maps.google.com/maps/api/js"
+			 map-lazy-load-params="{{fives.data.googleMapsUrl}}">
+		<ng-map layout-fill center="[48.864716, 2.349014]" zoom="12">
+			<marker ng-repeat="value in fives.markers" id="{{$index}}" icon="{{fives.customIcon}}" position="{{value.position}}"
+							on-click="fives.showInformations(event, value.title)"></marker>
+		</ng-map>
+	</div>
 </div>

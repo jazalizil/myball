@@ -25,7 +25,7 @@
 
 		function initiate() {
 			vm.me = UserService.getIdentity();
-			console.log(vm.me);
+			$log.debug(vm.me);
 
 			/* Valeurs en dur */
 			vm.me._nMatches.total = 69;

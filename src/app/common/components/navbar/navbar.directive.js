@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  angular.module('myBall').directive('mbNavbar', mbNavbar);
+  angular.module('myBall').directive('wbNavbar', mbNavbar);
 
   function mbNavbar() {
     /** @ngInject */
@@ -41,16 +41,16 @@
         if (vm.data.authenticated) {
           vm.data.links =  [
             {
-              text: gettextCatalog.getString('Accueil'),
-              url: 'main'
+              text: gettextCatalog.getString('Profil'),
+              url: 'profil'
             },
             {
-              text: gettextCatalog.getString('Réservations'),
-              url: 'matches'
+              text: gettextCatalog.getString('Fives'),
+              url: 'fives'
             },
             {
               text: gettextCatalog.getString('Paramètres'),
-              url: 'settings'
+              url: 'parameters'
             }
           ];
         }
