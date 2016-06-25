@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function config($provide, $logProvider, toastrConfig, RestangularProvider, Conf, $mdThemingProvider,
-                  localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider, $locationProvider) {
+                  localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider) {
     // Enable log if environment allows it
     $logProvider.debugEnabled(false);
     if (Conf.DEBUG) {
@@ -51,7 +51,6 @@
 
     localStorageServiceProvider.setPrefix('wb');
 
-    $locationProvider.html5Mode(true);
   }
 
 })();
