@@ -1,0 +1,23 @@
+<div id="mb-carousel">
+  <div class="full-width fit-height relative">
+    <div class="background">
+      <img ng-repeat="img in carousel.imgs" ng-src="{{img.src}}" alt="{{img.alt}}" ng-show="carousel.index === $index">
+    </div>
+    <div class="titles absolute full-width fit-height" layout="column">
+      <div class="main absolute fit-height full-width" layout="column" >
+        <div layout="column" class="fit-height full-width absolute" layout-align="center center">
+          <p class="no-margin" ng-repeat="title in carousel.imgs[carousel.index].titles">{{title}}</p>
+        </div>
+        <div class="sub absolute fit-height full-width" ng-show="carousel.currentImg.subtitles.length" layout="column" layout-align="center center">
+          <p class="no-margin" ng-repeat="subTitle in carousel.imgs[carousel.imgs].subTitles">{{subTitle}}</p>
+        </div>
+        <div class="fit-height absolute full-width" layout="row"
+             layout-align="center end" ng-hide="carousel.imgs.length === 1">
+          <span ng-repeat="img in carousel.imgs" ng-class="{'current' : $index === carousel.index}" class="circle">
+            &nbsp;
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
