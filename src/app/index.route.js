@@ -31,7 +31,7 @@
     }).state('signin', {
       parent: 'public',
       url: '/signin',
-      templateUrl: 'app/common/signin/signin.html',
+      templateUrl: 'app/common/404/404.html',
       controller: 'SigninController',
       controllerAs: 'signin'
     }).state('forgot', {
@@ -49,7 +49,7 @@
     }).state('register', {
       parent: 'public',
       url: '/register',
-      templateUrl: 'app/common/register/register.html',
+      templateUrl: 'app/common/404/404.html',
       controller: 'RegisterController',
       controllerAs: 'register'
     }).state('404', {
@@ -69,19 +69,19 @@
     }).state('profil', {
       parent: 'protected',
       url: '/profil',
-      templateUrl: 'app/user/profil/profil.html',
+      templateUrl: 'app/common/404/404.html',
       controller: 'ProfilController',
       controllerAs: 'profil'
     }).state('parameters', {
       parent: 'protected',
       url: '/parameters',
-      templateUrl: 'app/user/parameters/parameters.html',
+      templateUrl: 'app/common/404/404.html',
       controller: 'ParametersController',
       controllerAs: 'parameters'
     }).state('fives', {
       parent: 'protected',
       url: '/five',
-      templateUrl: 'app/user/five/five.html',
+      templateUrl: 'app/common/404/404.html',
       controller: 'FiveController',
       controllerAs: 'fives'
     });
