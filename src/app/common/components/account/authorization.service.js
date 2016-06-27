@@ -7,10 +7,9 @@
     var methods;
     return methods = {
       authorize: function() {
-        return UserService.identity().then(function(me) {
+        return UserService.identity().then(function() {
           var isAuthenticated;
           isAuthenticated = UserService.isAuthenticated();
-          $log.debug('me:', me, 'auth:', isAuthenticated);
           if ($rootScope.toState.data && $rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !UserService.isInAnyRole($rootScope.toState.data.roles)) {
             if (isAuthenticated === true) {
               $state.go('accessdenied');
@@ -39,6 +38,7 @@
       logout: function() {
         UserService.authenticate(null);
         localStorageService.clearAll();
+        $log.debug('logout');
         $state.go('signin');
       },
       register: function(five) {

@@ -31,7 +31,7 @@
     }).state('signin', {
       parent: 'public',
       url: '/signin',
-      templateUrl: 'app/common/404/404.html',
+      templateUrl: 'app/common/signin/signin.html',
       controller: 'SigninController',
       controllerAs: 'signin'
     }).state('forgot', {
@@ -49,7 +49,7 @@
     }).state('register', {
       parent: 'public',
       url: '/register',
-      templateUrl: 'app/common/404/404.html',
+      templateUrl: 'app/common/register/register.html',
       controller: 'RegisterController',
       controllerAs: 'register'
     }).state('404', {
@@ -57,7 +57,7 @@
       url: '/404',
       templateUrl: 'app/common/404/404.html'
     });
-    /** Manager routes **/
+    /** User routes **/
     $stateProvider.state('cgu', {
       parent: 'public',
       url: '/cgu',
@@ -69,23 +69,23 @@
     }).state('profil', {
       parent: 'protected',
       url: '/profil',
-      templateUrl: 'app/common/404/404.html',
+      templateUrl: 'app/user/profil/profil.html',
       controller: 'ProfilController',
       controllerAs: 'profil'
     }).state('parameters', {
       parent: 'protected',
       url: '/parameters',
-      templateUrl: 'app/common/404/404.html',
+      templateUrl: 'app/user/parameters/parameters.html',
       controller: 'ParametersController',
       controllerAs: 'parameters'
     }).state('fives', {
       parent: 'protected',
       url: '/five',
-      templateUrl: 'app/common/404/404.html',
+      templateUrl: 'app/user/five/five.html',
       controller: 'FiveController',
       controllerAs: 'fives'
     });
-    /** End manager routes **/
+    /** End user routes **/
     $urlRouterProvider.otherwise('/404');
     $urlMatcherFactoryProvider.strictMode(false);
   }
