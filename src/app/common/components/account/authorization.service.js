@@ -27,12 +27,12 @@
           $state.go('signin');
         });
       },
-      login: function(email, password) {
+      login: function(email, password, remember) {
         return Restangular.one('login').post('managers', {
           login: email,
           password: password
         }).then(function(res) {
-          UserService.updateToken(res.token);
+          UserService.updateToken(res.token, remember);
         });
       },
       logout: function() {

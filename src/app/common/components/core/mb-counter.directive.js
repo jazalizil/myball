@@ -8,7 +8,7 @@
   angular.module('myBall')
     .directive('mbCounter', mbCounterDirective);
   /** @ngInject */
-  function mbCounterDirective($timeout, $log){
+  function mbCounterDirective($timeout){
     function mbCounterLink(scope, element, attrs) {
       var e = element[0];
       var refreshInterval = 30;
@@ -24,7 +24,6 @@
       var steps = Math.ceil(duration / refreshInterval);
       var percentCompleted = 0;
       var lastNumberSlowCount = 3;
-      $log.debug('mbCounter:', steps, number, attrs);
       if(number > lastNumberSlowCount){
         number = number - lastNumberSlowCount;
       }

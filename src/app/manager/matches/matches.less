@@ -40,6 +40,7 @@
         .match-ctn {
           height: 200%;
           width: 100%;
+          //transition: all .2s ease;
           .transition-hover;
           .match {
             z-index: 1;
@@ -64,6 +65,10 @@
                 visibility: visible;
               }
             }
+          }
+          &.drop-over {
+            background-color: @black-transparent;
+            border: 1px solid @red;
           }
         }
       }

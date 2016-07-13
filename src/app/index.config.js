@@ -6,7 +6,8 @@
     .config(config);
 
   /** @ngInject */
-  function config($provide, $logProvider, toastrConfig, RestangularProvider, Conf, $mdThemingProvider, localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider) {
+  function config($provide, $logProvider, toastrConfig, RestangularProvider, Conf, $mdThemingProvider,
+                  localStorageServiceProvider, $mdIconProvider, $sceDelegateProvider, $locationProvider) {
     // Enable log if environment allows it
     $logProvider.debugEnabled(false);
     if (Conf.DEBUG) {
@@ -49,6 +50,8 @@
       .accentPalette('wbAccentPalette');
 
     localStorageServiceProvider.setPrefix('wb');
+
+    $locationProvider.html5Mode(true);
   }
 
 })();

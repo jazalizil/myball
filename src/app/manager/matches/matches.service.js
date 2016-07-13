@@ -66,8 +66,8 @@
           day: start.getDay(),
           hours: start.getUTCHours(),
           minutes: start.getUTCMinutes(),
-          seconds: start.getUTCSeconds(),
-          milliseconds: start.getUTCMilliseconds()
+          seconds: 0,
+          milliseconds: 0
         };
         end.setUTCHours(end.getUTCHours());
         match.endDate = {
@@ -77,45 +77,43 @@
           day: end.getDay(),
           hours: end.getUTCHours(),
           minutes: end.getUTCMinutes(),
-          seconds: end.getUTCSeconds(),
-          milliseconds: end.getUTCMilliseconds()
+          seconds: 0,
+          milliseconds: 0
         };
       },
       cleanDates: function(match) {
         var startHour = Math.floor(match.startDate.hours);
         var endHour = Math.floor(match.endDate.hours);
-        var endMinutes = match.duration * 10 % 10 === 0 && match.startDate.minutes === 0 ? 0 : 30;
         return {
-          startDate: match.startDate.year + '-' + z(match.startDate.month) + '-' +
+          startDate: match.startDate.year + '-' + z(match.startDate.month + 1) + '-' +
             z(match.startDate.date) + 'T' + z(startHour) + ':' +
             z(match.startDate.minutes) + ':' + z(match.startDate.seconds) + '.' + zz(match.startDate.milliseconds) +'Z',
-          endDate: match.endDate.year + '-' + z(match.endDate.month) + '-' +
+          endDate: match.endDate.year + '-' + z(match.endDate.month + 1) + '-' +
             z(match.endDate.date) + 'T' + z(endHour) + ':' +
-            z(endMinutes) + ':' + z(match.endDate.seconds) + '.' + zz(match.endDate.milliseconds) +'Z'
+            z(match.endDate.minutes) + ':' + z(match.endDate.seconds) + '.' + zz(match.endDate.milliseconds) +'Z'
         }
       },
-      getDates: function(hour) {
-        var today = new Date();
+      getDates: function(hour, today) {
         return {
           start: {
-            year: today.getUTCFullYear(),
-            month: today.getUTCMonth() + 1,
-            date: today.getUTCDate(),
-            day: today.getDay(),
+            year: today.year,
+            month: today.month,
+            date: today.date,
+            day: today.day,
             hours: hour.value,
             minutes: hour.minutes,
-            seconds: today.getUTCSeconds(),
-            milliseconds: today.getUTCMilliseconds()
+            seconds: 0,
+            milliseconds: 0
           },
           end: {
-            year: today.getUTCFullYear(),
-            month: today.getUTCMonth() + 1,
-            date: today.getUTCDate(),
-            day: today.getDay(),
+            year: today.year,
+            month: today.month,
+            date: today.date,
+            day: today.day,
             hours: hour.value + 1,
             minutes: hour.minutes,
-            seconds: today.getUTCSeconds(),
-            milliseconds: today.getUTCMilliseconds()
+            seconds: 0,
+            milliseconds: 0
           }
         }
       },

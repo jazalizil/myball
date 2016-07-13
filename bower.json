@@ -19,7 +19,10 @@
     "font-awesome": "~4.5.0",
     "angular-gettext": "~2.1.2",
     "angular-resizable": "~1.2.0",
-    "angular-un-svg": "~1.0.4"
+    "angular-un-svg": "~1.0.4",
+    "angular-dragdrop": "~1.0.13",
+    "jquery": "latest",
+    "jquery-ui": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

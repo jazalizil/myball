@@ -47,10 +47,25 @@
         padding-left: 42px;
       }
     }
+    md-checkbox {
+      margin-bottom: 8px;
+    }
   }
   .footer {
     font-size: 11px;
     padding: @padding-2x;
+  }
+  @media (max-width: @phone-width-max){
+    .sentence {
+      font-size: 14px;
+    }
+    form {
+      width: 70%;
+      font-size: 14px;
+    }
+    .footer {
+      font-size: 9px;
+    }
   }
   .link {
     &:hover {

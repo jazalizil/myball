@@ -18,6 +18,6 @@
       'gettext',
       'angularResizable',
       'wyvernzora.un-svg',
-      'countTo'
+      'ngDragDrop'
     ]);
 })();

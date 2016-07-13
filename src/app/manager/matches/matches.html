@@ -23,18 +23,20 @@
             </div>
             <div layout flex="25" class="slot {{hour.value * 10 % 10 !== 0 ? 'border-dashed' : 'border-solid'}} relative"
                  ng-repeat="field in matches.data.fields | limitTo: matches.data.limitTo | startFrom: matches.data.startFrom">
-              <div class="absolute unavailable fit-width" ng-show="$parent.$index === 0 && !field.available">
-              </div>
-              <div class="match-ctn absolute pointer" ng-click="matches.openSidenav(hour, field)" id="{{hour.value + '-' + field._id}}"
+              <div class="match-ctn absolute pointer" ng-click="matches.openSidenav(hour, field)"
                    ng-hide="matches.data.hours[$parent.$index - 1].matches[field._id] ||
-                   matches.data.hours[$parent.$index + 1].matches[field._id] || hour.value >= 21.5">
+                   matches.data.hours[$parent.$index + 1].matches[field._id] || hour.value >= 21.5" data-drop="true"
+                   jqyoui-droppable="{onOver:'matches.dropOverMatch(this)',
+                   onOut:'matches.dropOutMatch(this)', onDrop:'matches.dropOnMatch(this, obj)'}">
                 <div layout="row" class="match fit-height fit-width"
-                     ng-hide="hour.matches[field._id] || hour.booked[field._id] || !field.available">
+                     ng-hide="hour.matches[field._id] || hour.booked[field._id]">
                   <div layout="column" layout-align="center center" class="fit-width">
                     <i class="material-icons green">add_circle</i>
                   </div>
                 </div>
                 <div layout="row" class="match booked fit-height fit-width" ng-if="hour.matches[field._id]"
+                     id="{{hour.value + '-' + field._id}}"
+                     data-drag="true" jqyoui-draggable="{animate: true, onStart: 'matches.dragMatchStart(this'}"
                      ng-style="{'height': 100 * {{hour.matches[field._id].duration}} + '%'}">
                   <div layout="column" class="fit-width fit-height">
                     <div layout="row" layout-align="center center" class="fit-width fit-height">

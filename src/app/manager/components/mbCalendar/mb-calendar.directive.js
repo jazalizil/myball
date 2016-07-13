@@ -43,17 +43,33 @@
         $scope.$apply();
       });
 
+      $scope.$watch(function(){
+        return vm.today;
+      }, function(newVal){
+        // var toPush = {};
+        if (newVal) {
+          $log.debug('today change:', vm.today, 'matches:', vm.matches);
+          vm.today.matches = _.filter(vm.matches, function(match) {
+            return match.startDate.year === vm.today.year && match.startDate.month === vm.today.month &&
+              match.startDate.date === vm.today.date;
+          });
+          // _.each(vm.today.matches, function(match) {
+            // toPush = angular.copy(match);
+            // toPush.startDate = _.extend({month: vm.today.month + 1}, _.omit(match.startDate, ['month']));
+            // toPush.endDate = _.extend({month: vm.today.month + 1}, _.omit(match.endDate, ['month']));
+            // vm.today.matches.push(toPush);
+            // match.startDate.month += 1;
+            // match.endDate.month += 1;
+          // });
+        }
+      });
+
       $scope.$watchCollection(function(){
         return vm.matches
       }, function(newVal){
         if (newVal) {
+          $log.debug('allMatches change');
           addMatchesToDays();
-          vm.today.matches = _.filter(vm.matches, function(match){
-            $log.debug(match);
-            return match.startDate.year === vm.today.year && match.startDate.month === vm.today.month &&
-              match.startDate.date === vm.today.date;
-          });
-          $log.debug('today:', vm.today);
         }
       });
 
@@ -229,10 +245,9 @@
       };
 
       function init() {
-        var realDate = vm.today.realDate;
         vm.data.daysToDisplay = getDaysToDisplay();
         vm.data.weekIndex = getFirstWeekIndex();
-        // vm.data.matchStatus =
+        var realDate = vm.today.realDate;
         var day = _.filter(vm.data.daysToDisplay, function(day){
           return day.year === vm.today.realDate.getFullYear() &&
             day.month === vm.today.realDate.getMonth() &&
@@ -240,6 +255,8 @@
         });
         vm.today = day[0];
         vm.today.realDate = realDate;
+        // vm.data.matchStatus =
+
       }
       init();
     }

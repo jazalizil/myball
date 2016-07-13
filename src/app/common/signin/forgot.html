@@ -1,6 +1,6 @@
 <div id="signin">
   <div class="fixed bg full-height">
-    <img class="full-width" ng-src="{{forgot.data.bgUrl}}" alt="field factory">
+    <div class="bg-img fit-height full-width"></div>
   </div>
   <md-content class="full-height" layout-fill layout layout-align="center start">
     <div layout="row" class="full-width fit-height">
@@ -12,7 +12,7 @@
                 <un-svg style="height:80px;" class="fill-white" svg-src="/assets/icons/myball-txt.svg">
               </a>
             </div>
-            <div translate class="fit-width" layout layout-align="center center">
+            <div translate class="fit-width sentence" layout layout-align="center center">
               Bienvenue sur votre espace d'administration.
             </div>
             <form class="margin-t-5x" layout="column" ng-submit="forgot.resetPassword()" flex="30" novalidate name="forgot.resetForm" ng-switch-when="true">
