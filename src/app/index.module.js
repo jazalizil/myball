@@ -17,7 +17,6 @@
       'LocalStorageModule',
       'gettext',
       'angularResizable',
-      'wyvernzora.un-svg',
-      'countTo'
+      'wyvernzora.un-svg'
     ]);
 })();

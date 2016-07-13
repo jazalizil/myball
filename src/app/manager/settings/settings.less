@@ -34,6 +34,12 @@
         z-index: 1;
       }
       md-tabs {
+        md-pagination-wrapper {
+          width: 75% !important;
+          md-tab-item {
+            width: 25%;
+          }
+        }
         md-tabs-wrapper {
           .bg-black-transparent;
           border-bottom-left-radius: 5px;
@@ -47,7 +53,7 @@
               .white;
             }
             &.md-active {
-              .bold;
+              .white;
             }
           }
         }
@@ -68,7 +74,6 @@
       }
       button[type="submit"] {
         text-transform: none;
-        .bold;
         .uppercase;
         font-family: 'Avenir';
         width: 22%;

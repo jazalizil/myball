@@ -16,7 +16,7 @@
         <!--Navbar links-->
         <div class="links-ctn" layout="row" layout-align="start center" ng-hide="navbar.data.isSearching">
           <a ng-repeat="link in navbar.data.links track by $index" layout class="navbar-link"
-             ui-sref="{{link.url}}" ui-sref-active="active bold"
+             ui-sref="{{link.url}}" ui-sref-active="active"
              ng-class="{'padded': !$first && !$last}"
           >
           <span class="relative">
@@ -62,7 +62,7 @@
       <div class="fit-width bg-black-transparent-2 menu-mobile uppercase relative" layout="column">
         <div class="navbar-black fit-width menu-el" ng-show="navbar.data.menuOpen"></div>
         <a ng-repeat="link in navbar.data.links track by $index" layout="row" class="menu-el link center-text fit-width"
-           ui-sref="{{link.url}}" ui-sref-active="active bold"
+           ui-sref="{{link.url}}" ui-sref-active="active"
            ng-show="navbar.data.menuOpen"
            ng-click="navbar.toggleMenu(!navbar.data.menuOpen)"
         >
