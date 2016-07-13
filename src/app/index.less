@@ -11,7 +11,7 @@
 
 //colors
 @light-grey: #F9F9F9;
-@grey: rgba(238, 238, 238, .9);
+@grey: rgba(238, 238, 238, .7);
 @black-grey: #646464;
 @dark-grey: #979797;
 @dark-blue: #2c3e50;
@@ -676,6 +676,23 @@ md-card {
   }
 }
 
+// Checkbox
+md-checkbox {
+  .md-icon {
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-width: 1px;
+    border-color: @white !important;
+    &:after {
+      border-color: @white !important;
+    }
+  }
+  .md-label {
+    margin-left: 42px;
+  }
+}
+
 // Select
 md-select {
   .white;
@@ -818,6 +835,14 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   -webkit-text-fill-color: @white !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 // End angular material rebranding

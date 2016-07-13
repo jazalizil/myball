@@ -3,15 +3,16 @@
   angular.module('myBall').controller('SigninController', SigninController);
 
   /** @ngInject */
-  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog, Conf) {
+  function SigninController(AuthorizationService, $log, $state, toastr, gettextCatalog) {
     var vm = this;
     vm.datas = {
       isLoading: false,
       placeholders: {
         email: gettextCatalog.getString("Adresse email"),
-        password: gettextCatalog.getString("Mot de passe")
+        password: gettextCatalog.getString("Mot de passe"),
+        remember: gettextCatalog.getString("Se souvenir de moi")
       },
-      bgUrl: Conf.CDN_BASE_URL + 'images/field-factory.jpg'
+      remember: true
     };
     
     vm.login = function() {
@@ -20,7 +21,7 @@
         return;
       }
       vm.datas.isLoading = true;
-      AuthorizationService.login(vm.datas.login, vm.datas.password).then(function() {
+      AuthorizationService.login(vm.datas.login, vm.datas.password, vm.datas.remember).then(function() {
         $state.go('main');
         vm.datas.isLoading = false;
       }, function(err) {

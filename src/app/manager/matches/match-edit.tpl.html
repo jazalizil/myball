@@ -24,16 +24,16 @@
         </div>
       </div>
       <form ng-submit="matches.send()" layout="column">
-        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.reponsable.errors.name}">
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.reponsable.errors['name'].value}">
           <label>{{matches.data.placeholders.name}}</label>
           <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
           <input md-autofocus="!matches.data.responsable.name" type="text" name="name"
                  ng-model="matches.data.responsable.name">
         </md-input-container>
-        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.responsable.errors.phone}">
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.responsable.errors['phone'].value}">
           <label>{{matches.data.placeholders.phone}}</label>
           <md-icon md-svg-src="/assets/icons/phone.svg"></md-icon>
-          <input type="text" phone-prefix name="name" ng-model="matches.data.responsable.phone">
+          <input type="text" phone-prefix name="phone" ng-model="matches.data.responsable.phone">
         </md-input-container>
         <md-input-container class="md-img-float md-block">
           <label>{{matches.data.placeholders.email}}</label>
@@ -43,7 +43,7 @@
         <md-input-container class="md-icon-float md-block">
           <label>{{matches.data.placeholders.teams}}</label>
           <md-icon md-svg-src="/assets/icons/joueurs.svg"></md-icon>
-          <md-select class="white" ng-model="matches.data.match.maxPlayers" aria-label="team size">
+          <md-select class="white" ng-model="matches.data.teamSize" aria-label="team size">
             <md-option ng-repeat="size in matches.data.teamSizes" ng-value="size.value"
                        ng-selected="size.value === matches.data.match.maxPlayers">
               {{size.name}}

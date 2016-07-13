@@ -11,7 +11,7 @@
               <un-svg style="height:80px;" class="fill-white" svg-src="/assets/icons/myball-txt.svg">
             </a>
           </div>
-          <div translate class="fit-width" layout layout-align="center center">
+          <div translate class="fit-width sentence" layout layout-align="center center">
             Bienvenue sur votre espace d'administration.
           </div>
           <form class="margin-t-5x" layout="column" ng-submit="signin.login()"  novalidate name="signin.signinForm">
@@ -27,10 +27,15 @@
               <img src="assets/icons/lock.svg" alt="">
               <input required name="password" ng-model="signin.datas.password" type="password">
             </md-input-container>
-            <a ui-sref="forgot" class="white pointer forgot link" layout layout-align="end start">
-              <span translate>Mot de passe oublié?</span>
-            </a>
-            <md-button type="submit" class="margin-t-8x white hover-green" md-ink-ripple="#29C134"
+            <div layout layout-align="end start">
+              <a ui-sref="forgot" class="white pointer forgot link" >
+                <span translate>Mot de passe oublié?</span>
+              </a>
+            </div>
+            <md-checkbox class="margin-t-5x md-primary" md-no-ink ng-model="signin.datas.remember" aria-label="{{signin.datas.placeholders.remember}}">
+              {{signin.datas.placeholders.remember}}
+            </md-checkbox>
+            <md-button type="submit" class="no-margin white hover-green" md-ink-ripple="#29C134"
                        v-busy="signin.datas.isLoading">
               <span class="bold" translate>connexion</span>
             </md-button>

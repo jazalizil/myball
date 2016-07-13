@@ -19,10 +19,12 @@
       _authenticated = true;
     };
     return {
-      updateToken: function(token) {
+      updateToken: function(token, remember) {
         _token = token;
         _authenticated = true;
-        localStorageService.set('token', token);
+        if (remember) {
+          localStorageService.set('token', token);
+        }
       },
       getToken: function() {
         if (_token != null) {
