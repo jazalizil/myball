@@ -87,8 +87,8 @@
         });
         return deferred.promise;
       },
-      patch: function(manager) {
-        return Restangular.one('users', 'me').patch(manager);
+      update: function(user) {
+        return Restangular.one('users', 'me').patch(user);
       }
     };
   }

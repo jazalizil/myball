@@ -3,7 +3,7 @@
 	angular.module('myBall').controller('ParametersController', ParametersController);
 
 	/** @ngInject */
-	function ParametersController($log, UserService, toastr, gettextCatalog, $scope) {
+	function ParametersController($log, UserService, toastr, gettextCatalog, Restangular) {
 		var vm = this;
 
 		vm.error = null;
@@ -13,11 +13,7 @@
 		vm.isSelected = isSelected;
 		vm.submit = submit;
 		initiate();
-
-		$scope.$on('user-updated', function() {
-			vm.me = UserService.getIdentity();
-		});
-
+		
 		function initiate() {
 			var Identity = UserService.getIdentity();
 
@@ -53,8 +49,9 @@
 						city: vm.user.city
 					}
 				};
-				return UserService.update('users', data).then(function(user) {
+				return UserService.update(data).then(function(user) {
 					$log.debug("Then :", user);
+					UserService.setIdentity(Restangular.stripRestangular(user));
 					vm.isLoading = false;
 				}, function(err) {
 					if (err.data && err.data.code === 404) {
