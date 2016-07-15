@@ -16,7 +16,7 @@
         paid: gettextCatalog.getString('Payé'),
         name: gettextCatalog.getString('Nom complet'),
         email: gettextCatalog.getString('Email'),
-        phone: gettextCatalog.getString('Numéro de téléphone'),
+        phone: gettextCatalog.getString('Téléphone'),
         duration: gettextCatalog.getString('Durée du match')
       },
       today: {
@@ -230,15 +230,34 @@
         $mdSidenav('match').close();
         toastr.success(gettextCatalog.getString('Match crée avec succès'));
       }, function(err){
-        var now = new Date();
-        if (vm.data.match.startDate.hour < now.getHours() && vm.data.match.startDate.getMinutes() < now.getMinutes()) {
+        var now = new Date(), date = new Date(payload.match.startDate);
+        $log.debug(now, payload.match.startDate);
+        // if (vm.data.match.startDate.minutes < now.getMinutes() && vm.data.match.startDate.hours < now.getHours()) {
+        if (date.getTime() < now.getTime()) {
           toastr.error(gettextCatalog.getString('Impossible de créer un match dans le passé'), gettextCatalog.getString('Erreur'));
         }
         else {
           toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
         }
         vm.data.responsable.errors = angular.copy(vm.data.errors);
-        $log.debug(vm.data.match, err);
+        vm.data.isUploadingMatch = false;
+      })
+    };
+
+    vm.update = function() {
+      var payload = {};
+      payload.match = _.extend(MatchesService.cleanDates(vm.data.match), _.omit(vm.data.match, ['startDate', 'endDate', 'duration', 'teams']));
+      payload.match.responsable = _.omit(vm.data.responsable, ['errors']);
+      payload.teams = vm.data.match.teams;
+      $log.debug(payload);
+      vm.data.isUploadingMatch = true;
+      MatchesService.patch(payload).then(function(){
+        $mdSidenav('match').close();
+        vm.data.isUploadingMatch = false;
+        toastr.success(gettextCatalog.getString('Match mis à jour'));
+      }, function(err){
+        toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
+        vm.data.responsable.errors = angular.copy(vm.data.errors);
         vm.data.isUploadingMatch = false;
       })
     };
