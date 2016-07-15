@@ -23,10 +23,10 @@
           <span class="red">Le match que vous éditez vient d'être réservé par un utilisateur de l'application weBall</span>
         </div>
       </div>
-      <form ng-submit="matches.send()" layout="column">
-        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.reponsable.errors['name'].value}">
+      <form ng-submit="!matches.data.match.createdAt ? matches.send() : matches.update()" layout="column">
+        <md-input-container class="md-img-float md-block" ng-class="{'md-input-invalid' : matches.data.reponsable.errors['name'].value}">
           <label>{{matches.data.placeholders.name}}</label>
-          <md-icon md-svg-src="/assets/icons/name.svg"></md-icon>
+          <img src="/assets/icons/name.svg" alt="">
           <input md-autofocus="!matches.data.responsable.name" type="text" name="name"
                  ng-model="matches.data.responsable.name">
         </md-input-container>
@@ -52,7 +52,7 @@
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
           <label>{{matches.data.placeholders.duration}}</label>
-          <md-icon md-font-set="white material-icons">access_time</md-icon>
+          <md-icon md-font-set="white material-icons">timelapse</md-icon>
           <md-select class="white" ng-model="matches.data.match.duration" aria-label="team size">
             <md-option ng-repeat="duration in matches.data.durations" ng-value="duration.value"
                        ng-selected="duration.value === matches.data.match.duration">
@@ -62,6 +62,7 @@
         </md-input-container>
         <md-input-container class="md-icon-float md-block switch-ctn">
           <md-icon md-svg-src="/assets/icons/paiement.svg"></md-icon>
+          <!--<img src="/assets/icons/paiement.svg" alt="">-->
           <md-switch class="md-primary white" aria-label="match paid" ng-disabled="matches.data.match.alreadyPaid"
                      ng-model="matches.data.match.justPaid">
             {{matches.data.placeholders.paid}}

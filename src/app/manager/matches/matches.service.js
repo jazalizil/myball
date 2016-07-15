@@ -21,8 +21,10 @@
           });
       },
       put: function(match) {
-        $log.debug(match);
         return Restangular.one('matches').post('manager', match);
+      },
+      patch: function(payload) {
+        return Restangular.one('matches', payload.match._id).patch(payload);
       },
       statusToColor : {
         waiting: {

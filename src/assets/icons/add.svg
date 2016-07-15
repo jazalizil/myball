@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
+    <title>D2984A51-3666-47EF-B0EA-23B8C2D4B84E</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Paramètres---Disponibilités" transform="translate(-841.000000, -577.000000)">
+            <g id="delete" transform="translate(841.000000, 499.000000)">
+                <g id="add" transform="translate(0.000000, 78.000000)">
+                    <path d="M10,20 C15.5228475,20 20,15.5228475 20,10 C20,4.4771525 15.5228475,0 10,0 C4.4771525,0 0,4.4771525 0,10 C0,15.5228475 4.4771525,20 10,20 Z" id="Oval" fill="#7ED321"></path>
+                    <path d="M15,10 L5,10" id="Shape" stroke="#FFFFFF" stroke-width="2"></path>
+                    <path d="M10,15 L10,5" id="Shape" stroke="#FFFFFF" stroke-width="2"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

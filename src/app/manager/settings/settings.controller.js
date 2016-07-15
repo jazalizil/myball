@@ -14,7 +14,7 @@
       labels: {
         manager: gettextCatalog.getString('Manager'),
         five: gettextCatalog.getString('Five'),
-        fields: gettextCatalog.getString('Terrains'),
+        availibilities: gettextCatalog.getString('Disponibilités'),
         email: gettextCatalog.getString('Adresse mail'),
         oldPassword: gettextCatalog.getString('Ancien mot de passe'),
         newPassword: gettextCatalog.getString('Nouveau mot de passe'),
@@ -31,6 +31,10 @@
         gettextCatalog.getString('Modifier les informations de votre five.'),
         gettextCatalog.getString('Gérer les autorisations weBall'),
         gettextCatalog.getString('Modifier les informations de vos terrains.')
+      ],
+      availibilitiesChoices: [
+        gettextCatalog.getString('Indisponibilités'),
+        gettextCatalog.getString('Disponibilités')
       ],
       patch: {},
       photo: {},
@@ -271,6 +275,7 @@
         vm.data.welcomeSentence = gettextCatalog.getString('Bonjour') + ' ' + vm.data.identity.manager.firstName;
         vm.data.calendar.daysDisplayed.push(vm.data.calendar.daysDisplayed.shift());
         vm.data.selectedField = vm.data.newIdentity.five.fields[0];
+        vm.data.availibilityChoice = vm.data.availibilitiesChoices[0];
         initHours();
         initAuths();
         createDisplayInterval();

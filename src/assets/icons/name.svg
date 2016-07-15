@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="22px" height="21px" viewBox="0 0 22 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
-    <title>1F2F1736-F4AC-46B2-91AC-6CF2D484732F</title>
+<svg width="23px" height="22px" viewBox="0 0 23 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
+    <title>873DD312-0E89-493D-9003-40D86224E72D</title>
     <desc>Created with sketchtool.</desc>
-    <defs></defs>
+    <defs>
+        <path d="M11.5,12.755018 C7.61875,12.755018 0,14.6863886 0,18.6976968 L0,21.6690362 L23,21.6690362 L23,18.6976968 C23,14.6863886 15.38125,12.755018 11.5,12.755018 L11.5,12.755018 Z M11.5,10.4359238 C14.34625,10.4359238 16.675,8.08784094 16.675,5.2179619 C16.675,2.34808285 14.34625,0 11.5,0 C8.65375,0 6.325,2.34808285 6.325,5.2179619 C6.325,8.08784094 8.65375,10.4359238 11.5,10.4359238 L11.5,10.4359238 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="23" height="21.6690362" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
     <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="01.00-Matchs---weball" transform="translate(-1006.000000, -470.000000)" stroke="#E8E8E8">
-            <g id="Tableau" transform="translate(65.000000, 369.000000)">
-                <g id="Group-21" transform="translate(941.000000, 100.000000)">
-                    <g id="Group-17">
-                        <g id="Group-12" transform="translate(0.000000, 1.000000)">
-                            <path d="M11,12.200452 C7.2875,12.200452 0,14.04785 0,17.8847535 L0,20.7269042 L22,20.7269042 L22,17.8847535 C22,14.04785 14.7125,12.200452 11,12.200452 L11,12.200452 Z M11,9.98218798 C13.7225,9.98218798 15.95,7.73619568 15.95,4.99109399 C15.95,2.2459923 13.7225,0 11,0 C8.2775,0 6.05,2.2459923 6.05,4.99109399 C6.05,7.73619568 8.2775,9.98218798 11,9.98218798 L11,9.98218798 Z" id="Name"></path>
-                        </g>
-                    </g>
+        <g id="01.00-Matchs---myBall" transform="translate(-1090.000000, -263.000000)" stroke="#FFFFFF" stroke-width="2" fill="#FFFFFF">
+            <g id="Group-19" transform="translate(1025.000000, 0.000000)">
+                <g id="Group-26" transform="translate(65.000000, 263.000000)">
+                    <use id="Name" mask="url(#mask-2)" xlink:href="#path-1"></use>
                 </g>
             </g>
         </g>
