@@ -28,6 +28,11 @@
             </md-option>
           </md-select>
         </md-input-container>
+        <md-input-container class="md-icon-float md-block" ng-class="{'md-input-invalid' : matches.data.responsable.errors['phone'].value}">
+          <label>{{settings.data.labels.price}}</label>
+          <md-icon md-font-set="white material-icons">attach_money</md-icon>
+          <input type="number" name="price" ng-model="settings.data.authorization.price">
+        </md-input-container>
         <div layout="row" class="fit-width" ng-switch="settings.data.authorization.isNew">
           <div layout="column" class="fit-width" ng-switch-when="true">
             <md-button type="submit" class="md-raised md-primary fit-width" v-busy="settings.data.isUploadingAuth">

@@ -7,7 +7,7 @@
   angular.module('myBall')
     .service('MatchesService', MatchesService);
   /** @ngInject */
-  function MatchesService(Restangular, UserService, $log){
+  function MatchesService(Restangular, UserService){
     var _identity = UserService.getIdentity();
     function z(n){ return (n < 10? '0' : '') + n }
     function zz(n){ return (n < 100 ? '0' + z(n) : z(n)); }

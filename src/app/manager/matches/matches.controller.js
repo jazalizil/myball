@@ -92,8 +92,7 @@
       return vm.data.teamSize;
     }, function(newVal){
       if (newVal) {
-        vm.data.match.teams[0].currentPlayers = newVal / 2;
-        vm.data.match.teams[1].currentPlayers = newVal / 2;
+        vm.data.match.maxPlayers = newVal;
       }
     });
 
@@ -113,7 +112,6 @@
           vm.data.match.endDate.minutes = newVal * 10 % 10 === 0 ? 0 : 30;
           vm.data.match.endDate.hours = vm.data.match.startDate.hours + Math.floor(+newVal);
         }
-        $log.debug('duration:', newVal, 'match:', vm.data.match);
       }
     });
 
@@ -142,6 +140,7 @@
       vm.data.hour = hour;
       vm.data.matchBooked = false;
       vm.data.responsable = {};
+      $log.debug('hour match: ', hour.matches[field._id]);
       if (hour.matches[field._id]) {
         vm.data.match = hour.matches[field._id];
         vm.data.teamSize = vm.data.match.maxPlayers;
@@ -184,7 +183,6 @@
 
     vm.openSidenav = function(hour, field) {
       createMatch(hour, field);
-      $log.debug(vm.data.match);
       $mdSidenav('match').open();
     };
     
