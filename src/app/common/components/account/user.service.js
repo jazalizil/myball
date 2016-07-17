@@ -65,6 +65,11 @@
         _authenticated = identity != null;
       },
       setIdentity: function(identity) {
+        //Clean phone
+        identity.five.phone = identity.five.phone.replace(/\s/g, '');
+        if (identity.five.phone.startsWith('+33')) {
+          identity.five.phone.replace('+33', '0');
+        }
         _setIdentity(identity);
       },
       identity: function(force) {

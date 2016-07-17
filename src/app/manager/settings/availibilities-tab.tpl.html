@@ -1,14 +1,15 @@
-<md-content class="bg-transparent">
+<md-content class="bg-transparent" id="availibilities">
   <div class="fit-height fit-width" layout="column" layout-padding>
     <div class="fit-height" layout="row" layout-align="center center">
       <div layout="column" class="fit-height" layout-align="center center">
         <div layout="row" layout-align="center center">
-          <div class="border-bottom white">
-            <span>Ajouter une date</span>
-            <button>
-              <img src="/assets/icons/add.svg" alt="">
-            </button>
-          </div>
+          <!--<div class="border-bottom white">-->
+            <!--<span>Ajouter une date</span>-->
+            <!--<button>-->
+              <!--<img src="/assets/icons/add.svg" alt="">-->
+            <!--</button>-->
+          <!--</div>-->
+          <md-datepicker ng-model="myDate" md-placeholder="Ajouter une date"></md-datepicker>
         </div>
       </div>
     </div>

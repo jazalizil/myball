@@ -8,7 +8,7 @@
     .controller('SettingsController', SettingsController);
   /** @ngInject */
   function SettingsController(UserService, gettextCatalog, _, $log, CalendarService, $mdSidenav,
-                              toastr) {
+                              toastr, $scope, $stateParams, $state) {
     var vm = this;
     vm.data = {
       labels: {
@@ -24,7 +24,8 @@
         available: gettextCatalog.getString('Disponible'),
         authorizations: gettextCatalog.getString('Autorisations'),
         endAt: gettextCatalog.getString('Heure de fin'),
-        startFrom: gettextCatalog.getString('Heure de début')
+        startFrom: gettextCatalog.getString('Heure de début'),
+        price: gettextCatalog.getString('Prix')
       },
       sentences: [
         gettextCatalog.getString('Modifier vos informations personnelles.'),
@@ -46,6 +47,20 @@
     /*
     *  All tabs
     * */
+
+    // selected tab in url
+    $scope.$watch(function(){
+      return vm.data.selectedTab;
+    }, function(newVal){
+      if (newVal) {
+        $stateParams.tab = newVal;
+      } else {
+        delete $stateParams.tab;
+      }
+      $state.transitionTo($state.current, $stateParams, {
+        reload: false, inherit: false, notify: false
+      });
+    });
 
     // WIP photo
     var computePatchFive = function(patch) {
@@ -123,11 +138,13 @@
           from: hour.value,
           to: hour.value + 0.5,
           day: day,
+          price: 8,
           hour: hour,
           errors: {},
           isNew: true
         };
-      $log.debug('auth:', vm.data.authorization);
+      var idAuth = _.find(vm.data.identity.five.days, ['day', day.number]);
+      vm.data.oldAuth = angular.copy(_.find(idAuth.hours, ['from', hour.value]));
       vm.data.selectedHour = hour;
       $mdSidenav('authorization').open();
     };
@@ -141,13 +158,16 @@
         vm.data.authorization.errors.to = true;
         return;
       }
+
       var day = _.find(vm.data.newIdentity.five.days, ['day', vm.data.authorization.day.number]);
-      _.remove(day.hours, function(hours) {
-        return hours.price === -1 && hours.from >= vm.data.authorization.from && hours.to <= vm.data.authorization.to
-      });
+      if (vm.data.oldAuth) {
+        _.remove(day.hours, function(hour) {
+          return hour.to === vm.data.oldAuth.to && hour.from === vm.data.oldAuth.from;
+        });
+      }
       $log.debug('patched id:', vm.data.newIdentity);
       day.hours.push({
-        price: -1,
+        price: vm.data.authorization.price,
         from: vm.data.authorization.from,
         to: vm.data.authorization.to
       });
@@ -155,7 +175,8 @@
       vm.update().then(function(){
         vm.data.isUploadingAuth = false;
         delete vm.data.authorization.isNew;
-        addAuthToDisplay(vm.data.selectedHour);
+        initHours();
+        initAuths();
         $mdSidenav('authorization').close();
       }, function(){
         vm.data.isUploadingAuth = false;
@@ -218,7 +239,6 @@
         };
         vm.data.hours.push(toPush);
       });
-      $log.debug(vm.data.hours);
     };
 
     // Create display intervals
@@ -241,8 +261,8 @@
     var initAuths = function() {
       _.each(vm.data.newIdentity.five.days, function(day){
         _.each(day.hours, function(hour){
-          var tmp, auth, duration, idx;
-          if (hour.price === -1) {
+          var tmp, auth, duration, idx, to;
+          if (hour.price !== -1) {
             idx = _.findIndex(vm.data.hours, function(h){
               return h.value === hour.from;
             });
@@ -250,10 +270,12 @@
               return;
             }
             tmp = vm.data.hours[idx];
+            to = hour.to < 22 ? hour.to : 22;
             auth = {
               from: hour.from,
-              to: hour.to,
-              duration: hour.to - hour.from,
+              price: hour.price,
+              to: to,
+              duration: to - hour.from,
               day: _.find(vm.data.calendar.daysDisplayed, ['number', day.day])
             };
             duration = 0.5;
@@ -269,6 +291,7 @@
     };
 
     var init = function () {
+      vm.data.selectedTab = $stateParams.tab;
       UserService.identity(true).then(function(identity){
         vm.data.identity = identity;
         vm.data.newIdentity = angular.copy(vm.data.identity);

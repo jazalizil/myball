@@ -22,17 +22,17 @@
            ng-repeat="day in settings.data.calendar.daysDisplayed"
            >
         <div class="absolute auth-ctn fit-width fit-height" ng-click="settings.openSideNav(hour, day)"
-             ng-hide="settings.data.hours[$parent.$index - 1].auths[day.number] || hour.value >= 21.5">
+             ng-hide="hour.value >= 21.5">
           <div class="free pointer fit-width center-text fit-height"
                layout layout-align="center center"
                ng-hide="hour.auths[day.number] || hour.booked[day.number]">
             <i class="material-icons green">add_circle</i>
           </div>
-          <div layout-padding class="booked" layout-align="center center" layout="column"
-               class="pointer relative"
+          <div layout-padding layout-align="center center" layout="column"
+               class="booked pointer relative"
                ng-if="hour.auths[day.number]"
                id="{{day.number}}d{{hour.value}}"
-               ng-style="{'height': 200 * {{hour.auths[day.number].duration}} + '%'}"
+               ng-style="{'height': 204 * {{hour.auths[day.number].duration}} + '%'}"
           >
             <img src="assets/icons/created-with-weball.svg" alt="weball smartphone">
             <div class="lines fit-width absolute center-text">

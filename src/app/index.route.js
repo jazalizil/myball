@@ -72,13 +72,13 @@
       controllerAs: "main"
     }).state('matches', {
       parent: "protected",
-      url: "/matches",
+      url: "/matches?day",
       templateUrl: "app/manager/matches/matches.html",
       controller: "MatchesController",
       controllerAs: "matches"
     }).state('settings', {
       parent: "protected",
-      url: "/settings",
+      url: "/settings?tab",
       templateUrl: "app/manager/settings/settings.html",
       controller: "SettingsController",
       controllerAs: "settings"
