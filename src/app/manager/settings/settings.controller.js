@@ -127,7 +127,16 @@
         vm.data.isLoading = false;
       });
     };
-    
+
+    /*
+    *  Availibilities tab
+    * */
+
+    vm.deleteException = function() {
+      vm.data.exceptionDate = null;
+    }
+
+
     /*
     *  Authorizations tab
     * */
@@ -184,17 +193,17 @@
     };
 
     // Add auth to display
-    var addAuthToDisplay = function(hour) {
-      vm.data.authorization.duration = vm.data.authorization.to - vm.data.authorization.from;
-      hour.auths[vm.data.authorization.day.number] = vm.data.authorization;
-      var duration = 0.5;
-      var idx = _.findIndex(vm.data.hours, ['value', vm.data.authorization.from]);
-      while (duration < vm.data.authorization.duration) {
-        vm.data.hours[idx].booked[vm.data.authorization.day.number] = true;
-        duration += 0.5;
-        idx += 1;
-      }
-    };
+    // var addAuthToDisplay = function(hour) {
+    //   vm.data.authorization.duration = vm.data.authorization.to - vm.data.authorization.from;
+    //   hour.auths[vm.data.authorization.day.number] = vm.data.authorization;
+    //   var duration = 0.5;
+    //   var idx = _.findIndex(vm.data.hours, ['value', vm.data.authorization.from]);
+    //   while (duration < vm.data.authorization.duration) {
+    //     vm.data.hours[idx].booked[vm.data.authorization.day.number] = true;
+    //     duration += 0.5;
+    //     idx += 1;
+    //   }
+    // };
 
     // Delete auth to display
     var deleteAuthToDisplay = function(hour) {
