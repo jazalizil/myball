@@ -8,6 +8,7 @@
     }
     .md-datepicker-input-container {
       width: 300px;
+      margin-left: 0;
       input {
         color: @white;
       }
@@ -24,5 +25,24 @@
         display: none;
       }
     }
+    &.ng-touched {
+      .md-datepicker-input-container {
+        input {
+          margin-left: 12px;
+        }
+      }
+    }
+    &.has-date {
+      .md-datepicker-triangle-button {
+        display: none;
+      }
+    }
+  }
+  .delete-btn {
+    border: none;
+    background: transparent;
+    top: 0;
+    right: 0;
+    padding: 0;
   }
 }

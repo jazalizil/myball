@@ -9,7 +9,13 @@
               <!--<img src="/assets/icons/add.svg" alt="">-->
             <!--</button>-->
           <!--</div>-->
-          <md-datepicker ng-model="myDate" md-placeholder="Ajouter une date"></md-datepicker>
+          <div class="relative">
+            <md-datepicker ng-model="settings.data.exceptionDate" md-placeholder="Ajouter une date"
+                           ng-class="{'has-date' : settings.data.exceptionDate}"></md-datepicker>
+            <button class="delete-btn absolute" ng-click="settings.deleteException()" ng-show="settings.data.exceptionDate">
+              <md-icon md-font-set="material-icons" class="red">delete</md-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
