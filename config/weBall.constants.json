@@ -3,7 +3,6 @@
     "Conf": {
       "DEBUG": true,
       "WEBALL_API_BASE_URL": "http://staging-api.weball.fr",
-      ""
       "OPENDATA_API_BASE_URL": "https://public.opendatasoft.com/api/",
       "GOUVDATA_API_BASE_URL": "http://api-adresse.data.gouv.fr/search/",
       "CDN_BASE_URL": "https://d153u8w1ikjxem.cloudfront.net/"
