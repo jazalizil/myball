@@ -79,6 +79,7 @@
       var hourIdx = _.findIndex(vm.data.hours, function(hour){
         return hour.hours === data.startDate.hours && hour.minutes === data.startDate.minutes;
       });
+      var displayedDate = moment().year(data.startDate.year)
       $log.debug('Socket new match:', data);
       vm.data.hours[hourIdx].matches[data.field] = data;
       if (vm.data.matchEditing && vm.data.selectedHour.value === data.startDate.hours) {
@@ -86,7 +87,16 @@
         vm.data.matchBooked = true;
         vm.data.match = vm.data.hours[hourIdx].matches[data.field];
       } else {
-        toastr.success(gettextCatalog.getString('Un match a été réservé', moment(data.startDate).format(dateToastrFormat)));
+        toastr.success(
+          gettextCatalog.getString(
+            'Un match a été réservé', moment()
+              .year(data.startDate.year)
+              .month(data.startDate.month)
+              .date(data.startDate.date)
+              .hours(data.startDate.hours)
+              .minutes(data.startDate.minutes)
+              .format(dateToastrFormat))
+        );
       }
     });
 
