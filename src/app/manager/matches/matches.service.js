@@ -78,7 +78,6 @@
         };
       },
       cleanDates: function(match) {
-        console.log('c::', c(match.startDate));
         var startDate = moment()
           .year(match.startDate.year)
           .month(match.startDate.month)

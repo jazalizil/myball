@@ -8,7 +8,7 @@
     .controller('MatchesController', MatchesController);
   /** @ngInject */
   function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog, toastr,
-                             $log, $rootScope, Socket) {
+                             $log, $rootScope, Socket, moment) {
     var vm = this;
     var dateToastrFormat = 'ddd D MMMM YYYY \'à\' h:mm';
     vm.data = {
