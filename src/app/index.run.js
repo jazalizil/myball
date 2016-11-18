@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function runBlock($log, $rootScope, AuthorizationService, UserService, $state, $stateParams, Restangular,
-                    gettextCatalog, Conf, $q, $http) {
+                    gettextCatalog, Conf, amMoment, $http) {
     var deregistrationCallbacks = {};
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
@@ -49,6 +49,7 @@
       if (newVal) {
         gettextCatalog.setCurrentLanguage(newVal);
         gettextCatalog.loadRemote("/translations/" + newVal + ".json");
+        amMoment.changeLocale(newVal);
       }
     });
     /*
@@ -73,10 +74,8 @@
     deregistrationCallbacks.viewContentLoaded = $rootScope.$on('$viewContentLoaded', function(){
       $rootScope.$emit('loading', false);
     });
-    $rootScope.$on('$destroy', deregistrationCallbacks.viewContentLoading);
-    $rootScope.$on('$destroy', deregistrationCallbacks.viewContentLoaded);
-    $rootScope.$on('$destroy', deregistrationCallbacks.stateChangeStart);
-    $rootScope.$on('$destroy', deregistrationCallbacks.watch);
+    for (var idx in deregistrationCallbacks) {
+      $rootScope.$on('$destroy', deregistrationCallbacks[idx]);
+    }
   }
-
 })();

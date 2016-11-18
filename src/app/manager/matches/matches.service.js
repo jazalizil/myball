@@ -7,10 +7,10 @@
   angular.module('myBall')
     .service('MatchesService', MatchesService);
   /** @ngInject */
-  function MatchesService(Restangular, UserService){
+  function MatchesService(Restangular, UserService, moment){
     var _identity = UserService.getIdentity();
     function z(n){ return (n < 10? '0' : '') + n }
-    function zz(n){ return (n < 100 ? '0' + z(n) : z(n)); }
+    function c(d){ return '' +d.year+'-'+d.month+'-'+d.date+' '+z(Math.floor(d.hours))+':'+z(d.minutes) }
     return {
       fetchAll : function(params) {
         return Restangular.all('matches/five')
@@ -58,64 +58,74 @@
           });
       },
       initDates: function(match) {
-        var start = new Date(match.startDate);
-        var end = new Date(match.endDate);
-        start.setUTCHours(start.getUTCHours());
+        var start = moment(match.startDate);
+        var end = moment(match.endDate);
         match.startDate = {
-          year: start.getUTCFullYear(),
-          month: start.getUTCMonth(),
-          date: start.getUTCDate(),
-          day: start.getDay(),
-          hours: start.getUTCHours(),
-          minutes: start.getUTCMinutes(),
-          seconds: 0,
-          milliseconds: 0
+          year: start.year(),
+          month: start.month(),
+          date: start.date(),
+          day: start.weekday(),
+          hours: start.hours(),
+          minutes: start.minutes()
         };
-        end.setUTCHours(end.getUTCHours());
         match.endDate = {
-          year: end.getUTCFullYear(),
-          month: end.getUTCMonth(),
-          date: end.getUTCDate(),
-          day: end.getDay(),
-          hours: end.getUTCHours(),
-          minutes: end.getUTCMinutes(),
-          seconds: 0,
-          milliseconds: 0
+          year: end.year(),
+          month: end.month(),
+          date: end.date(),
+          day: end.weekday(),
+          hours: end.hours(),
+          minutes: end.minutes()
         };
       },
       cleanDates: function(match) {
-        var startHour = Math.floor(match.startDate.hours);
-        var endHour = Math.floor(match.endDate.hours);
+        console.log('c::', c(match.startDate));
+        var startDate = moment()
+          .year(match.startDate.year)
+          .month(match.startDate.month)
+          .date(match.startDate.date)
+          .hours(match.startDate.hours)
+          .minutes(match.startDate.minutes);
+        var endDate = moment(startDate)
+          .date(match.endDate.date)
+          .hours(match.endDate.hours)
+          .minutes(match.endDate.minutes);
         return {
-          startDate: match.startDate.year + '-' + z(match.startDate.month + 1) + '-' +
-            z(match.startDate.date) + 'T' + z(startHour) + ':' +
-            z(match.startDate.minutes) + ':' + z(match.startDate.seconds) + '.' + zz(match.startDate.milliseconds) +'Z',
-          endDate: match.endDate.year + '-' + z(match.endDate.month + 1) + '-' +
-            z(match.endDate.date) + 'T' + z(endHour) + ':' +
-            z(match.endDate.minutes) + ':' + z(match.endDate.seconds) + '.' + zz(match.endDate.milliseconds) +'Z'
-        }
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString()
+        };
+        // return {
+        //   startDate: match.startDate.year + '-' + z(match.startDate.month + 1) + '-' +
+        //     z(match.startDate.date) + 'T' + z(startHour) + ':' +
+        //     z(match.startDate.minutes) + ':' + z(match.startDate.seconds) + '.' + zz(match.startDate.milliseconds) +'Z',
+        //   endDate: match.endDate.year + '-' + z(match.endDate.month + 1) + '-' +
+        //     z(match.endDate.date) + 'T' + z(endHour) + ':' +
+        //     z(match.endDate.minutes) + ':' + z(match.endDate.seconds) + '.' + zz(match.endDate.milliseconds) +'Z'
+        // }
       },
-      getDates: function(hour, today) {
+      getDates: function(hour, slot) {
+        var start = moment()
+          .year(slot.year)
+          .month(slot.month)
+          .date(slot.date)
+          .hours(hour.value)
+          .minutes(hour.minutes);
+        var end = moment(start).add(1, 'h');
         return {
           start: {
-            year: today.year,
-            month: today.month,
-            date: today.date,
-            day: today.day,
-            hours: hour.value,
-            minutes: hour.minutes,
-            seconds: 0,
-            milliseconds: 0
+            year: start.year(),
+            month: start.month(),
+            date: start.date(),
+            day: start.day(),
+            hours: start.hours(),
+            minutes: start.minutes()
           },
           end: {
-            year: today.year,
-            month: today.month,
-            date: today.date,
-            day: today.day,
-            hours: hour.value + 1,
-            minutes: hour.minutes,
-            seconds: 0,
-            milliseconds: 0
+            year: end.year(),
+            month: end.month(),
+            date: end.date(),
+            day: end.day(),
+            hours: end.hours(),
+            minutes: end.minutes()
           }
         }
       },

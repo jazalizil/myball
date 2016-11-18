@@ -10,6 +10,7 @@
   function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog, toastr,
                              $log, $rootScope, Socket) {
     var vm = this;
+    var dateToastrFormat = 'ddd D MMMM YYYY \'à\' h:mm';
     vm.data = {
       identity: angular.copy(UserService.getIdentity()),
       placeholders: {
@@ -71,7 +72,6 @@
     };
 
     Socket.on('new match', function(data){
-      $log.debug('Socket new match:', data);
       MatchesService.setStatus(data);
       MatchesService.initDates(data);
       MatchesService.setDuration(data);
@@ -85,6 +85,8 @@
         toastr.warning(gettextCatalog.getString('Le match que vous éditez vient d\'être réservé via weBall'));
         vm.data.matchBooked = true;
         vm.data.match = vm.data.hours[hourIdx].matches[data.field];
+      } else {
+        toastr.success(gettextCatalog.getString('Un match a été réservé', moment(data.startDate).format(dateToastrFormat)));
       }
     });
 
@@ -185,7 +187,7 @@
       createMatch(hour, field);
       $mdSidenav('match').open();
     };
-    
+
     vm.delete = function(match) {
       vm.data.isDeletingMatch = true;
       return MatchesService.delete(match._id).then(function(){
@@ -205,11 +207,11 @@
         toastr.error(angular.isString(err.data.message) ? err.data.message : gettextCatalog.getString('Serveur indisponible'), gettextCatalog.getString('Erreur'));
       })
     };
-    
+
     var uploadMatch = function(){
       var payload = {};
       vm.data.isUploadingMatch = true;
-      payload.match = _.extend(MatchesService.cleanDates(vm.data.match), _.omit(vm.data.match, ['startDate', 'endDate', 'duration', 'teams']));
+      payload.match = _.assign({}, vm.data.match, MatchesService.cleanDates(vm.data.match));
       payload.match.responsable = _.omit(vm.data.responsable, ['errors']);
       payload.teams = vm.data.match.teams;
       $log.debug('payload:', payload);
@@ -244,7 +246,7 @@
 
     vm.update = function() {
       var payload = {};
-      payload.match = _.extend(MatchesService.cleanDates(vm.data.match), _.omit(vm.data.match, ['startDate', 'endDate', 'duration', 'teams']));
+      payload.match = _.assign({}, vm.data.match, MatchesService.cleanDates(vm.data.match));
       payload.match.responsable = _.omit(vm.data.responsable, ['errors']);
       payload.teams = vm.data.match.teams;
       $log.debug(payload);
@@ -275,13 +277,13 @@
     };
 
     var getHours = function(){
-      var toPush, hours = _.range(9, 26, 0.5);
+      var toPush, hours = _.range(9, 28, 0.5);
       vm.data.hours = [];
       _.each(hours, function(hour){
         toPush = {
           value: hour,
           hours: Math.floor(hour),
-          text: hour + ':' + (hour * 10 % 10 === 0 ? '00' : '30'),
+          text: (hour == 24 ? '00' : hour) + ':' + (hour * 10 % 10 === 0 ? '00' : '30'),
           minutes: hour * 10 % 10 === 0 ? 0 : 30,
           slots: {},
           matches: {},
@@ -324,7 +326,7 @@
           vm.data.allMatches = res;
         });
     };
-    
+
     var init = function() {
       vm.data.fields = vm.data.identity.five.fields;
       $rootScope.$broadcast('loading', true);

@@ -1,16 +1,4 @@
-/**
- * Created by jazalizil on 09/12/15.
- */
-
-(function () {
-  'use strict';
-  
-  angular.module('myBall')
-    .value('Cities', getZipCodes);
-
-  /** @ngInject */
-  function getZipCodes() {
-    return [{"name": "L ABERGEMENT CLEMENCIAT", "zipCode": "01400"}, {
+[{"name": "L ABERGEMENT CLEMENCIAT", "zipCode": "01400"}, {
       "name": "L ABERGEMENT DE VAREY",
       "zipCode": "01640"
     }, {"name": "AMBERIEU EN BUGEY", "zipCode": "01500"}, {
@@ -43518,4 +43506,4 @@
       "zipCode": "98000"
     }];
   }
-})();
+}]
