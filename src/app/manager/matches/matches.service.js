@@ -83,11 +83,11 @@
           .year(match.startDate.year)
           .month(match.startDate.month)
           .date(match.startDate.date)
-          .hours(match.startDate.hours)
+          .hours(Math.floor(match.startDate.hours))
           .minutes(match.startDate.minutes);
         var endDate = moment(startDate)
           .date(match.endDate.date)
-          .hours(match.endDate.hours)
+          .hours(Math.floor(match.endDate.hours))
           .minutes(match.endDate.minutes);
         return {
           startDate: startDate.toISOString(),
