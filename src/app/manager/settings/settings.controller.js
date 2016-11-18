@@ -43,10 +43,12 @@
       startInterval: [],
       endInterval: []
     };
-    
-    /*
-    *  All tabs
-    * */
+
+    /****************************************
+     ***                                  ***
+     ***           ALL TABS               ***
+     ***                                  ***
+     ****************************************/
 
     // selected tab in url
     $scope.$watch(function(){
@@ -62,7 +64,9 @@
       });
     });
 
-    // WIP photo
+    /*
+    *   Patch data before sending
+    * */
     var computePatchFive = function(patch) {
       if (vm.data.newIdentity.five.phone !== vm.data.identity.five.phone) {
         patch.five.phone = vm.data.newIdentity.five.phone;
@@ -110,7 +114,7 @@
       computePatchManager(patch);
       return patch;
     };
-    
+
     vm.update = function() {
       // var toSend = _.cloneDeep(vm.data.newIdentity);
       var toSend = computePatch();
@@ -128,18 +132,22 @@
       });
     };
 
-    /*
-    *  Availibilities tab
-    * */
+    /****************************************
+     ***                                  ***
+     ***      AVAILAIBILITIES TAB         ***
+     ***                                  ***
+     ****************************************/
 
     vm.deleteException = function() {
       vm.data.exceptionDate = null;
-    }
+    };
 
 
-    /*
-    *  Authorizations tab
-    * */
+    /****************************************
+     ***                                  ***
+     ***       AUTHORIZATIONS TAB         ***
+     ***                                  ***
+     ****************************************/
 
     // Open Sidenvav
     vm.openSideNav = function(hour, day) {
@@ -235,12 +243,12 @@
 
     // Create auth cells
     var initHours = function() {
-      var range = _.range(9, 23, 0.5);
+      var range = _.range(9, 25, 0.5);
       vm.data.hours = [];
       _.each(range, function(hour) {
         var toPush = {
           value: hour,
-          text: hour + ':' + (hour * 10 % 10 === 0 ? '00' : '30'),
+          text: (hour === 24 ? '00' : hour) + ':' + (hour * 10 % 10 === 0 ? '00' : '30'),
           booked: {},
           auths: {},
           errors: {},
@@ -252,11 +260,11 @@
 
     // Create display intervals
     var createDisplayInterval = function() {
-      var range = _.range(9, 22.5, 0.5);
+      var range = _.range(9, 24.5, 0.5);
       _.each(range, function(slot){
         var toPush = {
           value: slot,
-          text: Math.floor(slot) + 'h'
+          text: (slot === 24 ? '00' : Math.floor(slot)) + 'h'
         };
         if (slot * 10 % 10 !== 0) {
           toPush.text += '30';
@@ -279,7 +287,7 @@
               return;
             }
             tmp = vm.data.hours[idx];
-            to = hour.to < 22 ? hour.to : 22;
+            to = hour.to == 0 ? 24 : hour.to;
             auth = {
               from: hour.from,
               price: hour.price,
@@ -298,6 +306,19 @@
         })
       })
     };
+
+    // "availability": [
+    //   {
+    //     "amount": 10,
+    //     "end_date": "2017-01-03T16:00:00.000Z",
+    //     "start_date": "2017-01-03T15:00:00.000Z"
+    //   },
+    //   {
+    //     "amount": 10,
+    //     "end_date": "2017-01-03T17:00:00.000Z",
+    //     "start_date": "2017-01-03T16:00:00.000Z"
+    //   }
+    // ]
 
     var init = function () {
       vm.data.selectedTab = $stateParams.tab;

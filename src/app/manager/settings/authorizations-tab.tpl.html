@@ -13,7 +13,7 @@
   <div class="t-body fit-height full-width" layout="column">
     <div class="t-row full-width" layout="row" ng-repeat="hour in settings.data.hours">
       <div flex="9" layout="column" layout-align="center center" class="relative">
-        <span class="hour fit-width" ng-hide="hour.isHalf || hour.value > 22">
+        <span class="hour fit-width" ng-hide="hour.isHalf || hour.value > 24">
           {{hour.text}}
         </span>
       </div>
@@ -22,7 +22,7 @@
            ng-repeat="day in settings.data.calendar.daysDisplayed"
            >
         <div class="absolute auth-ctn fit-width fit-height" ng-click="settings.openSideNav(hour, day)"
-             ng-hide="hour.value >= 21.5">
+             ng-hide="hour.value >= 23.5">
           <div class="free pointer fit-width center-text fit-height"
                layout layout-align="center center"
                ng-hide="hour.auths[day.number] || hour.booked[day.number]">
