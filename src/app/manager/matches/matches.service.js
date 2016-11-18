@@ -9,8 +9,6 @@
   /** @ngInject */
   function MatchesService(Restangular, UserService, moment){
     var _identity = UserService.getIdentity();
-    function z(n){ return (n < 10? '0' : '') + n }
-    function c(d){ return '' +d.year+'-'+d.month+'-'+d.date+' '+z(Math.floor(d.hours))+':'+z(d.minutes) }
     return {
       fetchAll : function(params) {
         return Restangular.all('matches/five')
