@@ -10,7 +10,7 @@
   function MatchesController(UserService, MatchesService, _, $scope, $mdSidenav, gettextCatalog, toastr,
                              $log, $rootScope, Socket, moment) {
     var vm = this;
-    var dateToastrFormat = 'ddd D MMMM YYYY \'à\' h:mm';
+    var dateToastrFormat = 'ddd D MMMM YYYY';
     vm.data = {
       identity: angular.copy(UserService.getIdentity()),
       placeholders: {
@@ -79,7 +79,6 @@
       var hourIdx = _.findIndex(vm.data.hours, function(hour){
         return hour.hours === data.startDate.hours && hour.minutes === data.startDate.minutes;
       });
-      var displayedDate = moment().year(data.startDate.year)
       $log.debug('Socket new match:', data);
       vm.data.hours[hourIdx].matches[data.field] = data;
       if (vm.data.matchEditing && vm.data.selectedHour.value === data.startDate.hours) {
@@ -87,9 +86,9 @@
         vm.data.matchBooked = true;
         vm.data.match = vm.data.hours[hourIdx].matches[data.field];
       } else {
-        toastr.success(
-          gettextCatalog.getString(
-            'Un match a été réservé', moment()
+        $log.debug('un match socket::', data);
+        toastr.success(gettextCatalog.getString(
+            'Un match a été réservé', moment().utcOffset(0)
               .year(data.startDate.year)
               .month(data.startDate.month)
               .date(data.startDate.date)
@@ -178,11 +177,17 @@
           teams: [
             {
               name: gettextCatalog.getString('Équipe 1'),
-              currentPlayers: vm.data.teamSize / 2
+              currentPlayers: vm.data.teamSize / 2,
+              buts: 0,
+              private: true,
+              status: 'ready'
             },
             {
               name: gettextCatalog.getString('Équipe 2'),
-              currentPlayers: vm.data.teamSize / 2
+              currentPlayers: vm.data.teamSize / 2,
+              buts: 0,
+              private: true,
+              status: 'ready'
             }]
         };
       }
@@ -221,7 +226,8 @@
     var uploadMatch = function(){
       var payload = {};
       vm.data.isUploadingMatch = true;
-      payload.match = _.assign({}, vm.data.match, MatchesService.cleanDates(vm.data.match));
+      var cleanedDates = MatchesService.cleanDates(vm.data.match);
+      payload.match = _.assign({}, vm.data.match, cleanedDates);
       payload.match.responsable = _.omit(vm.data.responsable, ['errors']);
       payload.teams = vm.data.match.teams;
       $log.debug('payload:', payload);

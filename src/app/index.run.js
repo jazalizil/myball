@@ -50,6 +50,7 @@
         gettextCatalog.setCurrentLanguage(newVal);
         gettextCatalog.loadRemote("/translations/" + newVal + ".json");
         amMoment.changeLocale(newVal);
+        $log.debug('change lang::', newVal);
       }
     });
     /*
@@ -57,7 +58,7 @@
     * */
     deregistrationCallbacks.stateChangeStart = $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
       //http://stackoverflow.com/questions/22537311/angular-ui-router-login-authentication
-      $log.debug('State change start : ' + toState.name);
+      $log.debug('State change:: ' + toState.name);
       // track the state the user wants to go to; authorization service needs this
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;

@@ -7,7 +7,7 @@
   angular.module('myBall')
     .service('MatchesService', MatchesService);
   /** @ngInject */
-  function MatchesService(Restangular, UserService, moment){
+  function MatchesService(Restangular, UserService, moment, $log){
     var _identity = UserService.getIdentity();
     return {
       fetchAll : function(params) {
@@ -56,8 +56,8 @@
           });
       },
       initDates: function(match) {
-        var start = moment(match.startDate);
-        var end = moment(match.endDate);
+        var start = moment(match.startDate).utcOffset(0);
+        var end = moment(match.endDate).utcOffset(0);
         match.startDate = {
           year: start.year(),
           month: start.month(),
@@ -76,7 +76,7 @@
         };
       },
       cleanDates: function(match) {
-        var startDate = moment()
+        var startDate = moment().utcOffset(0)
           .year(match.startDate.year)
           .month(match.startDate.month)
           .date(match.startDate.date)
