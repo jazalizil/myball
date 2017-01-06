@@ -330,8 +330,8 @@
 
     var fetchMatches = function(y) {
       var params = {}, year = y || vm.data.today.realDate.getFullYear();
-      params.startDate = new Date(year, 0, 15);
-      params.endDate = new Date(year, 12, 31);
+      params.startDate = new Date(2017, 0, 2);
+      params.endDate = new Date(2017, 12, 30);
       return MatchesService.fetchAll(params)
         .then(function(res){
           _.each(res, function(match){

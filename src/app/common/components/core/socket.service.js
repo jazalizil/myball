@@ -15,6 +15,7 @@
       on: function (eventName, callback) {
         socket.on(eventName, function () {
           var args = arguments;
+          console.log(eventName, 'received');
           $rootScope.$apply(function () {
             callback.apply(socket, args);
           });
